@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet">
+        <link href="css/baseLogin.css" rel="stylesheet">
+        <link href="css/AppsiaLogin.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <style>
+                .loginTestImg{
+                  background:#ededed;
+                  height:1.55rem;
+                  text-align:center;
+                  line-height:1.55rem;
+                  letter-spacing: 0.2rem;
+                  font-style:italic;
+
+                }
+        </style>
+    </head>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header loginHeader">
+            <span class="closePage"></span><h4 class="pageLoginTitle"><script>writeI18nPageByKey("appasiaLogin")</script></h4>
+        </header>
+        <div class="scroll scroll4 loginSection">
+            <section class="loginBox">
+                <ul class="loginList">
+                    <li class="clear">
+                  <!--   <span class="loginInfo"><script>writeI18nPageByKey("appasiaUser")</script></span> --><input class="loginInput loginUser" type="text" name="" value="" placeholder="">
+                    </li>
+                    <li class="clear">
+                       <!--  <span class="loginInfo"><script>writeI18nPageByKey("appasiaPw")</script></span> --><input  class="loginInput loginPw" type="password" name="" value="" placeholder="">
+                    </li>
+                    <li class="clear">
+                       <!--  <span class="loginInfo" id="loginInfo"><script>writeI18nPageByKey("appasiaTestCode")</script></span> --><input class="loginIdentify" type="text" name="" value="" placeholder=""><a class="loginTestImg" href="javascript:void(0)" style="color:#f22f33;" onclick="$(this).html(yzm())"></a>
+                    </li>
+                    <li class="loginBtn">
+                        <input type="button" name="" value=""  id="loginBtn" style="color:#616161"/>
+                    </li>
+                    <li class="find">
+                       <a class="findPw" href="findPasswordBack050.html">
+                              <script>writeI18nPageByKey("findPWback")</script>
+                       </a>
+                       <a class="regFast" href="javascript:void(0)">
+                              <script>writeI18nPageByKey("fastRegister")</script>
+                       </a>
+                   </li> 
+                    <li class="buyByGuest">
+                        <input type="button" name="" value="" id="guestBtn">
+                    </li>
+                    <!-- <li class="otherMethod">
+                        <p>
+                            ——————&nbsp;<span>其他登录方式</span>&nbsp;——————
+                        </p>
+                        <p class="facebookIco">
+                            <a href="#"> <em class="facebookImg"></em><span>facebook</span></a>
+                        </p>
+                    </li> -->
+                </ul>
+            </section>
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script type="text/javascript" src="css/layer/layer.js"></script>
+        <script src="js/common.js"></script>       
+        <script> 
+           
+                var params=getParam(),
+                login=params.login,
+                loginBack=params.loginBack,
+                goods_store=params.goods_store,
+                goods_id=params.goods_id;
+                  $(".loginTestImg").text(yzm()); 
+                  function yzm(){
+                 var arr = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','1','2','3','4','5','6','7','8','9'];
+                 var str = '';
+                for(var i = 0 ; i < 4 ; i ++ )
+                str += ''+arr[Math.floor(Math.random() * arr.length)];
+                return str;
+                 }
+
+            $(function(){
+              //国际化：
+              $(".loginUser").attr("placeholder",getI18nPageByKey("appasiaEmailTip"));
+              $(".loginPw").attr("placeholder",getI18nPageByKey("appasiaPwTip"));
+              $(".loginIdentify").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"));
+              $("#loginBtn").attr("value",getI18nPageByKey("appasiaLoginBtn"));
+              $("#guestBtn").attr("value",getI18nPageByKey("appasiaGuestBtn"));
+              $("#title").text(getI18nPageByKey("userLoginTitle"));
+
+
+
+            })          
+           var testFlag=false;
+           var testUser=false;
+           var testPw=false;
+           var testOn=false;
+            var userId;//定义变量存储用户Id;
+            var visitId;//定义变量存储游客ID;
+            var cart_session_id;//游客参数
+            var defaultAddress,userType;
+            //设置开关是否是游客登录：
+            //设置购物车流程表示：
+            ls.setItem("shopCar",false);
+            
+            ls.setItem("guestOn",false);
+            $(".loginUser").blur(function(){
+                //账号失去焦点;
+                var userName=$(this).val();
+                
+                if(userName==""){
+                    layer.msg(getI18nPageByKey("accountnotEmpty"));
+                    testUser=false;
+                }else{
+                    testUser=true;
+                }
+                
+            })
+            $(".loginPw").blur(function(){
+                //密码失去焦点;
+                var userPw=$(this).val();
+                if(userPw==""){
+                    layer.msg(getI18nPageByKey("pwnotEmpty"));
+                    testPw=false;
+                }else{
+                    testPw=true;
+                }
+                
+            })
+            //验证码;
+            $(".loginIdentify").blur(function(){
+                var testCode=$(this).val();
+                if(testCode==""){
+                    layer.msg(getI18nPageByKey("testnotEmpty"));
+                    testOn=false;
+                }else if($(".loginTestImg").text().toLowerCase()==testCode.toLowerCase()){
+                    testOn=true;
+                }else if($(".loginTestImg").text().toLowerCase()!=testCode.toLowerCase()){
+                       layer.msg("Test Code Error");
+                         testOn=false;
+                }
+                
+            })
+              var params = getParam(),
+                 goods_id = params.goods_id? params.goods_id : null;
+            $('.loginIdentify').on("input",function(){
+                  var testCode=$(this).val(),
+                      a=testCode.length,
+                      c=a>0;
+                    if(  c && testUser && testPw ) {
+                         $(".loginBtn input").css({"background":"#f22f33","color":"#fff"});
+                    }else if($(".loginTestImg").text().toLowerCase()!=testCode.toLowerCase() || !testUser || !testPw ){
+                         $(".loginBtn input").css({"background":"#ededed","color":"#616161"});
+                    }
+               
+            })
+            $(".loginBtn input").on("click",function(){               
+                if (testUser&testPw&testOn) {
+                  Login();
+                };
+            })
+            //用户登录：
+            function Login(){
+                Datas({
+                  url:"user_login",
+                  datas:{
+                    "loginName":$(".loginUser").val(),
+                    "password":$(".loginPw").val(),
+                    "cart_session_id":ls.getItem("cartSessionId")
+
+                    
+                  },
+                  success:function(data){
+                    if(data.status){
+                      
+                        ls.setItem("userId",data.data.id);
+                     /* ls.setItem("goodsCount",data.data.goodsCount);
+                      ls.setItem("storeCount",data.data.storeCount);
+                      ls.setItem("availablebalance",data.data.availablebalance);
+                      ls.setItem("integral",data.data.integral);*/
+                      ls.setItem("trueName",data.data.truename);
+                      ls.setItem("rebateTotal",data.data.rebateTotal);
+                      // ls.setItem("userurl",data.data.url);
+                      layer.msg("Login Success");
+                      if (login) {
+                        window.location.href="aboutMe.html?Login="+login;
+                      }else{ 
+                        setTimeout(function(){
+                          window.history.back(-1);
+                        },500);
+                      }
+                      
+                    }else{
+                      layer.msg(data.message);
+                    }
+                    
+
+
+                  },
+                  error:function(){
+                   
+                  }
+
+                })
+
+
+
+            }
+             $(".buyByGuest input").on("click",function(){   
+                guestLogin();
+            })
+            //游客登录；
+            function guestLogin(){
+              
+               //设置开关判断是否是游客登录：
+               ls.setItem("guestOn",true);
+              if(ls.getItem("shopCar")=="true"){
+                  //从购物车过来的
+                  window.location.href="fillInAddress.html";
+
+               }else{
+                  window.history.back(-1);
+               }
+               
+
+
+            }
+           
+          
+          
+
+         
+         
+          $('.closePage').on("click",function(){
+                
+                 if (login) {
+                  window.location.href="aboutMe.html";
+                 }else if(loginBack==2){
+                  window.location.href="index.html";
+                 }else if(loginBack==3){
+                   window.location.href="obussinessmanShop.html?goods_store="+goods_store+"&goods_id="+goods_id;
+                 }else if(loginBack==4){
+                  window.location.href="shopDetail.html?goods_store="+goods_store+"&goods_id="+goods_id;
+                 }else{
+                   window.history.back(-1);
+                 }
+          })
+          //注册
+          $('.regFast').on("click",function(){
+            if (login) {
+               window.location.href="signInWithEmail882.html?login="+login;
+             }else if(loginBack==2){
+                window.location.href="signInWithEmail882.html?loginBack="+loginBack;
+             }else if(loginBack==3){
+                window.location.href="signInWithEmail882.html?loginBack="+loginBack+"&goods_store="+goods_store+"&goods_id="+goods_id;
+             }else if(loginBack==4){
+                window.location.href="signInWithEmail882.html?loginBack="+loginBack+"&goods_store="+goods_store+"&goods_id="+goods_id;
+             }
+             else{
+               window.location.href="signInWithEmail882.html";
+             }
+           
+          })
+        </script>
+        
+    </body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+     <script type="text/javascript" src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="css/indexSearch.css">
+	 <script>
+	    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<a href="javascript:void(0)" class="back"></a><span></span>
+			<div>
+				<i></i>
+				<input type="text"   class="search-txt">
+				<a href="javascript:void(0);" class="clear_icon"></a>
+			</div>
+		<!-- <a href="javascript:void(0)" class="search_right">搜索</a> -->
+		</header>
+		<section class="section_content" id="section_content">
+		<div class="shop_item">
+			<!-- <div class="shop_logo_info">
+				<img src="images/shop_item_infoImg.png">
+				<div>
+					<h3>七点运动看，叩叩叩</h3>
+					<p>121232关乎</p>
+				</div>
+				<input type="button" value="进店" class="enter_shop"/>
+			</div>
+			<div class="shop_item_class">
+				<a href="javascript:void(0)">
+					<dl>
+						<dt><img src="images/shop_item_infoImg.png"></dt>
+						<dd>
+							<p>Rm12.00</p>
+						</dd>
+					</dl>
+				</a>
+			</div>
+		</div> -->
+
+		</section>
+	</div>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+	var params=getParam(),
+		Txt=params.Txt,
+		shop_id=params.shop_id;
+	   $('.search-txt').val(Txt);
+	   Act(Txt);
+	   $(".search-txt").on("input",function(){
+		 	var  searchStr;
+		 	var txt;
+		 	  txt=$.trim($(this).val());
+		 		if (txt!="") {
+				 	 searchStr="";
+		             Act(txt);	
+		 		}else{
+		 			$("#section_content").html("");
+		 		   	
+		 		}
+        })
+	    
+		$('.clear_icon').on("click",function(){
+			$('.search-txt').val('');
+			$('#section_content').html("");
+		})
+		$('.back').on("click",function(){
+			window.location.href="indexSearch.html";
+		})
+		var params = getParam(),
+            actId=params.act_id;
+		   function Act(txt){
+           		Datas({
+		  			url:"store_class/searchStoreByParams",
+		  			types:"post",
+		  			async:false,
+		  			datas:{"store_name":txt,"user_id":ls.getItem("userId")?ls.getItem("userId"):""},
+		  			success:function(data){
+		  				if (data.status) {
+		  					var str="";
+							 $.each(data.data,function(k,v){
+							 	str+='<div class="shop_item">'+
+												'<div class="shop_logo_info">'+
+													'<img src="'+v.store_logo+'">'+
+													'<div>'+
+														'<h3>'+v.store_name+'</h3>'+
+														'<p>'+v.favorite_count+getI18nPageByKey("millionsFocus")/*人关注*/+'</p>'+
+													'</div>'+
+													'<input type="button" value="'+getI18nPageByKey("enterStore")/*进店*/+'" class="enter_shop"/>'+
+												'</div>'+
+												'<div class="shop_item_class" style="height:5rem">'
+													$.each(v.goods_list,function(k1,v1){
+														str+='<a href="javascript:void(0)" onclick="hrefGoods(this,'+v1.goods_id+')">'+
+															'<dl>'+
+																'<dt><img src="'+v1.goods_photo+'"></dt>'+
+																'<dd>'+
+																	'<p>RM'+v1.goods_price+'</p>'+
+																'</dd>'+
+															'</dl>'+
+														'</a>'
+													})
+												str+='</div>'+
+										'</div>'
+							 })
+							$('.section_content').html(str);
+							$('.enter_shop').on("click",function(){
+								window.location.href="obussinessmanShop.html?goods_store="+shop_id+"&Txt="+Txt;
+							})
+           				}
+           				
+		  			},
+		  			error:function(){
+		  				
+		  			}
+		  		})
+		   }
+		//商品
+		function hrefGoods(ele,aId){
+			$(ele).attr("href","product.html?goods_id="+aId);
+		}
+		
+	</script>
+</body>
+</html>

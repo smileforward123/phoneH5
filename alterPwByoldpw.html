@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+     <script src="css/layer/layer.js"></script>
+     <script src="js/common.js"></script>
+     <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("changeLoginPW")</script></h3>
+        </header>
+        <div class="scroll">
+             <h3 class="alterTitle"><script>writeI18nPageByKey("setPWforSafe")</script></h3>
+             <ul class="setPwList">
+                 <li>
+                     <input type="password" name="" id="oldPW" value="" placeholder="">
+                 </li>
+                 <li>
+                     <input type="password" name="" id="newPW" value="" placeholder="">
+                 </li>
+                 <li>
+                     <input type="password" name="" id="reEnterNew" value="" placeholder="">
+                 </li>
+             </ul>
+             <p class="pwTip"><script>writeI18nPageByKey("6-24lengthForPWCombine")</script></p>
+             <div class="finishBox" id="finishBox">
+                 <span><script>writeI18nPageByKey("haveDone")</script></span>
+             </div>
+        </div>
+
+
+     <script>
+
+           $(".back").click(function(){
+               window.location.href="alterPw.html";
+
+           })
+            $(document).ready(function(){
+                 $("#reEnterNew").attr("placeholder",getI18nPageByKey("confirmnewLoginPW"));
+                  $("#newPW").attr("placeholder",getI18nPageByKey("newLoginPW"));
+                  $("#oldPW").attr("placeholder",getI18nPageByKey("oldLoginPW"));
+                  $("#title").text(getI18nPageByKey("changeLoginPW"));
+
+            })
+            var regPs = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+            var regps2 =/^\d{6,20}$/;
+             $("#finishBox").click(function(){
+                 
+                  
+                     if($("#newPW").val()==""){
+                                  layer.msg(getI18nPageByKey("newPWcannotbeNull"));
+                                  return;
+                    } else if($("#reEnterNew").val()!=$("#newPW").val() ){
+                          layer.msg(getI18nPageByKey("bothTimePWDiffer"));
+                          return;
+                     }else if(!regPs.test($("#newPW").val())){
+                           
+                                layer.msg(getI18nPageByKey("6-24lengthForPW"));
+                                return;
+                       
+                               
+                    }
+
+
+                    reset();
+                   
+                  
+
+             })
+
+             function reset(){
+
+                 Datas({
+                    url:"reset_password",
+
+                    datas:{
+                        "newPassword":$("#newPW").val(),
+                        "oldPassword":$("#oldPW").val(),
+                        "bak_reset_type":"3",
+                        "user_id":ls.getItem("userId")
+                    },
+                    success:function(data){
+                        
+                       
+
+                        if(data.status){
+                             layer.msg(data.message);
+                             window.location.href="aboutMe.html";
+
+                        }else{
+                             layer.msg(data.message);
+                        }
+                      
+                    },
+                    error:function(){
+                      
+                    }
+                })
+             }
+     </script>   
+    </body>
+
+
+</html>

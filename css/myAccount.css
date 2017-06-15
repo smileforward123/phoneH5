@@ -1,0 +1,124 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.save{
+    float: right;
+    margin-right: 0.75rem;
+    color:#fff;
+}
+.scroll{
+    bottom:0;
+    background:#f3f5f7;
+}
+.scroll ul{
+    margin-bottom: 0.5rem;
+}
+.scroll li{
+    font-size:0.65rem ;
+    height:2.15rem;
+    line-height:2.15rem;
+    color:#000;
+    border-bottom: 1px solid #e6e6e6;
+    text-indent: 0.5rem;
+}
+.scroll li span{
+    float: left;
+}
+.scroll li a{
+    float: right;
+    margin-right: 0.5rem;
+    color:#cdcdcd;
+}
+.scroll .balance a{
+    float: left;
+    color:#ff0000;
+}
+.scroll li a em{
+    display:inline-block;
+    width:0.35rem;
+    height:0.6rem;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+.manageList li a{
+    display:block;
+    width:100%;
+    color:#000;
+}
+.manageList li em{
+    float: right;
+    margin-top:0.8rem;
+}
+
+.userInfoList li:nth-child(1){
+    border-top: 1px solid #e6e6e6;
+}
+.manageList  li:nth-child(1){
+    border-top: 1px solid #e6e6e6;
+}
+.quitBox span{
+    width:15rem;
+    margin:0 auto;
+    display:block;
+    height:2.15rem;
+    color:#fff;
+    font-size:0.75rem ;
+    line-height:2.15rem;
+    text-align: center;
+    background:#c90c1e;
+    border-radius: 5px;
+}
+/*弹出层样式修改*/
+label{
+  display: block;
+  width:90%;
+  margin: 0.5rem;
+  border-bottom: 1px solid #d43d4b;
+    font-size: 0.625rem;
+    height:2rem;
+    line-height: 2rem;
+}
+.nameTxt{
+     width:90%;
+    margin:0 0.5rem;
+    font-size:0.65rem;
+    line-height:1.95rem;
+    color:#ccc;
+    border-bottom:1px solid #d43d4b;
+}
+.tip{
+     width:90%;
+    height:1.375rem;
+    line-height:1.375rem;
+    margin:0 0.5rem;
+    font-size:0.75rem;
+    color:#999999;
+}
+input[type="raido"]{
+    position: absolute;
+    top: -9999px;
+}
+i{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    background: url(../images/radio.png) no-repeat;
+    vertical-align: middle;
+    background-size: contain;
+}
+input:checked+i {
+    background: url(../images/guestRadio.png) no-repeat;
+    background-size: contain;
+}
+/* .layui-layer-btn a{
+    font-size: 0.35rem;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    margin: 0 0.15rem;
+    padding: 0 0.15rem;
+} */
+

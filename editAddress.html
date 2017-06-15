@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+        <title id="title"></title>
+        <!--  <link rel="stylesheet" href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" type="text/css" /> -->
+        <link href="css/publicClear.css" rel="stylesheet">
+        <link href="css/baseLogin.css" rel="stylesheet">
+        <link href="css/fillInAddress.css" rel="stylesheet"/>
+        <link href="css/layer/skin/layer.css" rel="stylesheet"/>
+       
+    </head>
+     
+     <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+    <div class="editBox">
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("editAddressTitle")</script></h3>
+            <span class="save"><script>writeI18nPageByKey("saveBtn")</script></span>
+        </header>
+        <div class="scroll scroll3" id="scroll">
+           <ul class="addressList fontS1" id="addressList">
+              <li class="lineH2 optionTitle">
+                  <span><script>writeI18nPageByKey("receiver")</script>：</span><input type="text" name="trueName" value="" class="address addressOption"/>
+              </li>
+              <li class="lineH2 optionTitle">
+                  <span>+60</span><input style="text-indent:1.1rem;"class="addressOption"type="text" name="mobile" value="" placeholder=""/>
+              </li>
+              <li class="lineH2  optionTitle clear">
+                  <span><script>writeI18nPageByKey("country")</script>：</span><span class="addressOption"><script>writeI18nPageByKey("Malaysia")</script></span>
+                  <!-- <input id="demo_dummy"  class="addressOption"type="text" name="country" value="马来西亚" class="mbsc-control mbsc-control-ev"/><em class="CountryIco"></em> -->
+                   <!-- <select name="City" id="demo" style="display:none">
+                     <option value="1">马来西亚</option>
+                     <option value="2">文莱</option>
+                     <option value="3">新加坡</option>             
+                   <select> -->
+              </li>
+              <li class="lineH2 optionTitle ">
+                  <span><script>writeI18nPageByKey("areaPost")</script>：</span><input class="postCode addressOption" type="text" name="zip" value="" placeholder=""/>
+                 
+              </li>
+              <li class="lineH2 optionTitle clear">
+                  <span class="area"><script>writeI18nPageByKey("district")</script>：</span>
+                   <div class="countryBox addressOption " id="countryBox">
+                    <script>writeI18nPageByKey("districtByPost")</script>
+                   </div>
+                   <input type="hidden" class="postAdd" value="">
+                  
+              </li>
+              <li>
+
+                  <div class="addressBox">
+                      <span><script>writeI18nPageByKey("addressDetail")</script></span>
+                      <textarea  name="area_info" class="addressOption "></textarea>
+                      <input type="hidden" name="area_info" value=""/>
+                  </div>
+              </li>
+           </ul>
+           <div class="blankBk blank5">
+               
+           </div>
+           <div class="defaultAdd color3" id="defaultAdd">
+              <strong class="defBtn"><script>writeI18nPageByKey("setDefault")</script></strong><span class="changebtn" id="changebtn"></span>
+           </div>
+           <div class="blankBk blank5">
+               
+           </div>
+        </div>
+        <input  id="areaId" type="hidden" name="" value=""/>
+    </div>
+    
+         <script src="js/jquery-2.2.1.js"></script>
+         <script type="text/javascript" src="js/common.js"></script>      
+        <script src="css/layer/layer.js"></script>
+        <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+        <script>
+        $(function(){
+            //国际化;
+          $("input[name='mobile']").attr("placeholder",getI18nPageByKey("appasiaMobileTip"));
+          $(".postCode").attr("placeholder",getI18nPageByKey("districtByPostFill"));
+          $("#title").text(getI18nPageByKey("editAddressTitle"));
+
+
+
+
+        })
+        var userNames= ls.getItem("userId");//用户
+        var cartSessionId=ls.getItem("cartSessionId");//游客;
+        if(userNames){
+            $(".defaultAdd").css("display","block");
+        }
+        var countryId = 1;
+      
+      
+        //判断是否设为默认：
+        function hasDefault(defaultBtn){
+            return defaultBtn.hasClass("changeCheckedBtn");
+            
+        }
+        var onoff=false;//判断信息是否填写完整;
+       
+        $('.save').on("click",function(){
+             var strInfo=$("textarea[name='area_info']").val();
+             var mobileText=$("input[name='mobile']").val();
+           
+            $("input[name='area_info']").val(strInfo);
+             $("#addressList input").each(function(index,item){
+               //循环地址列表,只要有一个为空;就不能保存；
+                if(($(item).val()=="")){
+                
+                    onoff=false; 
+                     return false;//后面的就不执行了：
+                }else{
+                    onoff=true;
+                }
+               
+               
+            }) 
+             //验证详细地址;
+             if(strInfo.length<5){
+              onoff=false;
+              layer.msg(getI18nPageByKey("addrDetailnotLessThanfive"));
+             }
+             //验证电话号码：
+            if(mobileText.length<5||mobileText.length>15){
+              onoff=false;
+              layer.msg(getI18nPageByKey("telCorrectWarn"));
+             }
+
+        
+            var defaultSet=hasDefault($(".changebtn"));
+           
+           
+           
+           
+            if(onoff){
+                  Datas({ 
+                        url:"buyer/cart_address_save",
+                        "types":"post",
+                        datas:{
+                                "user_id":userNames||cartSessionId,
+                                "area_id":$("#areaId").val(),//地区根据邮编获取可能需要调另外的接口
+                                "trueName":$("input[name=trueName]").val(),
+                                "area_info":$("textarea[name=area_info]").val(),
+                                "mobile":$("input[name=mobile]").val(),
+                                "zip":$("input[name=zip]").val(),
+                                "defaultAddress":defaultSet?1:0,//是否设为默认;
+                                "id":editObj.id,
+                        },
+                        success:function(data){
+                        
+                            layer.msg(getI18nPageByKey("saveSuccess"));
+                            if(userNames){
+                                window.location.href="manageAddress.html";
+                            }else{
+                                window.location.href="setOrderVisited.html?addressId="+data.data.id+"";
+                            }
+                            /*setTimeout(function(){
+                              if(userNames){
+                                location.href="manageAddress.html";
+                              }else{
+                                location.href="setOrderVisited.html?addressId="+data.data.id+"";
+                              }
+                            },100);*/
+                            
+
+                            
+                        },
+                        error:function(data){
+                           
+                        }
+
+
+
+
+
+                    })
+
+                  
+            }else{
+              if(strInfo.length<5){
+                onoff=false;
+                 layer.msg(getI18nPageByKey("addrDetailnotLessThanfive"));
+              }else if(mobileText.length<5||mobileText.length>15){
+                onoff=false;
+                layer.msg(getI18nPageByKey("telCorrectWarn"));
+             }else{
+                layer.msg(getI18nPageByKey("completeWarn"));
+             }
+             
+            
+
+                
+            }
+             
+
+        })
+          
+             
+       $(".back").click(function(){
+         
+           history.back(-1);
+
+       })
+       $("#changebtn").click(function(){
+            $(this).toggleClass('changeCheckedBtn');
+        });
+
+       //根据邮编获取地区;
+        $(".postCode").blur(function(){
+                
+              var post=$("input[name=zip]").val();
+          
+
+              if(post==""){
+                 layer.msg(getI18nPageByKey("postnotEmpty"));
+              }else{
+                 Datas({
+                    url:"buyer/cart_areaByZip",
+                    datas:{
+                        "country":countryId,
+                        "zip":post
+                    },
+                    success:function(data){
+                     
+                        var areaId;
+                     
+
+                        var str="";
+                        var val="";
+                        var val2="";
+                        var val3="";
+                        if(data.status){
+                          if(data.data.childMArea!=null){
+                                  areaId=data.data.childMArea.id;
+                          }else{
+                                  areaId=data.data.id;
+                          }
+                      
+                          $("#areaId").val(areaId);
+                       
+                          if(!(data.data.areaName==undefined)){
+
+                                val=data.data.areaName; 
+                            }
+                       
+                            if(data.data.childMArea!=null){
+                              if(!(data.data.childMArea.areaName==undefined)){
+                                 val2=data.data.childMArea.areaName;
+                              }
+                        
+                              if(!(data.data.childMArea.childMArea==undefined)){
+                                   val3=data.data.childMArea.childMArea;
+                              }
+                            }
+                            str+=val+val2+val3;
+                        
+                            $('#countryBox').html(val+val2+val3);
+                         
+                            if($('#countryBox').html()==getI18nPageByKey("districtByPost")/*"地区根据邮编获取"*/){
+                              $(".postAdd").val("");
+                            }else{
+                              $(".postAdd").val(val+val2+val3);
+                            }
+                            
+                        }else{
+                            layer.msg(data.message);
+                            $(".countryBox").html("");
+                            $(".postAdd").val("");
+                        }
+                        
+                       
+
+                    },
+                    error:function(data){
+                        layer.msg(data.message);
+                    }
+                })
+              }
+              
+        })
+        //解析地址栏从订单页面的数据带过来;
+        var editObj=getParam();
+    
+        $("input[name='trueName']").val(editObj.name);
+        $("input[name='mobile']").val(editObj.mobile);
+       
+        if(userNames){
+          //如果是用户;
+           $(".postCode").val(editObj.zip.substring(3));
+        }else{
+          $(".postCode").val(editObj.zip);
+        }
+        $("textarea[name='area_info']").html(editObj.areaInfo);
+        if(editObj.defaultAddress){
+            $("#changebtn").addClass('changeCheckedBtn');
+        }else{
+            $("#changebtn").removeClass('changeCheckedBtn');
+        }
+       
+           
+
+
+
+
+       
+
+        </script>
+    </body>
+</html>

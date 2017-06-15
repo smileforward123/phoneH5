@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+		<meta content="yes" name="apple-mobile-web-app-capable" />
+		<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta content="email=no" name="format-detection" />
+		<!--禁止Android中自动识别页面中的邮件地址-->
+		<title id="title"></title>
+		<link rel="stylesheet" href="css/publicStyle.css" />
+		<link rel="stylesheet" href="css/index.css" />
+		<script type="text/javascript" src="js/public.js"></script>
+	</head>
+
+	<body>
+		<header class="header">
+			<span class="btn_slide_bar"></span>
+			<div class="logo"><img src="images/logo.png" /></div>
+			<a class="btn" href="javascript:void(0)" id="btn">
+				<img src="images/messages.png" />
+			</a>
+			<div class="search_total">
+				<div class="mui_search">
+					<i class="icon-search" id="icon-search"></i>
+				    <!--  <div class="sch-txt">Search</div> -->
+					<input type="text" class="sch-txt" placeholder="Search" style="outline-style:none;float: left;width:73%;margin-top:0.65rem;border:0;outline:none">
+				</div>
+			</div>
+		
+		</header>
+		<section class="seltion_content">
+			<!--轮播图-->
+			<div class="carousel carousel2">
+				<ul class="banner index_banner">
+					<!-- <li>
+						<a href="#"><img src="images/banner01.png" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="images/banner02.png" /></a>
+					</li>
+					<li>
+						<a href="#"><img src="images/banner01.png" /></a>
+					</li> -->
+				</ul>
+				<ul class="circle circle1">
+					<!-- <li class="on"></li>
+					<li></li>
+					<li></li> -->
+				</ul>
+			</div>
+			<!--商品分类-->
+			<div class="good_classify">
+				<ul class="gc_ul">
+					<!-- <li>
+						<a href="#">
+							<div class="li_image"><img src="images/good_01.jpg" /></div>
+							<p>及时送</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="li_image"><img src="images/good_01.jpg" /></div>
+							<p>优惠商品</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="li_image"><img src="images/good_01.jpg" /></div>
+							<p>促销活动</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="li_image"><img src="images/good_01.jpg" /></div>
+							<p>十元专区</p>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<div class="li_image"><img src="images/good_01.jpg" /></div>
+							<p>本土品牌</p>
+						</a>
+					</li> -->
+				</ul>
+			</div>
+			<!--大厅热卖-->
+			<section class="sales_hall">
+				<h1>
+		    	    <div class="hall_left"><small><!-- 大厅 --></small> </div>
+		    	    <div class="hall_right"><!-- 更多热卖<b>></b> --></div>
+		    	</h1>
+				<div class="carousel carousel1" style="height: 9rem;">
+					<ul class="banner banners">
+						<!-- <li>
+							<a href="#"><img src="images/bannersmail01.png" /></a>
+						</li>
+						<li>
+							<a href="#"><img src="images/banner01.png" /></a>
+						</li> -->
+					</ul>
+					<ul class="circle circle2">
+					<!-- 	<li class="on"></li>
+					<li></li>
+					<li></li> -->
+					</ul>
+				</div>
+				<!--商品列表-->
+				<div class="grid_wrapper" id="grid_wrapper">
+					<ul class="good_list">
+							<!--<li class="gl_listitems">
+									<a href="#" class="gl_ablock bor_A3A3A3">
+										<div class="f_image"><img src="images/good_list001.png" /></div>
+										<div class="r_font">
+											<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+											<del>RM129.00</del>
+											<p>RM65.00</p>
+										</div>
+									</a>
+								</li>
+								<li class="gl_listitems">
+									<a href="#" class="gl_ablock bor_A3A3A3">
+										<div class="f_image"><img src="images/good_list001.png" /></div>
+										<div class="r_font">
+											<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+											<del>RM129.00</del>
+											<p>RM65.00</p>
+										</div>
+									</a>
+								</li>
+								<li class="gl_listitems">
+									<a href="#" class="gl_ablock bor_A3A3A3">
+										<div class="f_image"><img src="images/good_list001.png" /></div>
+										<div class="r_font">
+											<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+											<del>RM129.00</del>
+											<p>RM65.00</p>
+										</div>
+									</a>
+								</li>
+								<li class="gl_listitems">
+									<a href="#" class="gl_ablock bor_A3A3A3">
+										<div class="f_image"><img src="images/good_list001.png" /></div>
+										<div class="r_font">
+											<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+											<del>RM129.00</del>
+											<p>RM65.00</p>
+										</div>
+									</a>
+								</li> -->
+					</ul>
+				</div>
+			</section>
+			<!--楼层-->
+		<!--<section class="goods_floor">
+			<h1><img src="images/title_01.png"/></h1>
+			<div class="floor_one">
+				<ul class="nav_floor_ul">
+					<li class="nav-cur">Women‘s Health & Beauty</li>
+					<li>Men’s Grooming</li>
+				</ul>
+				<div class="grid_wrapper">
+					<ul class="good_list">
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_A3A3A3">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_A3A3A3">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_A3A3A3">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_A3A3A3">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="goods_floor">
+			<h1><img src="images/title_02.png"/></h1>
+			<div class="floor_one">
+				<ul class="nav_floor_ul">
+					<li class="nav-cur">Women‘s Health & Beauty</li>
+					<li>Men’s Grooming</li>
+				</ul>
+				<div class="grid_wrapper">
+					<ul class="good_list">
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_DD6E6E">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_DD6E6E">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="goods_floor">
+			<h1><img src="images/title_03.png"/></h1>
+			<div class="floor_one">
+				<ul class="nav_floor_ul">
+					<li class="nav-cur">Women‘s Health & Beauty</li>
+					<li>Men’s Grooming</li>
+				</ul>
+				<div class="grid_wrapper">
+					<ul class="good_list">
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_8DB66C">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_8DB66C">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+	    <section class="goods_floor">
+			<h1><img src="images/title_04.png"/></h1>
+			<div class="floor_one">
+				<ul class="nav_floor_ul">
+					<li class="nav-cur">Women‘s Health & Beauty</li>
+					<li>Men’s Grooming</li>
+				</ul>
+				<div class="grid_wrapper">
+					<ul class="good_list">
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_B0B0B0">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+						<li class="gl_listitems">
+							<a href="#" class="gl_ablock bor_B0B0B0">
+								<div class="f_image"><img src="images/good_list001.png" /></div>
+								<div class="r_font">
+									<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+									<del>RM129.00</del>
+									<p>RM65.00</p>
+								</div>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<section class="goods_floor">
+			<h1><img src="images/title_05.png"/></h1>
+			<div class="floor_one">
+				<ul class="nav_floor_ul">
+					<li class="nav-cur">Women‘s Health & Beauty</li>
+					<li>Men’s Grooming</li>
+				</ul>
+				<div class="grid_wrapper">
+					<ul class="good_list">
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_E4D498">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					<li class="gl_listitems">
+						<a href="#" class="gl_ablock bor_E4D498">
+							<div class="f_image"><img src="images/good_list001.png" /></div>
+							<div class="r_font">
+								<h3>Lipstick WigLipstick WigLipstick WigLipstick Wig</h3>
+								<del>RM129.00</del>
+								<p>RM65.00</p>
+							</div>
+						</a>
+					</li>
+					</ul>
+				</div>
+			</div>
+		</section> -->
+		</section>
+		<footer class="footer">
+			<ul class="ul-nav">
+				<li  class="active">
+					<a href="index.html">
+						<img src="images/footer1.png" />
+						<p>
+						   <script>writeI18nPageByKey("botindex")</script>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="myIntegral.html">
+						<img src="images/footer02.png" />
+						<p>
+						    <script>writeI18nPageByKey("integralMall")</script> 
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="shopping_cars.html">
+						<img src="images/footer03.png" />
+						<p>
+						   <script>writeI18nPageByKey("shoppingCar")</script>
+					   </p>
+					</a>
+				</li>
+				<li>
+					<a href="aboutMe.html">
+						<img src="images/footer04.png" />
+						<p>
+						    <script>writeI18nPageByKey("botmine")</script>
+						</p>
+					</a>
+				</li>
+				<li>
+					<a href="more.html">
+						<img src="images/footer05.png" />
+						<p>
+						   <script>writeI18nPageByKey("botmore")</script>
+						</p>
+					</a>
+				</li>
+			</ul>
+		</footer>
+		<!--菜单-->
+		<section id="nav_conter">
+			<section id="nc_mean">
+				<!-- <details class="menu" open>
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details> -->
+				<!-- <details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details>
+				<details class="menu">
+					<summary>Women‘s Health</summary>
+					<ul class="menu_ul">
+						<li>
+							<a href="#">Lipstick</a>
+						</li>
+						<li>
+							<a href="#">Wig</a>
+						</li>
+					</ul>
+				</details> -->
+			</section>
+		</section>
+		<div class="layer"></div>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/home.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		<script type="text/javascript" src="js/public.js"></script>
+		<script type="text/javascript">
+		 $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("botindex"));
+         })
+		//页面一打开自动加载游客id
+
+		if (!ls.getItem("cartSessionId")) {
+			Datas({
+	              url:"get_cart_session",
+	              success:function(data){
+	                if (data.status) {
+	                	   ls.setItem("cartSessionId",data.data.user_id);
+
+	                };
+	              },
+	              error:function(){
+	                
+	              }
+
+	         })
+		};
+		//首页-category 商品分类
+		 Datas({
+		    url:"mall_category",
+            success:function(data){
+            	var str4='';
+            	$.each(data.data.categroy,function(k2,v2){
+            		str4+='<details class="menu"><summary>'+v2.className+'</summary><ul class="menu_ul">'
+            					$.each(v2.childs,function(k3,v3){
+            							/*str4+='<li><a href="javascript:void(0)" onclick="hrefPiclist(this,'+v3.nextChilds+','+v3.id+',\''+v3.className+'\')">'+v3.className+'</a></li>';*/
+            							str4+='<li><a href="javascript:void(0)" onclick="hrefPiclist(this,'+v3.nextChilds+','+v3.id+',\''+v3.className+'\')">'+v3.className+'</a></li>';					
+            						
+            					})
+            		str4+='</ul></details>';
+
+            	})
+   				$('#nc_mean').html(str4);
+
+            },
+            error:function(){
+            	
+            }
+		 })
+		 //判断跳转到积分商城还是商品列表
+		  function hrefPiclist(ele,nextChilds,goodsId,className){
+		  	var type=1;
+		  	ls.setItem("className",className);
+		 	if (nextChilds == true) {
+		 		$(ele).attr("href","picList.html?goods_id="+goodsId+"&type="+type);
+		 	}else{
+		 		// $(ele).attr("href","picDetail.html?goods_id="+goodsId+"&className="+className);
+		 		$(ele).attr("href","picDetail.html?goods_id="+goodsId);
+		 	}
+		 }	
+		//首页轮播商品楼层信息
+		var userId=ls.getItem('userId');
+		  Datas({
+                url:"h5_index_mall",
+                datas:{"id":1,"user_id":userId?userId:""},
+                success:function(data){
+                   if (data.status) {
+                   		 var str="",str1='',str2='',str3='',str4='',str5='',str6='',str7='';
+                   		 //第二个轮播
+                         $.each(data.data.advertList,function(k,v){
+                        	if(v.ad_type_value == ""){                       		
+                        		v.ad_type_value = null;
+                        	}
+                       		str+='<li ><a href="javascript:void(0)" onclick="Slider('+v.ad_type+',\''+v.ad_type_value+'\')"><img src="'+v.img_url+'" /></a></li>';
+                       		str6+='<li></li>';
+                         })
+                         $('.banners').html(str);
+                         $('.circle2').html(str6);
+                         $('.circle2').find('li').eq(0).addClass('on');
+                         lunbo_onclick('carousel1');
+                         //活动
+                        $.each(data.data.index_activity,function(k,v){
+                       		str1+='<li>'+
+	                       				'<a href="javascript:void(0)" onclick="Activity(this,'+v.id+')">'+
+											'<div class="li_image"><img src="'+v.ac_img+'" /></div>'+
+											'<p>'+v.ac_title+'</p>'+
+										'</a>'+
+									'</li>'
+                        })
+                        $('.gc_ul').html(str1);
+                        //第一个轮播
+                        if (data.data.index_slide.advs != null) {
+                        	$.each(data.data.index_slide.advs,function(k1,v1){
+                        	str3+='<li><a href="javascript:void(0)" onclick="Slider('+v1.ad_type+',\''+v1.ad_type_value+'\')"><img src="'+v1.imgPath+'"/></a></li>';
+                        	str7+='<li></li>';
+
+                       	 	})
+                       	 	$('.index_banner').html(str3);
+	                        $('.circle1').html(str7);
+	                        $('.circle1').find('li').eq(0).addClass('on');
+	                        lunbo_onclick('carousel2');
+
+                        }
+                      	
+                        //楼层
+                        $.each(data.data.index_floor,function(k,v){
+                         	if(k==0){//if（v.childs[0].gf_name=='Featured'）
+                         		//v.gf_name == data.data.index_floor[0].gf_name
+                         		$.each(v.childs[0].gf_list_goods,function(key,val){
+                         			str5 += '<li class="gl_listitems">'
+												+'<a href="javascript:void(0)" class="gl_ablock bor_A3A3A3" onclick="Goods(this,'+val.goodsId+')">'
+													+'<div class="f_image"><img src="'+val.imgPath+'" /></div>'
+													+'<div class="r_font">'
+														+'<h3>'+val.goodsName+'</h3>'
+														+'<del>RM'+val.goodsPrice+'</del>'
+														+'<p>RM'+val.storePrice+'</p>'
+													+'</div>'
+												+'</a>'
+											+'</li>'	
+                         		})
+                         			
+                         	}else{	
+                         		str2 += '<section class="goods_floor">'
+										+'<h1><span class="spans">'+v.gf_name+'</span><img src="images/title_0'+k+'.png"/></h1>'
+										+'<div class="floor_one">'
+												+'<ul class="nav_floor_ul'+k+'">'
+													$.each(v.childs,function(k1,v1){
+														/*str2+='<li onclick="Sorts('+v1.id+')">'+v1.gf_name+'</li>'*/
+														str2+='<li data-id="'+v1.id+'">'+v1.gf_name+'</li>'
+													})
+												str2+='</ul>'
+											+'<div class="grid_wrapper">'
+												+'<ul class="good_list">'
+			                        	$.each(v.childs[0].gf_list_goods,function(key,val){	                        		
+											str2+="<li class='gl_listitems'>"+
+													"<a href='javascript:void(0)' class='gl_ablock bor_E4D498' onclick='Goods(this,"+val.goodsId+") '>"+
+														"<div class='f_image'><img src='"+val.imgPath+"' /></div>"+
+														"<div class='r_font'>"+
+															"<h3>"+val.goodsName+"</h3>"+
+															"<del>RM"+val.goodsPrice+"</del>"+
+															"<p>RM"+val.storePrice+"</p>"+
+														"</div>"+
+													"</a>"+
+												"</li>"
+			                        	})
+	                        	     str2 += '</ul>'
+											+'</div>'
+										+'</div>'
+									+'</section>'
+	                         	}
+                        })
+						
+                        $('#grid_wrapper .good_list').append(str5);
+                        $('.seltion_content').append(str2); 
+                        $('.hall_left').text(data.data.index_floor[0].gf_name);
+                    	// $('.goods_floor').eq(0).find("h1").hide();
+                    	// $('.goods_floor').eq(0).find(".nav_floor_ul").hide();
+
+						$('.nav_floor_ul>li').on("click",function(){
+							var id=$(this).data('id');
+							var strs='';
+							$.each(data.data.index_floor,function(k,v){
+                				$.each(v.childs,function(k1,v1){
+                					$.each(v1.gf_list_goods,function(k2,v2){
+                						if (v1.id==id) {
+                						  strs+="<li class='gl_listitems'>"+
+													"<a href='javascript:void(0)' class='gl_ablock bor_E4D498' onclick='Goods(this,"+v2.goodsId+") '>"+
+														"<div class='f_image'><img src='"+v2.imgPath+"' /></div>"+
+														"<div class='r_font'>"+
+															"<h3>"+v2.goodsName+"</h3>"+
+															"<del>RM"+v2.goodsPrice+"</del>"+
+															"<p>RM"+v2.storePrice+"</p>"+
+														"</div>"+
+													"</a>"+
+												"</li>"
+											
+                						};
+                						
+
+                					})
+          
+                				})
+                			})
+                			$(this).parents('.nav_floor_ul').next().find('.good_list').html(strs);
+						})
+
+                   }
+                           
+                  
+                },
+                error:function(){
+                         
+               }
+
+          })
+		//图片轮播点击判断type value   1、商品详情（商品详情id） 2、店铺(店铺id) 、3积分商城(不穿value)，4、活动(活动商品id)， 5、网页（value不传） 6、订单
+		function Slider(type,val){
+			if (val!="") {
+				if (type==1) {//商品详情
+				location.href="product.html?goods_id="+val;
+				}else if(type==2){//店铺
+					var shop=1;
+					location.href="obussinessmanShop.html?goods_store="+val+"&shop="+shop;
+				}else if(type==3){//积分商城
+					location.href="myIntegral.html";
+				}else if(type==4){//活动
+					location.href="activity.html?act_id="+val;
+				}else if(type==5){//网页
+					location.href=val;
+				}else if(type==6){
+					location.href="allMenu.html";
+				}
+			}else{
+				location.href="index.html";
+			}
+			
+	
+		}
+		//点击信息icon去登录
+		$('#btn').on("click",function(){
+			if (!ls.getItem('userId')) {
+				var login=2;
+				$(this).attr('href',"Appsia_login.html?loginBack="+login);
+			}else{
+				$(this).attr('href',"message.html");
+			}
+		})
+		//点击楼层商品跳转到商品详情页面
+		  function Goods(ele,goodsId){
+		  	$(ele).attr("href","product.html?goods_id="+goodsId);
+		  }
+		//点击活动商品页面跳转到商品详情页面
+		 function Activity(ele,actId){
+		 	$(ele).attr("href","activity.html?act_id="+actId);
+		 }
+		 //首页搜索店铺
+		 $('.sch-txt').on('click',function(){
+		 	location.href="indexSearch.html";
+		 })
+		</script>
+	</body>
+
+</html>

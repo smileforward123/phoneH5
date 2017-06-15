@@ -1,0 +1,86 @@
+@charset "UTF-8";
+.pageTitle{margin-left: 2.25rem;} 
+.scroll{
+    bottom:0;
+}
+.alterTitle {
+    height: 1.5rem;
+    font-size: 0.6rem;
+    line-height: 1.5rem;
+    background: #f3f5f7;
+    color: #999999;
+    text-indent: 0.5rem;
+    border-bottom: 1px solid #d9d9d9;
+}
+.payPwList li{
+    height:2.2rem;
+    line-height:2.2rem;
+    font-size:0.65rem;
+    color:#333333;
+    padding:0 0.5rem;
+    border-bottom: 1px solid #d9d9d9;
+}
+.payPwTitle{
+    float: left;
+    width:20%;
+    vertical-align: middle;
+}
+.payPw{
+    float: left;
+    width:75%;
+    vertical-align: middle;
+    line-height: 2.2rem;
+}
+.nextBox{
+    width:15rem;
+    margin:0.825rem auto 0;
+    
+}
+.nextBox span{
+    background:#c90c1e;
+     width:15rem;
+    font-size:0.8rem;
+    height:2rem;
+    line-height:2rem;
+    color:white;
+    text-align:center;
+    display:block;
+    border-radius: 5px;
+}
+.mobileList{
+    margin-top:0.2rem;
+}
+.mobileList li{
+    width:15rem;
+    margin:0.2rem auto 0;
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 0.65rem;
+    color: #333333;
+}
+.mobileList li:nth-child(1){
+    border:1px solid #d9d9d9;
+    border-radius: 5px;
+}
+.identifyTxt{
+    width:8.65rem;
+    height:2.15rem;
+    border:1px solid #cccccc;
+    border-radius:5px;
+    font-size:0.75rem;
+    color:#cccccc;
+    line-height:2.15rem;
+    text-indent: 0.5rem;
+}
+.identifyBtn{
+    width:5.5rem;
+    height:2.15rem;
+    font-size: 0.7rem;
+    line-height: 2.15rem;
+    background:#808080;
+    color:#f3f5f7;
+    display:inline-block;
+    text-align: center;
+    margin-left: 0.7rem;
+    border-radius: 5px;
+}

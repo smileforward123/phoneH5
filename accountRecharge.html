@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" rel="stylesheet"/>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+         <link rel="stylesheet" href="css/accountRecharge.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                <script>writeI18nPageByKey("Accountrecharging")</script>
+            </h3>
+           
+        </header>
+        <div class="scroll">
+            <ul class="rechargeList">
+                <li>
+                    <span>
+                         <script>writeI18nPageByKey("methodOfrecharging")</script>：
+                   </span>
+                    
+                        <input id="demo_dummy"class="mbsc-control mbsc-control-ev"type="text" name="" value="" placeholder=""/>
+                        <em class="rightArrow"></em>
+                        <select id="demo" style="display:none">
+                          <option value="1">
+                                <script>writeI18nPageByKey("cyberBank")</script>
+                          </option>
+                          <option value="2">
+                               <script>writeI18nPageByKey("bankcardOrCreditcard")</script>
+                          </option>
+                                     
+                        <select>
+                </li>
+                <li>
+                    <span>
+                         <script>writeI18nPageByKey("TheAmountOfCharge")</script>：
+                    </span>
+                    <input  class="rechargeTxt" id="rechargeTxt" type="text" name="" value="" placeholder=""/>
+                </li>
+            </ul>
+            <div class="nextBox">
+                <span>
+                      <script>writeI18nPageByKey("theNextStep")</script>
+                </span>
+            </div>
+        </div>
+        <script>
+            $(".back").click(function(){
+                history.back(-1);
+            })
+            var instance = mobiscroll.select('#demo', {
+                    theme: 'mobiscroll',    
+                    lang: 'zh',         
+                    display: 'bottom',  
+                    minWidth: 200        
+            });
+            var payType;//充值方式；
+            var typeObj=getParam();//买家还是卖家;
+           
+            $(".rechargeTxt").on("input",function(){
+               $(".nextBox span").css("background","#c90c1e"); 
+            })
+            $('.nextBox span').click(function(){
+                if($("#demo_dummy").val()==getI18nPageByKey("cyberBank")){
+                        payType=1;
+                }else{
+                        payType=2;
+                }
+                recharge(payType);
+            })
+          
+            function recharge(payType){
+                
+                Datas({
+                    url:"/rechargeFirst",
+                    datas:{
+                        "user_id":ls.getItem("userId"),
+                        "store_id":"",
+                        "amount":$(".rechargeTxt").val(),
+                        "payType":payType,
+                        "type":typeObj.type,
+                        "callBackUrl":"h5_recharge"
+
+
+
+
+                    },
+                    success:function(data){
+                       
+                        ls.setItem("orderFormPayId",data.data.orderFormPayId);
+                        window.location.href=data.data.payUrl;
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+
+
+            //国际化
+            $(document).ready(function(){
+
+               $("#rechargeTxt").attr("placeholder",getI18nPageByKey("pleaseEnterAmountOfCharge"));
+               $("demo_dummy").attr("placeholder",getI18nPageByKey("selectPayingMethod"));
+                 $("#title").text(getI18nPageByKey("Accountrecharging"));
+            })
+          
+        </script>
+    </body>
+</html>

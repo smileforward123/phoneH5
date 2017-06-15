@@ -1,0 +1,361 @@
+
+/*公用的css*/
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    /*我们要去除在所有的浏览器当中点击过后有一个高亮的效果*/
+    /*击*/
+    -webkit-tap-highlight-color: transparent;/*我们把他设置透明*/
+    tap-highlight-color: transparent;
+    /*我们需要设置所有的元素宽度以边框开始计算*/
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body{
+    font-family: "MicroSoft YaHei",sans-serif;/*如果没有微软雅黑 就使用移动端默认的字体*/
+    font-size: 0.35rem;
+    color: #333;
+}
+a{color:#333333;}
+a:hover{color:#333333;}
+
+
+/*清楚移动端浏览器对表单的默认样式*/
+input[type="search"],input[type="tel"],textarea{
+    border: 0;
+    resize: none;
+    outline: none;
+    /*清除移动浏览默认的样式*/
+    -webkit-appearance: none;
+}
+
+.f_left{
+    float: left;
+}
+.f_right{
+    float: right;
+}
+i{font-style: normal;}
+/*清除浮动*/
+.clearfix::after,
+.clearfix::before{
+    content: ".";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+
+    clear: both;
+}
+/*头部代码start*/
+.wrapper{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    width:100%;  
+    line-height: 1.375rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    padding: 0.4rem 0 0.425rem;
+    position:fixed;
+    top:0;
+    left: 0;
+    z-index:99999;
+    height: 2rem;
+
+}
+.header  h3{
+     line-height: 1.375rem;
+     height: 1.375rem;
+     text-align: center;
+     font-size: 0.8rem;
+     color: #fff;
+}
+.scroll{
+    /* position:relative; */
+    overflow:auto;
+    width:100%;
+    z-index:100;
+    position: fixed;
+    left: 0;
+    top:2rem;
+    bottom: 2.25rem;
+}
+.back{
+   position: absolute;
+   left: 0.2rem;
+   top:0.5rem;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.3rem ;
+}
+.mainLogo{
+    position: absolute;
+    left: 2.2rem;
+    top:0.5rem;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    
+}
+.nav{
+    float:left;
+    font-size: 0.75rem;
+    height:1.3rem;
+    line-height: 1.3rem;
+}
+.nav input{background:white;}
+.nav .seartch_input{
+                   width:11.5rem;
+                   height:1.3rem;
+
+                   background:url(../images/magnify.png) no-repeat center left white;
+                   border-radius:0.15rem;
+                   margin-left:0.75rem;
+                   font-size:0.5rem;
+                   text-indent:1.3rem;
+                   font-family:"微软雅黑";
+				   background-size: contain;
+}
+.nav a{
+    float:left;
+    color:#fff;
+    padding:0 0.7rem;
+    margin-left: 0.25rem;
+}
+.nav_a2{background: #A10A18;border-radius:0.125rem  ;}
+.themeBanner{width:100%;
+             height:5rem;
+
+             background:url(../images/backdrop.png) no-repeat center center;
+             background-size:contain;position:relative;
+             }
+.themeBanner-content div{float:left;}
+
+
+.themeBanner-content{width:15rem;height:1.6rem;color:white;margin:0 auto;position:absolute;bottom:0.5rem;left:0.5rem;}
+.themeBanner-content .focuBtn{float:right;}
+.themeBanner-content a{color:white;
+                        display:inline-block; 
+                       line-height: 1rem;
+                       width:5rem;
+                       height: 1rem;
+                       white-space: nowrap;
+                       text-overflow:ellipsis;
+                       overflow: hidden;
+                       }
+.numberOfFocus span{
+    background:url(../images/leftward-arrow.png) no-repeat center right;
+    background-size:contain;
+    width: 0.7rem;
+    height: 0.7rem;
+    position: absolute;
+    right: -0.5rem;
+    top:0.2rem;
+    display:inline-block;
+}
+#focus{
+    float: right;
+}
+.shopLog img{width:3rem; height: 3rem !important; margin-top: -35px;}
+.numberOfFocus{font-size:0.6rem;text-indent:0.25rem;position: relative;width: 6rem;height: 2rem;}
+.numberOfFocus p{font-size:0.4rem;padding-left: 0.2rem;}
+.focuBtn{width:4rem;
+         height:1.4rem;
+         background:url(../images/noFocus.png) no-repeat center;
+         line-height:1.5rem;
+         font-size:0.5rem;
+         color:white;
+         text-indent:1.5rem;
+         background-size:cover;
+         margin-top: 8px;
+ }
+.focuBtnon{width:5rem;
+         height:1.5rem;
+         background:url(../images/comFocus.png) no-repeat center;
+         font-size:0.5rem;
+         color:#da2a2e;
+         text-indent:0;
+         background-size:cover;
+         margin-top: 2px;
+         text-align: center;
+         padding-left: 30px;
+         padding-top: 2px;
+ }
+
+
+
+
+/* 轮播 */
+.swipe {
+    overflow: hidden;
+    visibility: hidden;
+    position: relative;
+}
+.swipe-wrap {
+    overflow: hidden;
+    position: relative;
+}
+.swipe-wrap > figure {
+    float: left;
+    width: 100%;
+    position: relative;
+}
+#slider {position:relative;
+    width: 15rem;/* 设置最大的宽度 */
+    height:6.5rem;
+    margin: 0px auto; /* 居中对齐 */
+    margin-top:0.5rem;
+}
+
+figure {
+    margin: 0;/* 对齐，四周宽度都为0，在轮播的时候，以整张图片进行移动 */
+}
+div.swipe {
+
+}
+.page-swipe nav #position {
+    text-align: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+}
+.page-swipe nav #position li {
+    display: inline-block;
+    width: 1rem;
+    height:1rem;
+    border-radius: 0.5rem;
+    background: #141414;
+    box-shadow: inset 0 1px 3px black,0 0 1px 1px #202020;
+    margin: 0 2px;
+    cursor: pointer
+    text-align:center;
+}
+.page-swipe nav #position li.on {
+    box-shadow: inset 0 1px 3px -1px #28b4ea,0 1px 2px rgba(0,0,0,.5);
+    background-color: #1293dc;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0%,#1293dc),color-stop(100%,#0f6297));
+    background-image: -webkit-linear-gradient(top,#1293dc,#0f6297);
+    background-image: -moz-linear-gradient(top,#1293dc,#0f6297);
+    background-image: -ms-linear-gradient(top,#1293dc,#0f6297);
+    background-image: -o-linear-gradient(top,#1293dc,#0f6297);
+    background-image: linear-gradient(top,#1293dc,#0f6297);
+
+}
+.divider{box-sizing:border-box;
+         height:0.65rem;
+		 width:100%;
+		 border:1px solid #e0e0e0;
+		 background:#f2f1f6;
+		 margin-top:0.5rem;
+		 margin-bottom:0.5rem;}
+.showCase{width:90%;
+          height:auto;
+		  margin:0 auto;}
+.showCase a {
+    width:47%;
+    height:45%;
+    display: inline-block;
+    background: #ccc;
+    margin-right: 0.4rem;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+    
+}
+.swiper-wrapper{
+    background: #ccc;
+}
+.showCase a img{width:5.5rem;
+                height:5.5rem;
+                margin: 0.5rem 0.5rem 0.2rem 0.5rem;
+                background-size: contain;}
+/*.showCase a:nth-child(1){float:left;}
+.showCase a:nth-child(2){float:right;}*/
+/* .showCase a{
+    float: left;
+} */
+.showCase a p{
+   text-align: center;
+   width: 6.5rem;
+   height: 1.1rem;
+   white-space: nowrap;
+   text-overflow:ellipsis;
+   overflow: hidden;
+   display: block;
+   line-height: 1.1rem;
+}
+.bottomBackground{width:100%;
+                  height:5.5rem;
+				  background:#f3f5f7;
+				  margin-top:0.05rem;}
+.bottomMenu{
+            
+			z-index:100;
+            width:100%;
+            height:2.25rem;
+			box-sizing:border-box;
+			border-top:1px solid #cccccc;
+            border-bottom: 1px solid #ccc;
+			position:fixed;
+			bottom:0rem;
+			background:white;}
+.bottomMenu div{box-sizing:border-box;
+                width:33%;
+				height:100%;
+				line-height:2.25rem;
+				font-size:0.7rem;
+				text-align:center;
+				float:left;
+                border-left:1px solid #cccccc;
+                }
+.bottomMenu div:nth-child(2){
+                             background:url(../images/spring-menu.png) no-repeat center;
+							 background-position-x:0.9rem;
+							 background-size:0.45rem 0.35rem;
+							
+							 text-indent:1.5rem;
+							 }
+.hotClassDetail{height:9rem;
+                width:5.4rem;
+				border:1px solid #cccccc;
+				margin-left:5.275rem;
+				position:fixed;
+				bottom:3rem;
+				z-index:100;
+				background:white;
+				display:none;
+				}
+.hotClassDetail ul{width:100%;
+                   padding-top:0.5rem;
+                   text-align:center;
+				   font-size:0.55rem;}
+.hotClassDetail li{display:block;
+                   width:4rem;
+                   height:2rem;
+				   line-height:2rem;
+				    margin:0 auto;
+                    border-bottom:1px solid #cccccc;
+                }
+.hotClassDetail li:nth-child(1){
+                                border-bottom:1px solid #cccccc;}
+.hotClassDetail li:nth-child(2){
+                                border-bottom:1px solid #cccccc;}
+.hotClassDetail div{width:0.5rem;
+                    height:0.5rem;
+					background:red;
+					margin:0 auto;
+					transform:rotate(45deg);
+					margin-top:0.24rem;
+					background:white;
+					border-bottom:1px solid #cccccc;
+					border-right:1px solid #cccccc;}
+.onShow{display:block;}

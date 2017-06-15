@@ -1,0 +1,90 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.header{
+    width:100%;
+    height:1.375rem;
+    line-height: 1.375rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    padding: 0.4rem 0 0.425rem;
+     position:fixed;
+    left:0;
+    top:0; 
+    z-index: 1;
+
+}
+.back{
+    float:left;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.3rem ;
+}
+.mainLogo{
+    float:left;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.7rem;
+}
+.pageTitle{
+    float: left;
+   
+    color:#fff;
+    font-size:0.8rem ;
+}
+
+.scroll {
+   /* bottom: 0;*/
+    background:#f3f5f7;
+    margin-top: 2rem;
+}
+.complaintList li{
+    margin-top:0.5rem;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+    width:15rem;
+    padding:0.4rem 0.5rem 0.2rem;
+    font-size: 0.5rem;
+    line-height:1rem ;
+}
+.complaintTopic{
+    border-bottom: 1px solid #ccc;
+}
+.complaintList p span{
+    float: left;
+}
+.complaintList p strong{
+    float: right;
+}
+.complaintList p .status{
+    color:#ed5f61;
+}
+.complaintList .cancelBtn{
+    display:none;
+    width:100%;
+    height:1.5rem;
+    border-top:1px solid #ccc;
+}
+.complaintList .cancelBtn span{
+    display:block;
+    float:right;
+    width:3.875rem;
+    height:1.25rem;
+    font-size:0.7rem;
+    line-height:1.25rem;
+    color:#3a3a3a;
+    text-align:center;
+    background:#fff;
+    border:1px solid #cfcfcf;
+    border-radius:5px;
+    margin:0.25rem 0.25rem 0 0;
+}
+
+

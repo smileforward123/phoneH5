@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"><script>writeI18nPageByKey("accountSafe")</script></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/accountSafe.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("accountSafe")</script></h3>
+        </header>
+        <div class="scroll">
+             <ul class="accountSafeList">
+                 <li>
+                     <a href="alterPw.html">
+                         <span class="safeTitle"><script>writeI18nPageByKey("loginPW")</script></span>
+                         <span class="safeTip"><script>writeI18nPageByKey("changePWregular")</script></span>
+                         <em></em>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="alterBoundMobile.html">
+                         <span class="safeTitle clear"><strong class="safeName"><script>writeI18nPageByKey("verifyPhone")</script></strong><strong class="safeInfo mobile"><!-- 131****9877 --></strong></span>
+                         <span class="safeTip"><script>writeI18nPageByKey("ifYourPhoneLostTIp")</script></span>
+                         <em></em>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="alterPayPw.html">
+                         <span class="safeTitle"><script>writeI18nPageByKey("payPassword")</script></span>
+                         <span class="safeTip"><script>writeI18nPageByKey("changePWregular")</script></span>
+                         <em></em>
+                     </a>
+                 </li>
+                 <li>
+                     <a href="alterBoundEmail.html">
+                         <span class="safeTitle clear"><strong class="safeName"><script>writeI18nPageByKey("verifyEmail")</script></strong><strong class="safeInfo email"><!-- wodeyouxiang@**** --></strong></span>
+                         <span class="safeTip"><script>writeI18nPageByKey("ifYourEmailStopped")</script></span>
+                         <em></em>
+                     </a>
+                 </li>
+             </ul>
+         </div> 
+         <script>
+                $(".back").click(function(){
+                    window.location.href="myAccount.html"
+                })
+                var userInfoObj=getParam();
+                
+                $(".mobile").text(userInfoObj.mobile);
+                $(".email").text(userInfoObj.email);
+         </script>
+    </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/identifyTest.css" />
+        <link rel="stylesheet" href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" type="text/css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+     <script type="text/javascript" src="js/public.js"></script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+               <script>writeI18nPageByKey("bindMobile")</script>
+            </h3>
+        </header> 
+         <div class="scroll">
+             <h3 class="alterTitle">
+                   <script>writeI18nPageByKey("bindMobileForSafe")</script>
+            </h3>
+             <ul class="mobileList">
+                 <li class="clear ">
+                  
+                        <select id="demo">
+                          <option value="+60">+60</option>
+                          <option value="+65">+65</option>
+                          <option value="+673">+673</option>        
+                        </select>
+                   
+
+
+                     <input class="payPw" type="text" name="" value="" placeholder="">
+                 </li>
+                  <li class="clear">
+                   <input class="identifyTxt"type="text" name="" value="" placeholder=""><input type="button" class="identifyBtn" value="" onclick="sendCode();settime(this)"></input>
+                 </li>
+            </ul>
+            <div class="nextBox">
+                <span id="Confirm">
+
+                      <script>writeI18nPageByKey("okBtn")</script>
+                </span>
+            </div>
+        </div>
+        <script>
+            $(".back").click(function(){
+
+                history.back(-1);
+           })
+
+
+
+           var instance=mobiscroll.select('#demo', {
+                        theme: 'mobiscroll',    
+                        lang: 'zh',         
+                        display: 'bottom',  
+                        minWidth: 200  ,
+            });
+            $("#demo_dummy").css({"width":"2rem","float":"left","line-height":"2.2rem","text-align":"center"})
+            
+          
+
+            //重新发送验证码倒计时
+            var countdown=60;
+            function settime(obj) {
+                if (countdown == 0) {
+                    obj.removeAttribute("disabled");
+                    obj.value=getI18nPageByKey("getCheckCode");
+                    countdown = 60;
+                    return;
+                } else {
+                    obj.setAttribute("disabled", true);
+                    obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                    countdown--;
+                }
+                setTimeout(function() {
+                            settime(obj) }
+                        ,1000)
+            }
+
+            //发送验证码substr
+            function sendCode(){
+               var areaNm= $("#demo").val();
+                Datas({
+                    url:"send_mobile_message",
+                    datas:{
+                        "mobile":areaNm.substr(1)+$(".payPw").val(),
+                    },
+                    success:function(data){
+                       
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("phonecodeSendOk"));
+                        }else if(!data.status){
+                             layer.msg(getI18nPageByKey("failToSendphonecode"));
+                        }
+                    },
+                    error:function(){
+                       layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+
+            //确定邦定
+            $("#Confirm").click(function(){
+                 var areaNm= $("#demo").val();
+                Datas({
+                    url:"buyer/validation_phone",
+                    datas:{
+                        "phone_num":areaNm.substr(1)+$(".payPw").val(),
+                        "code":$(".identifyTxt").val()
+                    },
+                    success:function(data){
+                       
+                        if(!data.status){
+                            layer.msg(getI18nPageByKey("errorCode"));
+                        }else if(data.status){
+                            boundNewEmail();
+                        }
+                    },
+                    error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            })
+
+            function boundNewEmail(){
+                var userId=ls.getItem("IDnumber");
+                 var areaNm= $("#demo").val();
+                Datas({
+                    url:"buyer/bind_telePhone",
+                    datas:{
+                        "telePhone":areaNm+$(".payPw").val(),
+                        "user_id":userId
+                    },
+                    success:function(data){
+                      
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("bindMobileSuccessed"));
+                            setTimeout(function() {
+                                window.location.href="aboutMe.html";
+                            },1000)
+                        }
+                    },
+                    error:function(){
+                      
+                       layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+
+
+           $(document).ready(function(){
+                
+                  $("#title").text(getI18nPageByKey("bindMobile"));
+                   $(".payPw").attr("placeholder",getI18nPageByKey("PleaseEnterPhone"));
+                    $(".identifyTxt").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"));
+                     $(".identifyBtn").val(getI18nPageByKey("getCheckCode"));
+            })
+        </script>
+    </body>
+</html>

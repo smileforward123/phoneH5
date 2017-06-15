@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/setPayPw.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                <script>writeI18nPageByKey("setPAYINGpw")</script>
+            </h3>
+        </header>
+        <div class="scroll">
+            <h3 class="alterTitle">
+               <script>writeI18nPageByKey("setPayPWForSafe")</script>
+            </h3>
+            <ul class="payPwList">
+                <li class="clear ">
+                    <!-- <span class="payPwTitle">
+                          <script>writeI18nPageByKey("oldPayPassword")</script>:
+                    </span> -->
+                     <input class="payPw" type="password" name="" value="" >
+                </li>
+                <li class="clear ">
+                    <!-- <span class="payPwTitle">
+                         <script>writeI18nPageByKey("newPayPassword")</script>:
+                    </span> -->
+                     <input class="newpayPw" type="password" name="" value="" >
+                </li>
+                <li class="clear ">
+                    <!-- <span class="payPwTitle">
+                        <script>writeI18nPageByKey("reenterPaypw")</script>:
+                    </span> -->
+                     <input class="payPwAgain" type="password" name="" value="" >
+                </li>
+            </ul>
+            <p class="pwTip">
+                  <script>writeI18nPageByKey("enterPaypwSixNumber")</script>
+            </p>
+            <div class="finishBox">
+                <span>
+                    <script>writeI18nPageByKey("haveDone")</script>
+                </span>
+            </div>
+         </div>
+         <script>
+
+              $(".back").click(function(){
+
+                history.back(-1);
+           })
+            //获取用户信息 设置本地存储
+            Datas({
+                url:"/buyer/member_info ",
+                datas:{
+                    "user_id":ls.getItem("userId")
+                },
+                success:function(data){
+                   
+                    ls.setItem("UsersID",data.data.user.id);
+                    ls.setItem("UsersPhone",data.data.user.mobile);
+                    ls.setItem("UsersEmail",data.data.user.email);
+                    var store = ls.getItem('UsersID');
+                   
+                },
+                error:function(){
+                     layer.msg(getI18nPageByKey("failToRequest"));
+                }
+            })
+
+               var reg =/^\d{6}$/;
+               $('.newpayPw').blur(function(){
+                  if($(this).val()==''){
+                      layer.msg(getI18nPageByKey("PAYPWcannotnull"));
+                  }else if(!reg.test($(this).val())){
+                      layer.msg(getI18nPageByKey("payPWformatTip"));
+                  }
+             })
+
+            $(".payPwAgain").blur(function(){
+                if($(this).val()==''){
+                    layer.msg(getI18nPageByKey("PAYPWcannotnull"));
+                }else if($(this).val()!=$('.newpayPw').val()){
+                    layer.msg(getI18nPageByKey("bothTimePWDiffer"));
+                }
+            })
+           $('.finishBox span').click(function(){
+               if($(".payPwAgain").val()=='' || $('.newpayPw').val()==''|| $('.newpayPw').val()!=$(".payPwAgain").val()){
+                   layer.msg(getI18nPageByKey("inforInputError"));
+                     return;
+               }
+
+               var ID = ls.getItem('UsersID');
+               Datas({
+                   url:"buyer/pay_pwd",
+                   datas:{
+                       "user_id":ID,
+                       "pay_pwd":$(".payPw").val()
+                   },
+                   success:function(data){
+                   
+                       if(!data.status){
+                           layer.msg(getI18nPageByKey("payPWerror"));
+                       }else if(data.status){
+                           layer.msg(getI18nPageByKey("rightpayPW"));
+                           modifyPW();
+                       }
+                   },
+                   error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                   }
+               })
+           })
+
+           function modifyPW(){
+
+            
+               var ID = ls.getItem('UsersID');
+               Datas({
+                   url:"updatePayPwdByUser",
+                   datas:{
+                       "user_id":ID,
+                       "pay_pwd":$(".newpayPw").val()
+                   },
+                   success:function(data){
+                    
+                       if(!data.status){
+                           layer.msg(getI18nPageByKey("paypwEditnotOk"));
+                       }else if(data.status){
+                           layer.msg(getI18nPageByKey("paypwEditOk"));
+                           setTimeout(function(){
+                                window.location.href="aboutMe.html";
+                           },1000)
+
+                       }
+                   },
+                   error:function(){
+                       layer.msg(getI18nPageByKey("failToRequest"));
+                   }
+               })
+           }
+
+         $(document).ready(function(){
+           $("#title").text(getI18nPageByKey("setPAYINGpw"));
+           $(".payPw").attr("placeholder", getI18nPageByKey("oldPayPassword"));
+           $(".newpayPw").attr("placeholder", getI18nPageByKey("newPayPassword"));
+           $(".payPwAgain").attr("placeholder", getI18nPageByKey("reenterPaypw"));
+         })
+        </script>
+    </body>
+</html>

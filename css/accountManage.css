@@ -1,0 +1,65 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background:#f3f5f7;
+}
+.manageList li{
+    margin-top:0.75rem;
+    border-top:1px solid #dbdbdb;
+    border-bottom:1px solid #dbdbdb;
+    font-size: 0.8rem;
+    line-height:2.75rem ;
+}
+.manageList li a {
+    color: #333333;
+    width: 100%;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    text-indent: 2rem;
+    padding:0 0.5rem;
+}
+
+.manageList .title{
+    float: left;
+}
+.manageList .titleImg{
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 0.5rem;/*  */
+    /* background:url(../images/balanceImg.png) no-repeat;
+    background-size: contain; */
+}
+.manageList .balanceImg{
+   background:url(../images/balanceImg.png) no-repeat;
+    background-size: contain; 
+}
+.manageList  .rebateImg{
+     background:url(../images/myRebate.png) no-repeat;
+    background-size: contain;
+}
+.manageList  .rechargeImg{
+     background:url(../images/recharge.png) no-repeat;
+    background-size: contain;
+}
+.manageList .money{
+    float: right;
+    color:#ff8800;
+}
+.manageList li .rightArrow{
+    position: absolute;
+    right:0rem;
+    top:1rem;
+    width: 0.35rem;
+    height: 0.6rem;
+    background: url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+  /*   margin-left: 0.5rem; */
+    vertical-align: middle;
+}

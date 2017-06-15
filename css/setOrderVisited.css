@@ -1,0 +1,406 @@
+@charset "UTF-8";
+.content{
+    width: 100%;
+    height: 100%;
+}
+.pageTip{
+    width:100%;
+ 
+    font-size: 0.55rem;
+  
+    color:#999999;
+    background:#fff;
+    background:url(../images/addressBk.png) no-repeat bottom;
+    background-size: contain;
+
+}
+.addTitle{
+     height:1.625rem;
+    line-height: 1.625rem;
+    margin-bottom: 0.25rem;
+}
+.title{
+    font-size:0.7rem ;
+    font-weight: bold;
+   
+    color:#292929;
+    float: left;
+    margin-left: 0.5rem;
+
+
+}
+.defaultBtn{
+    float: right;
+    width:2.1rem;
+    font-size:0.45rem ;
+    height:0.75rem;
+    line-height: 0.75rem;
+    background:#ec2426;
+    color:#fff;
+    text-align: center;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    margin-top:0.45rem;
+    display:none;
+}
+
+.areaList{
+
+    line-height: 3.15rem;
+    padding-bottom: 0.5rem;
+}
+.areaList span{
+    vertical-align: middle;
+}
+.scroll{
+    width:100%;
+     position:fixed;
+    left:0;
+    top:2.2rem;
+    bottom:2.525rem;
+    overflow:auto;
+    box-sizing: border-box;
+    
+}
+.addressLogo{
+    display:inline-block;
+    float: left;
+    width:0.6rem;
+    height:0.7rem;
+    background:url(../images/addressLogo.png) no-repeat;
+    background-size:contain;
+   margin-left:0.5rem ;
+    margin-right: 0.2rem;
+   
+}
+.addPlace{
+    float: left;
+    width:11.5rem;
+    font-size: 0.6rem;
+    line-height:0.875rem;
+
+
+}
+.chosed{
+    float: right;
+    display:inline-block;
+    margin-right:0.65rem ;
+    width:0.4rem;
+    height:0.8rem;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size:contain;
+    vertical-align: middle;
+ 
+}
+.blank{
+    height:0.55rem;
+    background:#f3f5f7;
+    width:100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #ccc;
+}
+/*订单列表*/
+.orderBox{
+    width:100%;
+}
+
+.storeIco{
+    display:inline-block;
+    float: left;
+    width:0.825rem;
+    height:0.75rem;
+    background:url(../images/stroeIco.png) no-repeat;
+    background-size:contain;
+    margin-right:0.45rem ;
+    margin-left: 0.3rem;
+    margin-top:0.6rem;
+}
+.storeNames{
+    float: left;
+    width:12rem;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.storeName{
+    
+    background:#fbfbfb;
+    font-size:0.675rem;
+    height:2.25rem;
+    line-height:2.25rem;
+    color:#333333;
+    text-indent:0.5rem;
+}
+.orderList{
+    padding:0 0.5rem;
+    box-sizing: border-box;
+}
+.orderList li{
+    padding:0.725rem 0;
+    width:100%;
+    border-bottom: 2px solid #e7e7e7;
+}
+.orderImg{
+    float:left;
+    width:3.95rem;
+    height:3.95rem;
+    border:1px solid #ccc;
+    border-radius:0.125rem;
+
+}
+.orderImg img{
+    width:3.95rem;
+    height:3.95rem;
+}
+.orderInfo{
+    float:left;
+    max-width:8rem;
+    height:auto;
+    margin-left:0.525rem ;
+}
+.orderInfo dt{
+    font-size: 0.7rem;
+    line-height:0.95rem;
+    color:#4d4d4d;
+}
+.info{
+   
+    font-size:0.6rem ;
+
+   line-height:0.75rem;
+   color:#848691;
+}
+.price{
+    font-size: 0.6rem;
+    height:1rem;
+    line-height: 1rem;
+}
+.priceNow{
+    float:left;
+    color:#ec2426;
+}
+.num{
+    float:right;
+    color:#333333;
+}
+.express{
+    width:100%;
+    padding:0.475rem 0.5rem 0.375rem ;
+    box-sizing: border-box;
+ 
+    font-size:0.65rem ;
+    line-height:1.225rem ;
+    border-bottom: 1px solid #ccc;
+
+}
+.method{
+    float: left;
+}
+.jisong{
+    float:left;
+    margin-left:8.5rem ;
+}
+
+.expressDate{
+    text-indent:3.35rem ;
+    color:#333333;
+}
+.expressDate em{
+    display:inline-block;
+    width:0.65rem;
+    height:0.65rem;
+    background:url(../images/dateIco.png) no-repeat;
+    background-size:contain;
+    margin-right:0.375rem ;
+}
+.salerMes{
+    height:2.15rem;
+    font-size:0.7rem;
+    line-height:2.15rem;
+    color:#333333;
+    border-bottom: 1px solid #ccc;
+    text-indent: 0.5rem;
+
+}
+.salerMes input{
+    width:8.7rem;
+    
+    line-height:0.55rem;
+    color:#999999;
+}
+
+.totalMoney{
+    padding:0.5rem ;
+    width:100%;
+    box-sizing: border-box;
+    font-size: 0.6rem;
+    line-height: 1.25rem;
+    border-bottom: 1px solid #ccc;
+}
+.totalMoney .leftName{float:left;}
+.leftName em{
+    display:inline-block;
+    width:0.55rem;
+    height:0.55rem;
+    background:url(../images/gantanhao.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.5rem;
+}
+.totalMoney .Money{
+    float:right;color:#ec2426;
+}
+
+.totalFooter{
+    height:2.525rem;
+    line-height:2.525rem;
+    position:fixed;
+    left:0;
+    bottom:0;
+    width:100%;
+
+}
+.total{
+ 
+    color:#ec2426;
+    width:100%;
+}
+.total .totalPay{
+    float: left;
+}
+.total input{
+    float:right;
+     width:4.35rem; 
+    height:2.5rem;
+    background:#ec2426;
+    font-size:0.7rem;
+    line-height:2.5rem;
+    color:#fff;
+    text-align: center;
+  
+}
+
+/* 配送页面 */
+html,body{
+    width: 100%;
+    height: 100%;
+}
+.dialog{
+    width: 100%;
+    height:100%;
+    position: absolute;
+   left: 0;
+   top:0;
+}
+.expressBox{
+    bottom:0;
+}
+.method{
+    width:100%;
+    box-sizing: border-box;
+    padding-bottom: 0;
+    
+}
+.methodChose{
+    border-bottom: 1px solid #ccc;
+    padding-top:0.55rem;
+    padding-bottom:1.2rem ;
+}
+.methodChose span{
+    display:inline-block;
+    width:4.6rem;
+
+    height:1.35rem;
+    line-height:1.35rem;
+    border:2px solid #ccc;
+    border-radius:0.25rem;
+    margin-right: 0.5rem;
+}
+.methodChose .active{
+   
+    color:#f33737;
+    border:2px solid #f33737;
+}
+.date{
+    padding:0 0.5rem 2rem;
+    display:none;
+    
+}
+.date h4{
+    padding-left: 0.075rem;
+}
+.datebox{
+    width:15rem;
+    font-size: 0.7rem;
+    height:2.2rem;
+    line-height: 2.2rem;
+    border:2px solid #c2c3c4;
+    border-radius: 0.25rem ;
+    text-indent: 0.65rem;
+    box-sizing: border-box;
+    position:relative;
+
+}
+#expressDate input{
+    width:80%;
+    line-height: 2.2rem;
+}
+
+.calender{
+    float:right;
+    width:0.95rem;
+    height:0.95rem;
+    background:url(../images/calender.png) no-repeat;
+    background-size:contain;
+    margin-right:0.55rem;
+    margin-top:0.55rem;
+}
+.defTime{
+    position:relative;
+}
+.blackTri{
+    position:absolute;
+    right:0.55rem;
+    top:0.95rem;
+    width:0.675rem;
+    height:0.425rem;
+    background:url(../images/blackTri.png) no-repeat;
+    background-size: contain;
+    transition: transform ease 0.5s;
+}
+.timeWhile{
+    width:15rem;
+    box-sizing: border-box;
+    position:absolute;
+    left:-0.08rem;
+    top:2.0rem;
+    width:15rem;
+    border:2px solid #ccc;
+   
+    border-radius: 0 0 0.25rem 0.25rem;
+    display:none;
+    background:#fff;
+
+}
+.correct{
+    float:right;
+    width:0.8rem;
+    height:0.55rem;
+    margin:0.75rem;
+    display:inline-block;
+    background:url(../images/correct.png) no-repeat;
+    background-size: contain;
+    display:none;
+
+}
+.okBtn{
+    width:15rem;
+    height:2.2rem;
+    font-size:0.75rem;
+    line-height:2.2rem;
+    color:#fff;
+    background:#c90c1e;
+   margin:0 0.5rem;
+   border-radius:0.25rem;
+
+}
+

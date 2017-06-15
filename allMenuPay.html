@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title id="title"></title>
+	<link rel="stylesheet" type="text/css" href="css/allmenu.css">
+	 <link rel="stylesheet" type="text/css" href="css/loading.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/orderSearchComplate.css"> -->
+	<script type="text/javascript">
+		document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="titTop">
+				 <a href="aboutMe.html"></a>
+		        <span></span>
+				<h2>
+				    <em>
+				        <script>writeI18nPageByKey("allOrders")</script>
+				    </em>
+				    <b></b>
+				</h2>
+				<i id="status_icon"></i>
+			</div>
+			<div class="nav">
+				<ul id="menu">
+					<li >
+					    <a href="allMenu.html">
+					        <script>writeI18nPageByKey("storeAll")</script>
+					    </a>
+					</li>
+					<li>
+					     <a href="allMenuPay"  class="color">
+					         <script>writeI18nPageByKey("waitForPaying")</script>
+					     </a>
+					</li>
+					<li>
+					     <a href="allMenuPreGood.html">
+					         <script>writeI18nPageByKey("waitForDelivery")</script>
+					     </a>
+					</li>
+					<li>
+					     <a href="allMenuReviece.html">
+					         <script>writeI18nPageByKey("waitForSigning")</script>
+					     </a>
+					</li>
+					<li>
+					     <a href="allMenuComGood.html">
+					         <script>writeI18nPageByKey("haveReceivedGoods")</script>
+					     </a>
+					</li>
+				</ul>
+				<p class="line" id="line" style="left:20%"></p>
+			</div>
+		</header>
+		<section id="box">
+			<!-- 待付款 -->
+			<div class="all">
+				<div class="wrap">
+					<div class="wrap_box" ></div>
+					<div class="loading">
+					    <img src="images/loading_more.gif" class="loadImg">
+					    <span>
+					        <script>writeI18nPageByKey("isLoading")</script>...
+					    </span>
+					</div>
+				</div>
+				<div class="no_menu" style="display:none">
+					<dl>
+						<dt><img src="images/nomenu.png"></dt>
+						<dd>
+							<script>writeI18nPageByKey("youHaveNoSuchOrder")</script>
+						</dd>
+					</dl>
+				</div>
+			</div>
+		
+		</section>
+	</div>
+	<div class="layer" style="z-index:10000"></div>
+	<div class="all_menu">
+		<a href="allMenuOrder.html">
+		    <script>writeI18nPageByKey("allOrders")</script><!-- 全部订单 -->
+		</a>
+		<a href="allMenuCancelCompalte.html">
+		    <script>writeI18nPageByKey("orderHaveCompleted")</script><!-- 已完成订单 -->
+		</a>
+		<a href="allMenuCancel.html">
+		    <script>writeI18nPageByKey("orderHaveCancelled")</script><!-- 已取消订单 -->
+		</a>
+		<a href="allMenuRecode.html">
+		    <script>writeI18nPageByKey("returnRecord")</script><!-- 退款记录 -->
+		</a>
+	</div>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="css/layer/layer.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function(){
+	 	 		$("#title").text(getI18nPageByKey("waitForPaying"));
+             
+      		})
+			$('.titTop h2').on('click',function(){
+				if (!$(this).find("b").hasClass('on')) {
+					$('.all_menu').show();
+					$('.layer').show();
+					$(this).find('b').addClass('on');
+				}else{
+					$('.all_menu').hide();
+					$('.layer').hide();
+					$(this).find('b').removeClass('on');	
+				}
+
+			})
+			var page=0;
+			loadAdd();
+			 $(window).scroll(function () {
+		        var scrollTop=$(this).scrollTop();
+		        var scrollHeight = $(document).height();
+		        var windowHeight = $(this).height();
+		        if (scrollTop+windowHeight==scrollHeight) {
+		              loadAdd();
+		        };
+		    })
+			var status=10,orderStatus=10;
+			$('#status_icon').on("click",function(){
+				window.location.href="orderSearchComplate.html?orderStatus="+status;
+			})
+			//订单列表 buyer/order 待付款orderStatus=10
+			function loadAdd(){
+				$('.loading').show();	
+				page+=1;
+				Datas({
+					url:"buyer/order",
+					datas:{"order_status":10,"user_id":ls.getItem("userId"),"currentPage":page},
+					success:function(data){
+							var str='',str1='',txt;
+						if (data.status&&data.data!="") {
+							$('.all .no_menu').hide();
+							for(var i=0;i<data.data.length;i++){
+								if (data.data[i].status==15) {
+									txt=getI18nPageByKey("offlinePayWaitChecking");
+									//txt="线下支付待审核";
+									str1= '<div class="footers_info">'+
+						  						'<nav class="nav_info">'+
+										  		 '<div class="right" style="float:right">'+
+										  		 	'<a href="javascript:void(0)" onclick="contactSaller(this,\''+data.data[i].store_userId+'\',\''+data.data[i].store_userName+'\')">'+getI18nPageByKey("contactSeller")+'</a>'+
+				  									'<a href="javascript:void(0)"  class="cancel_menu" onclick="cancelOrder('+data.data[i].id+','+data.data[i].order_id+')" style="margin-right:0.5rem">'+getI18nPageByKey("cancelOrder")+'</a>'+
+				  									'<a href="javascript:void(0)"  class="confirm_item" onclick="pay('+data.data[i].lineType+','+data.data[i].totalPrice+','+data.data[i].id+')">'+getI18nPageByKey("waitForPaying")+'</a>'+
+					  							' </div>'+
+					  							'<nav>'+
+				  							'</div>';
+								 }else if (data.data[i].status==10){
+								 	txt=getI18nPageByKey("waitForPaying");
+								 	//txt="待付款";
+									 str1='<div class="footers_info">'+
+						  						'<nav class="nav_info">'+
+						  								'<div class="right rig1" style="float:right">'+
+						  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+data.data[i].store_userId+'\',\''+data.data[i].store_userName+'\')">'+getI18nPageByKey("contactSeller")+'</a>'+
+									  						'<a href="javascript:void(0)" class="cancel_menu" onclick="cancelOrder('+data.data[i].id+','+data.data[i].order_id+')">'+getI18nPageByKey("cancelOrder")+'</a>'+
+									  						'<a href="javascript:void(0)"  onclick="pay('+data.data[i].lineType+','+data.data[i].totalPrice+','+data.data[i].id+')">'+getI18nPageByKey("paying")+'</a>'+
+						  								'</div>'+
+						  								
+						  						'</nav>'+
+						  					'</div>'
+								 }
+								str+='<div class="shop_item shop_goods">'+
+										'<div class="shop_detail">'+
+						              		'<h4 class="store_name">'+
+							                         '<span class="store_icon"></span>'+
+							                         '<b class="shop_name">'+data.data[i].store_name+'</b>'+
+							                         '<a href="javascript:void(0)">'+txt+'</a>'+
+					
+						                    '</h4>'+
+
+						                   '<div class="shop_item">'
+						                    for(var j=0;j<data.data[i].gcpList.length;j++){
+						                    	  str+='<a class="orderImg"  onclick="menuDetai('+data.data[i].id+','+data.data[i].store_id+',10)">'+
+								                  		'<dl>'+
+								                  			'<dt><img src="'+data.data[i].gcpList[j].goodsMainPhotos+'" /></dt>'+
+								                  			'<dd class="shop_info">'+
+								                  				'<h2>'+data.data[i].gcpList[j].goodsName+'</h2>'+
+								                  				'<p><span>'+data.data[i].gcpList[j].specInfo+'</span></p>'+
+								                  				'<p><i>RM'+data.data[i].gcpList[j].gcPrice+'</i><em>x'+data.data[i].gcpList[j].count+'</em></p>'+
+								                  			'</dd>'+				
+								                  		'</dl>'+
+							                  		'</a>'
+						                    }
+						                    str+='</div>'+	              
+						              		'<div class="item_price"><p class="span_left">'+getI18nPageByKey("theTotal")+''+data.data[i].totalcount+''+getI18nPageByKey("itemsGoods")+'</p><p style="margin-right:0.5rem" class="span_right"><b>'+getI18nPageByKey("totalPay")+'：RM'+data.data[i].totalPrice+'</b>('+getI18nPageByKey("includePostage")+')</p></div>'+str1+
+						                   
+						              	'</div>'+
+									'</div>'
+
+							};
+							setTimeout(function(){
+		                           $(".loading").hide();
+		                           $('.wrap_box').append(str);
+	                 		 },500);
+
+						}else{
+							 if (page==1) {
+		                            setTimeout(function(){
+		                            $(".loading").hide();
+		                            $('.all .no_menu').show(); 
+		                         },500)   
+		                          // 
+		                        }else if(page>1){
+		                           $(".loading").hide(); 
+		                           $('.all .no_menu').hide(); 
+		                           // 
+		                         } 
+						}
+
+					},
+					error:function(data){
+						leyer.msg(data.message);
+						// 
+					}
+
+				})
+			
+		}		
+	</script>
+</body>
+</html>

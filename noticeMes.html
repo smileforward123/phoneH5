@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+       <script src="js/public.js"></script>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/noticeMes.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("informMessage")</script></h3>
+        </header>
+        <div class="scroll">
+        <!--  <div class="noticeMesBox">
+              <ul>
+                  <li>
+                      <a class="clear"href="javascript:void(0)"><span>您的订单号:20160704183318的商品提交成功，请尽快完成支付</span><em></em></a>
+                  </li>
+              </ul>
+              <p class="date">2016年6月08日</p>
+          </div>
+          <div class="noticeMesBox">
+              <ul>
+                  <li>
+                      <a class="clear"href="javascript:void(0)"><span>您的订单号:20160704183318的商品提交成功，请尽快完成支付</span><em></em></a>
+                  </li>
+              </ul>
+              <p class="date">2016年6月08日</p>
+          </div> 
+          <div class="noticeMesBox"> -->
+            <!--   <ul>
+                <li>
+                    <a class="clear"href="javascript:void(0)"><span>您的订单号:20160704183318的商品提交成功，请尽快完成支付</span><em></em></a>
+                </li>
+                <li>
+                    <a class="clear"href="javascript:void(0)"><span>您的订单号:20160704183318的商品提交成功，请尽快完成支付</span><em></em></a>
+                </li>
+            </ul>
+            <p class="date">2016年6月08日</p>
+                      </div> -->
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+       $('.back').on('click',function(){
+             window.location.href="message.html";
+       })
+        $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("informMessage"));
+        })
+       //通知消息
+       Datas({
+        url:"system/message",
+        datas:{"types":0,"to_user_id":ls.getItem('userId'),"currentPage":1},
+        success:function(data){
+            var str="";
+            if (data.status) {
+                $.each(data.data,function(k,v){
+                    str+='<div class="noticeMesBox">'+
+                           ' <ul><li><a class="clear"href="javascript:void(0)"><span>'+v.title+'</span><em></em></a></li>'+
+                           ' </ul>'+
+                            '<p class="date">'+v.addTime+'</p>'+
+                       '</div>';
+
+                })
+                $('.scroll').html(str);
+            };
+        },
+        error:function(){
+            
+        }
+       })
+       
+       </script>
+    </body>
+</html>

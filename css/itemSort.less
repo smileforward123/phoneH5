@@ -1,0 +1,164 @@
+*{
+	margin:0;
+	padding:0;
+}
+html,body,.wrap{
+	width:100%;
+	height:100%;
+}
+body{
+	  font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif; /*使用无衬线字体*/
+ }
+
+a, img {
+		-webkit-touch-callout: none; /*禁止长按链接与图片弹出菜单*/
+}
+
+html, body {
+		-webkit-user-select: none; /*禁止选中文本*/
+		user-select: none;
+}
+
+button,input,optgroup,select,textarea {
+		 -webkit-appearance:none; /*去掉webkit默认的表单样式*/
+}
+
+a,button,input,optgroup,select,textarea {
+		-webkit-tap-highlight-color:rgba(0,0,0,0); /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/
+}
+
+input::-webkit-input-placeholder {
+		color:#ccc; /*修改webkit中input的planceholder样式*/
+}
+body {
+		-webkit-text-size-adjust: 100%!important; /*禁止IOS调整字体大小*/
+}
+
+input::-webkit-input-speech-button {
+		display: none; /*隐藏Android的语音输入按钮*/
+}
+a{
+	text-decoration:none;
+}
+.wrap{
+	background:#f7f7f7;
+	header{
+			height:2.2rem;
+			background:#C90C1E;
+			color:#fff;
+			line-height:2.2rem;
+			h2{
+				text-align:center;
+				color:#fff;
+				position:relative;
+				font-size:1rem;
+				a{
+					width:1rem;
+					height:1rem;
+					left:0.5rem;
+					top:0.5rem;
+					position:absolute;
+					background:url(../images/shareShop_r2_c1.png) no-repeat;
+					background-size:100% 100%;
+				}
+				span{
+					width:1.275rem;
+					height:1.45rem;
+					left:2.1rem;
+					top:0.3rem;
+					position:absolute;
+					display:inline-block;
+					background:url(../images/shareShop_r1_c3.png) no-repeat;
+					background-size:contain;
+				}
+			}
+	}
+	.allItem{
+		height:2.15rem;
+		background:#fff;
+		margin:0.5rem 0;
+		line-height:2.15rem;
+		a{
+			width:90%;
+			height:2.15rem;
+			display:block;
+			margin:0 auto;
+			color:#636668;
+			font-size:0.9rem;
+			span{
+				    float: right;
+				    display: inline-block;
+				    width: 0.45rem;
+				    height: 0.7rem;
+				    background: url(../images/rightChose.png) no-repeat;
+				    background-size: contain;
+				    margin-top: 0.8rem;
+				    margin-right: 0.5rem;
+			}
+		}
+	}
+	.itemList{
+		width:100%;
+		height:auto;
+		background:#fff;
+		padding-top:0.01rem;
+		/*ul{
+			height:2.25rem;
+			width:98%;
+			margin:0 auto;
+			background:#fff;
+			padding-bottom:0.4rem;
+			li{
+				width:49%;
+				float:left;
+				list-style:none;
+				font-size:0.6rem;
+				color:#636668;
+				height:2.25rem;
+				line-height:2.25rem;
+				background:#f3f3f3;
+				margin:0.2rem 0;
+				&:nth-child(2n+1){
+					border-right:3px;
+				}
+				a{
+					width:90%;
+					float:left;
+					list-style:none;
+					font-size:0.6rem;
+					color:#636668;
+					height:2.25rem;
+					line-height:2.25rem;
+					display:inline-block;
+					padding-left:0.3rem;
+				}
+				
+			}
+		}*/
+		a{
+			width:46%;
+			height:2.25rem;
+			line-height:2.225rem;
+			background:#fff;
+			display:inline-block;
+			font-size:0.8rem;
+			color:#636668;
+			margin-top:0.3rem;
+
+			span{
+				color:#636668;
+				height:2.25rem;
+				line-height:2.25rem;
+				display:inline-block;
+				background:#f3f3f3;
+				font-size:0.7rem;
+				display:inline-block;
+				width:98%;
+				margin:0 auto;
+				padding-left:0.3rem;
+
+
+			}
+		}
+	}
+}

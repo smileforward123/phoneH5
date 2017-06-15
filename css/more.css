@@ -1,0 +1,36 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll{
+    bottom:0;
+    background:#f3f5f7;
+}
+.List li {
+   
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    font-size: 0.7rem;
+    line-height: 2rem;
+}
+.List li a {
+    color: #333333;
+    width: 100%;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    text-indent: 0.5rem;
+    padding: 0 0.5rem;
+}
+.List li em{
+    display: inline-block;
+    width: 0.35rem;
+    height: 0.6rem;
+    background: url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    position: absolute;
+    right:0.5rem;
+    top:0.7rem;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/guestPay.css" rel="stylesheet"/>
+         <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    </head>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back" id="copttou"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("payChoose")</script></h3>
+            
+        </header>
+        <div class="scroll scroll3">
+            <h3 class="payTitle">
+                <em class="payMethod"></em><script>writeI18nPageByKey("payMethodTitle")</script>
+            </h3>
+            <ul class="payList">
+                <li data-id="1">
+                    <label><input class="radio"type="radio" name="payMethod" value="">
+                        <i class="radioImg add" ></i><script>writeI18nPageByKey("bankCard")</script></label>
+                </li>
+                <li data-id="2">
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><script>writeI18nPageByKey("cyberBank")</script></label>
+                </li>
+                 <li data-id="3">
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><script>writeI18nPageByKey("accountBalance")</script></label>
+                </li>
+                 <li class="pay" data-id="4">
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><script>writeI18nPageByKey("offlinePayment")</script></label>
+                </li>              
+            </ul>
+             <div class="payListRig">
+                 <label><input class="radio" type="radio" name="payMethod" value=""><i class="radioImg"></i><script>writeI18nPageByKey("rebateMoney")</script>:<span  class="rebate"><!-- 300 --></span>RM</label>
+                
+            </div>
+            <div class="blankBk blank6">
+                
+            </div>
+        </div>
+        <div class="PayGuestBtn" id="payingon">
+            <span id="confirm"><script>writeI18nPageByKey("okBtn")</script></span>
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script src="js/zepto.min.js"></script>
+        <script src="js/common.js"></script>   
+    <script>
+    var orderBy,follow_type;
+      var params = getParam(),
+        signType=getParam().signType,
+        goods_id=getParam().goods_id;
+        //解析地址栏获取orderBy的值        
+      var params=getParam();
+        orderBy=params.orderBy;
+        signType=params.signType;
+      var gc_id = params.id ? params.id : null,
+        goods_id =params.goods_id?params.goods_id:null;
+        // follow_type=params.follow_type;
+      
+       $("#title").text(getI18nPageByKey("payMethodTitle"));
+        $(".back").click(function(){
+             window.location.href="convertComplete.html";
+        })
+        //判断线下支付显示还是隐藏
+         if (ls.getItem('lineType')==0) {
+            $('.pay').hide();
+           
+        }else{//1显示
+             $('.pay').show();
+            
+        }
+        var flag=false;
+        $('.payListRig .radioImg').on("click",function(){
+            if (!$(this).hasClass('on')) {
+                flag=true;
+                 $(this).addClass('on');
+            }else{
+                flag=false;
+                $(this).removeClass('on');
+                
+            } 
+        })
+        window.payType=1;
+        // window.payTypes=1;
+        var payType,rebate,payTypes;
+           $('.payList li').each(function(k,v){
+                $(this).on('click',function(){
+                     window.payType=$(this).data('id');
+                   if (! $(this).find('.radioImg').hasClass('add')) {
+                     $(this).find('.radioImg').addClass('add');
+                     
+                   
+                      ls.setItem("payTypes",payTypes);
+    
+                      if ($('.payListRig .radioImg').hasClass('on')) {
+                         payTypes=window.payTypes*1+5;
+                         rebate=1;
+                      }
+                    
+                     $(this).siblings().find('.radioImg').removeClass('add');
+                   };
+                })
+            })
+       //返回余额
+         Datas({
+            url:"getUserInfo",
+            datas:{"user_id":ls.getItem('user')},
+            success:function(data){
+              
+                $('.rebate').text(data.data.rebateTotal);
+            },
+            error:function(data){
+                
+            }
+        })
+         var pay;
+        $('.PayGuestBtn').on('click',function(){
+            if ($('.payList .radioImg').hasClass("add")&&$('.payListRig .radioImg').hasClass('on')) {
+                 pay=window.payType*1+5;
+              
+                 rebate=1;
+                 window.location.href="paymentSucceed.html?payType="+pay+"&&rebate="+rebate;
+            }else{
+                pay=window.payType;
+                 window.location.href="paymentSucceed.html?payType="+pay;
+            }
+            
+        })
+    </script>
+    </body>
+</html>

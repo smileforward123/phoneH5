@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" style="padding-bottom:10rem;">
+<head>
+    <script src="js/public.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,user-scalable=no"/>
+    <title id="title"></title>
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    <link rel="stylesheet" type="text/css" href="css/publich5.css">
+    <link rel="stylesheet" href="css/shopping_cars.css">
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <style>
+        .mainPhot{
+          position: relative;
+        }
+        .reminder{
+          position: absolute;
+          display: none;
+          left: -3.8rem;
+          height: 3rem;
+          width: 3rem;
+          text-align: center;
+          border-radius: 1.5rem;
+          opacity: 0.5;
+          background: black;
+          top: 1.4rem;
+          line-height: 3rem;
+          color: white;
+        }
+
+
+    </style>
+</head>
+<body style="background:#f2f2f2;">
+    <div class="shopCarBox">
+        <header class="car_header red">
+              <h2><a href="javascript:void(0)" class="backs"></a><script>writeI18nPageByKey("shoppingCar")</script><span class="delete"></span><b id="message"></b></h2>
+              <div class="selcectBox" style="background:white">
+                   <a href="javascript:void(0);"   id="MainSelectAllitems" class="nonSelect"></a>
+                    <span><script>writeI18nPageByKey("selectedAll")</script></span>
+              </div>
+        </header>
+        <div class="wrapper">
+              <div class="empty" style="display:none">
+                      <div  class="emptyreminder" ></div>
+                      <p  class="emptyss" >
+                               <script>writeI18nPageByKey("theCartIsEmpty")</script><!-- 购物车是空的，什么也没有哦～ -->
+                      </p>
+              </div>   
+            <!--<div class="Store_wrapper">
+                      <div class="Pick_All_Goods">
+                          <a href="javascript:void(0);"  class="ShopLeverSelectAll shop_select_none"></a>
+                          <img src="images/stroeIco.png"/>
+                          <span class="shop_name">美邦服饰专卖</span>
+                          <img class="arrow" src="images/property.png"/>
+                          <div class="clearfix"></div>
+                      </div>
+
+                      <div class="goodBox">
+                              <a href="javascript:void(0);"  class="singles nonSelect_single"></a>
+                              <a href="#" class="mainPhot"><img src="images/goods-photo.png"/></a>
+                              <a href="#" class="goods_title">
+                                  <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                                  <p> <span>颜色：</span><span>701蓝色</span> </p>
+                                  <p> <span>尺码：</span><span>32</span> </p>
+                              </a>
+                              <p class="prizeBox">
+                                  <span class="money_symbol">￥</span>
+                                  <span class="price">321</span>
+
+                                  <input type="button" class="subtract" value="-"/>
+                                  <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                                  <input type="button" class="adding" value="+"/>
+
+                                  <div class="clearfix"></div>
+                              </p>
+                          <div class="clearfix"></div>
+                          </div>
+                      </div>
+                  </div>-->
+        </div>
+        <p class="footer_span">
+                 <i class="sumUp" style="padding-left: 0.2rem;font-size: 0.7rem;padding-top:0.1rem;"><script>writeI18nPageByKey("totalPay")</script>:</i>
+                 <b style="color:red;font-size: 0.7rem;">RM</b>
+                 <em class="color_red" id="sums" style="font-size: 0.7rem;">0</em><br/>
+                 <!--  <b class="reminder" style="padding-left:0.2rem;"><script>writeI18nPageByKey("noFreight")</script></b> -->
+                 
+                 <a href="javascript:void(0)" class="jiesuan">
+                    <script>writeI18nPageByKey("submitBtn")</script>
+                    <b>(</b>
+                    <i class="item_count">0</i>
+                    <b>)</b>
+                 </a>
+        </p>
+        <div class="footer">
+              <ul class="ul-nav">
+                  <li  >
+                    <a href="index.html">
+                      <img src="images/footer01.png" />
+                      <p>
+                           <script>writeI18nPageByKey("botindex")</script><!-- 首页 -->
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="myIntegral.html">
+                      <img src="images/footer02.png" />
+                      <p>
+                         <script>writeI18nPageByKey("integralMall")</script><!-- 积分商城 --> 
+                      </p>
+                    </a>
+                  </li>
+                  <li class="active">
+                    <a href="shopping_cars.html">
+                      <img src="images/footer3.png" />
+                      <p>
+                          <script>writeI18nPageByKey("shoppingCar")</script><!-- 购物车 -->
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="aboutMe.html">
+                      <img src="images/footer04.png" />
+                      <p>
+                           <script>writeI18nPageByKey("botmine")</script><!-- 我的 -->
+                      </p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="more.html">
+                      <img src="images/footer05.png" />
+                      <p>
+                            <script>writeI18nPageByKey("botmore")</script><!-- 更多 -->
+                      </p>
+                    </a>
+                  </li>
+                </ul>
+        </div>
+    </div>
+
+    <script src="js/jquery-2.2.1.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/common.js"></script> 
+    
+    <script>
+      $(function(){
+       
+        Fn();
+      });
+      $("#message").click(function(){
+         window.location.href="message.html";
+      })
+
+      $("#title").text(getI18nPageByKey("shoppingCar"));
+     var goods_id,obj;
+     var params=getParam(),
+         goods_id=params.goods_id;
+        
+      $(".backs").on("click",function(){
+           history.back(-1);
+        
+      })
+      
+      function removeDuplicatedItem(arr) {
+          var ret = [];
+
+          arr.forEach(function(e, i, arr) {
+              if (arr.indexOf(e) === i) {
+                  ret.push(e);
+              }
+          });
+
+          return ret;
+      }
+      var userId=ls.getItem('userId');
+      var cartSessionId=ls.getItem('cartSessionId');
+      var cartType;
+      if (ls.getItem("userId")) {
+         
+           cartType=1;
+      }else{
+        
+          cartType=2;
+         
+      }
+     
+      
+     
+      function Fn(){
+        
+           Datas({
+              url:"goods/cart_list",
+              async:false,
+              datas:{
+                  "user_id":userId?userId:"",
+                  "cart_session_id":ls.getItem("cartSessionId"),
+                  "cart_type":cartType
+              },
+              success:function(data){
+               
+                 if (data.status) {
+                     var str="",val=data.data;
+                    
+                     $('.empty').hide();
+                     $.each(val,function(k,v){
+                         str+='<div class="Store_wrapper" >'+
+                                   '<div class="Pick_All_Goods" id="'+v.storeId+'" >'+
+                                          '<a href="javascript:void(0);"  class="ShopLeverSelectAll shop_select_none"></a>'+
+                                          '<img src="images/stroeIco.png"/>'+
+                                          '<span class="shop_name">'+v.storeName+'</span>'+
+                                          '<img class="arrow" src="images/property.png"/>'+
+                                          '<div class="clearfix"></div>'+
+                                    '</div>'
+                                 $.each(v.goodsCarts,function(k1,v1){
+                                        str += '<div class="goodBox" id="'+v1.goods.id+'" goods_inventory='+v1.goods.goods_inventory+'>'+
+                                                  '<a href="javascript:void(0);"  class="singles nonSelect_single"></a>'+
+                                                  '<a href="product.html?goods_id='+v1.goods.id+'" class="mainPhot">'+
+                                                  '<img src="'+v1.goodsUrl+'">'+
+                                                  '<span class="reminder">'+getI18nPageByKey("isOffShelf")/*已下架*/+'</span></a>'+
+                                                  '<a href="product.html?goods_id='+v1.goods.id+'" class="goods_title">'+
+                                                      '<b>'+v1.goods.goods_name+'</b>'+
+                                                      '<p><span>'+v1.spec_info+'</span> </p>'+
+                                                    '</a>'+
+                                                  '<p class="prizeBox" id="'+v1.id+'" status='+v1.goods.goods_status+'>'+
+                                                     ' <span class="money_symbol">RM</span>'+
+                                                      '<span class="price">'+v1.price+'</span>'+
+                                                      '<input type="button" class="subtract" value="-"/>'+
+                                                      '<input type="button" class="numberOfArticle" readonly="readonly" value="'+v1.count+' "/>'+
+                                                      '<input type="button" class="adding" value="+"/>'+
+
+                                                     ' <div class="clearfix"></div>'+
+                                                  '</p>'+
+                                             ' <div class="clearfix"></div>'+
+                                          '</div>'
+                                })
+                           str+='</div>';          
+                      })
+              
+                     $('.wrapper').html(str); 
+                     $(".wrapper .goodBox").each(function(index,item){
+                     
+                        if($(this).find(".prizeBox").attr("status")!="0"){
+                          $(this).find(".reminder").show();
+
+                        }
+
+
+
+                     }) 
+                    
+                      var script=$("<script>");
+                         script.attr("src","js/shoppingCar.js");
+
+                      $('body').append(script);
+                     
+                 }else{
+                      layer.msg(data.message);
+                 }
+               },
+               error:function(data){
+                  layer.msg(data.message);
+                  $('.empty').show();
+               }
+        })
+      }
+     
+
+       var goodIdArr = [],storeArr=[],goodscartIdArr=[];
+      $('.jiesuan').on("click",function(){
+
+            ls.setItem("shopCar",true);
+            if(parseInt($("#sums").text()) != 0){          
+                $(".Select_single").each(function(index,item){
+                    if($(this).parent().find(".prizeBox").attr("status")=="0"){
+                      goodIdArr.push($(this).parent(".goodBox").attr("id"));
+                      storeArr.push($(this).parents(".Store_wrapper").find(".Pick_All_Goods").attr("id"));
+                     goodscartIdArr.push($(this).parent().find(".prizeBox").attr("id"));
+                    }
+                    
+                })
+            
+                //var newStoreArr=removeDuplicatedItem(storeArr);
+               
+                 ls.setItem('goodsId',goodIdArr.join(","));
+                 ls.setItem('storesId',storeArr.join(","));
+                ls.setItem('goodsCartsId',goodscartIdArr.join(","));
+               
+                if(!userId&&!ls.getItem("guestOn")){
+                     window.location.href="Appsia_login.html";
+                    
+                }else if(userId){
+                     window.location.href="manageAddress.html";
+                }else if(ls.getItem("guestOn")){
+                     window.location.href="fillInAddress.html";
+                }
+              
+
+
+           }else{
+              layer.msg(getI18nPageByKey("chooseGoodsWarn"));
+           }   
+
+
+      })
+       
+        
+    </script>
+
+
+</body>
+</html>

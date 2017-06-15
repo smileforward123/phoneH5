@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="submitTitle"></title>
+         <link rel="stylesheet" href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" type="text/css" />
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+         <link rel="stylesheet" href="css/complaintDetail.css" />
+         <link href="css/submitProList.css" rel="stylesheet"/>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <div class="submitBox">
+            <header class="header clear">
+                <span class="back"></span><a href="#" class="mainLogo"></a>
+                <h3 class="pageTitle">
+                    <script>writeI18nPageByKey("ToComplain")</script><!-- 投诉 -->
+                </h3>
+                <span class="submit">
+                    <script>writeI18nPageByKey("Sumit")</script><!-- 提交 -->
+                </span>
+            </header>
+            <div class="scroll">
+                <div class="orderBox">
+                    <div  class="orderBoxDetail">
+                       <p class="orderNum clear"><span class="num"><!--订单号：2016070517756!--></span></p>
+                       <p class="orderNum"><span class="date"><!--下单时间：2016-04-12 12:20:13!--></span></p>
+                       <div class="orderProduct">
+                           <!-- <div class="orderPro clear">
+                                <a class="complaintImg"href="javascipt:void(0)">
+                                    <img src="images/complaintImg.png" />
+                                </a>
+                                <div class="complaintName">
+                                    <p><a href="javascipt:void(0)">小米随身风扇USB蛇形迷你笔记本电脑小电风扇超静音便携A626662C0</a></p>
+                                    <p>
+                                        <span>RM18.90</span><span>数量:2</span>
+                                    </p>
+                                </div>
+                            </div>
+                            </div>
+                            !-->
+                        </div>
+                        <p class="totalMoney"><!--订单总额：RM37.80!--></p>
+                    </div>
+                    <div class="submitcomplaintTopic">
+                        <p class="clear">
+                            <span class="left">
+                                   <script>writeI18nPageByKey("themeOfComplaint")</script><!-- 投诉主题 -->：
+                            </span>
+                            <span class="right topic">
+                               <select id="demo">
+                                  <!--<option value="1">商品破损</option>
+                                  <option value="2">卖家态度不好</option>
+                                  <option value="3">质量不好</option>!-->         
+                                </select>
+                                <em class="rightArrow"></em>
+                            </span>
+                        </p>
+                      <p class="clear">
+                            <span class="left">
+                                  <script>writeI18nPageByKey("contentOfComplaint")</script><!-- 投诉内容 -->：
+                            </span>
+                            <span class="right complaintContent">
+                                 <textarea></textarea>
+                            </span>
+                      </p>
+                    </div>
+                    <div class="submitImg clear"> 
+                        <span class="left">
+                                  <script>writeI18nPageByKey("imgOfComplaint")</script><!-- 取证图片 -->：
+                        </span>
+                        <div class="right">
+                            <a href="javascipt:void(0)">
+                                <input  accept="image/*" type="file"  name="" value="" class="fileInput">
+                            </a><a href="javascipt:void(0)">
+                                <input accept="image/*" type="file" name="" value="" class="fileInput">
+                            </a><a href="javascipt:void(0)">
+                                <input accept="image/*" type="file" name="" value="" class="fileInput">
+                            </a>
+                        </div>
+						
+                    </div>
+
+                </div>
+                </div>
+        </div>
+        
+       
+         
+        <script>
+            $(document).ready(function(){
+                $("#submitTitle").text(getI18nPageByKey("submitComplain"));
+             
+            })
+			var photo=[];//图片数组：
+           
+            $(".fileInput").change(function(){
+                var obj=$(this);
+               
+                uploadImg(obj);
+
+            })
+			
+			function uploadImg(obj){
+				//获取需要上传的图片
+               
+				var fileUpload = obj[0].files[0];
+				var fd = new FormData();
+				var reader = new FileReader();
+				reader.readAsDataURL(fileUpload);
+				fd.append("file",fileUpload);
+				$.ajax({   
+                    url:defaults.url+"upload",   
+                    type : 'post',
+					processData : false, 
+					contentType : false,
+                    data : fd,   
+                    success : function(data){   
+                      
+                       
+                         var dataObj=JSON.parse(data);
+                        
+                        if(dataObj.status){
+                            photo.push(dataObj.data[0].id);
+                           
+                            var url="https://devimg0119.oss-cn-hongkong.aliyuncs.com/" + dataObj.data[0].path+"/"+dataObj.data[0].name;
+                           
+                            obj.parent().css("background-image","url("+url+")");
+                        }  
+                  　}    
+                });
+			}
+
+		
+		
+		
+		
+		
+           
+            $(".back").click(function(){
+                //点击选择投诉商品的返回：
+                history.back(-1);
+            })
+           var titleId;//投诉主题的id;
+            var orderObj=getParam();
+           
+            var arr=orderObj.arr;//选中的商品;
+
+            var goodsIdArr=orderObj.goodsIdArr;//商品id ;
+           
+             var goodArrs=[];//商品信息和问题描述：
+            
+            
+            var str="";//投诉列表：
+            var submitComplaintStr="";//提交投诉;
+             var topicStr="";
+             //投诉商品信息接口：
+            Datas({
+                        url:"/order_view",
+                        datas:{   "id":orderObj.order_id,
+                                "storeId":orderObj.storeId,
+                                "user_id":ls.getItem('userId')
+                                },
+                        success:function(data){
+                           
+                            for(var i=0;i<data.data.gcs.length;i++){
+                                for(var j=0;j<arr.length;j++){
+                                   
+                                    if(i==arr[j]){
+                                submitComplaintStr+='<div class="shopDetail clear" id='+data.data.gcs[i].goods.id+' >'+
+                                       '<a href="javascript:void(0)" class="orderImg orderImg2">'+
+                                            '<dl>'+
+                                                '<dt class="imgBox">'+
+                                                    '<img src='+data.data.gcs[i].goodsUrl+'>'+
+                                                '</dt>'+
+                                                '<dd class="shop_info">'+
+                                                    '<h2 class="title">'+data.data.gcs[i].goods.goods_name+'</h2>'+ 
+                                                    '<p class="propertyBox">'+
+                                                        '<span>'+data.data.gcs[i].spec_info+'</span>'+
+                                                    '</p>'+
+                                                '</dd>'+
+                                                '<dd class="shop_price">'+
+                                                    '<b  class="price">'+data.data.gcs[i].price+'</b>'+
+                                                     '<i class="count">x'+data.data.gcs[i].count+'</i>'+ 
+                                                '</dd>'+
+                                            '</dl>'+ 
+                                        '</a>'+
+                                    '<span class="describe">'+getI18nPageByKey("describeIssue")/*问题描述*/+':<textarea></textarea></span>'+
+                                    '</div>';
+
+
+
+
+                                    }
+                                }
+                                
+                                $(".orderProduct").append(submitComplaintStr);
+                                $(".orderNum .num ").html(getI18nPageByKey("OrderNumber")+"："+data.data.order_id);/*"订单号："*/
+                                $(".orderNum .date").html(getI18nPageByKey("DateOfOrder")+"："+data.data.addTime);/*"下单时间："*/
+                                $(".totalMoney").html(getI18nPageByKey("TheAmountOfOrder")+":RM"+data.data.disbursements);/*订单总额*/
+
+                               
+
+                            }
+                            
+                        },
+                        error:function(){
+                            
+                        }
+            });
+           
+            
+
+
+            //投诉主题：
+            Datas({
+                url:"/buyer/complaint_title",
+                datas:{
+                    "currentPage":"1",
+                    "type":"0"
+                },
+                success:function(data){
+                   
+                    for(var i=0;i<data.data.result.length;i++){
+                        topicStr+="<option value="+data.data.result[i].id+">"+data.data.result[i].title+"</option>";
+                    }
+                    
+
+                    $("#demo").append(topicStr);
+                    var instance=mobiscroll.select('#demo', {
+                        theme: 'mobiscroll',    
+                        lang: 'zh',         
+                        display: 'bottom',  
+                        minWidth: 200  ,
+                       
+                        
+                          
+                     });
+                   
+                    titleId=$('#demo').val();
+                  
+                     $("#demo").change(function(){
+                        titleId=$('#demo').val();
+                        
+                    })
+
+
+
+                },
+                error:function(){
+                 
+                }
+
+
+
+            })
+
+            //type（卖家= 2 ， 买家 = 1 ）
+            $(".submit").click(function(){
+              
+                $(".orderProduct .shopDetail").each(function(index,item){
+                  
+                    goodArrs.push($(this).attr("id")+"_"+$(this).find("textarea").val());
+                })
+              
+                //点击提交
+                if($("#demo_dummy").val()==""){
+                    layer.msg(getI18nPageByKey("themeOfComplaintNotNUll"));/*"投诉主题不能为空!"*/
+                }else if($(".complaintContent textarea").val()==""){
+                    layer.msg(getI18nPageByKey("contentOfComplaintNotNUll"));/*"投诉内容不能为空!"*/
+                }else{
+                   submitComplaint();
+                }
+                
+                
+                
+
+            })
+           
+            function submitComplaint(){
+                
+                 Datas({   
+                    url:"/buyer/save_complaint",   
+                    type : 'post',   
+                    datas:{
+                       "user_id":ls.getItem("userId"), 
+                       "of_id":orderObj.order_id,
+                       "store_id":orderObj.storeId,
+                       "goods_id":goodArrs.join(","),
+                       "title":titleId,
+                       "content":$(".complaintContent textarea").val(),
+                       "photo":photo.join(","),
+                       "type":"1"
+
+                    },  
+                    success:function(data){
+                      
+                        if(data.status){
+                            layer.msg(data.message);
+                           setTimeout(function(){
+                                 window.location.href="aboutMe.html";
+                            },1000);
+                           
+                        }else{
+                            layer.msg(getI18nPageByKey("failToComplain"));/*"投诉失败"*/
+                        }
+                    },
+                    error:function(){
+                        
+                    }    
+                });
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+.focus0nShop{
+            width:100%;
+			
+			margin-top:2.7rem;
+			margin-bottom:0.5rem;}
+.focus0nShop-content{margin-top:1.3rem;
+                     width:15rem;
+					 height:1.6rem;
+					 margin:0 auto;
+					 padding-bottom:0.5rem;
+					 }
+
+.focus0nShop-content img:nth-child(1){float:left;
+                                      margin-right:0.3rem;}
+.focus0nShop-content div{float:left;}
+.focus0nShop div p{font-size:0.6rem;}
+.focus0nShop div p:nth-child(2){
+                                float:left;
+                                font-size:0.4rem;
+								color:#cccccc;}
+.focuBtn{width:4rem;
+         height:1.4rem;
+         background:url(../images/noFocus.png) no-repeat center;
+         line-height:1.5rem;
+         font-size:0.5rem;
+         color:white;
+         text-indent:1.5rem;
+         background-size:cover;
+         margin-top: 8px;
+ }
+.focuBtnon{width:4rem;
+         height:1.5rem;
+         background:url(../images/comFocus.png) no-repeat center;
+         font-size:0.5rem;
+         color:#da2a2e;
+         text-indent:0;
+         background-size:cover;
+         margin-top: 2px;
+         text-align: center;
+         padding-left: 30px;
+ }
+.comprehensives li{ 
+                    position:relative;
+                    border-bottom:1px solid #cccccc;
+                    display:block;
+					width:100%;
+					height:2.15rem;
+					font-size:0.625rem;
+					line-height:2.15rem;}
+.comprehensives li b{font-weight:normal;
+                     color:black;}
+.comprehensives li input[type=text]{
+	width:10rem;
+	height: 2.15rem;
+    font-size: 0.625rem;
+    line-height: 2.15rem;
+    display: inline-block;
+
+}
+.comprehensives li:nth-child(1){
+                                border-top:0.5rem solid #f3f5f7;
+}
+
+/* .comprehensives li:nth-child(4){
+                                border:1px solid #d9d9d9;
+                                height:0.5rem;
+                                background:#f3f5f7;
+} */
+
+.comprehensives .seller{height:0.875rem;
+                        width:0.875rem;
+						line-height:0.875rem;
+						background:url(../images/service.png) no-repeat center;
+						background-size:contain;
+						position:absolute;
+						right:1rem;
+						top:0.7rem;}
+.comprehensives li span{margin-right:0.75rem;}
+.stars{display:inline-block;
+       position:absolute;
+	   top:0.65rem;}
+.stars img { height:0.75rem;width:0.75rem;}
+.star-rating p{font-size:0.55rem;margin-top:0.5rem;margin-bottom:0.5rem;}
+.star-rating li{font-size:0.5rem;margin-bottom:0.75rem;}
+.star-rating li img{height:0.5rem;width:0.5rem;}
+ul{margin-left:0.3rem;}
+
+
+
+.numberOfFocus {
+    font-size: 0.6rem;
+    text-indent: 0.25rem;
+    position: relative;
+    width: 6rem;
+    height: 2rem;
+}
+.focus0nShop a {
+    color: #666;
+    display: inline-block;
+    line-height: 1rem;
+    width: 5rem;
+    height: 1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.numberOfFocus p {
+    font-size: 0.4rem;
+    padding-left: 0.2rem;
+}
+#focus{
+    float: right;
+}
+.cride img{
+	width: 1rem;
+	height: 1rem;
+	margin-top: 0.5rem;
+	background-size: contain;
+}
+.description span{
+	background:url(../images/nostar.png) no-repeat;
+	width: 1rem;
+	height: 1rem;
+	background-size: contain;
+	display: inline-block;
+	margin-right: 0.5rem;
+	vertical-align: bottom;
+}
+.description li em {
+    font-style: normal;
+    vertical-align: super;
+    margin-right: 0.5rem;
+}
+.description li b {
+    font-weight: normal;
+    vertical-align: super;
+    
+}
+.description span.cur{
+	background:url(../images/redstar.png) no-repeat;
+	width: 1rem;
+	height: 1rem;
+	background-size: contain;
+	display: inline-block;
+	margin-right: 0.3rem;
+}

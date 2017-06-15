@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="js/public.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/shTrigge.css"/>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+</script>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<head>
+
+<body>
+	<header class="car_header red">
+	     <h2><a href="javascript:void(0)" class="top_delete"></a><div class="fitertxt"></div><div class="sweep">
+		 <script>writeI18nPageByKey("clearaway")</script></div></h2>
+	</header>
+	 <div class="cle"></div>
+	<div class="listsize">
+		<!-- 	
+					<label><span>1201212221</span><input type="checkbox"><i></i></label>
+				</ul> -->
+			<!--  <ul id="triagelist">
+			 	</ul> -->
+		<!--  <label><span>1201212221</span><input type="checkbox"><i></i></label>
+		<label><span>1201212221</span><input type="checkbox"><i></i></label>
+		<label><span>1201212221</span><input type="checkbox"><i></i></label> -->
+	 </div>
+	 <footer>
+	  <div class="bottom_confirm"><script>writeI18nPageByKey("determine")</script></div>
+	 </footer>
+ <script src="js/jquery-2.1.1.min.js"></script>
+ <script type="text/javascript" src="js/common.js"></script>
+ <script src="css/layer/layer.js"></script>
+<script  type="text/javascript">
+	var params=getParam();
+		goods_id=params.goods_id,
+		className=params.className,
+		id=params.id,
+		name=params.name,
+		key=params.key;
+		$('.fitertxt').text(name);
+		
+	 Datas({
+      url:"goods/searchInfoByGc",
+	   datas:{"gc_id":goods_id},
+	   success:function(data){
+	   
+		   if(data.status){
+		   		var str="";
+		   		$.each(data.data.resultList,function(k,v){
+		   			$.each(v.properties,function(k1,v1){
+		   				if (v.id==id&&id!="") {
+		   					str+='<label for="names'+v1.id+'" class="labels" data-id="'+v1.id+'"><span>'+v1.value+'</span><input type="checkbox" id="names'+v1.id+'"/><i></i></label>';
+		   				}else if(v.id==id&&id==""){
+		   					str+='<label for="names'+v1.id+'" class="labels"  data-id="'+v1.id+'"><span>'+v1.name+'</span><input type="checkbox" id="names'+v1.id+'"/><i></i></label>';
+		   				}
+		   				
+		   			})
+		 
+					
+		   			
+		    	})
+		    	  	$('.listsize').html(str);
+		    	  
+			
+			}		
+		}
+
+ })
+	$('.top_delete').on("click",function(){
+		 window.location.href="shopTriage.html?goods_id="+goods_id+"&className="+className;
+	})
+
+		//点击确定
+		var goodIdArr=[],txt=[];
+		$('.bottom_confirm').on("click",function(){
+			//判断是否选择了商品
+			var len=0;
+			$(".listsize>label").each(function(index,val){
+				if ($(this).find("input[type=checkbox]").prop("checked")) {
+					 // arr.push(index);
+					 goodIdArr.push($(this).data("id"));
+					
+					 len++;
+					
+				};
+
+			})
+		
+			if (len==0) {
+				layer.msg("请选择一个内容");
+			}else{
+				 window.location.href="shopTriage.html?key="+key+"&id="+id+"&goods_id="+goods_id+"&className="+className+"&goodIdArr="+goodIdArr.join(",");
+			}		
+		})
+			
+</script>
+</body>
+</html>

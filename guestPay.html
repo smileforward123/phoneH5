@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+         <title id="title"></title>
+         <link href="css/publicClear.css" rel="stylesheet"/>
+        <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/guestPay.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    </head>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("payChoose")</script></h3>
+            
+        </header>
+        <div class="scroll scroll3">
+            <h3 class="payTitle">
+                <em class="payMethod"></em><script>writeI18nPageByKey("payMethodTitle")</script>
+            </h3>
+            <ul class="payList">
+                <li>
+                    <label><input class="radio"type="radio" name="payMethod" value=""><i class="radioImg"></i><script>writeI18nPageByKey("bankCard")</script></label>
+                </li>
+                <li>
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg"></i><script>writeI18nPageByKey("cyberBank")</script></label>
+                </li>
+            </ul>
+            <div class="blankBk blank6">
+                
+            </div>
+        </div>
+        <div class="PayGuestBtn">
+            <span id="confirm"><script>writeI18nPageByKey("okBtn")</script></span>
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script src="js/zepto.min.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script src="js/common.js"></script> 
+    <script>
+        $("#title").text(getI18nPageByKey("payMethodTitle"));
+        $(".back").click(function(){
+           
+            history.back(-1);
+
+        })
+        var payType;
+        var params=getParam();
+       
+        $(".PayGuestBtn").click(function(){
+            $(".payList li ").each(function(index,item){
+                if($(this).find('input').prop("checked")){
+                    if($(this).find("label")[0].innerText==getI18nPageByKey("bankCard")){
+                        payType=1;
+                    }else if($(this).find("label")[0].innerText==getI18nPageByKey("cyberBank")){
+                        payType=2;
+                        
+                    }
+
+                }
+               
+
+
+
+
+            })
+
+
+            Datas({
+                "url":"orderPay",
+                datas:{
+                "payType":payType,
+                "order_id":params.orderId,
+                "user_id":ls.getItem("userId")?ls.getItem("userId"):ls.getItem("cartSessionId"),
+               
+                "callBackUrl":"h5_payfinsh",
+                "isUseRebate":""
+
+
+
+
+
+                },
+                success:function(data){
+                    if(data.status){
+                         window.location.href=data.data.payUrl;
+                    }
+                    
+                },
+                error:function(){
+                    alert("order guestPayError");
+
+                }
+
+
+
+
+            })
+
+
+
+        })
+
+          
+    </script>
+    </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/insideMesSearch.css" />
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link href="css/insideMes.css" rel="stylesheet"/>
+        <style>
+          #scroll{
+            margin-top: 0;
+          }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <div class="searchBox" style="background:#fff;padding:0 0">
+                <span class="searchLogo"></span><input type="text" name="" value="" class="txtSearch"/>
+            </div>
+        </header>
+         <div class="scroll" id="scroll">
+           <ul class="insideMesList" >
+                    <!-- <li class="clear">
+                       <div class="leftBtn">
+                           <label><input type="checkbox" name="mes" /><i></i></label>
+                           <span></span>
+                       </div>
+                       <div class="rightMes">
+                           <p><span>有福家具</span><span>16/10/23</span></p>
+                           <p>不客气的亲</p>
+                       </div>
+                   </li>
+                   <li class="clear">
+                       <div class="leftBtn">
+                           <label><input type="checkbox" name="mes" /><i></i></label>
+                           <span></span>
+                       </div>
+                       <div class="rightMes">
+                           <p><span>有福家具</span><span>16/10/23</span></p>
+                           <p>不客气的亲</p>
+                       </div>
+                   </li>
+                   <li class="clear">
+                       <div class="leftBtn">
+                           <label><input type="checkbox" name="mes" /><i></i></label>
+                           <span></span>
+                       </div>
+                       <div class="rightMes">
+                           <p><span>有福家具</span><span>16/10/23</span></p>
+                           <p>不客气的亲</p>
+                       </div>
+           </li> -->
+           </ul>
+           
+        </div>
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+      
+       // var page=0;
+       $('.back').on("click",function(){
+            history.back(-1);
+       })
+       
+        $('.txtSearch').on("input",function(){
+            var txt;
+            txt=$(this).val();
+            if (txt!="") {
+                Msg(txt);
+            }else{
+              $('.insideMesList').html("");
+            }
+          
+        })
+         // $(window).scroll(function () {
+         //      var scrollTop=$(this).scrollTop();
+         //      var scrollHeight = $(document).height();
+         //      var windowHeight = $(this).height();
+         //      if (scrollTop+windowHeight==scrollHeight) {
+         //          var page=0;
+         //             page++;
+         //          
+         //            Msg($('.txtSearch').val());
+         //      };
+         //  }) 
+            function Msg(txt){
+                 Datas({
+                    url:"system/message_search",
+                    datas:{"user_id":ls.getItem('userId'),"currentPage":1,"userName":txt},
+                    async:false,
+                    success:function(data){
+                        var str='';
+                        if (data.status) {
+                            $.each(data.data,function(k,v){
+                                str+='<li class="clear" onclick="detailMsg('+v.fromUserId+',\''+v.fromUserName+'\',\''+v.toUserId+'\',\''+v.toUserName+'\')">'+
+                                           '<div class="rightMes">'+
+                                              ' <p><span>'+v.toUserName+'</span><span>'+v.addTime+'</span></p>'+
+                                          ' </div>'+
+                                      ' </li>';
+                          
+
+                            })
+                            $('.insideMesList').html(str);
+                        };
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+          function detailMsg(fromUserId,fromUserName,toUserId,toUserName){
+             window.location.href="talkingMessage.html?fromUserId="+fromUserId+"&fromUserName="+fromUserName+"&toUserId="+toUserId+"&toUserName="+toUserName;
+           }
+       </script>
+    </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="js/public.js"></script>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/shTrigge.css"/>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+<script type="text/javascript">
+ document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+$(function(){
+    $("#dimensions  li").toggle(function(){
+          $(this).children("a").children(".addface").show();
+   },function(){
+     $(this).children("a").children(".addface").hide();
+    })
+ })
+</script>
+<head>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<body>
+<header class="car_header red">
+     <h2><a href="javascript:void(0)" class="backs" id="twosotron"></a><p class="iconbox"></p><div class="fitertxt" style="font-size:1rem;">
+	 <script>writeI18nPageByKey("sizetitle")</script></div>
+     <div class="sweep"><script>writeI18nPageByKey("clearaway")</script></div></h2>
+ </header>
+ <div class="cle"></div>
+<div class="listsize">
+ <ul  id="dimensions">
+ <!--  <li><a href="javascript:viod(0)" >"+g_id.value+"<div class="addface"></div></a></li>
+ <li><a href="javascript:viod(0)" >"+g_id.value+"<div class="addface"></div></a></li>
+ <li><a href="javascript:viod(0)" )>"+g_id.value+"<div class="addface"></div></a></li>
+ <li><a href="javascript:viod(0)" )>"+g_id.value+"<div class="addface"></div></a></li>
+ <li><a href="javascript:viod(0)" )>"+g_id.value+" <div class="addface"></div></a></li>
+ <li><a href="javascript:viod(0)" )>"+g_id.value+" <div class="addface" style="display:block;"></div></a></li> -->
+ </ul>
+ </div>
+ <footer>
+  <div class="bottom_confirm"><script>writeI18nPageByKey("determine")</script></div>
+ </footer>
+<script  type="text/javascript">
+var orderBy,follow_type;
+          var params = getParam(),
+          gsp_id=params.gsp_id;
+          //解析地址栏获取orderBy的值   
+          var data = ls.getItem("goods_properites_"+gsp_id); 
+          var json_data = eval(data);
+          $.each(json_data,function(val,key){
+          
+            $("#dimensions").append('<li><a href="javascript:viod(0)" spkey="'+key.id+'">'+key.value+'<div class="addface"></div></a></li>');
+          })
+  //
+    var orderBy,follow_type;
+          var params = getParam(),
+            signType=getParam().signType,
+            goods_id=getParam().goods_id;
+            //解析地址栏获取orderBy的值        
+          var params=getParam();
+            orderBy=params.orderBy;
+            signType=params.signType;
+          var gc_id = params.id ? params.id : null,
+            goods_id =params.goods_id?params.goods_id:null;
+   $('#twosotron').on("click",function(){
+       window.location.href="shopTriage.html?goods_id="+goods_id+"&signtype="+signType;
+  })    
+         
+</script>
+</body>
+</html>

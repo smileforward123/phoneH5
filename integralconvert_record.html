@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+ <script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title id="title"></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+ <link rel="stylesheet" href="css/loading.css"/>
+
+<style type="text/css">
+
+.clear:after{
+  content:"";
+  display:block;
+  clear:both;
+}
+
+.scroll {
+    width: 100%;
+   /*  position: fixed;
+   left: 0;
+   top: 2.2rem; */
+  /*  margin-top:2.2rem; */
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* bottom: 0; */
+    background: #f3f5f7;
+}
+.addBtn a{
+  display:none;
+}
+
+
+</style>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="css/layer/layer.js"></script>
+
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+</script>
+
+</head>
+<body style="background: #f3f5f7">
+
+
+  <header class="car_header red">
+                  <h2><a  href="javascript:void(0)" class="backs" id="intehref"></a><p class="iconbox"></p><script>writeI18nPageByKey("integralExchangeRecord")</script></h2>
+  </header>
+  <div class="cle mR"></div>
+  <div class="scroll">
+      <div class="inrecordbox">
+      <!-- <ul>
+         <li class="clear"><h1>兑换单号：0066677330</h1><b >待发货</b></li>
+         <li class="oddnumbers"><div class="recordImg"><a href=""><img  src="images/img6.jpg"></a></div><div class="redtxt"><p>消耗积分：231</p><p>运费：￥12</p><p>数量：x1</p></div></li>
+         <li class="clear"><div class="addBtn"><a href="javascript:void(0)" class="lookorder">查看订单</a></div></li>
+      </ul> -->
+    </div>
+     <div class="loading">
+                    <img src="images/loading_more.gif" class="loadImg">
+                    <span>
+                       <script>writeI18nPageByKey("isLoading")</script>...
+                    </span>
+    </div>
+    <div class="noMore">
+          <span>
+               <script>writeI18nPageByKey("noMoreData")</script>
+          </span>
+    </div>
+</div>
+  
+ 
+ 
+  <script type="text/javascript">
+      $(".scroll")[0].addEventListener("touchStart",function(ev){
+        ev.preventDefault();
+      })
+			$('#intehref').on("click",function(){
+			   history.back(-1);
+			});
+		  var userNames=ls.getItem('userId');
+      var begin=0;
+     /* $(window).scroll(function(){
+         var scrollTop=$(this).scrollTop();
+          var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop+windowHeight==scrollHeight) {
+              record();             
+            };
+      })*/
+      $(window).scroll(function () {
+               var scrollTop=$(this).scrollTop();
+                var scrollHeight =$(document).height(); ;
+                var windowHeight = $(this).height();
+                if (scrollTop+windowHeight>=scrollHeight) {
+                     record();
+                };
+      })
+      var str='';
+      function record(){
+         $(".loading").show();
+        begin++;
+        Datas({
+             url:"buyer/exchange_record",
+             types:"get",
+             datas:
+                    {
+                    "igo_user_id":userNames,
+                    "currentPage":begin,
+                    "orderBy":"addTime",
+                    "orderType":"desc"
+                    },
+              success:function(data){
+                if(data.status){
+                    if(data.data.length==0){
+                          $(".noMore").show();
+
+                      }
+                    var statusStr="";
+                    for(var i=0;i<data.data.length;i++){
+                      if(data.data[i].igo_status=="-1"){
+                        statusStr=getI18nPageByKey("haveConcelled");//已取消
+                      }else if(data.data[i].igo_status=="0"){
+                        statusStr=getI18nPageByKey("waitForPaying");//待付款
+                      }else if(data.data[i].igo_status=="10"){
+                        statusStr=getI18nPageByKey("payWaitChecking");//待审核
+                      }else if(data.data[i].igo_status=="20"){
+                        statusStr=getI18nPageByKey("waitForDelivery");//待发货
+                      }else if(data.data[i].igo_status=="30"){
+                        statusStr=getI18nPageByKey("waitForSigning");//待收货
+                      }else if(data.data[i].igo_status=="40"){
+                        statusStr=getI18nPageByKey("haveCompleted");//已完成
+                      }
+                      str+='<ul status='+data.data[i].igo_status+' id='+data.data[i].id+' price='+data.data[i].igo_trans_fee+'><li class="clear list"><h1>'+getI18nPageByKey("exchangeNumber")+'：'+data.data[i].igo_order_sn+'</h1><b  class="statusbox">'+statusStr+'</b></li><li class="oddnumbers list">';
+                     for(var j=0;j<data.data[i].igo_gcs.length;j++){
+                        str+='<div class="clear">'+
+                            '<div class="recordImg">'+
+                              '<a>'+
+                                '<img  src="'+data.data[i].igo_gcs[j].goods.url+'">'+
+                              '</a>'+
+                            '</div>'+
+                            '<div class="redtxt">'+
+                              '<P>'+data.data[i].igo_gcs[j].goods.ig_goods_name+'</p><P>'+getI18nPageByKey("consumptionIntegral")+'：'+data.data[i].igo_gcs[j].goods.ig_goods_integral+'</p>'+
+                              '<p>'+getI18nPageByKey("number")+'：x'+data.data[i].igo_gcs[j].count+'</p>'+
+                            '</div>'+
+                        '</div>';
+                      }
+                      str+='</li><li class="clear"><div class="addBtn"><a href="javascript:void(0)" class="cancelOrder">'+getI18nPageByKey("orderHaveCancelled")+'</a><a href="javascript:void(0)" class="payOrder" >'+getI18nPageByKey("toPay")+'</a><a href="javascript:void(0)" class="receive" >'+getI18nPageByKey("confirmReceipt")+'</a> </div></li>';
+                        str+='</ul>'
+                    }
+                 }else{
+                     
+                 }
+                  setTimeout(function(){
+                        $(".loading").hide();
+                        $(".inrecordbox").html(str);
+                        $(".inrecordbox ul").each(function(index,item){
+                           
+                          if($(this).attr("status")=="0"){
+                          
+                            $(this).find(".cancelOrder").show();
+                            $(this).find(".payOrder").show();
+                             $(this).find(".receive").hide();
+
+                          }
+                          if($(this).attr("status")=="30"){
+                             $(this).find(".receive").show();
+                             $(this).find(".cancelOrder").hide();
+                            $(this).find(".payOrder").hide();
+
+                          }
+                        })
+                },500);
+                  
+                
+                  
+              },
+              error:function(){
+               
+              }
+        })
+      }
+      record();
+
+				
+       $(".inrecordbox ").delegate(".cancelOrder","click",function(){
+        var integralId=$(this).parents("ul").attr("id");
+
+        cancelOrder(integralId,$(this));
+      })
+      $(".inrecordbox ").delegate(".payOrder","click",function(){
+        var integralId=$(this).parents("ul").attr("id");
+        var totalPrice=$(this).parents("ul").attr("price");
+        ls.setItem("intergalOn",true);
+        
+        payOrder(integralId,totalPrice);
+     })
+    $(".inrecordbox ").delegate(".receive","click",function(){
+        var integralId=$(this).parents("ul").attr("id");
+
+       receive($(this),integralId);
+        
+        
+       
+     })
+    //确认收货：
+    function receive(obj,id){
+         Datas({
+          url:"buyer/complete_order",
+          datas:{
+            "integral_order_id":id
+
+
+          },
+          success:function(data){
+         
+            if(data.status){
+                  layer.msg(data.message);
+                  obj.hide();
+                  obj.parents("ul").find('.statusbox').text(getI18nPageByKey("haveReceivedGoods"));//已收货
+
+            }
+          },
+          error:function(){
+           
+          }
+
+
+
+
+
+
+
+      })
+
+
+
+    }
+     
+      function payOrder(id,price){
+         window.location.href="guestPayBill.html?orderId="+id+"&totalPrice="+price+"&lineType=0";
+     }
+     $(".inrecordbox ").delegate(".list","click",function(){
+        var id=$(this).parent().attr("id");
+        orderDetail(id);
+       
+     })
+     //跳转积分兑换详情页面：
+     function  orderDetail(id){
+       window.location.href="orderDetailWaitRecept.html?igo_id="+id+"";
+     }
+
+
+
+
+    
+   
+    function cancelOrder(integralId,obj){
+      Datas({
+             "url":"buyer/cancel_integral_order",
+             datas:{
+                   "user_id":userNames,
+                  "integral_order_id":integralId   
+             },
+             success:function(data){
+              
+               if(data.status){
+                  layer.msg(data.message);
+                  obj.hide();
+                  obj.next().hide();
+                  obj.parents("ul").find('.statusbox').text(getI18nPageByKey("haveConcelled"));//已取消
+
+
+
+               }
+             },
+             error:function(){
+             
+             }
+      })
+
+
+
+
+
+
+    }
+   
+  </script>
+</body>
+</html>

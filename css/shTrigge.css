@@ -1,0 +1,38 @@
+@charset "utf-8";
+/* CSS Document */
+.car_header h2 a.top_delete{ width: 1rem; height: 1rem;left: 0.5rem; top: 0.7rem;position: absolute;background: url(../images/deletes.png) no-repeat;background-size: 100% 100%;}
+.sweep{ height:1.2rem;right:0.6rem;top: 0.18rem;position: absolute;background-size: 100% 100%;}
+.fitertxt{ font-size:0.8rem;}
+.listsize{margin-top:2.2rem; width:100%;}
+.listsize li{width:100%; display:block;}
+.listsize li a{width:95%; border-bottom:solid 1px #cccccc; color:#333333; display:block; margin:0 auto; height:2.2rem; line-height:2.2rem; font-size:0.7rem; position:relative;}
+.listsize li b{width:0.8rem; height:0.8rem;right: 0.5rem; top: 0.7rem;position: absolute;background: url(../images/boult.png) no-repeat;background-size: 100% 100%;}
+#triagelist .shtrhovs{width:95%; border-bottom:solid 1px #cccccc; color:#333333; display:block; margin:0 auto; height:2.2rem; line-height:2.2rem; font-size:0.7rem}
+.shtrhovs i{float: right;display: block;width:0.8rem; height:0.85rem;margin-top: 0.5rem;}
+.shtrhovs i.add{float: right;background: url(../images/clicked.jpg) no-repeat;display: block;background-size: 100% 100%;width:0.8rem; height:0.85rem;margin-top: 0.5rem; }
+.bottom_confirm{width: 100%;height: 2.5rem;background: #c90c1e; line-height:2.5rem; display:block; text-align:center; color:#FFF; font-size:0.8rem;}
+.addface{width:1rem; height:1rem;right: 0.5rem; top: 0.7rem;position: absolute;background: url(../images/face.png) no-repeat;background-size: 100% 100%; display:none;}
+.listsize li b.greenbtn{background: url(../images/clicked.jpg) no-repeat;background-size: 100% 100%;width:0.8rem; height:0.8rem;}
+.listsize li{width: 100%;height: 2.2rem;line-height: 2.2rem;display: block;    border-bottom: solid 1px #cccccc;}
+.listsize li span{font-size: 0.7rem;color: #333333;float: left;padding-left: 0.3rem}
+.listsize li i{float: right;display: block;width:0.8rem; height:0.8rem;margin-top: 0.5rem;}
+.listsize li input[type=checkbox]{float: right;background: url(../images/clicked.jpg) no-repeat;display: block;margin-top: 0.8rem;margin-right: 0.5rem;display: none;}
+.listsize li i.add{float: right;background: url(../images/clicked.jpg) no-repeat;display: block;background-size: 100% 100%;width:0.8rem; height:0.8rem;margin-top: 0.5rem; }
+
+.labels{width:95%; border-bottom:solid 1px #cccccc; color:#333333; display:block; margin:0 auto; height:2.2rem; line-height:2.2rem; font-size:0.7rem}
+.labels i{float: right;display: block;background-size: 100% 100%;width:0.8rem; height:0.85rem;margin-top: 0.5rem;}
+.labels input{float: right;display: block;width:0.8rem; height:0.85rem;margin-top: 0.5rem;display: none}
+.labels input:checked+i{
+	background: url(../images/clicked.jpg) no-repeat;
+	display:block;
+	background-size: contain;
+	width: 0.8rem;
+	height: 0.85rem;
+}
+.labels i.curs{
+	background: url(../images/clicked.jpg) no-repeat;
+	display:block;
+	background-size: contain;
+	width: 0.8rem;
+	height: 0.85rem;
+}

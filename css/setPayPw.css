@@ -1,0 +1,56 @@
+@charset "UTF-8";
+.scroll {
+    bottom: 0;
+    background: #f3f5f7;
+}
+.pageTitle {
+    margin-left: 2.25rem;
+}
+.alterTitle {
+    font-size: 0.6rem;
+    line-height: 1rem;
+    background: #f3f5f7;
+    color: #999999;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 10px 20px;
+}
+.payPwList li {
+    padding: 0 20px;
+   
+    height: 2.2rem;
+    line-height: 2.2rem;
+    font-size: 0.65rem;
+    color: #333333;
+   border-bottom: 1px solid #d9d9d9; 
+}
+.payPwList .payPwTitle{
+    float: left;
+    width:70%;
+}
+.payPwList .payPw, .payPwList .newpayPw, .payPwList .payPwAgain{
+    float: left;
+    line-height: 2.2rem;
+    width:100%;
+}
+.pwTip {
+    font-size: 0.5rem;
+    line-height: 1.5rem;
+    color: #999999;
+    margin-bottom: 1.5rem;
+    text-indent: 0.5rem;
+}
+.finishBox {
+    width: 15rem;
+    margin: 0 auto;
+}
+.finishBox span {
+    display: block;
+    width: 15rem;
+    height: 2rem;
+    background: #c90c1e;
+    color: #fff;
+    font-size: 0.8rem;
+    line-height: 2rem;
+    text-align: center;
+    border-radius: 5px;
+}

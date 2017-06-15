@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" style="padding-bottom:10rem;">
+<head>
+    <script src="js/public.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,user-scalable=no"/>
+    <title id="title"></title>
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    <link rel="stylesheet" type="text/css" href="css/publich5.css">
+    <link rel="stylesheet" href="css/shopping_cars.css">
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+</head>
+<body style="background:#f2f2f2;">
+      <div class="shopCarBox">
+        <header class="car_header red">
+              <h2><a href="javascript:void(0)" class="backs" id="carIglin"></a><script>writeI18nPageByKey("shoppingCar")</script><span class="delete"></span><b></b></h2>
+              <div class="selcectBox" style="background:white">
+                   <a href="javascript:void(0);"   id="MainSelectAllitems" class="nonSelect"></a>
+                    <span><script>writeI18nPageByKey("selectedAll")</script></span>
+               </div>
+        </header>
+  <div class="wrapper" style="width:100%;">      
+                  <div class="Store_wrapper">
+                        <div class="Pick_All_Goods">
+                            <a href="javascript:void(0);"  class="ShopLeverSelectAll shop_select_none"></a>
+                            <img src="images/stroeIco.png"/>
+                            <span class="shop_name">美邦服饰专卖</span>
+                            <img class="arrow" src="images/property.png"/>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <div class="goodBox">
+                               <!--  <a href="javascript:void(0);"  class="singles nonSelect_single"></a>
+                                                              <a href="#" class="mainPhot"><img src="images/goods-photo.png"/></a>
+                               <a href="#" class="goods_title">
+                                   <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                                   <p> <span>颜色：</span><span>701蓝色</span> </p>
+                                   <p> <span>尺码：</span><span>32</span> </p>
+                               </a>
+                               <p class="prizeBox">
+                                   <span class="money_symbol">￥</span>
+                                   <span class="price">321</span>
+                               
+                                   <input type="button" class="subtract" value="-"/>
+                                   <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                                   <input type="button" class="adding" value="+"/>
+                               
+                                   <div class="clearfix"></div>
+                               </p>
+                                                           <div class="clearfix"></div> -->
+                            </div>
+                        </div>
+                    </div> 
+        </div>
+            <p class="footer_span">
+                 <i class="sumUp" style="padding-left: 0.2rem;font-size: 0.7rem;padding-top:0.1rem;"><script>writeI18nPageByKey("totalPay")</script>:</i>
+                 <b style="color:red;font-size: 0.7rem;">RM</b>
+                 <em class="color_red" id="sums" style="font-size: 0.7rem;">0</em><br/>
+                  <b class="reminder" style="padding-left:0.2rem;"><script>writeI18nPageByKey("noFreight")</script></b>
+                 
+                 <a href="javascript:void(0)" class="jiesuan">
+                    <script>writeI18nPageByKey("submitBtn")</script>
+                    <b>(</b>
+                    <i class="item_count">0</i>
+                    <b>)</b>
+                 </a>
+            </p>
+
+       <!--  <div class="bottom_footer">
+            <div class="boxa">
+                <a href="index.html"><img src="images/hshouyetubiao@2x.png" alt="">首页</a>
+                <a href="myIntegral.html"><img src="images/jifensahngcheng@2x.png" alt="">积分商城</a>
+                <a href="#"><img src="images/hgouwuche@2x.png" alt="">
+                     购物车
+                    <i class="bubble"></i>
+                </a>
+                <a href="aboutMe.html"><img src="images/wode@2x.png" alt="">我的</a>
+                <a href="#"><img src="images/genduo@2x.png" alt="">更多</a>
+            </div>
+        </div> -->
+             <div class="footer">
+                    <ul class="ul-nav">
+                        <li >
+                          <a href="index.html">
+                            <img src="images/hshouyetubiao@2x.png" />
+                            <p>首页</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="myIntegral.html">
+                            <img src="images/footer02.png" />
+                            <p>积分商城 </p>
+                          </a>
+                        </li>
+                        <li class="active">
+                          <a href="shopping_cars.html">
+                            <img src="images/footer3.png" />
+                            <p>购物车</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="aboutMe.html">
+                            <img src="images/footer04.png" />
+                            <p>我的</p>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <img src="images/footer05.png" />
+                            <p>更多</p>
+                          </a>
+                        </li>
+                      </ul>
+               </div>
+
+       <!--    <footer class="footer">
+         <ul class="ul-nav">
+           <li  class="active">
+             <a href="index.html">
+               <img src="images/footer1.png" />
+               <p>首页</p>
+             </a>
+           </li>
+           <li>
+             <a href="myIntegral.html">
+               <img src="images/footer02.png" />
+               <p>积分商城 </p>
+             </a>
+           </li>
+           <li>
+             <a href="shopping_cars.html">
+               <img src="images/footer03.png" />
+               <p>购物车</p>
+             </a>
+           </li>
+           <li>
+             <a href="aboutMe.html">
+               <img src="images/footer04.png" />
+               <p>我的</p>
+             </a>
+           </li>
+           <li>
+             <a href="#">
+               <img src="images/footer05.png" />
+               <p>更多</p>
+             </a>
+           </li>
+         </ul>
+                </footer> -->
+    </div>
+
+    <script src="js/jquery-2.2.1.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/common.js"></script> 
+    
+    <script type="text/javascript">
+     var orderBy,follow_type;
+      var params = getParam(),
+        signType=getParam().signType,
+        goods_id=getParam().goods_id;
+        //解析地址栏获取orderBy的值        
+      var params=getParam();
+        orderBy=params.orderBy;
+        signType=params.signType;
+      var gc_id = params.id ? params.id : null,
+        goods_id =params.goods_id?params.goods_id:null;
+      $("#carIglin").on("click",function(data){
+          window.location.href="goodsdetails.html?goods_id="+goods_id+"&signtype="+signType;
+      });
+       var userNames= ls.getItem("user");
+    
+       Datas({
+         url:"buyer/cart_integral_list",
+         datas:{'user_id':userNames,
+                'currentPage':1
+               },
+          success:function(data){
+          
+            if(data.status){
+
+              //var data=data.data;
+               var str="",val=data.data;
+          $.each(val,function(k,v){
+                         str+='<div class="Store_wrapper" >'+
+                                   '<div class="Pick_All_Goods" >'+
+                                          '<a href="javascript:void(0);"  class="ShopLeverSelectAll shop_select_none"></a>'+
+                                          '<img src="images/stroeIco.png"/>'+
+                                          '<span class="shop_name">'+v.ig_content+'</span>'+
+                                          '<img class="arrow" src="images/property.png"/>'+
+                                          '<div class="clearfix"></div>'+
+                                    '</div>'
+                                 $.each(v.goodsCarts,function(k1,v1){
+                                        str += '<div class="goodBox" >'+
+                                                  '<a href="javascript:void(0);"  class="singles nonSelect_single"></a>'+
+                                                  '<a href="#" class="mainPhot"><img src="'+v1.url+'"/></a>'+
+                                                  '<a href="#" class="goods_title">'+
+                                                      '<b>'+v1.ig_goods_name+'</b>'+
+                                                      '<p> <span>颜色：</span><span>'+v1+'</span> </p>'+
+                                                      '<p> <span>尺码：</span><span>'+v1.size+'</span> </p>'+
+                                                  '</a>'+
+                                                  '<p class="prizeBox" id="'+v1.id+'">'+
+                                                     ' <span class="money_symbol">RM</span>'+
+                                                      '<span class="price">'+v1.price+'</span>'+
+                                                      '<input type="button" class="subtract" value="-"/>'+
+                                                      '<input type="button" class="numberOfArticle" readonly="readonly" value="'+v1.count+' "/>'+
+                                                      '<input type="button" class="adding" value="+"/>'+
+
+                                                     ' <div class="clearfix"></div>'+
+                                                  '</p>'+
+                                             ' <div class="clearfix"></div>'+
+                                          '</div>'
+                                })
+                           str+='</div>';  
+                        
+                      })
+              
+                     $('.wrapper').html(str); 
+            }
+          }  
+
+       }) 
+    </script>
+
+
+</body>
+</html>

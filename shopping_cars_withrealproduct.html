@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" style="padding-bottom:10rem;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0"/>
+    <title>购物车</title>
+
+    <link rel="stylesheet" href="css/shoppingcarsWithUnreal.css">
+    <script src="js/jquery-2.2.1.js"></script>
+	
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <script src="js/shoppingCar.js"></script>
+    <style>
+        .goodsClass{
+             color:red;
+            font-size:0.5rem;
+            display:inline-block;
+            float:right;
+            margin-top:0.65rem;
+        }
+    </style>
+</head>
+<body style="background:#f2f2f2;">
+<header class="car_header red">
+
+        <span>购物车</span>
+        <span class="delete"></span>
+        <span class="letter_img"><a href="#"></a></span>
+        <div class="selcectBox" style="background:white">
+        <a href="javascript:0"  id="MainSelectAllitems" class="nonSelect"></a><span>全选</span>
+
+          </div>
+</header>
+
+<div class="wrapper">
+
+
+
+    <div class="Store_wrapper">
+        <div class="Pick_All_Goods">
+            <a href=javascript:0  class="ShopLeverSelectAll shop_select_none"></a>
+            <img src="images/stroeIco.png"/>
+            <span class="shop_name">美邦服饰专卖</span>
+            <img class="arrow" src="images/property.png"/>
+            <span class="goodsClass">虚拟商品</span>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="goodBox">
+            <a href=javascript:0  class="singles nonSelect_single"></a>
+            <a href="#" class="mainPhot"><img src="images/pans1.png"/></a>
+            <a href="#" class="goods_title">
+                <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                <p> <span>颜色：</span><span>701蓝色</span> </p>
+                <p> <span>尺码：</span><span>32</span> </p>
+            </a>
+
+            <p class="prizeBox">
+                <span class="money_symbol">RM</span>
+                <span class="price">321.33</span>
+
+                <input type="button" class="subtract" value="-"/>
+                <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                <input type="button" class="adding" value="+"/>
+
+            <div class="clearfix"></div>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="goodBox">
+            <a href=javascript:0  class="singles nonSelect_single"></a>
+            <a href="#" class="mainPhot"><img src="images/pans1.png"/></a>
+            <a href="#" class="goods_title">
+                <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                <p> <span>颜色：</span><span>701蓝色</span> </p>
+                <p> <span>尺码：</span><span>32</span> </p>
+            </a>
+
+            <p class="prizeBox">
+                <span class="money_symbol">RM</span>
+                <span class="price">123.33</span>
+
+                <input type="button" class="subtract" value="-"/>
+                <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                <input type="button" class="adding" value="+"/>
+
+            <div class="clearfix"></div>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+
+
+
+    <div class="Store_wrapper">
+        <div class="Pick_All_Goods">
+            <a href=javascript:0  class="ShopLeverSelectAll shop_select_none"></a>
+            <img src="images/stroeIco.png"/>
+            <span class="shop_name">美邦服饰专卖</span>
+            <img class="arrow" src="images/property.png"/>
+            <span class="goodsClass">实物商品</span>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="goodBox">
+            <a href=javascript:0  class="singles nonSelect_single"></a>
+            <a href="#" class="mainPhot"><img src="images/pans1.png"/></a>
+            <a href="#" class="goods_title">
+                <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                <p> <span>颜色：</span><span>701蓝色</span> </p>
+                <p> <span>尺码：</span><span>32</span> </p>
+            </a>
+
+            <p class="prizeBox">
+                <span class="money_symbol">RM</span>
+                <span class="price">321.33</span>
+
+                <input type="button" class="subtract" value="-"/>
+                <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                <input type="button" class="adding" value="+"/>
+
+            <div class="clearfix"></div>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="goodBox">
+            <a href=javascript:0  class="singles nonSelect_single"></a>
+            <a href="#" class="mainPhot"><img src="images/pans1.png"/></a>
+            <a href="#" class="goods_title">
+                <b>南极人2016夏季新款男士修身牛仔短裤破洞破洞</b>
+                <p> <span>颜色：</span><span>701蓝色</span> </p>
+                <p> <span>尺码：</span><span>32</span> </p>
+            </a>
+
+            <p class="prizeBox">
+                <span class="money_symbol">RM</span>
+                <span class="price">123.33</span>
+
+                <input type="button" class="subtract" value="-"/>
+                <input type="button"   class="numberOfArticle" readonly="readonly" value="1"/>
+                <input type="button" class="adding" value="+"/>
+
+            <div class="clearfix"></div>
+            </p>
+            <div class="clearfix"></div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <footer>
+        <span class="footer_span">
+		    <i class="bottom_btn"></i>
+			<i class="sumUp">合计:</i>
+			<b style="color:red;">RM</b>
+			<em class="color_red" id="sums">0</em>
+			<a href="#" class="jiesuan">
+			    结算
+			   <b>(</b>
+			   <i class="item_count">0</i>
+               <b>)</b>
+			</a></span>
+        <div class="bottom_footer">
+            <div class="boxa">
+                <a href="#"><img src="images/hshouyetubiao@2x.png" alt="">
+                    首页
+                </a>
+                <a href="#"><img src="images/jifensahngcheng@2x.png" alt="">
+                    积分商城
+                </a>
+                <a href="#"><img src="images/hgouwuche@2x.png" alt="">
+                    购物车
+
+                </a>
+                <a href="#"><img src="images/wode@2x.png" alt="">
+                    我的
+                </a>
+                <a href="#"><img src="images/genduo@2x.png" alt="">
+                    更多
+                </a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

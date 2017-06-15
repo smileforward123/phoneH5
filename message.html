@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link rel="stylesheet" href="css/message.css" />
+        <script type="text/javascript" src="js/public.js"></script>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("message")</script></h3>
+        </header>
+        <div class="scroll">
+            <ul class="messageList">
+                <li>
+                    <a href="systemMes.html"><em class="sysMessage"></em><script>writeI18nPageByKey("systemMessage")</script></a>
+                </li>
+                <li>
+                    <a href="insideMes.html"><em class="indideMessage"></em><script>writeI18nPageByKey("insideMessage")</script></a>
+                </li>
+                <li>
+                    <a href="noticeMes.html"><em class="noticeMes"></em><script>writeI18nPageByKey("informMessage")</script></a>
+                </li>
+            </ul>
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+        <script type="text/javascript">
+            $('.back').on("click",function(){
+                  window.location.href="index.html";    
+            })
+            $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("message"));
+            })
+        </script>
+    </body>
+</html>

@@ -1,0 +1,382 @@
+/*公用的css*/
+*,
+::before,
+::after{
+    padding: 0;
+    margin: 0;
+    /*我们要去除在所有的浏览器当中点击过后有一个高亮的效果*/
+    /*击*/
+    -webkit-tap-highlight-color: transparent;/*我们把他设置透明*/
+    tap-highlight-color: transparent;
+    /*我们需要设置所有的元素宽度以边框开始计算*/
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "MicroSoft YaHei",sans-serif;/*如果没有微软雅黑 就使用移动端默认的字体*/
+    font-size: 0.35rem;
+    color: #333;
+}
+/*font-family: "SimHei","Helvetica Neue",Arial,"Droid Sans",sans-serif;*/
+a{color:#333333;}
+input{outline:none;background:none;border:none;}
+.clearfix::after,
+.clearfix::before{
+    content: " ";
+    height: 0;
+    line-height: 0;
+    display: block;
+    visibility: hidden;
+
+    clear: both;
+}
+
+
+/*清楚移动端浏览器对表单的默认样式*/
+input[type="search"],input[type="tel"],input[type="text"],,textarea{
+    border: 0;
+    resize: none;
+    outline: none;
+    /*清除移动浏览默认的样式*/
+    -webkit-appearance: none;
+}
+li{
+    list-style:none;
+}
+i, b ,em{
+    font-style:normal;
+}
+.red{
+    background: #C90C1E;
+
+
+}
+a{
+    text-decoration: none;
+}
+.color_red{
+    color:#EC2426;
+}
+.color_666{
+    color:#999999;
+    font-size:0.6rem;
+}
+.f_l{
+    float: left;
+}
+.f_r{
+    float: right;
+}
+i,b{font-style: normal;}
+/*头部代码*/
+.car_header{
+    width:100%;
+    height:3.2rem;
+    line-height: 2.2rem;
+    font-size: 0.75rem;
+    color:#ffffff;
+    position:fixed;
+    top:0;
+    left:0;
+	z-index:99999;
+
+}
+.car_header span{
+    display: inline-block;
+}
+.car_header span:nth-child(1){
+    margin-left: 6.75rem;
+    float: left;
+}
+.delete{
+    width:1.2rem;
+    height:1.2rem;
+    background: url("../images/delete_car.png")no-repeat ;
+
+    background-size: contain;
+    margin-left: 3.2rem;
+    margin-top: 0.5rem;
+
+   
+}
+.letter_img{
+    width:1.2rem;
+    height:1.2rem;
+    background: url("../images/xiaoxi.png") no-repeat;
+    background-size: contain;
+    margin-left: 0.5rem;
+
+    position: relative;
+}
+.letter_img a{
+    display: block;
+    width:0.35rem;
+    height:0.35rem;
+    background: #FFD800;
+    border-radius: 0.175rem;
+    border:0.075rem solid #C90C1E;
+    position: absolute;
+    top:0.2rem;
+    right:0rem;
+}
+
+
+
+
+
+.wrapper{width:100%;
+         margin-top:5rem;}
+
+
+.selcectBox{width:100%;2.175rem;
+             border-bottom:1px solid #cccccc;}
+.selcectBox  #MainSelectAllitems{display:block;
+                             height:1rem;
+                             width:1rem;
+                             float:left;margin-top:0.5rem;
+                             background-size:contain;
+                             margin-left:0.5rem;}
+
+
+
+.ShopLeverSelectAll{
+                             display:block;
+                             height:1rem;
+                             width:1rem;
+                             float:left;margin-top:0.5rem;
+                             background-size:contain;
+                             margin-left:0.5rem;
+}
+
+
+
+.nonSelect_single{           
+                             display:block;
+                             height:1rem;
+                             width:1rem;
+                             float:left;
+							 margin-top:2.2rem;
+                             background-size:contain;
+                             margin-left:0.5rem; 
+                             background:url(../images/radio.png) no-repeat center;
+                             background-size: contain;
+
+}
+.Select_single{
+                             display:block;
+                             height:1rem;
+                             width:1rem;
+                             float:left;margin-top:2.2rem;
+                             background-size:contain;
+                             margin-left:0.5rem; 
+                             background:url(../images/guestRadio.png) no-repeat center;
+                             background-size: contain;
+}
+
+
+
+
+.shop_select_all{
+                 background:url(../images/guestRadio.png) no-repeat center;
+                  background-size: contain;
+ }
+.shop_select_none{background:url(../images/radio.png) no-repeat center;
+                  background-size: contain;
+
+
+}
+
+
+.selcectBox span{font-size:0.9rem;color:black;margin-left:0.5rem;}
+
+.nonSelect{background:url(../images/radio.png) no-repeat center;
+           background-size: contain;}
+
+.selected{background:url(../images/guestRadio.png) no-repeat center;
+           background-size: contain;}
+
+
+
+
+.Store_wrapper{width:100%;
+               margin-top:0.25rem;
+			   background:white;}
+.Pick_All_Goods *{float:left;}
+.Pick_All_Goods{width:100%;height:2.25rem;background:#fbfbfb;border-top:1px solid #cccccc;}
+.Pick_All_Goods .shop_name{font-size:0.55rem;
+                           margin-top:0.65rem;
+						   margin-left:0.5rem;}
+.Pick_All_Goods img{margin-top:0.65rem;
+                   height:0.75rem;
+				   width:0.825rem;
+				   margin-left:0.5rem}
+ .Pick_All_Goods .arrow{width:0.35rem;
+                       height:0.7rem;
+					   margin-top:0.66rem;}
+.mainPhot img{height:4.75rem;
+              width:4.75rem;
+			  border:1px solid #cccccc;
+			  border-radius:0.25rem;
+			  margin-left:0.5rem;
+			  float:left;
+			  margin-top:0.5rem;
+			  margin-bottom:0.5rem;
+			  }
+.adding{height:1rem;
+        width:1rem;
+		line-height:1rem;
+		border:1px solid black;
+		background:white;
+		border-top-right-radius:0.25rem;
+		border-bottom-right-radius:0.25rem;
+		
+		float:left
+		}
+.numberOfArticle{width:1.75rem;
+                 height:1rem;
+				 border:1px solid black;
+				 text-align:center;
+				 line-height:1rem;
+				 float:left;
+                 outline:none;
+				 border-left:none;
+				 border-right:none;
+
+				}
+
+.subtract{height:1rem;
+          width:1rem;
+		  border:1px solid black;
+		  background:white;
+		  line-height:1rem;
+		  border-top-left-radius:0.25rem;
+		  border-bottom-left-radius:0.25rem;
+		
+		  
+		 float:left;
+		 margin-left:5rem;}
+
+
+
+.goods_title{
+              font-size:0.55rem;
+			 float:right;
+			 width:7.05rem;
+			 display:inline-block;
+			 margin-right:1.8rem;
+ }
+ .goods_title>b{display:block;
+                margin-top:0.5rem;
+ }
+ .prizeBox{width:9rem;
+          height:1.2rem;
+		 
+		  display:block;
+		  float:right;
+		  margin-top:0.8rem; 
+		  margin-right:0.06rem;
+		  position:relative;
+		  }
+ .price{position:absolute;
+        color:red;
+		font-weight:bold;
+		font-size:0.4rem;
+		left:1rem;
+        margin-bottom:0.2rem; }
+ .money_symbol{position:absolute;
+               color:red;
+			   font-weight:bold;
+			   font-size:0.4rem;
+               margin-bottom:0.2rem;}
+ 
+.goods_title p span{color:#848691;
+                  font-size:0.35rem;}
+.reminders{
+      position:absolute;
+     display:block;
+     left:-3.8rem;
+     height:3rem;
+     width:3rem;
+    text-align:center;
+    border-radius:1.5rem;
+    opacity:0.5;
+    background:black;
+    top:1.4rem;
+    line-height:3rem;
+    color:white;
+}
+
+.footer_span{
+    display:block;
+    width:100%;
+    height:2.5rem;
+    line-height: 2.5rem;
+    font-size:0.85rem;
+    font-weight: 600;
+    background: #ffffff;
+	
+
+}
+.tanhao{
+    display: inline-block;
+    width:0.8rem;
+    height:0.8rem;
+    line-height: 0.8rem;
+    border:1px solid #ccc;
+    border-radius:0.4rem;
+    text-align: center;
+    vertical-align: middle;
+    color: #999999;
+
+
+
+}
+.jiesuan{
+    display: block;
+    float: right;
+    width:6rem;
+    text-align:center;
+    height:2.5rem;
+    background: #C50C20;
+    color:#ffffff;
+}
+.bottom_btn img{
+    width:0.95rem;
+    height:0.65rem;
+    margin: 0 0.5rem;
+}
+.bottom_footer{
+    width:100%;
+    height:2.5rem;
+    background: #E0E0E0;
+
+}
+
+.bottom_footer a{
+    display: inline-block;
+    width:19.1%;
+    height:2.5rem;
+    text-align: center;
+     
+}
+.bottom_footer img{
+    display: block;
+    width:1.25rem;
+    height:1.25rem;
+    margin: 0.3rem auto 0 auto;
+
+}
+footer{
+    width:100%;
+    position: fixed;
+    bottom:0;
+    left:0;
+
+
+}
+.boxa{z-index:100000;}
+
+
+
+

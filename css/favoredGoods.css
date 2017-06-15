@@ -1,0 +1,152 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部代码*/
+*{ margin:0; padding:0;}
+html{
+   /*  height:100%; */
+}
+body{
+    font-family: "Arial";
+    position:relative;
+   /*  overflow:hidden; */
+   /*  height:100%; */
+}
+.header{
+    width:100%;
+    height:1.775rem;
+    line-height: 1.775rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    position:fixed;
+    left:0;
+    top:0; 
+    z-index: 1;
+
+}
+.back{
+    float:left;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.4rem ;
+}
+.mainLogo{
+    float:left;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.7rem;
+    margin-top: 0.15rem;
+}
+.pageTitle{
+    float: left;
+    color:#fff;
+    font-size:0.75rem ;
+}
+
+input{
+    border:1px solid #999999;
+}
+
+.scroll{
+    width: 100%;
+    height: auto;
+    margin-top: 2rem;
+}
+.pageTitle{
+ float:left;
+    display:inline-block;
+}
+.pageTitle1{
+  background:#a10a18;
+  display:inline-block;
+   padding-left:0.3rem;
+    padding-right:0.3rem;
+    border-radius:5px;
+    margin-left:2.75rem;
+
+}
+.pageTitle3{
+           display:block;
+           float:right;
+           margin-right:0.5rem;
+}
+.pageTitle2{
+    width:4.25rem;
+    text-align:left;
+    text-indent:0.7rem;
+}
+
+.goodsInfor{
+            width:15rem;
+            padding-top:0.2rem;
+            padding-bottom:0.2rem;
+            border:1px solid #cccccc;
+            margin:0 auto;
+            margin-top:0.5rem;
+}
+.leftpart{
+          height:5.5rem;
+          width:5.5rem;
+          float:left;
+}
+.rightpart{
+            width:8.8rem;
+            float:right;
+            font-size:0.7rem;
+}
+.leftpart img{
+        height:5.5rem;
+        width:5.5rem;
+        margin-top: 0.8rem;
+        margin-left: 0.5rem;
+}
+.addToCart{
+    width:4.5rem;
+    height:1.5rem;
+    border-radius:0.15rem;
+    background:#c90c1e;
+    border:none;
+    font-size:0.7rem;
+    color:white;
+    line-height:1.5rem;
+
+}
+.buttons img{
+          height:0.75rem;
+          width:0.75rem;
+         margin-top:0.4rem;
+         margin-left:0.7rem;
+}
+.buttons{
+    margin-top:0.6rem;
+}
+.Ptitle{
+        font-size:0.6rem;
+        width: 90%;
+        height: 1rem;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+
+}
+.Ptitle a{
+        color:#666666;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+
+}
+.review img{
+         height:0.6rem;
+         width:0.6rem;
+}
+.rightInfor li{
+        margin-top:0.3rem;
+       margin-bottom:0.1rem;
+       display:block;
+}

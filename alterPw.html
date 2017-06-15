@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"><script>writeI18nPageByKey("changeLoginPW")</script></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+
+
+        <style>
+                .layui-layer-btn .layui-layer-btn1{
+                height: 30px;
+                line-height: 30px;
+                margin: 0 6px;
+                padding: 0 15px;
+                border: 1px solid #dedede;
+                background-color: #f1f1f1;
+                color: #333;
+                border-radius: 2px;
+                font-weight: 400;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+        <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("changeLoginPW")</script></h3>
+        </header>
+        <div class="scroll">
+            <h3 class="alterTitle"><script>writeI18nPageByKey("selectWayOfChangePW")</script></h3>
+            <ul class="alterList">
+                <li>
+                    <a class="byMobile" href="javascript:void(0)"><script>writeI18nPageByKey("changeLoginPWByPnone")</script><em></em></a>
+                </li>
+                 <li>
+                    <a class="byEmail" href="javascript:void(0)"><script>writeI18nPageByKey("changeLoginPWByEmail")</script><em></em></a>
+                </li>
+                 <li>
+                    <a class="byOldPw"href="alterPwByoldpw.html"><script>writeI18nPageByKey("changeLoginPWByOldPW")</script><em></em></a>
+                </li>
+            </ul>
+        </div>
+        <script>
+
+             $(".back").click(function(){
+               window.location.href="accountSafe.html";
+
+           })
+
+            var str="<p class='layerCodeTip'></p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder=''/><input type='button' value='' class='testBtn' onclick='settime(this);sendMessageCode();'/></p>";
+            var str1="<p class='layerCodeTip'></p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder=''/><input type='button' class='testBtn' onclick='sendCode(this);settime(this)' value=''/></p>";
+            $(".byMobile").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("verifyThePnumber"),
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                   window.location.href="alterPwByMobile.html";
+
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+
+
+
+                  $('.layui-layer-btn1').replaceWith("<input type='button' class='layui-layer-btn1' value='' style='font-size:0.35rem'/>")
+
+                   $('.layui-layer-btn1').val(getI18nPageByKey("okBtn"));
+
+                   $(".testBtn").val(getI18nPageByKey("getCheckCode"));
+                   $(".testCode").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"))
+                var phoneNum=ls.getItem('HP');
+                $('.layerCodeTip').text(getI18nPageByKey("enterTailNumber")+phoneNum.substring(phoneNum.length-4,phoneNum.length)+getI18nPageByKey("CheckCodeYouGot"));
+
+
+
+
+                $('.layui-layer-btn1').bind('click',function(){
+                    verifyMessCode();
+                    setTimeout(function(){
+                        $('.layui-layer').remove();
+                        $('.layui-layer-shade').remove();
+                    },1000)
+                })
+            })
+           
+
+
+             $(".byEmail").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("verifyTheEmail"),
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str1,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                  /* location.href="alterPwByMobile.html";*/
+
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+
+                   //填写弹出框，提示验证码接收邮箱
+                getRequest();
+
+
+                //替换弹出框的确定按钮为 Button
+                $(".layui-layer-btn1").replaceWith("<input type='button' style='font-size:0.35rem;' class='layui-layer-btn1'  value=''/>")
+                
+                $('.layui-layer-btn1').val(getI18nPageByKey("okBtn"));
+                 $(".testBtn").val(getI18nPageByKey("getCheckCode"));
+                 $(".testCode").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"))
+               
+                 //给验证码输入框绑定事件
+                $(".testCode").bind("blur",function(){
+                    codeInoutBlur();
+                })
+                //给确定按钮绑定点击事件
+                $(".layui-layer-btn1").bind("click",function(){
+                    if($(".testCode").val()==""){
+                        layer.msg(getI18nPageByKey("testnotEmpty"));
+                        return;
+                    }else if($(".testCode").val()!=""){
+                        sendCodeForChecking();
+                         //设置延时才能获取输入框的验证码
+                        window.setTimeout(function(){
+                            $(".layui-layer-shade").remove();
+                            $(".layui-layer").remove();
+                        },500)
+                    }
+                })
+
+               
+
+            })
+
+
+
+              function sendCode(){
+               
+                Datas({
+                    url:"sendEmail",
+                    datas:{
+                        "email":ls.getItem("userEmail"),
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("sendEmailSuccessful"));
+                          
+                          /*  location.href="findPsswordBack-sentCodeEmail.html"+location.search;*/
+                        }else if(!data.status){
+                            layer.msg(getI18nPageByKey("failTosendEmail"));
+                        }
+                    },
+                    error:function(){
+                        
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+           //重新发送验证码倒计时
+             var countdown=60;
+             function settime(obj) {
+                 if (countdown == 0) {
+                     obj.removeAttribute("disabled");
+                     obj.value=getI18nPageByKey("getCheckCode");
+                     countdown = 60;
+                     return;
+                 } else {
+                     obj.setAttribute("disabled", true);
+                     obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                     countdown--;
+                 }
+                 setTimeout(function() {
+                             settime(obj) }
+                         ,1000)
+             }
+
+
+
+
+             function getRequest(){
+                var emails=  ls.getItem("userEmail");
+                 $(".layerCodeTip").text(getI18nPageByKey("enterEmailNum")+emails.substring(0,3)+"******"+getI18nPageByKey("CheckCodeYouGot"));
+                 
+
+             };
+
+                  //弹出框确定按钮点击函数
+             function sendCodeForChecking(Code){
+                
+                 Datas({
+                     url:"buyer/validation_email",
+                     datas:{
+                         "email": ls.getItem("userEmail"),
+                         "code":$(".testCode").val()
+                     },
+                     success:function(data){
+                       
+                         if(!data.status){
+                             layer.msg(getI18nPageByKey("errorCode"));
+                         }else if(data.status){
+                             layer.msg(getI18nPageByKey("codeOk"));
+                             window.location.href="findPasswordBack-finish.html";
+                         }
+                     },
+                     error:function(){
+                           layer.msg(getI18nPageByKey("failToRequest"));
+                     }
+                 })
+             }
+
+            //发送验证短信验证码
+            
+            function sendMessageCode(){
+                var phoneNum = ls.getItem('HP');
+               
+                var num = phoneNum.substr(1);
+                Datas({
+                    url:"send_mobile_message",
+                    datas:{
+                        "mobile":num,
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("phonecodeSendOk"));
+                        }else if(!data.status){
+                           layer.msg(getI18nPageByKey("failToSendphonecode"));
+                        }
+                    },
+                    error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+
+            //验证手机短信
+            function verifyMessCode(){
+
+                var number=  ls.getItem('HP');
+               
+                Datas({
+                    url:"buyer/validation_email",
+
+                    datas:{
+                        "phone_num": number.substr(1),
+                        "code":$(".testCode").val()
+                    },
+                    success:function(data){
+                       
+                        if(!data.status){
+                            layer.msg(getI18nPageByKey("errorCode"));
+                            return;
+                        }else if(data.status){
+                            layer.msg(getI18nPageByKey("codeOk"));
+                            window.location.href="findPasswordBack-finish.html";
+                        }
+                    },
+                    error:function(){
+                       layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+
+
+
+        </script>
+
+    </body>
+</html>

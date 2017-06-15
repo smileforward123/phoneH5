@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+        <style>
+            .layui-layer-btn1{
+                height: 30px;
+                line-height: 30px;
+                margin: 0 6px;
+                padding: 0 15px;
+                border: 1px solid #dedede;
+                background-color: #f1f1f1;
+                color: #333;
+                border-radius: 2px;
+                font-weight: 400;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                <script>writeI18nPageByKey("forgotPayPW")</script><!-- 忘记支付密码 -->
+            </h3>
+        </header> 
+        <div class="scroll">
+            <h3 class="alterTitle">
+                 <script>writeI18nPageByKey("youAreChangingPayPW")</script><!-- 您正在修改AppAsia账户支付密码，请选择方式 -->
+            </h3>
+            <ul class="alterMobileList">
+                <li>
+                    <a class="findPwByMobile" href="javascript:void(0)">
+                        <script>writeI18nPageByKey("getPayPWbyMobile")</script><!-- 通过手机号找回支付密码 -->
+                        <em></em>
+                    </a>
+                </li>
+                 <li>
+                    <a class="findPwByEmail" href="javascript:void(0)">
+                        <script>writeI18nPageByKey("getPayPWbyEmail")</script><!-- 通过邮箱找回支付密码 -->
+                        <em></em>
+                    </a>
+                </li>
+            </ul>
+            <p class="alterMobileTip">
+                        <script>writeI18nPageByKey("methodOfFindBack")</script>
+                        <script>writeI18nPageByKey("hotlineTip")</script>
+                        <!-- 如无法自助修改，请拨打人工客服<span>400-000-5500</span>转<span>7</span>，由客服协助您进行修改 -->
+            </p>
+           
+         </div>
+         <script>
+
+             $(".back").click(function(){
+
+                history.back(-1);
+           })  
+
+             //获取用户信息
+             Datas({
+                 url:"/buyer/member_info ",
+                 datas:{
+                     "user_id":ls.getItem("userId")
+                 },
+                 success:function(data){
+                     
+                     ls.setItem("UsersID",data.data.user.id);
+                     ls.setItem("UsersPhone",data.data.user.mobile);
+                     ls.setItem("UsersEmail",data.data.user.email);
+                     var store = ls.getItem('UsersID');
+                    
+                 },
+                 error:function(){
+                    
+                 }
+             })
+
+
+             var str="<p class='layerCodeTip'>输入手机尾号9877接收的短信验证码</p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder='"+getI18nPageByKey("appasiaTestCodeTip")+"'/><span class='testBtn'>"+getI18nPageByKey("getCheckCode")+"</span></p>";
+             var str1="<p class='layerCodeTip'>输入邮箱zzyshan****接收的验证码</p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder='"+getI18nPageByKey("appasiaTestCodeTip")+"'/><span class='testBtn'>"+getI18nPageByKey("getCheckCode")+"</span></p>";
+            $(".findPwByMobile").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("verifyThePnumber"),/*'验证手机号'*/
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                  }
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+
+                $('.layui-layer-btn1').replaceWith("<input type='button' class='layui-layer-btn1' value='"+getI18nPageByKey("okBtn")+"' style='font-size:0.35rem'/>")
+                var phoneNum=ls.getItem('UsersPhone');
+                $('.layerCodeTip').text(getI18nPageByKey("enterTailNumber")+phoneNum.substring(phoneNum.length-4,phoneNum.length)+"****"+getI18nPageByKey("CheckCodeYouGot"));
+                $('.testBtn').bind('click',function(){
+                    sendMessageCode();
+                })
+                $('.layui-layer-btn1').bind('click',function(){
+                    verifyMessCode();
+                    setTimeout(function(){
+                        $('.layui-layer').remove();
+                        $('.layui-layer-shade').remove();
+                    },1000)
+                })
+
+            })
+             //发送手机验证码
+             function sendMessageCode(){
+                 var phoneNum = ls.getItem('UsersPhone');
+                 //去掉电话号码前的加号
+                 var num = phoneNum.substr(1);
+               
+                 Datas({
+                     url:"send_mobile_message",
+                     datas:{
+                         "mobile":phoneNum,
+                     },
+                     success:function(data){
+                      
+                         if(data.status){
+                             layer.msg(getI18nPageByKey("phonecodeSendOk"));/*"手机验证码发送成功！"*/
+                              window.location.href="setPayPw.html";
+                         }else if(!data.status){
+                             layer.msg(getI18nPageByKey("failToSendphonecode"))/*"手机验证码发送失败！"*/
+                         }
+                     },
+                     error:function(){
+                     
+                         layer.msg(getI18nPageByKey("failToSendphonecode"));/*"手机验证码发送失败！"*/
+                     }
+                 })
+             }
+           //验证手机短信
+             function verifyMessCode(){
+
+                var number=  ls.getItem('UsersPhone');
+              
+                 Datas({
+                     url:"buyer/validation_email",
+
+                     datas:{
+                         "phone_num": number.substr(1),
+                         "code":$(".testCode").val()
+                     },
+                     success:function(data){
+                    
+                         if(!data.status){
+                             layer.msg(getI18nPageByKey("errorCode"));
+                             return;
+                         }else if(data.status){
+                             layer.msg(getI18nPageByKey("codeOk"));
+                              window.location.href="changePayPw.html";
+                         }
+                     },
+                     error:function(){
+                       
+                     }
+                 })
+             }
+
+
+
+            //验证邮箱
+            $(".findPwByEmail").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("codeOk"),/*'验证邮箱'*/
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+                 $('.layui-layer-btn1').replaceWith("<input type='button' class='layui-layer-btn1' value='"+getI18nPageByKey("okBtn")+"' style='font-size:0.35rem'/>")
+                 var emailTip=ls.getItem('UsersEmail');
+                $('.layerCodeTip').text(getI18nPageByKey("enterEmailNum")+emailTip.substring(0,4)+"****"+getI18nPageByKey("CheckCodeYouGot"));
+
+                $('.testBtn').bind('click',function(){
+                    resend();
+                })
+
+                $('.layui-layer-btn1').bind('click',function(){
+                    verifyCode();
+                    setTimeout(function(){
+                        $('.layui-layer').remove();
+                        $('.layui-layer-shade').remove();
+                    },1000)
+                })
+
+            })
+
+
+
+
+             //邮件发送验证码
+             function resend(){
+                 var emails = ls.getItem('UsersEmail');
+              
+                 Datas({
+                     url:"sendEmail",
+                     datas:{
+                         "email":emails,
+                     },
+                     success:function(data){
+                         
+                         if(data.status){
+                             layer.msg(getI18nPageByKey("sendEmailSuccessful"));
+                            
+                         }else if(!data.status){
+                             layer.msg(getI18nPageByKey("failTosendEmail"));
+                         }
+                     },
+                     error:function(){
+                        
+                         layer.msg(getI18nPageByKey("failTosendEmail"))
+                     }
+                 })
+             }
+
+
+
+             //验证验证码
+             function verifyCode(){
+                 Datas({
+                     url:"buyer/validation_email",
+                     datas:{
+                         "email":ls.getItem('UsersEmail'),
+                         "code":$(".testCode").val()
+                     },
+                     success:function(data){
+                       
+                         if(!data.status){
+                             layer.msg(getI18nPageByKey("errorCode"));
+                             return;
+                         }else if(data.status){
+                             layer.msg(getI18nPageByKey("codeOk"));
+                             window.location.href="changePayPw.html";
+                         }
+                     },
+                     error:function(){
+                        
+                     }
+                 })
+             }
+         </script>
+    </body>
+</html>

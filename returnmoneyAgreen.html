@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title>退款详情</title>
+	<link rel="stylesheet" type="text/css" href="css/returnmoneyDetail.css">
+	<script type="text/javascript">
+		document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body style="background:#f7f7f7;">
+	<div class="wrapper">
+		<header>
+			 <h2>
+	        	<a href="allMenuRecode.html" class="#"></a>
+	        	<span></span>
+	        	退款详情
+	        </h2>
+		</header>
+		<section>
+			<div class="wrap"></div>
+			<!-- <h1>退款金额:<span>RM123.00</span></h1>
+			<div class="return_money">
+				<div class="buyer">
+					<h2>买家申请退款</h2>
+					<h3><span>2016-07-28</span><span>12:13:30</span></h3>
+					<div class="common_return">
+						<p class="return_detail"><span class="span_left">退款原因:</span><span class="span_right">不想要了</span></p>
+					</div>
+				</div>
+				<div class="saler">
+					<h2>商家操作</h2>
+					<h3><span>2016-07-28</span><span>12:13:30</span></h3>
+					<div class="common_return">
+						<p class="refuse_return">拒绝退款</p>
+						<p class="return_detail"><span class="span_left">退款原因:</span><span class="span_right">你提出的退款申请不合理，你也收到货品了。</span></p>
+					</div>
+				</div>
+				<div class="buyer">
+					<h2>买家申请退款</h2>
+					<h3><span>2016-07-28</span><span>12:13:30</span></h3>
+					<div class="common_return">
+						<p class="return_detail"><span class="span_left">退款原因:</span><span class="span_right">不想要了</span></p>
+					</div>
+				</div>
+				<div class="saler">
+					<h2>商家操作</h2>
+					<h3><span>2016-07-28</span><span>12:13:30</span></h3>
+					<div class="common_return">
+						<p class="refuse_return">同意退款</p>
+						
+					</div>
+				</div>
+			
+			</div> -->
+
+
+
+
+			</section>
+		
+	</div>
+	  <script src="js/jquery-2.1.1.min.js"></script>
+	  <script type="text/javascript" src="js/zepto.min.js"></script>
+	  <script src="css/layer/layer.js"></script>
+	  <script type="text/javascript" src="js/common.js"></script>
+	  <script type="text/javascript" src="js/menu.js"></script>
+	  <script type="text/javascript">
+	  var param=getParam(),
+	  	  id=param.order_id;
+	  	Datas({
+	  		url:"buyer/refundLog_info",
+	  		datas:{"of_id":id},
+	  		success:function(data){
+	  		
+	  			if (data.status) {
+	  				var str='';
+	  				str+='<h1>退款金额:<span>RM'+data.data.refundPrice+'</span></h1>'+
+	  					'<div class="return_money">'
+	  				$.each(data.data.refundInfo,function(k,v){
+						str+='<div class="buyer" style="margin-bottom:0.5rem">'+
+								'<h2>'+v.refundInfo+'</h2>'+
+								'<h3>'+v.refundTime+'</h3>'+
+								'<div class="common_return">'+
+									'<p class="refuse_return">'+v.refundType+'</p>'+
+									'<p class="return_detail">'+v.refundWay+'</p>'+
+								'</div>'+
+							'</div>'
+	  				})
+	  				 str+='</div>';
+	  				  $('.wrap').html(str);
+
+	  			}else{
+	  				layer.msg(data.message);
+	  			}
+	  		},
+	  		error:function(){
+	  			
+	  		}
+	  	})
+
+	  </script>
+</body>
+</html>

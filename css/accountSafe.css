@@ -1,0 +1,57 @@
+@charset "UTF-8";
+.scroll{
+    bottom:0;
+    background:#f3f5f7;
+}
+.pageTitle{
+    margin-left:3.1rem ;
+}
+.accountSafeList li{
+    border-top:1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+    margin-top:0.5rem;
+}
+.accountSafeList li a{
+    width:100%;
+    display:block;
+    padding:0.325rem 0.5rem;
+    box-sizing: border-box;
+    position: relative;
+}
+.accountSafeList li .safeTitle{
+    display:block;
+    width:90%;
+    font-size:0.75rem ;
+    height:1.5rem;
+    line-height:1.5rem;
+    color:#333333;
+}
+.accountSafeList li .safeTip{
+     display:block;
+     width:90%;
+    font-size:0.55rem ;
+   /*  height:1.3rem; */
+   height: auto;
+    line-height:1.3rem;
+    color:#999999;
+}
+.accountSafeList li em{
+    position: absolute;
+    right:0.5rem;
+    top:1.325rem;
+    width:0.35rem;
+    height:0.65rem;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size:contain;
+}
+.safeTitle .safeName{
+    float: left;
+}
+.safeTitle .safeInfo{
+    float: right;
+    color:#da2a2e;
+}
+
+
+
+

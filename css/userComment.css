@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+.wrap {
+  width: 100%;
+  height: 100%;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+  /*使用无衬线字体*/
+}
+a,
+img {
+  -webkit-touch-callout: none;
+  /*禁止长按链接与图片弹出菜单*/
+}
+html,
+body {
+  -webkit-user-select: none;
+  /*禁止选中文本*/
+  user-select: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  -webkit-appearance: none;
+  /*去掉webkit默认的表单样式*/
+}
+a,
+button,
+input,
+optgroup,
+select,
+textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/
+}
+input::-webkit-input-placeholder {
+  color: #ccc;
+  /*修改webkit中input的planceholder样式*/
+}
+body {
+  -webkit-text-size-adjust: 100%!important;
+  /*禁止IOS调整字体大小*/
+}
+input::-webkit-input-speech-button {
+  display: none;
+  /*隐藏Android的语音输入按钮*/
+}
+.wrap {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  display: -ms-box;
+  -ms-box-orient: vertical;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  overflow: hidden;
+}
+.wrap header {
+  height: 2.25rem;
+  background: #C90C1E;
+  color: #fff;
+  line-height: 2.25rem;
+}
+.wrap header h2 {
+  text-align: center;
+  color: #fff;
+  position: relative;
+  font-size: 0.8rem;
+}
+.wrap header h2 a {
+  width: 1rem;
+  height: 1rem;
+  left: 0.5rem;
+  top: 0.5rem;
+  position: absolute;
+  background: url(../images/shareShop_r2_c1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.wrap header h2 span {
+  width: 1.275rem;
+  height: 1.55rem;
+  left: 2.1rem;
+  top: 0.5rem;
+  position: absolute;
+  display: inline-block;
+  background: url(../images/mainLogo.png) no-repeat;
+  background-size: contain;
+}
+.wrap section {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -moz-box-flex: 1;
+  width: 100%;
+  overflow-y: scroll;
+}
+.wrap section div {
+  width: 95%;
+  margin: 0 auto;
+  height: auto;
+}
+.wrap section .title h1 {
+  font-size: 0.8rem;
+  line-height: 1.6rem;
+  padding: 0.2rem 0;
+}
+.wrap section .title p {
+  font-size: 0.7rem;
+}
+.wrap section .content h2 {
+  font-size: 0.7rem;
+  padding: 0.5rem 0;
+}
+.wrap section .content p {
+  font-size: 0.7rem;
+  padding-bottom: 0.8rem;
+}
+.wrap section .content a {
+  text-decoration: none;
+}

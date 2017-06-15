@@ -1,0 +1,126 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部代码*/
+*{ margin:0; padding:0;}
+input{
+    border:1px solid #999999;
+}
+.pageTitle{
+   /*  margin-left: 3.15rem; */
+   width: 78%;
+   text-align: center;
+}
+.sendBox{
+    width:100%;
+    height:2.2rem;
+    background:#e6e6e6;
+    position:fixed;
+    bottom:0rem;
+    left:0rem;
+    border:1px solid #cccccc;
+}
+.textOfSending{
+                width:12rem;
+                height:1.5rem;
+                background:white;
+                border-radius:5px;
+                float:left;
+                margin-top:0.35rem;
+                margin-left:0.3rem;
+                font-size:0.7rem;
+}
+.sender{
+         height:1.5rem;
+         width:2.5rem;
+         border-radius:5px;
+         color:white;
+         background:#1a88f5;
+        font-size:0.5rem;
+        float:right;
+        margin-top:0.35rem;
+       margin-right:0.3rem;
+}
+.scroll{
+        padding-bottom:4rem;
+}
+.message1,.message2{
+                       width:13.4rem;
+                       margin-top:0.3rem;
+                       margin-bottom:0.3rem;
+                       font-size:0.5rem;
+}
+.message1{
+    float:left;
+    text-align:left;
+    position:relative;
+
+}
+.message2{
+    float:right;
+    text-align:right;
+    position:relative;
+}
+.message1 div{
+    padding:0.5rem;
+    background:#fff;
+    float:left;
+    margin-left:1rem;
+    margin-top:0.25rem;
+    border-radius:0.25rem;
+    border:0.05rem solid #cccccc;
+    position: relative;
+ }
+.message1 div i{   
+    height:0.5rem;
+    width:0.5rem;
+    display: inline-block;
+    position: absolute;
+    top:48%;
+    left:-0.4rem;
+    background: url(../images/angleWhite_03.png) no-repeat;
+    background-size: contain;
+}
+.message2 div{
+    background:#53e01f;
+    padding:0.5rem;
+    height: auto;
+    float:right;
+    margin-right:1rem;
+    margin-top:0.25rem;
+    border-radius:0.25rem;
+    position: relative;
+
+
+}
+.message2 div i{ 
+     height:0.5rem;
+    width:0.5rem;
+    display: inline-block;
+    position: absolute;
+    right: -0.5rem;
+    top:0.5rem;
+    background: url(../images/angle_03.png) no-repeat;
+    background-size: contain;
+}
+
+.message2 p{
+     padding-right:1rem;
+}
+.message1 p{
+    padding-left:1rem;
+
+}
+.message1 img{
+    position:absolute;
+    top:1.5rem;
+    left:0.55rem;
+    height:0.5rem;
+    width:0.5rem;
+}
+.message2 img{
+    position:absolute;
+    top:1.5rem;
+    right:0.53rem;
+    height:0.5rem;
+    width:0.5rem;
+}

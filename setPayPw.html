@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/setPayPw.css" />
+    </head>
+    <script src="js/jquery-2.2.1.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("setPAYINGpw")</script><!-- 设置支付密码 -->
+            </h3>
+        </header>
+        <div class="scroll">
+            <h3 class="alterTitle">
+                 <script>writeI18nPageByKey("setPayPWForSafe")</script><!-- 设置支付密码可以保障您的账户安全 -->
+            </h3>
+            <ul class="payPwList">
+                <li class="clear ">
+                    <span class="payPwTitle">
+                         <script>writeI18nPageByKey("payPassword")</script><!-- 支付密码 -->:
+                    </span>
+                     <input class="payPw" type="password" onblur="verifyPW()" name="" value="" placeholder="">
+                </li>
+                <li class="clear ">
+                    <span class="payPwTitle">
+                         <script>writeI18nPageByKey("confirmPAYPW")</script><!-- 确定密码 -->:
+                    </span>
+                     <input class="payPwOld"  type="password" name="" value="" placeholder="">
+                </li>   
+
+            </ul>
+            <div style="clear:both"></div>
+            <p class="pwTip">
+                 <script>writeI18nPageByKey("enterPayPWofsixNumber")</script><!-- 请输入6位数组成的支付密码 -->
+            </p>
+            <div class="finishBox">
+                <span>
+                   <script>writeI18nPageByKey("haveDone")</script><!-- 完成 -->
+                </span>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $(".back").click(function(){
+            history.back(-1);
+        })
+
+        var reg =/^\d{6}$/;
+        function verifyPW(){
+            if( !reg.test($('.payPw').val())){
+                layer.msg(getI18nPageByKey("enterPayPWofsixNumber"))
+            }else if($('.payPw').val()==''){
+              layer.msg(getI18nPageByKey("PAYPWcannotnull"))
+          }
+        }
+        $('.payPwOld').blur(function(){
+            if($('.payPwOld').val()==''){
+                layer.msg(getI18nPageByKey("confirmPWnotNull"))
+            }else if($('.payPwOld').val()!= $('.payPw').val()){
+                layer.msg(getI18nPageByKey("bothTimePWDiffer"))
+            }
+        })
+
+        //保存支付密码
+        $('.finishBox').click(function(){
+            if($('.payPwOld').val()==''){
+                layer.msg(getI18nPageByKey("confirmPWnotNull"));
+                return;
+            }else if($('.payPwOld').val()!= $('.payPw').val()){
+                layer.msg(getI18nPageByKey("bothTimePWDiffer"));
+                 return;
+            }
+            Datas({
+                url:"/buyer/save_paypwd ",
+                datas:{
+                    "user_id":ls.getItem("userId"),
+                    "pay_pwd":$('.payPw').val()
+                },
+                success:function(data){
+                  
+                    if(data.status){
+                        layer.msg(getI18nPageByKey("paypwEditOk"));
+                        setTimeout(function(){
+                             window.location.href="aboutMe.html";
+                        },1000)
+                    }else if(!data.status){
+                        layer.msg(getI18nPageByKey("youALreadyHavePW"));
+                        setTimeout(function(){
+                             window.location.href="aboutMe.html";
+                        },1000)
+                    }
+                },
+                error:function(){
+                   
+                }
+            })
+
+
+        })
+        //定时器
+
+        $(document).ready(function(){
+
+            $(".payPw").attr("placeholder",getI18nPageByKey("appasiaPwTip"));
+            $(".payPwOld").attr("placeholder",getI18nPageByKey("appasiaPwTipAgain"));
+
+        })
+    </script>
+</html>

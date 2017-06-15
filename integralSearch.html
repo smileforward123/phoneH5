@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="text/javascript" src="js/public.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/base.css"/>
+	<link rel="stylesheet" type="text/css" href="css/myInt.css"/>
+	<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+	<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	
+	<script type="text/javascript">
+	        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	 </script>
+</head>
+<body>
+
+	  <header class="headerTop">
+	       <a href="javascript:void(0)" class="history_back" id="history_back"></a><span></span>
+			<div id="search_header">
+				<i></i>
+				<input type="text" palceholder="" id="Search">
+			</div>
+		</div>
+	  </header>
+	  <div class="wraps" style="width:100%;height:100%;margin-top:2.5rem">
+     
+    	  	<div class="left-containner"></div>
+       
+	 </div>
+<script src="css/layer/layer.js"></script>
+<script  type="text/javascript">
+$(document).ready(function(){
+      $("#Search").attr("placeholder",getI18nPageByKey("searchtxt"));
+    })
+	var userNames= ls.getItem("userId");
+	var goods_id="";
+ 	var num=0;
+  var str;
+    $(window).scroll(function(){
+         var scrollTop=$(this).scrollTop();
+          var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop+windowHeight==scrollHeight) {
+              loadAdd();             
+            };
+      })
+    //积分列表：
+    var txt;
+   $('#Search').on("input",function(){
+    	// str='';
+     //    num=0;
+     //   loadAdd();
+   		txt=$(this).val();
+   		if (txt!="") {
+          str='';
+          num=0;
+   			  loadAdd();
+   		}else{
+   			$('.left-containner').html("");
+   			
+   		}
+   })
+  function loadAdd(){     
+      num+=1; 
+      Datas({
+          url:"buyer/integral_goods_list",
+          datas:{
+              "currentPage":num,
+              "orderBy":"addTime",
+              "ig_goods_name":txt,
+              "orderType":"desc"
+            },
+          async:false,
+          success:function(data){
+            if(data.status){
+              //我的积分数量
+              var v=data.data,btnStr;
+              var btnStr='<input class="exchangeBtn" type="button" name="" value="'+getI18nPageByKey("myconvert")+'">';
+               for(var i=0;i<v.length;i++ ){
+                 goods_id=v[i].id;
+
+               if(v[i].ig_goods_count<=0){
+                   btnStr='<input  onclick="exchangeList('+v[i].id+','+v[i].ig_goods_count+','+v[i].ig_exchange_count+')"  class="exchangeBtn disabled" type="button" name="" value="'+getI18nPageByKey("myconvert")+'" >';
+                  }else{
+                    btnStr='<input onclick="exchangeList('+v[i].id+','+v[i].ig_goods_count+','+v[i].ig_exchange_count+')"  class="exchangeBtn" type="button" name="" value="'+getI18nPageByKey("myconvert")+'" >';
+                  }
+                  str+='<div data="'+v[i].ig_goods_count+'"  num='+v[i].ig_goods_integral+'  class="search_good_detail" style="width:100%;height:7rem;margin-left:0">'+
+                       ' <img class="main-photos" style="width:6.5rem;height:5rem;margin:0.7rem 0.7rem;float:left;background-size:contain" src="'+v[i].url+'" onclick="godsDetails('+v[i].id+','+v[i].ig_goods_count+')" data-id="'+v.id+'"/>'+
+                      '<ul class="price-discount" style="float:left">'+
+                          '<li><a href="javascript:void(0)">'+v[i].ig_goods_name+'</a></li>'+
+                          '<li><b >'+getI18nPageByKey("integral")+': '+v[i].ig_goods_integral+'</b></li>'+
+                        '<li class="marketprice">'+getI18nPageByKey("marketprice")+'：RM'+v[i].ig_goods_price+'</li>'+
+                       ' <li><div class="convertin">'+btnStr+'</div></li>'+
+                      '</ul>' +
+                   '</div>';
+                       $('.left-containner').html(str);      
+                }
+                
+               
+            }
+            if (data.data.length==0) {
+                $('.left-containner').html("");
+             
+            };
+          },
+          error:function(){
+            
+          }
+
+          
+        }) 
+ }
+//兑换积分点击事件：
+ function exchangeList(goods_id,integral,count){
+        Datas({
+              url:"buyer/cart_integral_save",
+              datas:{'user_id':userNames,
+                     'integral_goods_id':goods_id ,
+                     'integral':integral //商品积分：
+              },
+              types:"get",
+              success:function(data){
+              
+                if(data.status){
+                 window.location.href="integralconvert_repertoire.html?count="+count+"&goods_id="+goods_id+""
+                }else{
+                  layer.msg(data.message);
+                }
+              },
+              error:function(){
+               
+              }
+      })  
+                      
+}
+	$(".left-containner").delegate(".exchangeBtn","click",function(){
+	      var count=$(this).parents(".search_good_detail").data("count");
+	      
+	      var goodsId=$(this).parents(".search_good_detail").data("id");
+	      var integral=$(this).parents(".search_good_detail").attr("num");
+	    
+	      if(ls.getItem("userId")){
+	        if(count<=0){
+	           window.location.href = "goodsdetails.html?goods_id="+goodsId+"&count="+count+"";
+	        }else{
+	            exchangeList(goodsId,integral,count);
+	           
+	        
+	         }
+	      }else{
+	         window.location.href="Appsia_login.html";
+	      }
+	      
+	})
+    //商品详情
+    function godsDetails(goods_id,count){
+       window.location.href="goodsdetails.html?count="+count+"&goods_id="+goods_id;
+    }
+	//返回积分首页
+	$('#history_back').on("click",function(){
+		// history.back(-1);
+		 window.location.href="myIntegral.html";
+	})
+</script>
+</body>
+</html>

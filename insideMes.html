@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+         <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link href="css/insideMes.css" rel="stylesheet"/>
+    </head>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="jacascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("insideMessage")</script></h3>
+            <span class="edit"><script>writeI18nPageByKey("editAddress")</script></span>
+        </header>
+        <div class="scroll">
+            <div class="searchBox">
+                <p><em></em><input type="text" placeholder=""  id="txt"/></p>
+            </div>
+            <ul class="insideMesList">
+               <!--  <li class="clear">
+                   <div class="leftBtn">
+                       <label><input type="checkbox" name="mes" /><i></i></label>
+                       <span></span>
+                   </div>
+                   <div class="rightMes">
+                       <p><span>有福家具</span><span>16/10/23</span></p>
+                       <p>不客气的亲</p>
+                   </div>
+               </li> -->
+            </ul>
+            <div class="delBtnBox" style="position:fixed;left:0;bottom:0;">
+                <span class="cancel"><script>writeI18nPageByKey("cancel")</script></span><span  class="del"><script>writeI18nPageByKey("delAddress")</script>(<b id="num"><!-- 0 --></b>)</span>
+            </div>
+        </div>
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+        <script>
+             $(document).ready(function(){
+                $("#txt").attr("placeholder",getI18nPageByKey("searchtxt"))//搜索
+                   $("#title").text(getI18nPageByKey("insideMessage"));
+            })
+
+
+            $(".edit").click(function(){
+                $(".leftBtn label").css("visibility","visible");
+                $(".delBtnBox").css("display","block");
+                $("#num").text("0");
+            })
+            $(".cancel").click(function(){
+                $(".delBtnBox").css("display","none");
+                 $(".leftBtn label").css("visibility","hidden");
+            })
+            var dataArr=[];
+            $(".del").click(function(){
+              var len=0;
+                $(".insideMesList input").each(function(index,item){
+                    if($(this).prop("checked")){
+                        dataArr.push($(this).data("id"));
+                        $(this).parents("li").remove();
+                        len++;
+                          Datas({
+                              url:"system/message_delete",
+                              datas:{"ids":dataArr.join(",")},
+                              success:function(data){
+                                  if (data.status) {
+                                      layer.msg(data.message);
+                                  };
+                              },
+                              error:function(){
+                               
+                              }
+
+                          })
+                    }
+
+                })
+                $(".delBtnBox").css("display","none");
+                 $(".leftBtn label").css("visibility","hidden");
+            })
+             $('.back').on('click',function(){
+                  window.location.href="message.html";
+             })
+             var page=0,str="";
+             $(window).scroll(function () {
+              var scrollTop=$(this).scrollTop();
+              var scrollHeight = $(document).height();
+              var windowHeight = $(this).height();
+              if (scrollTop+windowHeight==scrollHeight) {
+                   megList();
+              };
+          })    
+              //站内信息列表
+              function megList(){
+                page+=1;
+                Datas({
+                url:"system/newMessageList",
+                datas:{"fromusername":ls.getItem('userId'),"currentPage":page,"orderBy":"addTime","orderType":"desc"},
+                success:function(data){
+                    if (data.status) {
+                        $.each(data.data,function(k,v){
+                            str+='<li class="clear" >'+
+                                      ' <div class="leftBtn">'+
+                                          ' <label><input type="checkbox" name="mes" data-id="'+v.id+'" class="inputs"/><i></i></label>'+
+                                           '<span></span>'+
+                                       '</div>'+
+                                       '<div class="rightMes" onclick="detailMsg('+v.fromUserId+',\''+v.fromUserName+'\',\''+v.toUserId+'\',\''+v.toUserName+'\')">'+
+                                          ' <p><span>'+v.toUserName+'</span><span>'+v.addTime+'</span></p>'+
+                                           '<p>'+v.content+'</p>'+
+                                      ' </div>'+
+                                  ' </li>'
+
+                        })
+                        $('.insideMesList').html(str);
+                           checkList();
+                        };
+                    },
+                    error:function(){
+                      
+                    }
+                })
+              }
+           megList();
+          
+         
+           function detailMsg(fromUserId,fromUserName,toUserId,toUserName){
+             window.location.href="talkingMessage.html?fromUserId="+fromUserId+"&fromUserName="+fromUserName+"&toUserId="+toUserId+"&toUserName="+toUserName;
+           }
+           $('#txt').on('click',function(){
+               window.location.href="insideMesSearch.html";
+           })
+           //遍历所有被选中的，数字填写上去
+            var num=0;
+           function checkList(){
+               $(".insideMesList>li").each(function(index,item){
+                var ele=$(this).find("label").find('input[type=checkbox]');
+                   $(ele).on("click",function(){
+                      if ($(this).prop("checked")) {
+                        num++;
+                        $('#num').text(num);
+                      }else{
+                        num--;
+                        $('#num').text(num);
+                      }
+                   })
+              })
+           }
+           
+        </script>
+    </body>
+</html>

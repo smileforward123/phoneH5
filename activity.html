@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title id="title"></title>
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" href="css/loading.css"/>
+	<link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+	<link rel="stylesheet" href="./Swiper demo_files/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="css/activity.css">
+	
+	<script>
+	    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<a href="javascript:void(0)" class="history_back"></a><span></span>
+			<div>
+				<i></i>
+				<input type="text" palceholder="" id="actSearch">
+			</div>
+		</header>
+		<section id="section" style="margin-top:2.2rem">
+			<div class="swiper swiper-container" style="margin-bottom:0.8rem" id="swiper-container">
+				<!-- <div class="swiper-wrapper">
+					<div class="swiper-slide"><img src="images/activity_banner.png"></div>
+					<div class="swiper-slide"><img src="images/activity_banner.png"></div>
+					<div class="swiper-slide"><img src="images/activity_banner.png"></div>
+					<div class="swiper-slide"><img src="images/activity_banner.png"></div>
+				</div>
+				<div class="swiper-pagination"></div> -->
+			</div>
+			<div class="activ-content">
+				
+				<div class="act-item" id="X_Scroller">
+						<!-- <a href="#">
+							<dl>
+								<dt><img src="images/activity_item1.png"></dt>
+								<dd>
+									<h1>森马短袖T恤2016夏装新款 男士字母印花针织衫...</h1>
+									<h2>RM29.00</h2>
+									<b>29.00</b>
+									<p>立即抢购</p>
+								</dd>
+							</dl>
+						</a>-->
+						
+				</div>
+			</div>
+			 <div class="loading"><img src="images/loading_more.gif" class="loadImg"><span><script>writeI18nPageByKey("isLoading")</script>...</span></div>
+             <div class="noMore"><span><script>writeI18nPageByKey("noMoreData")</script></span></div>
+		</section>
+	</div>
+	 <script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script src="./Swiper demo_files/swiper.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	 <script type="text/javascript" src="css/layer/layer.js"></script>
+	<script type="text/javascript">
+	   $(document).ready(function(){
+             $("#actSearch").attr("placeholder",getI18nPageByKey("searchtxt"))//搜索
+             $("#title").text(getI18nPageByKey("activity"));
+
+        })
+		var params = getParam(),
+             actId=params.act_id;
+		$('.history_back').on("click",function(){
+			// history.back(-1);
+			window.location.href="index.html";
+		})
+		var page=0;
+		// $('#section').scroll(function(){
+		// 	 var scrollTop=$(this).scrollTop();
+  //            var scrollHeight =$(window).height() ;
+  //            var windowHeight = $(this).height();
+  //               if (scrollTop+windowHeight>=scrollHeight) {
+  //               	if ($('#actSearch').val()!="") {
+  //               		search();
+  //               	}else{
+  //               		loadAdd();     
+  //               	}
+                                      
+  //               };
+		// })
+ 		$(window).scroll(function(){
+        	 var scrollTop=$(this).scrollTop();
+         	 var scrollHeight = $(document).height();
+           	 var windowHeight = $(this).height();
+	            if (scrollTop+windowHeight==scrollHeight) {
+	             	if ($('#actSearch').val()!="") {
+	                		search();
+	                	}else{
+	                		loadAdd();     
+	                	}            
+	            };
+      })
+		loadAdd();
+		//活动页面请求数据
+		function loadAdd(){
+			$('.loading').show();
+			page++;
+		    Datas({
+		    	url:"goods/getGoodsByActivity",
+		    	datas:{
+		    		"begin":page,
+		    		"max":10,
+		    		"act_id":actId,
+		    		"user_id":ls.getItem("userId")?ls.getItem("userId"):""
+		    	},
+		    	success:function(data){
+		    		var str='',str1='';
+		    		//活动商品
+		    		if (data.status) {
+		    			if (data.data.reList!="") {
+				    		$.each(data.data.reList,function(k,v){
+				    			str+='<a href="javascript:void(0)" onclick="actFn('+v.id+')">'+
+										'<dl>'+
+											'<dt><img src="'+v.imgPath+'"></dt>'+
+											'<dd>'+
+												'<h1>'+v.goods_name+'</h1>'+
+												'<h2>RM'+v.ag_price+'</h2>'+
+												'<b>RM'+v.goods_price+'</b>'+
+												'<p>'+getI18nPageByKey("instantBuy")/*立即抢购*/+'</p>'+
+											'</dd>'+
+										'</dl>'+
+									'</a>'
+									
+				    		})
+				    		setTimeout(function(){
+				    			$('.loading').hide();
+				    			$('#X_Scroller').append(str);
+				    		},500)
+			    		};
+			    		
+			    		//活动轮播图
+			    		   str1+='<div class="swiper-wrapper">'
+		                         $.each(data.data.advertList,function(k,v){
+		                           str1+='<div class="swiper-slide" onclick="Slider('+v.ad_type+',\''+v.ad_type_value+'\')"><img src="'+v.img_url+'"style="width:100%;height:100%;"/></div>'
+		                        }) 
+		                     str1+= '</div><div class="swiper-pagination"></div>';
+			    		$('.swiper-container').html(str1);
+			    			var swiper = new Swiper('.swiper-container', {
+						        pagination: '.swiper-pagination',
+						        slidesPerView: 1,
+						        paginationClickable: true,
+						        spaceBetween: 30,
+						        loop: true,
+						        autoplay:2000
+						    })
+				   };
+				   if (data.data.reList.length==0) {
+				   		$('.loading').hide();
+				   		$('.noMore').show();
+				   };
+		    	},
+		    	error:function(){
+		    	}
+		    }) 
+		}
+		var searchStr="";
+		$('#actSearch').on("input",function(){
+			page=0;
+			searchStr="";
+			search();
+
+		})
+		function search(){
+			$('#swiper-container').hide();
+			$('.loading').show();
+			page++;
+		    Datas({
+		    	url:"goods/searchGoodsByActivity",
+		    	types:"POST",
+		    	async:false,
+		    	datas:{
+		    		"begin":page,
+		    		"max":10,
+		    		"act_id":actId,
+		    		"user_id":ls.getItem("user_id")?ls.getItem("user_id"):"",
+		    		"goods_name":$('#actSearch').val()
+		    	},
+		    	success:function(data){
+		    		var str='',str1='';
+		    		//活动商品
+		    		if (data.status) {
+		    			if (data.data.reList!="") {
+				    		$.each(data.data.reList,function(k,v){
+				    			searchStr+='<a href="javascript:void(0)" onclick="actFn('+v.id+')">'+
+										'<dl>'+
+											'<dt><img src="'+v.imgPath+'"></dt>'+
+											'<dd>'+
+												'<h1>'+v.goods_name+'</h1>'+
+												'<h2>RM'+v.ag_price+'</h2>'+
+												'<b>RM'+v.goods_price+'</b>'+
+												'<p>'+getI18nPageByKey("instantBuy")+'</p>'+//立即抢购
+											'</dd>'+
+										'</dl>'+
+									'</a>'
+				    		})
+				    		setTimeout(function(){
+				    			$('.loading').hide();
+				    			$('#X_Scroller').html(searchStr);
+				    		},500)
+			    		};
+			    		
+			    	
+				   };
+				   if (data.data.reList.length==0) {
+				   		$('.loading').hide();
+				   		$('.noMore').show();
+				   };
+		    	},
+		    	error:function(){
+		    	}
+		    }) 
+		}
+		function actFn(goodsId){
+			window.location.href="product.html?goods_id="+goodsId;
+		}
+		//图片路径跳转
+		function Slider(type,val){
+			if (val!="") {
+				if (type==1) {//商品详情
+					window.location.href="product.html?goods_id="+val;
+				}else if(type==2){//店铺
+					window.location.href="obussinessmanShop.html?goods_store="+val;
+				}else if(type==3){//积分商城
+					window.location.href="myIntegral.html";
+				}else if(type==4){//活动
+					window.location.href="activity.html?act_id="+val;
+				}else if(type==5){//网页
+					window.location.href=val;
+				}else if(type==6){
+					window.location.href="allMenu.html";
+				}
+			}else{
+				window.location.href="index.html";
+			}
+			
+	
+		}
+	
+	</script>
+</body>
+</html>

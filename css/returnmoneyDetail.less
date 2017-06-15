@@ -1,0 +1,234 @@
+@charset "utf-8";
+@import url("reset.css");
+*{
+	margin:0;
+	padding:0;
+}
+html {
+	font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-webkit-font-smoothing:antialiased;
+}
+html,body,.wrapper{
+	width:100%;
+	height:100%;
+}
+a{
+	text-decoration:none;
+}
+.wrapper{
+	display:-webkit-box;
+	-webkit-box-orient:vertical;
+	display:-ms-box;
+	-ms-box-orient:vertical;
+	display:-moz-box;
+	-moz-box-orient:vertical;
+	display:-o-box;
+	-o-box-orient:vertical;
+	overflow:hidden;
+	header{
+		height:2.25rem;
+		background:#C90C1E;
+		color:#fff;
+		width:100%;
+		position:relative;
+		line-height:2.25rem;
+		a{
+			width:0.9rem;
+			height:0.9rem;
+			left:0.5rem;
+			top:0.6rem;
+			position:absolute;
+			background:url(../images/shareShop_r2_c1.png) no-repeat;
+			background-size:100% 100%;
+		}
+		span{
+			width:1.175rem;
+			height:1.45rem;
+			left:2.1rem;
+			top:0.55rem;
+			position:absolute;
+			display:inline-block;
+			background:url(../images/mainLogo.png) no-repeat;
+			background-size:contain;
+		}
+		h2{
+			text-align:center;
+			color:#fff;
+			
+			font-size:0.8rem;
+			width:60%;
+			margin-left:20%;
+			
+		}
+		i{
+			width:1rem;
+			height:1rem;
+			display:inline-block;
+			position:absolute;
+			right:0.3rem;
+			top:0.65rem;
+			background:url(../images/searchBtn.png) no-repeat;
+			background-size:contain;
+		
+			
+		}
+		
+
+	}
+	section{
+		-webkit-box-flex:1;
+		-moz-box-flex:1;
+		-ms-box-flex:1;
+		-o-box-flex:1;
+		height:auto;
+		h1{
+			height:2.175rem;
+			line-height:2.175rem;
+			font-size:0.7rem;
+			padding-left:0.2rem;
+			background:#fff;
+			border-bottom:1px solid #ccc;
+			margin-bottom:0.5rem;
+			background:#fff;
+			span{
+				color:#c90c1e;
+				padding-left:0.2rem;
+			}
+		}
+		.return_money{
+			width:100%;
+			height:auto;
+			.buyer{
+				height:auto;
+				background:#fff;
+				h2,h3{
+					font-size:0.7rem;
+					width:95%;
+					margin:0 auto;
+					color:#999;
+				}
+				h2{
+					padding:0.3rem 0;
+				}
+				h3{
+					padding-bottom:0.5rem;
+					border-bottom:1px solid #ccc;
+					span{
+						&:nth-child(1){
+							margin-right:0.5rem;
+						}
+					}
+				}
+				.common_return{
+					height:auto;
+					width:95%;
+					margin:0 auto;		
+					.return_detail{
+						width:100%;
+						height:2rem;
+						font-size:0.7rem;
+						padding-top:0.5rem;
+						padding-bottom:0.5rem;
+						.span_left{
+							float:left;
+							width:20%;
+							margin-left:0.3rem;
+							background:#fff;
+						}
+						.span_right{
+							float:right;
+							width:70%;
+							padding-left:0.3rem;
+							margin-right:0.3rem;
+							background:#fff;
+						}
+					}
+					.refuse_return{
+						color:#cd2f3a;
+						padding-top:0.3rem;
+						font-size:0.7rem;
+						padding-left:0.3rem;
+						background:#fff;
+						height:auto;
+					}
+				}
+				/*h4{
+					height:auto;
+					width:95%;
+					margin:0 auto;
+					font-size:0.7rem;
+					.span_left{
+						float:left;
+						width:20%;
+					}
+					.span_right{
+						float:right;
+						width:70%;
+						margin-left:5%;
+					}
+				}*/
+
+
+			}
+			.saler{
+				height:auto;
+				margin-top:0.5rem;
+				background:#fff;
+				margin-bottom:0.5rem;
+				h2,h3{
+					font-size:0.7rem;
+					width:95%;
+					margin:0 auto;
+					color:#999;
+				}
+				h2{
+					padding:0.3rem 0;
+				}
+				h3{
+					padding-bottom:0.5rem;
+					border-bottom:1px solid #ccc;
+					span{
+						&:nth-child(1){
+							margin-right:0.5rem;
+						}
+					}
+				}
+				.common_return{
+					height:auto;
+					width:95%;
+					margin:0 auto;		
+					.return_detail{
+						width:100%;
+						height:2.5rem;
+						font-size:0.7rem;
+						padding-top:0.5rem;
+						padding-bottom:0.5rem;
+						.span_left{
+							float:left;
+							width:20%;
+							margin-left:0.3rem;
+							background:#fff;
+						}
+						.span_right{
+							float:right;
+							width:70%;
+							padding-left:0.3rem;
+							margin-right:0.3rem;
+							background:#fff;
+						}
+					}
+					.refuse_return{
+						color:#cd2f3a;
+						padding-top:0.3rem;
+						font-size:0.7rem;
+						padding-left:0.3rem;
+						background:#fff;
+						height:auto;
+					}
+				}
+			}
+		}
+	}
+}

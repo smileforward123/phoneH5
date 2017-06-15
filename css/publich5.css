@@ -1,0 +1,192 @@
+@charset "UTF-8";
+html{
+    height:100%;
+}
+body{
+    font-family: "Arial";
+    position:relative;
+    overflow:hidden;
+    height:100%;
+}
+.header{
+    width:100%;
+    height:1.375rem;
+    line-height: 1.375rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    padding: 0.4rem 0 0.425rem;
+     position:fixed;
+    left:0;
+    top:0; 
+    z-index: 1;
+
+}
+.back{
+    float:left;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.3rem ;
+}
+.mainLogo{
+    float:left;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.7rem;
+}
+.pageTitle{
+    float: left;
+   
+    color:#fff;
+    font-size:0.8rem ;
+}
+.scroll{
+    width:100%;
+     position:fixed;
+    left:0;
+    top:2.2rem;
+    overflow:auto;
+    box-sizing: border-box;
+    background:#f0f2f5;
+    bottom:50px;
+    
+}
+.footer{
+    position: fixed;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 99999;
+
+    width: 100%;
+    line-height: 0px !important;
+    font-size: 14px !important;
+    height: 50px;
+    bottom: 0;
+    background-color: #E0E0E0;
+}
+.footer .ul-nav {
+    width: 100%;
+    padding: 6px 0px 4px 0px;
+    margin: 0px;
+    height: 100%;
+    display: block;
+    clear: both;
+}
+.footer .ul-nav li {
+    width: 20%;
+    text-align: center;
+    float: left;
+    height: 100%;
+}
+.footer .ul-nav li a {
+    width: 100%;
+    display: block;
+}
+.footer .ul-nav img {
+    height: 22px;
+}
+.footer .ul-nav .active a p {
+    color: #C90C1E;
+}
+
+.footer .ul-nav li p {
+    color: #444444;
+    font-size: 14px;
+    line-height: 14px;
+    margin-top: 4px;
+}
+/* 搜索头部 */
+.wrapper header {
+  width: 100%;
+  height: 2.2rem;
+  background: #c90c1e;
+  position: relative;
+}
+.wrapper header .back {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: url(../images/back.png) no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 0.3rem;
+  top: 0.35rem;
+}
+.wrapper header span {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  background: url(../images/iconimg.png) no-repeat;
+  background-size: contain;
+  margin-top: 0.3rem;
+  position: absolute;
+  left: 2rem;
+  top: 0.2rem;
+}
+.search_header {
+  width: 11rem;
+  float: left;
+  margin-right: 0.3rem;
+  display: inline;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  background: #fff;
+  border-radius: 5px 5px;
+  margin-top: 0.45rem;
+  margin-left: 3.8rem;
+}
+.search_header i {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: url(../images/search.png) no-repeat left;
+  background-size: contain;
+  margin-left: 0.5rem;
+  margin-top: 0.2rem;
+  float: left;
+}
+.search_header input {
+  display: inline-block;
+  float: left;
+  font-size: initial;
+  height: 1rem;
+  line-height: 1rem;
+  color: #999;
+  outline: none;
+  border: 0;
+  width: 74%;
+  margin-left: 0.2rem;
+  padding-top: 0.15rem;
+  font-size: 0.7rem;
+}
+.search_header .clear_icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+}
+.search_header .clear_icon:after {
+  content: "";
+  display: block;
+  width: 0.9rem;
+  height: 0.8rem;
+  background: url(../images/clear.png) no-repeat right;
+  background-size: contain;
+}
+.search_header .search_right {
+  width: 1.75rem;
+  float: right;
+  margin-right: 0.3rem;
+  display: block;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  margin-top: 0.45rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-size: 0.8rem;
+}

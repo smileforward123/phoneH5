@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link rel="stylesheet" href="css/sysMes.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("systemMessage")</script></h3>
+        </header>
+        <div class="scroll">
+            <ul class="sysMesList">
+              <!--<li>
+                   <a href="javascript:void(0)">
+                          <span class="MesTitle">电子商城AppAsia巡查的询问和咨询</span>
+                           <span class="Mesdate">2016-07-13 10：14</span>
+                           <em></em>
+                  </a>
+              </li>-->
+            </ul>
+        </div>
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+        var params = getParam(),
+             msg=params.msg;
+       $('.back').on('click',function(){
+            window.location.href="systemMes.html";
+       })
+        Datas({
+        url:"system/message",
+        datas:{"types":2,"to_user_id":ls.getItem('userId'),"currentPage":1},
+        success:function(data){
+            var str="";
+            if (data.status) {
+                $.each(data.data,function(k,v){
+                  if (msg==v.id) {
+                     str+='<li>'+
+                           '<a href="javascript:void(0)">'+
+                                  '<span class="MesTitle">'+v.content+'</span>'+
+                                   '<span class="Mesdate">'+v.addTime+'</span>'+ 
+                         ' </a>'+
+                     ' </li>'
+                  };  
+
+                })
+                $('.sysMesList').html(str);
+            };
+        },
+        error:function(){
+            
+        }
+       })
+      
+       </script>
+    </body>
+</html>

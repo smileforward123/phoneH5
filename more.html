@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/more.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+          <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle" style="margin-left:3.7rem">
+                <script>writeI18nPageByKey("botmore")</script>
+            </h3>
+        </header>
+        <div class="scroll">
+            <ul class="List" id="list1">
+               <!--   <li class="clear">
+                     <a href="javascript:void(0)">常见问题<em></em></a>
+                 </li>
+                 <li class="clear">
+                     <a href="javascript:void(0)">条款和条件<em></em></a>
+                 </li>
+                 <li class="clear">
+                     <a class="editName" href="javascript:void(0)"><strong>隐私政策</strong><em></em></a>
+                 </li>
+                 <li class="clear">
+                    <a class="editSex" href="javascript:void(0)"><strong>航运政策</strong><em></em></a>
+                 </li>
+                  <li class="clear">
+                     <a href="javascript:void(0)"><strong>退款政策</strong><em></em></a>
+                 </li>
+                 <li class="clear">
+                     <a href="javascript:void(0)"><strong>我们公司</strong><em></em></a>
+                 </li>
+                <li class="clear">
+                     <a href="javascript:void(0)"><strong>故事</strong><em></em></a>
+                 </li>
+                 <li class="clear">
+                     <a href="javascript:void(0)"><strong>职业生涯</strong><em></em></a>
+                 </li>
+                  <li class="clear">
+                     <a href="javascript:void(0)"><strong>加入我们的团队</strong><em></em></a>
+                 </li> -->
+             </ul>
+        </div>
+        <footer class="footer">
+            <ul class="ul-nav">
+                <li >
+                    <a href="index.html">
+                        <img src="images/footer.png">
+                        <p>
+                           <script>writeI18nPageByKey("botindex")</script>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="myIntegral.html">
+                        <img src="images/footer02.png">
+                        <p>
+                            <script>writeI18nPageByKey("integralMall")</script>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="shopping_cars.html">
+                        <img src="images/footer03.png">
+                        <p> 
+                            <script>writeI18nPageByKey("shoppingCar")</script>
+                        </p>
+                    </a>
+                </li>
+                <li>
+                    <a href="aboutMe.html">
+                        <img src="images/footer04.png">
+                        <p>
+                            <script>writeI18nPageByKey("botmine")</script>
+                        </p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="more.html">
+                        <img src="images/footer5.png">
+                        <p>
+                            <script>writeI18nPageByKey("botmore")</script>
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </footer>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script src="js/common.js"></script>
+        <script type="text/javascript">
+        $('.back').on("click",function(){
+            window.location.href="index.html";
+        })
+            Datas({
+                url:"article",
+                success:function(data){
+                
+                    if (data.status) {
+                        var str="";
+                        $.each(data.data,function(k,v){
+                            str+=' <li class="clear">'+
+                                         '<a href="javascript:void(0)"  onclick="moreDetail('+v.id+')"><strong>'+v.className+'</strong><em></em></a>'+
+                                    '</li>';
+                        })
+                        $('.List').html(str);
+                    };
+                },
+                error:function(){
+                   
+                }
+            })
+            function moreDetail(id){
+                 window.location.href="moreDetail.html?id="+id;
+            }
+            $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("botmore"));
+            })
+        </script>
+    </body>
+</html>

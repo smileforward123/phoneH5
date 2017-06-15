@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript" src="js/public.js"></script>
+    <meta charset="utf-8">
+    <title id="integralTitle">
+       
+    </title>
+    <link rel="stylesheet" type="text/css" href="css/base.css"/>
+    <link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/json2.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+   <!--  <script type="text/javascript" src="js/integraStore.js"></script> -->
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize = document.documentElement.clientWidth / 16 + "px";
+
+    </script>
+    <style type="text/css">
+        .gionit input.singles {
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            width: 1rem;
+            height: 1rem;
+        }
+         a.aBalk{background:#c0bebe;}
+         a.aRed{background:red;}
+    </style>
+</head>
+<body style="background: #f3f5f7">
+
+
+<header class="car_header red">
+    <h2><a href="javascript:void(0)" class="backs" id="godbadbut"></a>
+        <p class="iconbox"></p><script>writeI18nPageByKey("intInventory")</script>
+    </h2>
+</header>
+<div class="cle mR"></div>
+<div class="selectConvert" id="selectConvert">
+    <div class="seltitle"><h1><script>writeI18nPageByKey("intpresent")</script></h1>
+        <p class="delete"></p></div>
+    <div class="cle"></div>
+    <div class="selconboxin">
+    <!-- <div>
+          <img class="faceicon" src="images/facicon.png"/><img class="picin" src="images/img6.jpg"/><div class="conriglsit"><h2>正品包邮 STAR世达专业比赛高级超纤革5号耐....</h2><b>积分：390</b><P> 市场价：Y29.00</P>
+           <div class="cle"></div>
+           <div class="repCord"><a class="a1 jian">-</a><input class="reptxt num" type="text" value="2"><a class="a2 add">+</a></div>
+          </div></div> 
+    -->
+    </div>
+</div>
+<div class="totalbox">
+   <!--  <p>合计:</p>
+   <div>(共<b id="shuliang">0</b>件)<i id="zong1">0</i>积分 <br/>我的积分：104分</div> -->
+</div>
+<div class="cle"></div>
+
+<div class="intconfbtn "><a href="javascript:void(0)" id="repaddtop" class="aBalk"><script>writeI18nPageByKey("confirmexchange")</script></a></div>
+<script type="text/javascript">
+
+ ls.setItem("intergalOn", false);
+   var params = getParam(),
+   goods_id=params.goods_id,
+   count=params.count,
+    myIntegral=params.myIntegral;
+   var userNames = ls.getItem("userId");
+    $("#godbadbut").on("click", function () {
+        // history.back(-1);
+        if (count) {
+           window.location.href="goodsdetails.html?count="+count+"&goods_id="+goods_id+"&myIntegral="+myIntegral;
+        }else{
+           window.location.href="myIntegral.html";
+        }
+    });
+
+      function removeDuplicatedItem(arr) {
+          var ret = [];
+
+          arr.forEach(function(e, i, arr) {
+              if (arr.indexOf(e) === i) {
+                  ret.push(e);
+              }
+          });
+
+          return ret;
+      }
+    
+    var num=0;
+    var str="";
+    $(window).scroll(function(){
+           var scrollTop=$(this).scrollTop();
+            var scrollHeight =$(window).height() ;//667
+            var windowHeight = $(this).height();//667
+                if (scrollTop+windowHeight>=scrollHeight) {
+                      loadAdd();
+                };
+      })
+    loadAdd();
+    function loadAdd(){
+      num+=1;
+    //购物车数据
+      Datas({
+          url: "buyer/cart_integral_list",
+          datas: {
+              'user_id': userNames,
+              'currentPage': num
+          },
+          success: function (data) {
+              if (data.status) {
+                 var product = data.data;
+                  for (var i = 0; i < product.length; i++) {
+                     var goods = product[i].goods;
+                      var str2 = '<div class="gionit"><a title="'+product[i].id+'"  class="singles nonSelect_single_br" data="' + product[i].id + '"></a><img class="picin" src="' + goods.url + '"/>'
+                      str2 += '<div class="conriglsit"><h2>' + goods.ig_goods_name + '</h2><b>'+getI18nPageByKey("listIntegral")+'：<i id="total1" class="inter tot">' + goods.ig_goods_integral + '</i></b>'
+                      str2 += '<P>'+getI18nPageByKey("listMarketprice")+'：' + goods.ig_goods_price + '</P>'
+                      str2 += '<div class="cle"></div>'
+                      str2 += '<div class="repCord" data-id="'+goods.id+'"><a class="a1 jian">-</a><input class="reptxt num"  type="button" value="'+product[i].count+'" data-count="'+goods.ig_goods_count+'" data-sum="'+data.statusStr+'" data-type="'+goods.ig_limit_type+'" data-limit="'+goods.ig_limit_count+'" data-counts="'+product[i].count+'" data-time="'+goods.ig_time_type+'" data-end="'+goods.ig_end_time+'" data-integral="'+product[i].integral+'"><a class="a2 add">+</a></div> </div></div>'
+                        $(".selconboxin").append(str2);
+                   }
+                  $(".singles").unbind("click");
+                  $(".singles").click(function () {
+                      var Cur_singles = $(this);
+                      if (Cur_singles.hasClass("nonSelect_single_br")) {
+                         Cur_singles.removeClass("nonSelect_single_br").addClass("Select_singleim");
+                         $("#repaddtop").removeClass("aBalk") 
+                          GetCount();
+                          setTotal();
+
+                      } else  {
+                        $("#repaddtop").addClass("aBalk") 
+                          Cur_singles.removeClass("Select_singleim").addClass("nonSelect_single_br");
+                          GetCount();
+                          setTotal();
+                      }
+
+                  })
+                 
+
+
+              }
+          }
+
+      });
+    }
+    //单选删除
+    function singleDel() {
+        var sums = 0;;
+        $(".Select_singleim").each(function () {
+            var Select_single_num = $(this).parent().parent().find(".nonSelect_single_br").length;
+            if (Select_single_num > 0) {
+                $(this).parent().remove();
+                $("#sums").text(sums);
+
+            } else if (Select_single_num == 0) {
+                $(this).parent().parent().remove();
+                $("#sums").text(sums);
+
+            }
+        })
+    }
+    //点击++的数据
+     $('.selconboxin').delegate(".add","click",function(){
+            var sums, id;
+            var singles = $(".singles");
+            var n = $(this).siblings(".num");
+            var prices = parseFloat($(".inter").text());
+            //库存
+            var count=$(this).prev().data("count"),
+            //限制兑换个数
+               type=$(this).prev().data("type"),//判断限制类型
+               limit=$(this).prev().data("limit");//判断限制个数
+            var end=$(this).prev().data("end");//判断过期时间
+                id = $(this).parent().data("id");
+            var thiss = $(this);
+            var time=$(this).prev().data("time");
+            var limit_count = $(this).prev().data("counts");
+              var integral=$(this).prev().data("integral");
+            //判断库存数量    
+            if (n.val()==count) {
+                layer.msg(getI18nPageByKey("outofStock"));//超出库存数量
+                 return;
+            }
+            
+               Datas({
+                url: 'buyer/cart_integral_update',
+                datas: {
+                    "user_id": userNames,
+                    "integral_goods_id": id,
+                    "type":'1'
+                },
+                success: function (data) {
+                    if (data.status) {
+                         n.val(parseInt(n.val()) + 1);
+                        setTotal();
+                        GetCount();
+                    }else{
+                         layer.msg(data.message);
+                      return;
+                    }
+                }
+            });
+            
+          
+            
+
+    })
+
+     //点击--的数据
+     $('.selconboxin').delegate(".jian","click",function(){
+           var sums, id;
+            var singles = $(".singles");
+            var n = $(this).siblings(".num");
+            var prices = parseFloat($(".inter").text());
+            n.val(parseInt(n.val()) - 1);
+            if(n.val()<1){
+                 n.val('1');
+                 return;
+            }
+            var thiss = $(this);
+            // if (singles.hasClass("Select_singleim")) {
+            //     add_subtract(thiss, prices);
+            // }
+               setTotal();
+               GetCount();
+            id = $(this).parent().data("id");
+            Datas({
+                url: 'buyer/cart_integral_update',
+                datas: {
+                    "user_id": userNames,
+                    "integral_goods_id": id,
+                    "type":'0'
+                },
+                success: function (data) {
+                    if (data.status) {
+
+                    }
+                }
+            });
+    })
+    //删除数据
+    $(".delete").click(function () {
+        if(!$(".singles").hasClass("Select_singleim")){
+           layer.msg(getI18nPageByKey("theDay"))
+        }else{
+            $("body").find(".Select_singleim").each(function () {
+           var igc_id = $(this).attr("data");
+            Datas({
+                url: 'buyer/cart_integral_delete',
+                datas: {"igc_id": igc_id},
+                success: function (data) {
+                  $('#shuliang').text("0");
+                  $('#zong1').text("0");
+                    if (data.status) {
+                      layer.msg(data.message);
+                       
+                    }
+                }
+            })
+
+         });
+        }
+        
+        if ($(".singles").hasClass("Select_singleim")) {
+            singleDel();
+        }
+
+    });
+
+    $(".gionit .singles").click(function () {
+        $(this).addClass("Select_singleim");
+
+    });
+
+
+    function setTotal() {
+        var s = 0;
+        $(".gionit").each(function () {
+            var cthis = $(this).find(".singles");
+            if (cthis.hasClass("Select_singleim")) {
+                s += parseInt($(this).children(".conriglsit").find(".repCord").find('input[class*=num]').val()) * parseFloat($(this).children(".conriglsit").find('i[class*=inter]').text());
+            }
+        });
+
+        $("#zong1").html(s.toFixed(0));
+
+    }
+    function GetCount() {
+        var conts = 0;
+        var aa = 0;
+
+        $(".gionit .singles").each(function () {
+            var consingles = $(this);
+            if (consingles.hasClass("Select_singleim")) {
+                for (var i = 0; i < $(this).length; i++) {
+                    conts += parseInt($(this).val()) * parseInt($(".reptxt").val());
+                    aa += 1;
+                }
+
+            }
+        });
+        $("#shuliang").text(aa);
+    }
+  var userNames= ls.getItem("userId");
+  var gvalId=ls.getItem("gval_id")
+     var jf=0;
+   //总积分
+   Datas({
+          url:"buyer/integral_goods_list",
+          datas:{
+              "user_id":userNames,
+              "currentPage":1,
+              "orderBy":"addTime",
+              "orderType":"DESC"
+            },
+          success:function(data){
+            if(data.status){
+                   var myIntegral=data.statusStr;
+                   var  str8='<p>'+getI18nPageByKey("total")+':</p>'
+                        str8+='<div>('+getI18nPageByKey("common")+'<b id="shuliang">0</b>'+getI18nPageByKey("piece")+')<i id="zong1">0</i>'+getI18nPageByKey("ntegration")+'<br/>'+getI18nPageByKey("myToat")+'：'+myIntegral+''+getI18nPageByKey("score")+'</div>';
+                  $(".totalbox").append(str8);
+                 }
+               }
+     })
+
+    $("#repaddtop").on("click", function () {
+         var gds_id = [];
+         var length=0;
+          $(".selconboxin .singles").each(function (index,item) {
+              if($(this).hasClass("Select_singleim")) {
+                   gds_id.push(index);
+                   length++;
+               }
+          });
+          removeDuplicatedItem(gds_id);
+          ls.setItem("integralIds",gds_id.join(","));
+           ls.setItem("intergalOn", true);
+           ls.setItem("integralNum",$("#zong1").text());
+          if(length==0){
+            layer.msg(getI18nPageByKey("theDay"));
+          }else{
+             window.location.href = "consigneeData.html?goods_id="+goods_id;
+          }
+     
+ })
+    //日期转化为毫秒
+       function putTime(dateStr){
+         var dateStrArr = dateStr.split(" "),
+             dateOne = dateStrArr[0].split("-"),
+             dateTwo = dateStrArr[1].split(":");
+          return  new Date(dateOne[0],dateOne[1],dateOne[2],dateTwo[0],dateTwo[1],dateTwo[2]).getTime();           
+      }
+
+        //获取当前日期
+     function getNowFormatDate() {
+          var date = new Date();
+          var seperator1 = "-";
+          var seperator2 = ":";
+          var month = date.getMonth() + 1;
+          var strDate = date.getDate();
+          if (month >= 1 && month <= 9) {
+              month = "0" + month;
+          }
+          if (strDate >= 0 && strDate <= 9) {
+              strDate = "0" + strDate;
+          }
+          var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                  + " " + date.getHours() + seperator2 + date.getMinutes()
+                  + seperator2 + date.getSeconds();
+          return currentdate;
+      } 
+      
+</script>
+</body>
+</html>

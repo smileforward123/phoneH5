@@ -1,0 +1,345 @@
+@import url("reset.css");
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+a {
+  text-decoration: none;
+}
+.wrapper {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  display: -ms-box;
+  -ms-box-orient: vertical;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  background: #f7f7f7;
+}
+.wrapper header {
+  height: 2.25rem;
+  background: #C90C1E;
+  color: #fff;
+  width: 100%;
+  position: relative;
+  line-height: 2.25rem;
+}
+.wrapper header a {
+  width: 0.8rem;
+  height: 0.9rem;
+  left: 0.5rem;
+  top: 0.5rem;
+  position: absolute;
+  background: url(../images/shareShop_r2_c1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.wrapper header span {
+  width: 1.175rem;
+  height: 1.45rem;
+  left: 2.1rem;
+  top: 0.45rem;
+  position: absolute;
+  display: inline-block;
+  background: url(../images/mainLogo.png) no-repeat;
+  background-size: contain;
+}
+.wrapper header h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+  width: 60%;
+  margin-left: 20%;
+}
+.wrapper section {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -moz-box-flex: 1;
+  overflow-y: scroll;
+}
+.wrapper section .top {
+  width: 100%;
+  height: 5.8rem;
+  background: #fff;
+}
+.wrapper section .top img {
+  float: left;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-size: contain;
+  margin: 0.5rem 0.5rem;
+}
+.wrapper section .top textarea {
+  float: left;
+  margin-left: 0.5rem;
+  font-size: 0.7rem;
+  resize: none;
+  margin-top: 0.5rem;
+  width: 10rem;
+  height: 3.5rem;
+  overflow-y: scroll;
+  border: 0;
+  outline: none;
+  color: #666;
+}
+.wrapper section .public_photo {
+  height: 3.65rem;
+  background: #fff;
+  padding-bottom: 0.6rem;
+  /*span{
+				float:left;
+				font-size:0.7rem;
+				padding-left:0.5rem;
+				color:#ccc;
+				margin-top:1rem;
+			}*/
+}
+.wrapper section .public_photo .load {
+  width: auto;
+  height: 3.2rem;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+.wrapper section .public_photo .load img {
+  width: 3.2rem;
+  height: 3.2rem;
+  float: left;
+  background-size: contain;
+  margin-right: 0.2rem;
+}
+.wrapper section .public_photo .file {
+  position: relative;
+  width: 3.2rem;
+  height: 3.2rem;
+  background: #f00;
+  display: inline-block;
+}
+.wrapper section .public_photo .file .fileInput {
+  width: 3.2rem;
+  height: 3.2rem;
+  position: absolute;
+  left: 0;
+  bottom: -1rem;
+  z-index: 1000;
+  font-size: 0;
+  opacity: 0;
+}
+.wrapper section .public_photo .file img {
+  background: url(../images/photo.png) no-repeat;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-size: contain;
+  margin-left: 0.5rem;
+  position: absolute;
+  left: -0.5rem;
+  top: 0;
+}
+.wrapper section .type_comment {
+  height: 2.45rem;
+  line-height: 2.45rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+}
+.wrapper section .type_comment div {
+  -webkit-box-flex: 1;
+  font-size: 0.7rem;
+  color: #ccc;
+  text-align: center;
+}
+.wrapper section .type_comment .good_comment a {
+  color: #666;
+}
+.wrapper section .type_comment .good_comment a:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/middlecomment.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .type_comment .good_comment a.add {
+  color: #fd5401;
+}
+.wrapper section .type_comment .good_comment a.add:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/good_comment.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .type_comment .middle_comment a {
+  color: #666;
+}
+.wrapper section .type_comment .middle_comment a:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/middlecomment.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .type_comment .middle_comment a.add {
+  color: #fd5401;
+}
+.wrapper section .type_comment .middle_comment a.add:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/good_comment.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .type_comment .lower_comment i {
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/lowercomment.png) no-repeat;
+  vertical-align: sub;
+  margin-right: 0.2rem;
+  background-size: contain;
+}
+.wrapper section .type_comment .lower_comment a {
+  color: #666;
+}
+.wrapper section .type_comment .lower_comment a:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/lowercomment.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .type_comment .lower_comment a.add {
+  color: #fd5401;
+}
+.wrapper section .type_comment .lower_comment a.add:before {
+  content: "";
+  width: 1.075rem;
+  height: 1.085rem;
+  display: inline-block;
+  background: url(../images/chanping.png) no-repeat;
+  background-size: contain;
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}
+.wrapper section .shop_comment {
+  height: 7.425rem;
+  margin-top: 0.6rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+}
+.wrapper section .shop_comment h2 {
+  font-size: 0.7rem;
+  padding-left: 0.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  padding-top: 0.2rem;
+}
+.wrapper section .shop_comment div {
+  line-height: 1.55rem;
+  height: 1.55rem;
+  width: 95%;
+  margin: 0 auto;
+}
+.wrapper section .shop_comment div span {
+  float: left;
+  font-size: 0.65rem;
+  width: 30%;
+}
+.wrapper section .shop_comment div ul {
+  float: right;
+  width: 60%;
+  height: 1.55rem;
+}
+.wrapper section .shop_comment div ul li {
+  width: 1.1rem;
+  height: 1.05rem;
+  float: left;
+  margin-top: 0.2rem;
+  background: url(../images/nostar.png) no-repeat;
+  background-size: contain;
+  margin-right: 0.6rem;
+}
+.wrapper section .shop_comment div ul li.on {
+  background: url(../images/redstar.png) no-repeat;
+  background-size: contain;
+}
+.wrapper footer {
+  width: 100%;
+  height: 2.4rem;
+  line-height: 2.4rem;
+}
+.wrapper footer h2 {
+  background: #ec2426;
+  height: 2.4rem;
+  line-height: 2.4rem;
+  color: #fff;
+  text-align: center;
+  font-size: 0.8rem;
+}
+.public_photo {
+  height: 3.65rem;
+  background: #fff;
+  position: relative;
+}
+.public_photo .webuploader-pick {
+  background: url(../images/photo.png) no-repeat;
+  width: 3.2rem;
+  height: 3.2rem;
+  background-size: contain;
+  font-size: 0;
+}
+.public_photo .webuploader-container {
+  float: left;
+  width: 20%;
+  margin-left: 0.5rem;
+}
+.public_photo .webuploader-element-invisible label {
+  margin-right: 0.5rem;
+}
+.public_photo .parentFileBox {
+  width: 80%;
+  height: 3.5rem;
+  position: absolute;
+  left: 25%;
+  top: 0;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+}
+.public_photo .parentFileBox .fileBoxUl {
+  width: 100%;
+  height: 3.5rem;
+}
+.public_photo .parentFileBox .fileBoxUl li {
+  -webkit-box-flex: 1;
+  width: 3.2rem;
+  height: 3.2rem;
+  border: 1px solid #ccc;
+  float: left;
+  margin-top: 0;
+  margin-left: 0.2rem;
+}
+.public_photo .parentFileBox .fileBoxUl li .viewThumb {
+  width: 3.2rem;
+  height: 3.2rem;
+}

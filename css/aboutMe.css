@@ -1,0 +1,354 @@
+@charset "UTF-8";
+.header .btn {
+    position: relative;
+    z-index: 11;
+    width: 1.05rem;
+    height: 1.05rem;
+    display: block;
+    margin: 0 0.625rem 0px 0rem;
+    padding: 0;
+    height: 100%;
+    float: right;
+    background-size: contain;
+}
+.header .btn img {
+    max-width: 100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+.pageTitle{
+    margin-left: 7.15rem;
+}
+.myAccount{
+    position: relative;
+    width:100%;
+    height:7rem;
+
+}
+.myAccount img{
+    width:100%;
+    height:100%;
+}
+.accountInfo{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+}
+.account{
+    position: absolute;
+    left:1.075rem;
+    top:1rem;
+    width:10.7rem;
+
+
+}
+.accountName span{
+    display:block;
+}
+.accountLogo{
+    float: left;
+    width:3.025rem;
+    height:3.025rem;
+}
+.account .accountLogo img{
+    width:100%;
+    height:100%;
+}
+.accountName{
+    float: left;
+    width:7.1rem;
+    color:#fff;
+    font-size:0.7rem ;
+    line-height:1.2rem ;
+    margin-left: 0.55rem;
+}
+.langBox{
+    position: absolute;
+    right:0.55rem;
+    top:1rem;
+}
+.langBox a{
+    display:block;
+    font-size: 0.5rem;
+    line-height: 1.5rem;
+    color:#fff;
+    cursor: pointer;
+}
+.langBox .countryLogo{
+    display:inline-block;
+    width:0.875rem;
+    height:0.675rem;
+    background:url(../images/malaiLogo.png) no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+    margin-right:0.225rem ;
+}
+.langBox .down{
+    display:inline-block;
+    width:0.45rem;
+    height:0.25rem;
+    background:url(../images/downTri.png) no-repeat;
+    background-size:contain;
+    vertical-align: middle;
+    margin-left: 0.225rem;
+}
+.langBox .right{
+    display:inline-block;
+    width:0.25rem;
+    height:0.5rem;
+    background:url(../images/rightTri.png) no-repeat;
+    background-size:contain;
+    vertical-align: middle;
+    margin-left: 0.225rem;
+
+}
+.mask{
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:2rem;
+    background:#423c4b;
+    opacity:.5;
+    width:100%;
+
+
+}
+.nav{
+    position: absolute;
+    left:0;
+    bottom:0;
+    height:2rem;
+    color:#fff;
+    width:100%;
+}
+.nav a{
+    color: #fff;
+    float: left;
+   /*  width:33%; */
+   width: 49%;
+    height:2rem;
+    border-right: 1px solid #fff;
+   text-align: center;
+}
+.nav a strong{
+    display:block;
+    width:100%;
+    font-size: 0.5rem;
+    line-height: 0.75rem;
+   
+}
+.nav a:nth-child(2){
+    border-right:none;
+}
+.nav a .num{
+    margin-top:0.225rem;
+}
+.nav .myStore{
+    border-right: none;
+}
+.nav .myStore strong{
+    font-size: 0.55rem;
+    line-height: 2rem;
+}
+.myList li{
+    margin-top:0.525rem;
+    border-top:1px solid #cccccc;
+    border-bottom:1px solid #cccccc;
+}
+.myOrder{
+    height:1.95rem;
+    font-size:0.6rem;
+    line-height:1.95rem;
+    
+    color:#000;
+    border-bottom: 1px solid #ccc;
+
+}
+.myOrder1{
+    color:#000;font-weight: bold;
+    float: left;
+   
+}
+.myOrder1 .orderLogo{
+     background:url(../images/orderLogo.png) no-repeat ;
+    background-size: contain;
+    display:inline-block;
+    width:0.7rem;
+    height:0.95rem;
+    vertical-align: middle;
+    margin:0 0.5rem;
+}
+.seeOrder{
+    color:#999999;
+    float: right;
+    margin-right: 0.5rem;
+}
+.orderNav a{
+    float: left;
+    width:20%;
+    color:#333333;
+    padding:0.7rem 0 0.25rem;
+    font-size:0.45rem ;
+    line-height:1.4rem ;
+    text-align: center;
+    position:relative;
+}
+.orderNav a em{
+    position: absolute;
+    width:0.8rem;
+    height:0.8rem;
+    border-radius:50%;
+    background:#f22f33;
+    color:#fff;
+    font-size:0.3rem ;
+    line-height: 0.8rem;
+    right:0.8rem;
+    top:0.3rem;
+}
+.orderNav .statusLogo{
+    display:block;
+    margin:0 auto;
+    width:0.85rem;
+    height:0.7rem;
+
+    
+}
+.orderNav .payWait{
+   /*  width:0.8rem;
+   height:0.55rem; */
+    background:url(../images/payWaited.png) no-repeat;
+    background-size: contain;
+}
+.orderNav .receiveWait{
+    /* width:0.85rem;
+    height:0.7rem; */
+    background:url(../images/receiveWait.png) no-repeat;
+     background-size: contain;
+}
+.orderNav .received{
+    /* width:0.65rem;
+    height:0.65rem; */
+    background:url(../images/receive.png) no-repeat;
+     background-size: contain;
+}
+.orderNav .canceld{
+   /*  width:0.75rem;
+   height:0.75rem; */
+    background:url(../images/cancel.png) no-repeat;
+     background-size: contain;
+}
+.orderNav .drawBack{
+   /*  width:0.75rem;
+   height:0.75rem; */
+    background:url(../images/drawPack.png) no-repeat;
+     background-size: contain;
+}
+.orderNav .statusText{
+    vertical-align: middle;
+}
+.accountDetail{
+    float: left;
+    width:50%;
+    box-sizing: border-box;
+    border-right:2px dashed #ccc ;
+}
+.integral{
+    float: left;
+    width:50%;
+}
+.myList li:nth-child(2) div .title{
+    display:block;
+    height:1.95rem;
+    font-size: 0.6rem;
+    color:#000;
+    line-height: 1.95rem;
+    font-weight:bold;
+    border-bottom: 1px solid #ccc;
+}
+.myList li:nth-child(2)  .title em{
+    display:inline-block;
+   
+    background-size:contain;
+}
+.myList .accountLogo1{
+    width:0.8rem;
+    height:0.875rem;
+    background:url(../images/wallet.png) no-repeat;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+
+}
+.myList .intelLogo{
+     width:0.85rem;
+    height:0.9rem;
+    background:url(../images/intergal.png) no-repeat;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    margin-right:0.5rem ;
+}
+.myList li:nth-child(2) .rightArrow{
+    display:inline-block;
+    width:0.35rem;
+    height:0.65rem;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+    float: right;
+    vertical-align: middle;
+    margin-top:0.7rem;
+    margin-right: 0.5rem;
+}
+.balance{
+    float: left;
+    width:3.5rem;
+    margin:0rem 0 0rem 0.5rem;
+    font-size:0.475rem;
+    line-height:0.925rem ;
+    color:#333333;
+}
+.balance span{
+    display:block;
+}
+.accountDetail div{
+    margin:0.6rem 0 0.7rem;
+}
+.integral div {
+    margin: 0.6rem 0 0.7rem;
+}
+.balanceDetail{
+    float: right;
+    width:3.875rem;
+    font-size:0.55rem ;
+    line-height: 1.85rem;
+    color:#666666;
+}
+.menuList{
+    height:1.95rem;
+    font-size:0.6rem;
+    line-height:1.95rem;
+    color:#333333;
+    
+}
+.menuList a{
+    color:#333333;
+    display:inline-block;
+    width:100%;
+    text-indent: 0.5rem;
+}
+.menuList em{
+    width:0.35rem;
+    height:0.65rem;
+    display:inline-block;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+    float: right;
+    margin-top:0.65rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+.myList{
+    padding-bottom:3.75rem ;
+}
+
+/* Added by Elias */
+.balanceDetail{line-height: 1.2rem;}

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/accountBalance.css" />
+        <link rel="stylesheet" href="css/loading.css"/>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    
+   <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                  <script>writeI18nPageByKey("accountBalance")</script>
+            </h3>
+           
+        </header>
+        <div class="scroll">
+            <div class="balanceBox">
+                <h3>
+                    <script>writeI18nPageByKey("accountBalance")</script>
+                </h3>
+                <p class="balance">
+                     <b><!-- 300.00 --></b>
+                     <span class="recharge">
+                         <script>writeI18nPageByKey("recharging")</script>
+                    </span>
+                </p>
+            </div>
+            <nav class="nav clear">
+                <a class="active" href="javascript:void(0)">
+                     <script>writeI18nPageByKey("storeAll")</script>
+                </a>
+                <a href="javascript:void(0)">
+                     <script>writeI18nPageByKey("earnings")</script>
+                </a>
+                <a href="javascript:void(0)">
+                     <script>writeI18nPageByKey("expense")</script>
+                </a>
+            </nav>
+            <div class="content">
+                <ul class="balanceList">
+                    <!-- <li>
+                        <p class="clear"><span class="method">在线支付</span><span class="date">2016-07-03</span></p>
+                        <p class="clear"><span class="method">余额:123.00</span><span class="date">-10</span></p>
+                    </li>
+                    <li>
+                        <p class="clear"><span class="method">在线支付</span><span class="date">2016-07-03</span></p>
+                        <p class="clear"><span class="method">余额:123.00</span><span class="date">-10</span></p>
+                    </li> -->
+                </ul>
+                 <div class="loading">
+                    <img src="images/loading_more.gif" class="loadImg"/>
+                    <span>
+                         <script>writeI18nPageByKey("isLoading")</script>...
+                    </span>
+                </div>
+                <div class="noMore">
+                    <span>
+                       <script>writeI18nPageByKey("noMoreData")</script>
+                    </span>
+                </div>
+               
+            </div>
+            
+        </div>
+        <script>
+            $(".back").click(function(){
+             history.back(-1);
+           })
+          var typeObj=getParam();
+            
+            var begin=0;
+           
+            var type=0;//代表全部，收入，支出;
+            var status;//代表账户余额状态：
+            var str="";
+            $(".content").scroll(function () {
+               
+                var scrollTop=$(this).scrollTop();
+               
+                var scrollHeight =$(window).height() ;
+               
+                var windowHeight = $(this).height();
+               
+                if (scrollTop+windowHeight>=scrollHeight) {
+                   
+                      balance();
+                };
+            })
+            $(".nav a").click(function(){
+              
+                str="";
+                begin=0;
+                $(this).addClass('active').siblings().removeClass("active");
+                
+                if($(this)[0].innerText==getI18nPageByKey("storeAll")){
+                    type=0;
+                }else if($(this)[0].innerText==getI18nPageByKey("earnings")){
+                    type=1;
+                }else{
+                    type=2;
+                }
+             
+                balance();
+                
+                
+                
+
+            })
+            $(".nav a").each(function(index,item){
+                if($(this).hasClass("avtive")){
+                    if($(this)[0].innerText==getI18nPageByKey("storeAll")){
+                        type=0;
+                    }else if($(this)[0].innerText==getI18nPageByKey("earnings")){
+                        type=1;
+                    }else{
+                        type=2;
+                    }
+                
+                }
+            })
+           balance();
+            function balance(){
+                $(".loading").show();
+                begin++;
+               
+
+
+               Datas({
+                    url:"/my_balance",
+                    datas:{
+                        "user_id":ls.getItem("userId"),
+                        "type": type,
+                        "balance_type": typeObj.type,//代表买家，卖家;
+                        "begin":begin
+
+
+
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                             $(".balance b").text("RM"+data.balance);
+                           
+
+                            for(var i=0;i<data.data.length;i++){
+                               
+
+                            str+="<li>"+
+                                "<p class='clear'><span class='method'>"+data.data[i].pd_log_info+"</span><span class='date'>"+data.data[i].addTime+"</span></p>"+
+                                "<p class='clear'><span class='method'>"+data.data[i].payTypeStr+"</span><span class='date'>"+data.data[i].pd_log_amount+"</span></p>"+
+                                "</li>";
+                            }
+                            
+                           
+
+
+                        }else{
+                           
+                           
+                            if(data.data.length==0){
+                                $(".noMore").show();
+                            }
+
+                        }
+                         
+                         setTimeout(function(){
+                            $(".loading").hide();
+                            $(".balanceList").html(str); 
+                    
+                        },500);
+                          
+                    },
+                    error:function(data){
+                         layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+
+
+
+
+                }) 
+            }
+            $(".recharge").click(function(){
+                window.location.href="accountRecharge.html?type="+typeObj.type+"";
+            })
+           
+           
+           
+       $(document).ready(function(){
+
+           $("#title").text(getI18nPageByKey("accountBalance"));
+       })
+
+
+
+
+            
+          
+            
+        </script>
+    </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title id="title"></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/shTrigge.css"/>
+ <script src="js/jquery-2.1.1.min.js"></script>
+ <script type="text/javascript" src="js/common.js"></script>
+ <script src="css/layer/layer.js"></script>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+</script>
+
+
+</head>
+
+<body>
+	<div class="wrap" style="width:100%;height:100%;" >
+		<header class="car_header red">
+		     <h2><a href="javascript:void(0)" class="top_delete" id="top_delete1"></a><div class="fitertxt"><script>writeI18nPageByKey("searchFiter")</script></div><div class="sweep" id="sweep">
+			 <script>writeI18nPageByKey("clearaway")</script></div></h2>
+		</header>
+		 <div class="cle"></div>
+		 <div class="listsize">
+			 <div id="triagelist">
+				
+			  </div>
+		 </div>
+		 <footer class="footer">
+		 		 <div class="bottom_confirm" id="bottom_confirm1"><script>writeI18nPageByKey("determine")</script></div>
+		 </footer>
+	</div>
+<script  type="text/javascript">
+	$(document).ready(function(){
+            	$("#title").text(getI18nPageByKey("searchFiter"));
+     })
+	var params=getParam();
+		goods_id=params.goods_id,
+		className=params.className,
+		index = 0,
+		flag = false,
+		gbids = [],
+		gpids = [];
+		 Datas({
+		      url:"goods/searchInfoByGc",
+			   datas:{"gc_id":goods_id},
+			   success:function(data){
+				   if(data.status){
+					   	var str="",html="";
+				  	 	$.each(data.data.resultList,function(k,v){
+					   		str+='<label class="labels" data-id="'+v.id+'"><span>'+v.name+'</span><input type="checkbox"><i></i></label>';
+					   		html+='<div class="wrapper" style="width:100%;height:100%;display:none">'
+									+'<header class="car_header red">'
+									     +'<h2><a href="javascript:void(0)" class="top_delete back"></a><div class="fitertxt" id="fitertxt">'+v.name+'</div>'
+									     +'<div class="sweep clearStatus">'
+										 +'clear'
+										 +'</div></h2>'
+									+'</header>'
+								    +'<div class="cle"></div>'
+								    +'<div class="listsize list">'
+					   		$.each(v.properties,function(key,val){
+					   			if(v.id!=""){
+					   				html+='<label class="labels" data-id='+val.id+'><span>'+val.value+'</span><input type="checkbox"><i></i></label>'
+					   			}else{
+					   				html+='<label class="labels" data-id='+val.id+'><span>'+val.name+'</span><input type="checkbox"><i></i></label>'
+					   			}
+					   			
+					   		})
+					   		html+='</div>'
+									+'<footer class="footer">'
+										  +'<div class="bottom_confirm bottom_confirm2">'
+										  +getI18nPageByKey("okBtn")/*'确定'*/
+										  +'</div>'
+									+'</footer>'
+								+'</div>'
+					   	})
+					   	 $('#triagelist').html(str);
+	   					$(".wrap").after(html)
+					}		
+				}
+
+		})
+	//返回键	 
+	$("#top_delete1").click(function(){
+	    window.location.href="picDetail.html?goods_id="+goods_id+"&className="+className;
+	})
+
+	//点击事件
+	$("#triagelist").on("click","label",function(){
+		flag = false;
+		index = $(this).index();
+		$(".wrapper").eq(index).show().siblings().hide();
+	})
+	
+	
+	//点击确定(获得列表id--gpids)
+	var goodIdArr=[],txt=[],itemName=[],arr=[];
+	$("body").on("click",'.bottom_confirm2',function(){
+		//判断是否选择了商品
+		var list = $(this).parents(".footer").prev(".list");
+		checkStatus(list)
+		if (!flag) {
+			layer.msg(getI18nPageByKey("chooseContent"));/*"请选择一个内容"*/
+		}else{
+			if(flag){
+				$("#triagelist label").eq(index).find("input[type=checkbox]").attr("checked",true);
+				$("#triagelist .labels").eq(index).find("i").addClass("curs");
+			}else{
+				$("#triagelist label").eq(index).find("input[type=checkbox]").attr("checked",false);
+				$("#triagelist .labels").eq(index).find("i").removeClass("curs");
+			}
+			saveList();
+			$(".wrapper").hide();
+			$('.wrap').show();
+		}
+
+	
+	})
+	//点击确定(获得菜单id--gbids)
+	$('#bottom_confirm1').on("click",function(){
+		//判断是否选择了商品
+		var list = $(this).parents(".footer").prev(".listsize");
+		checkStatus(list)
+		if (!flag) {
+			layer.msg(getI18nPageByKey("chooseContent"));/*"请选择一个内容"*/
+		}else{
+			gbids = [];
+			
+			$("#triagelist").find("label").each(function(idx,val){
+				if($(this).find("input[type=checkbox]").prop("checked")){
+					gbids.push($(this).data("id"))
+				}
+			})
+			
+			// ls.setItem("gbids",JSON.stringify(gbids));
+			// ls.setItem("gbids",gbids);
+			// location.href="picDetail.html?goods_id="+goods_id;
+			var gpid=ls.getItem('gpids');
+			 window.location.href="picDetail.html?goods_id="+goods_id+"&gpids="+gpids.join(',');
+		}
+	
+	})
+	//从列表返回菜单
+	$('body').on("click",".back",function(){
+		var list = $(this).parents(".wrapper").find(".list");
+		checkStatus(list)
+		if(flag){
+			$("#triagelist label").eq(index).find("input[type=checkbox]").attr("checked",true);
+			$("#triagelist .labels").eq(index).find("i").addClass("curs");
+		}else{
+			$("#triagelist label").eq(index).find("input[type=checkbox]").attr("checked",false);
+			$("#triagelist .labels").eq(index).find("i").removeClass("curs");
+		}
+		saveList();
+		$(".wrapper").hide();
+		$('.wrap').show();
+	})
+	//列表点击清除
+	$('body').on("click",".clearStatus",function(){
+		var list = $(this).parents(".wrapper").find(".list");
+
+		list.find("input[type=checkbox]").attr("checked",false);
+		list.find("i").removeClass("curs");
+		
+	})
+	//菜单的清除
+	$('#sweep').on("click",function(){
+		var list = $("body").find(".listsize");
+
+		list.find("input[type=checkbox]").attr("checked",false);
+		list.find("i").removeClass("curs");
+		
+	})
+
+	function checkStatus(list){//判断列表菜单是否被选中
+		var item = $(list).find("label");
+		for(var i=0,len=item.length;i<len;i++){
+			if ($(item).eq(i).find("input[type=checkbox]").prop("checked")) {
+				flag = true;
+				return;
+				
+			};
+		}
+		
+	}
+	//列表的id
+	function saveList(){
+		gpids = [];
+		var list = $("body .wrapper").find(".list");
+		$(list).each(function(key,ele){
+			$(ele).find("label").each(function(idx,val){
+				if($(this).find("input[type=checkbox]").prop("checked")){
+					gpids.push($(this).data("id"))
+				}
+			})
+		})
+		// ls.setItem("gpids",JSON.stringify(gpids))
+		ls.setItem("gpids",gpids);
+	}	
+</script>
+</body>
+</html>

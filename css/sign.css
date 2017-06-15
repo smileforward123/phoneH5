@@ -1,0 +1,68 @@
+@charset "UTF-8";
+.pageTitle {
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background: #f3f5f7;
+}
+.signList{
+    width:14.75rem;
+    margin:1rem auto 0;
+}
+.signList li{
+    height: 2rem;
+    line-height: 2rem;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    background: white;
+    border-radius: 0.2rem;
+    font-size: 0.7rem;
+    margin-bottom: 0.8rem;
+}
+.signList  .signInput{
+    width:90%;
+    text-indent: 0.5rem;
+}
+
+.userComment {
+    display: block;
+  
+    margin: 0.5rem;
+   
+ font-size: 0.5rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+.userComment input:checked+i {
+    background: url(../images/check1.png) no-repeat;
+    background-size: contain;
+}
+.userComment i {
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    background: url(../images/check2.png) no-repeat;
+    vertical-align: middle;
+    background-size: contain;
+}
+.registerBox{
+    height: 2rem;
+    line-height: 2rem;
+    background: #C90C1E;
+    text-align: center;
+    border-radius: 5px 5px;
+    width: 92%;
+    margin: 0 auto;
+}
+.registerBox a{
+    height: 2rem;
+    line-height: 2rem;
+    color: #fff;
+    display: block;
+    font-size: 0.8rem;
+   
+}
+    
+

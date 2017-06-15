@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+       <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+        <meta content="yes" name="apple-mobile-web-app-capable" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+         <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+      <!--   <link rel="stylesheet" href="css/complaintDetail.css" /> -->
+        <link rel="stylesheet" href="css/talkingMessage.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle"><!-- 有福家居 --></h3>
+        </header>
+        <div class="scroll" style="background:white;">
+          <!--  <div class="message1">
+              <p>昨天 10:40</p>
+                    <img src="images/angleWhite_03.png"/>
+              <div>
+               <span>
+                 最近版面上有很多大家对Appasia的询问和查询，为了让大家全面的认识熊熊巡查员，版主特意采访了Appasia。
+               </span>
+                   <i></i>
+              </div>
+          </div> -->
+           
+            <!-- <div class="message2">
+                       
+                <p>昨天 10:41</p>
+               <img src="images/angle_03.png"/>
+                <div>
+                    <span>最近版面上有很多大家对Appasia的询问和查询，为了让大家全面的认识熊熊巡查员，版主特意采访了Appasia。</span>
+                    <i></i>
+                </div>
+            </div> -->
+           </div>
+              <div style="clear:both;"></div>
+           <footer>
+            <div class="sendBox">
+                <input class="textOfSending"  type="text" id="txt" placeholder="input text"/>
+                <input class="sender" type="button" value="" id="send"/>
+
+            </div>
+           </footer>
+        
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+        $(document).ready(function(){
+              $("#send").attr("value",getI18nPageByKey("sendtxt"))//搜索
+
+          })
+
+       var param=getParam(),
+           //store_userId=146&store_userName=1492175853@qq.com&userID=111&userName=750197332@qq.com卖家订单详情
+           // userId=param.store_userId,
+           store_userName=param.store_userName,
+           store_userId=param.store_userId,
+           userID=param.userID,
+           userName=param.userName,
+          //买家定单联系卖家 
+           storeUserId=param.storeUserId,
+           storeUserName=param.storeUserName,
+           //商品详情
+           good_userId=param.good_userId,
+           good_userName=param.good_userName,
+           //判断条件
+           type=param.type,
+           //fromUserId=111&fromUserName=750197332@qq.com&toUserId=4480&toUserName=1029@qq.com 从站内信进去的
+           fromUserName=param.fromUserName,
+           fromUserId=param.fromUserId,
+           toUserId=param.toUserId,
+           toUserName=param.toUserName;
+         $('.back').on("click",function(){
+            history.back(-1);
+         })  
+
+        var userId=ls.getItem("userId"),newUserId,toNewUserId;
+        //判断title和用户id;      
+        if (type) {//卖家定单详情?store_userId=146&store_userName=1492175853@qq.com&userID=111&userName=750197332@qq.com
+            if (userId==store_userId) {//卖家
+                  $('.pageTitle').text(userName);
+                    newUserId = store_userId;//自己的id
+                    toNewUserId  = userID;//对话用户id
+              }else{
+                  $('.pageTitle').text(store_userName);
+                  newUserId  = userID;
+                  toNewUserId = store_userId;
+              }
+             
+        }else{
+             if (storeUserName) {
+                 //买家定单列表
+                  $('.pageTitle').text(storeUserName); 
+                   newUserId = userId;
+                   toNewUserId =storeUserId;
+             }else{//商品详情和店铺详情
+                  $('.pageTitle').text(good_userName); 
+                   newUserId = userId;
+                   toNewUserId = good_userId;
+             }
+
+              
+        }
+        if (fromUserId) {//买家或者卖家站内信聊天
+             if (userId==fromUserId) {
+                  $('.pageTitle').text(toUserName);
+                    newUserId = fromUserId;//自己的id
+                    toNewUserId  = toUserId;//对话用户id
+              }else{
+                  $('.pageTitle').text(fromUserName);
+                    newUserId  = toUserId;
+                    toNewUserId = fromUserId;
+              }
+        }
+         
+
+        //站内信消息发言 
+          $('#send').on('click',function(){
+             var val;
+             if ($('#txt').val()=="") {
+                layer.msg(getI18nPageByKey("WriteTxt") );
+                return;
+             };
+             Datas({
+                url:"system/NewSendMessage",
+                datas:{"toUser":toNewUserId,"content":$('#txt').val(),"fromUser":newUserId},
+                success:function(data){ 
+                   if (data.status) {
+                     val=$('#txt').val();
+                      $('#txt').val("");
+                      Msg(); 
+                   };
+                },
+                error:function(){
+                }
+             })
+
+          })
+       Msg(); 
+       function Msg(){
+         //获取站内信消息内容列表
+               Datas({
+                  url:"system/message_detail",
+                  datas:{"toUserId":toNewUserId,"fromUserId":newUserId},
+                  success:function(data){
+                      var str="";                    
+                      if (data.status) {
+                          $.each(data.data,function(k,v){
+                              if (v.fromUserId==newUserId) {
+                                 str+='<div class="message2">'+
+                                     '<p>'+v.addTime+'</p>'+
+                                     '<div><span>'+v.content+'</span><i></i></div>'+
+                                ' </div>';
+                              }else{
+                                     str+='<div class="message1">'+
+                                       '<p>'+v.addTime+'</p>'+
+                                       '<div><span>'+v.content+'</span><i></i></div>'+
+                                  ' </div>';
+                              }
+                          })
+                            $('.scroll').html(str);
+                      };
+
+                  },
+                  error:function(){
+                  }
+             })
+
+       }
+       </script>
+    </body>
+</html>

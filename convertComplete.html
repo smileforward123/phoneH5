@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<style type="text/css">
+.igoid i,.igoid b{ float:left; }
+.igoid,.igtransfee{display: block;}
+.igoid i,.igtransfee i{width:3rem;}
+.igoid b,.igtransfee b{width:10rem; color:#000;font-size:0.7rem;}
+.igtransfee i,.igtransfee b{float:left;}
+.clearint{ clear:left; }
+body{overflow-x:hidden;}
+.scroll{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 2.2rem;
+    overflow: auto;
+    box-sizing: border-box;
+    background: #f0f2f5;
+    bottom: 0;
+}
+</style>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+
+</head>
+<body style="background: #f3f5f7">
+    <header class="car_header red">
+            <h2>
+                <a  href="javascript:void(0)" class="backs" id="godbacks"></a>
+                <p class="iconbox"></p>
+                   <script>writeI18nPageByKey("exchangeOk")</script><!-- 兑换完成 -->
+                <div class="intcinright" id="lnteRecord">
+                   <script>writeI18nPageByKey("redeemRecord")</script><!-- 兑换记录 -->
+                </div>
+            </h2>
+    </header>
+    <div class="cle mR"></div>
+    <div class="scroll">
+        <div class="successsbox">
+          <div class="sucimg"><img src="images/inetcon.png" /></div>
+          <P align="center">
+                 <script>writeI18nPageByKey("integralOrderOk")</script><!-- 积分商城订单交成功，您需要支付礼品运费 -->
+          </P>
+          <div class="sconctxt">
+             <p class="igoid">
+                     <i>
+                          <script>writeI18nPageByKey("orderSerialNo")</script><!-- 订单编号 -->
+                     </i>
+                     <b><!-- igo20160717171444832791 --></b>
+             </p>
+              <p class="igtransfee">
+                       <i>
+                           <script>writeI18nPageByKey("transAmount")</script><!-- 运费金额 -->：
+                       </i>
+                       <b>RM<span><!-- 10.0 --></span></b>
+              </p>
+          </div>
+          <div class="clearint"></div>
+          <b>
+                <script>writeI18nPageByKey("clickUpperRightCorner")</script><!-- 点击右上角↗ [兑换记录] 查看订单 -->
+          </b>
+
+      </div>
+      <div class="createbot">
+                <b>
+                     <script>writeI18nPageByKey("yourOrderCreated")</script><!-- 您的订单已成功生成，选择您用的支付方式进行支付 -->
+                </b>
+      </div>
+      <div class="intconfbtn">
+                <a href="javascript:void(0)" id="pattern">
+                     <script>writeI18nPageByKey("payMethodTitle")</script><!-- 选择支付方式 -->
+                </a>
+      </div>
+    </div>
+    
+<script type="text/javascript">
+        $("#godbacks").on("click",function(){
+          history.back(-1);
+        })
+      $("#lnteRecord").on("click",function(){
+        window.location.href="integralconvert_record.html";
+      })
+       var userNames=ls.getItem('userId');
+       var integralObj=getParam();
+     
+        $(".igoid").find("b").html(integralObj.orderSn);
+       $(".igtransfee").find("b").find("span").text(integralObj.transfee);/**/
+      $("#pattern").on("click",function(){
+        if(integralObj.transfee=="0"){
+          window.location.href="paymentSucceed.html?payMethod=free&goldExchange=0";
+        }else{
+          window.location.href="guestPayBill.html?totalPrice="+integralObj.transfee+"&orderId="+integralObj.orderId+"&lineType=0";
+        }
+        
+      });
+     
+</script>
+</body>
+</html>

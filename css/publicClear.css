@@ -1,0 +1,25 @@
+@charset "UTF-8";
+body,ul,li,h1,h2,h3,h4,h5,p,dl,dt,dd,input,textarea{margin:0;padding:0;}
+ li{list-style:none;}
+ strong{font-weight:normal;}
+ a{text-decoration:none;}
+ h1,h2,h3,h4,h5{font-weight:normal;}
+ img{border:none;vertical-align:top;}
+ b,em,strong{font-weight: normal;}
+ em{
+    font-style: normal;
+ }
+ input{border:none;background:none;}
+ html *{-webkit-tap-highlight-color:rgba(0,0,0,0);}
+input,button{-webkit-appearance:none;}
+input,textarea,select{outline: none;}
+.clear:after{content:"";display:block;clear:both;}
+html {
+    font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-font-smoothing:antialiased;
+}
+body,button,input, select,textarea {font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;}
+h1,h2,h3,h4,h5,h6,* {font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;-webkit-font-smoothing:antialiased;}
+

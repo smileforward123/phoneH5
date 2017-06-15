@@ -1,0 +1,281 @@
+@charset "utf-8";
+a {
+  text-decoration: none;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body,
+.wrapper {
+  width: 100%;
+  height: 100%;
+}
+html {
+  font-family: "Lantinghei SC", "Open Sans", Arial, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "STHeiti", "WenQuanYi Micro Hei", SimSun, sans-serif;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+.wrapper {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  display: -ms-box;
+  -ms-box-orient: vertical;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -o-box;
+  -o-box-orient: vertical;
+}
+.wrapper header {
+  width: 100%;
+  height: 2.2rem;
+  background: #c90c1e;
+  position: relative;
+}
+.wrapper header .back {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: url(../images/back.png) no-repeat;
+  background-size: contain;
+  position: absolute;
+  left: 0.5rem;
+  top: 0.65rem;
+}
+.wrapper header span {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: inline-block;
+  background: url(../images/iconimg.png) no-repeat;
+  background-size: contain;
+  margin-top: 0.3rem;
+  position: absolute;
+  left: 2rem;
+  top: 0.2rem;
+}
+.wrapper header div {
+ /*  width: 9.475rem; */
+  width: 54%;
+  float: left;
+  margin-right: 0.3rem;
+  display: inline;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  background: #fff;
+  border-radius: 5px 5px;
+  margin-top: 0.45rem;
+  margin-left: 3.8rem;
+}
+.wrapper header div i {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: url(../images/search.png) no-repeat left;
+  background-size: contain;
+  margin-left: 0.5rem;
+  margin-top: 0.2rem;
+  float: left;
+}
+.wrapper header div input {
+  display: inline-block;
+  float: left;
+  font-size: initial;
+  height: 1rem;
+  line-height: 1rem;
+  color: #999;
+  outline: none;
+  border: 0;
+  width: 70%;
+  margin-left: 0.2rem;
+  padding-top: 0.15rem;
+  font-size: 0.7rem;
+}
+.wrapper header div .clear_icon {
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+}
+.wrapper header div .clear_icon:after {
+  content: "";
+  display: block;
+  width: 0.9rem;
+  height: 0.8rem;
+  background: url(../images/clear.png) no-repeat right;
+  background-size: contain;
+}
+.wrapper header .search_right {
+  /* width: 1.75rem; */
+  float: right;
+  margin-right: 0.3rem;
+  display: block;
+  height: 1.3rem;
+  line-height: 1.3rem;
+  margin-top: 0.45rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-size: 0.8rem;
+}
+.wrapper section {
+  width: 100%;
+  overflow-y: scroll;
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -moz-box-flex: 1;
+  -o-box-flex: 1;
+}
+.wrapper section h2 {
+  height: 2.25rem;
+  line-height: 2.25rem;
+  color: #838383;
+  font-size: 0.8rem;
+  border-bottom: 1px solid #ccc;
+}
+.wrapper section h2:before {
+  content: "";
+  width: 0.925rem;
+  height: 0.85rem;
+  display: inline-block;
+  background: url(../images/indexSearch.png) no-repeat;
+  background-size: contain;
+  margin-left: 0.5rem;
+  margin-top: 0.7rem;
+}
+.wrapper section h2 p {
+  color: #a4a4a4;
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 0.3rem;
+  font-weight: normal;
+}
+.wrapper section h2 p span {
+  padding: 0 0.3rem;
+}
+.wrapper section ul {
+  width: 100%;
+  height: auto;
+}
+.wrapper section ul li {
+  border-bottom: 1px solid #ccc;
+  line-height: 2.12rem;
+  padding-left: 0.5rem;
+}
+.wrapper section ul li a {
+  color: #828282;
+  font-size: 0.8rem;
+  display: block;
+  width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.section_content {
+  background: #f3f5f7;
+}
+.shop_item {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+.shop_item:nth-child(1) {
+  border-top: none;
+  margin-top: 0;
+}
+.shop_item .shop_logo_info {
+  width: 95%;
+  margin: 0 auto;
+  height: 2rem;
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-flex: 1;
+  padding-top: 0.5rem;
+}
+.shop_item .shop_logo_info img {
+  max-width: 100%;
+  width: 4.575rem;
+  height: 1.6rem;
+  border: 1px solid #ccc;
+}
+.shop_item .shop_logo_info div {
+  margin-left: 0.5rem;
+  width: 7.5rem;
+  margin-right: 0.2rem;
+}
+.shop_item .shop_logo_info div h3 {
+  width: 7.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0.7rem;
+  color: #7d7d7d;
+  padding-bottom: 0.15rem;
+  padding-top: 0.1rem;
+}
+.shop_item .shop_logo_info div p {
+  color: #ccc;
+  font-size: 0.65rem;
+}
+.shop_item .shop_logo_info .enter_shop {
+  font-size: 0.6rem;
+  color: #c90c1e;
+  border: 1px solid #c90c1e;
+  border-radius: 5px 5px;
+  padding: 0.15rem 0.3rem;
+  outline: none;
+  /* border: 0; */
+  background: #fff;
+  padding: 0.2rem 0.5rem;
+}
+.shop_item .shop_item_class {
+  width: 95%;
+  margin: 0 auto;
+  height: auto;
+}
+.shop_item .shop_item_class a {
+  width: 30%;
+  height: 4.675rem;
+  display: inline-block;
+  position: relative;
+  margin-right: 0.5rem;
+}
+.shop_item .shop_item_class a:nth-child(3) {
+  margin-right: none;
+}
+.shop_item .shop_item_class a dl {
+  width: 33%;
+  height: 4.675rem;
+  display: inline-block;
+}
+.shop_item .shop_item_class a dl dt {
+  width: 5rem;
+  height: 5.1rem;
+  text-align: center;
+}
+.shop_item .shop_item_class a dl dt img {
+  width: 4.8rem;
+  height: 4.9rem;
+  max-width: 100%;
+}
+.shop_item .shop_item_class a dl dd {
+  position: absolute;
+  height: 1rem;
+  background: #000;
+  opacity: .7;
+  left: 0.2rem;
+  bottom: -0.2rem;
+  width: 100%;
+ /*  border-radius: 0 0 8px 8px; */
+}
+.shop_item .shop_item_class a dl dd p {
+  height: 1rem;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  font-size: 0.6rem;
+  line-height: 1rem;
+  padding-right: 0.5rem;
+}

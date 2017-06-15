@@ -1,0 +1,158 @@
+@charset "UTF-8";
+.submitProBox{
+    display:block;
+}  
+.submitProScroll {
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top: 2.2rem;
+    overflow: auto;
+    box-sizing: border-box;
+    background: #f0f2f5;
+     bottom: 0;
+    background: #f3f5f7;
+}
+
+.proList .shopDetail {
+    width: 100%;
+    height: auto;
+    background: #f5f5f5;
+    border-bottom:1px solid #dddddd;
+    padding-bottom:0.25rem;
+   
+   
+}
+.shopDetail label{
+    float:left;
+    width:2%;
+    margin-right:0.25rem;
+}
+.shopDetail .orderImg{
+    width: 95%;
+  
+    display: block;
+    float:right;
+
+  
+}
+.shopDetail .orderImg dl {
+    width: 100%;
+   
+    display: -webkit-flex;
+    display: flex;
+    margin-top: 0.5rem;
+    -webkit-flex-direction: row;
+}
+.orderImg .imgBox{
+    max-width: 4.5rem;
+    max-height: 4.5rem;
+    background-size: contain;
+    margin: 0 0.5rem 0 0;
+}
+.shopDetail .imgBox  img {
+    width: 4.5rem;
+    height: 4.5rem;
+    /*background-size: contain;*/
+}
+.shopDetail .orderImg .shop_info {
+    height: 4.375rem;
+    padding-top: 0.3rem;
+    width: 6rem;
+    margin-right: 0.5rem;
+}
+.shopDetail  .shop_info .title{
+    font-size: 0.65rem;
+    font-weight: normal;
+    color: #4d4d4d;
+    width: 6rem;
+    height: 1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.shopDetail  .shop_info .propertyBox span{
+    color: #c4c4c4;
+    font-size: 0.6rem;
+    padding-right: 0.2rem;
+}
+.shopDetail .shop_price{
+        width: 4.25rem;
+    padding-top: 0.1rem;
+}
+.shopDetail .shop_price .price{
+   font-size: 0.8rem;
+    color: #808080;
+    display:block; 
+}
+.shopDetail .shop_price .oldPrice {
+    text-decoration: line-through;
+    margin-left: 0.2rem;
+    display:block;
+    font-style: normal;
+    color: #8a8a8a;
+    font-size: 0.8rem;
+}
+.shopDetail .shop_price .count{
+    width: 100%;
+    display: block;
+   
+    font-style: normal;
+    color: #8a8a8a;
+    font-size: 0.65rem;
+    line-height:1rem;
+    margin-top:0.5rem;
+   
+} 
+.shopDetail  label i{
+    display: inline-block;
+    width: 17px;
+    height: 17px;
+    margin-right: 10px;
+    background: url(../images/radio.png) no-repeat;
+    vertical-align: middle;
+    background-size: contain;
+}
+.shopDetail input:checked+i {
+    background: url(../images/guestRadio.png) no-repeat;
+    background-size: contain;
+}
+.nextBtn {
+    width:100%;
+    position:absolute;
+    left:0;
+    bottom:0;
+    height:2.2rem;
+    background:#f22f33;
+    font-size:0.8rem;
+    color:#fff;
+    line-height:2.2rem;
+    text-align:center;
+
+}
+.shopDetail .orderImg2{
+    display:block;
+    float:none;
+    width:100%;
+}
+.shopDetail .describe{
+    font-size:0.4rem;
+    line-height:1rem;
+    color:#000;
+    display:block;
+    width:100%;
+}
+.shopDetail .describe textarea{
+    width:60%;
+    height:1rem;
+    overflow-y:auto;
+    resize:none;
+    vertical-align:middle;
+}
+
+    
+
+
+    
+
+    

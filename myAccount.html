@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="accountTitle"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+         <link rel="stylesheet" href="css/publich5.css" />
+         <link href="css/myAccount.css" rel="stylesheet"/>
+         <link href="css/mobiscroll.css" rel="stylesheet" />
+        <link href="css/mobiscroll_date.css" rel="stylesheet" />
+        <style>
+              .editSex strong{
+                      display:inline-block;
+                      width:3rem;
+                      height:2.15rem;
+                      line-height:2.15rem;
+                      text-align:right;
+              }
+              .layui-layer-btn1{
+                   height: 28px;
+                   line-height: 28px;
+                   margin: 0 6px;
+                   padding: 0 15px;
+                   border: 1px solid #dedede;
+                   background-color: #f1f1f1;
+                   color: #333;
+                   border-radius: 2px;
+                   font-weight: 400;
+                   cursor: pointer;
+                    text-decoration: none;
+              }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/mobiscroll_date.js" charset="gb2312"></script>
+    <script src="js/mobiscroll.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                <script>writeI18nPageByKey("myAccount")</script>
+            </h3>
+           
+        </header>  
+        <div class="scroll">
+             <ul class="userNameList">
+                 <li class="clear">
+                     <span>
+                         <script>writeI18nPageByKey("userAccountNum")</script>
+                     </span>
+                     <a class="userName" href="javascript:void(0)"><!-- zhanghusd --></a>
+                 </li>
+                
+                 <li class="clear balance">
+                     <span>
+                         <script>writeI18nPageByKey("useableBlance")</script>
+                     </span>
+                     <a href="javascript:void(0)"><!-- 123.00 --></a>
+                 </li>
+            </ul>
+             <ul class="userInfoList">
+                 <li class="clear">
+                    <span>
+                        <script>writeI18nPageByKey("appasiaEmail")</script>
+                    </span>
+                    <a class="email" href="javascript:void(0)" ><em></em></a>
+                 </li>
+                 <li class="clear">
+                     <span>
+                          <script>writeI18nPageByKey("mobilePhoneNumber")</script>
+                     </span>
+                     <a class="mobileNum" href="javascript:void(0)"><em></em></a>
+                 </li>
+                 <li class="clear">
+                     <span>
+                         <script>writeI18nPageByKey("TheTrueName")</script>
+                     </span>
+                     <a  class="editName" href="javascript:void(0)"><strong><!-- 请输入姓名 --></strong><em></em></a>
+                 </li>
+                 <li class="clear">
+                     <span>
+                         <script>writeI18nPageByKey("TheGender")</script>
+                     </span>
+                     <a class="editSex" href="javascript:void(0)"><strong></strong><em></em></a>
+                 </li>
+                  <li class="clear">
+                     <span>
+                         <script>writeI18nPageByKey("TheBirthday")</script>
+                     </span>
+                     <a class="birthday" href="javascript:void(0)">
+                          <input type="text" onchange="editBirthday($(this))" style="color:#cdcdcd;width:4rem;text-align:right" name="" id="chooseBirthday" readonly placeholder="" />
+                          <em></em>
+                    </a>
+                 </li>
+             </ul>
+             <ul class="manageList">
+                 <li>
+                     <a class="clear" href="manageAddress.html">
+                          <span style="padding-left:0.45rem;">
+                             <script>writeI18nPageByKey("addressManagement")</script>
+                          </span>
+                          <em></em>
+                    </a>
+                 </li>
+                 <li class="clear">
+                      <a id="safety" href="javascript:void(0)">
+                         <span style="padding-left:0.45rem;">
+                             <script>writeI18nPageByKey("securityOfAccount")</script>
+                         </span>
+                         <em></em>
+                     </a>
+                 </li>
+             </ul>
+             <div class="quitBox">
+                 <span>
+                     <script>writeI18nPageByKey("logoutAccount")</script>
+                 </span>
+             </div>
+         </div> 
+         <script src="js/common.js"></script>
+         <script>
+           $(document).ready(function(){
+
+            $("#chooseBirthday").attr("placeholder",getI18nPageByKey("BirthdayPicker"));
+             $("#title").text(getI18nPageByKey("BirthdayPicker"));
+             $("#accountTitle").text(getI18nPageByKey("myAccount"));
+           })
+
+            $(".back").click(function(){
+
+                 window.location.href="aboutMe.html";
+            })
+
+            //修改姓名：
+            var str="<input class='nameTxt' id ='nameTxt' type='text'name='' value='' placeholder=''>"+
+                "<p class='tip'></p>";
+               /* "<input class='testCode'type='text' name=''placeholder='请输入验证码'/><span class='testBtn'>获取验证码</span>"*/
+            //修改性别;
+            var str1="<label><input type='radio' name='sex' class='gender' title='1' checked/><i></i><span id='male'></span></label><label><input class='gender' type='radio'name='sex' title='0'/><i></i><span id='female'></span></label>";
+           
+
+            var reg =/^[\u4e00-\u9fa5]{1,10}$/;//中文验证
+            $(".editName").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("wholeName"),
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("saveBtn")],btn2:function(){
+                   
+                  
+                  }
+                  
+                });
+                 
+                 
+                $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                 
+                $(".layui-layer-btn1").replaceWith("<input type='button' value='' class='layui-layer-btn1'/>");
+                 $(".layui-layer-btn1").val(getI18nPageByKey("okBtn"));
+                 $("#nameTxt").attr("placeholder",getI18nPageByKey("enterYourWholeName"));
+                 $(".tip").text(getI18nPageByKey("noMoreThan20letter"));
+                $(".layui-layer-btn1").bind("click",function(){
+                 
+
+                 if(reg.test($(".nameTxt").val())){
+                     layer.msg(getI18nPageByKey("EnterEnglishName"));
+                     return;
+                 }else if($(".nameTxt").val().length>="20"){
+                      layer.msg(getI18nPageByKey("noLongerThan20"));
+                      return;
+                 }
+
+
+            Datas({
+                url:"/buyer/update_info",
+                datas:{
+                    "user_id":ls.getItem("userId"),
+                    "trueName":$(".nameTxt").val()
+                },
+                success:function(data){
+                        
+                        
+                        if(data.status){
+                             $(".editName strong").text($(".nameTxt").val()) ;
+                              ls.setItem("trueName",$(".nameTxt").val());
+                             setTimeout(function(){
+                                   $(".layui-layer").remove();
+                                   $('.layui-layer-shade').remove();
+                             },1000)
+                        }
+                        ls.setItem("trueName",$(".nameTxt").val());
+                        layer.msg(getI18nPageByKey("editNameOk"));
+                },
+                error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                }
+            })
+
+
+                })
+               
+            });
+          
+
+
+
+
+            $(".editSex").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("TheGender"),
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str1,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("saveBtn")],btn2:function(){
+                   
+                   
+                     
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+
+                $(".layui-layer-btn1").replaceWith("<input type='button' value='' class='layui-layer-btn1'/>");
+                $(".layui-layer-btn1").val(getI18nPageByKey("okBtn"));
+                $("#male").text(getI18nPageByKey("male"));
+                 $("#female").text(getI18nPageByKey("female"));
+                $(".layui-layer-btn1").bind("click",function(){
+                 
+
+                
+
+
+            Datas({
+                url:"/buyer/update_info",
+                datas:{
+                    "user_id":ls.getItem("userId"),
+                    "sex":$(".gender:checked").attr('title')
+                },
+                success:function(data){
+                     
+                        
+                        if(data.status){
+                            $(".editSex strong").text($("input:checked").parent().text());
+                             setTimeout(function(){
+                                   $(".layui-layer").remove();
+                                   $('.layui-layer-shade').remove();
+                             },1000)
+                        }
+                        layer.msg(getI18nPageByKey("editGenderOk"));
+                },
+                error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                }
+            })
+
+
+                })     
+                 
+
+
+
+            })
+            //调取获取用户信息的接口：
+           
+            Datas({
+                url:"/buyer/member_info ",
+                datas:{
+                    "user_id":ls.getItem("userId")
+                },
+                success:function(data){
+                    
+                     if(data.data.user.birthday){
+                          $(".birthday input").val(data.data.user.birthday.substring(0,11));
+                     }
+                   
+                    if(data.data.user.sex=="1"){
+                        
+                         $(".editSex strong").html(getI18nPageByKey("male"));
+                    }else if(data.data.user.sex=="0"){
+                       
+                        $(".editSex strong").html(getI18nPageByKey("female"));
+                    }else{
+                        
+                        $(".editSex strong").html(getI18nPageByKey("keepSecret"));
+                    }
+                    
+
+                    var em=$("<em></em>");
+                    var bm=$("<em></em>");
+                    if(data.data.user.mobile!="null"|| data.data.user.mobile){
+                      $(".mobileNum").text(data.data.user.mobile).append(em);
+                    
+                    }
+                  
+                    $(".email").text(data.data.user.email) .append(bm);
+                    $(".userName").text(data.data.user.username);
+                    $(".balance a").text(data.data.user.availableBalance);
+                   
+                     $(".editName strong").text(data.data.user.trueName);
+                   //对应找回手机验证码页
+                    ls.setItem("HP",data.data.user.mobile);
+                    ls.setItem("IDnumber",data.data.user.id);
+                     ls.setItem("userEmail",data.data.user.email);
+                     $(".email").click(function(){
+                     	 window.location.href="alterBoundEmail.html";
+                     });
+                    $("#safety").click(function(){
+                        window.location.href="accountSafe.html?email="+data.data.user.email+"&mobile="+data.data.user.mobile; 
+                   });
+                    $('.mobileNum').click(function(){
+                         window. location.href="alterBoundMobile.html";
+
+                    })
+
+
+                },
+                error:function(){
+                     layer.msg(getI18nPageByKey("failToRequest"));
+                }
+            })
+
+          //霍建超
+
+          
+            
+
+           //日期选择插件
+            $(function () {
+                var currYear = (new Date()).getFullYear();
+                var opt={};
+                opt.date = {preset : 'date'};
+                opt.datetime = {preset : 'datetime'};
+                opt.time = {preset : 'time'};
+                opt.default = {
+                    theme: 'android-ics light', //皮肤样式
+                    display: 'modal', //显示方式
+                    mode: 'scroller', //日期选择模式
+                    dateFormat: 'yyyy-mm-dd',
+                    lang: 'zh',
+                    showNow: false,
+                    nowText: "今天",
+                    startYear: currYear - 70, //开始年份
+                    endYear: currYear//结束年份
+                };
+
+                $("#chooseBirthday").mobiscroll($.extend(opt['date'], opt['default']));
+
+            });
+           
+
+
+            //退出登录调接口：
+            $(".quitBox").click(function() {
+               Datas({
+                 url:"/logout",
+                 success:function(data){
+                 
+                    if(data.status){
+                        layer.msg(data.message);
+                        ls.clear();
+                        setTimeout(function(){
+                             window.location.href="aboutMe.html";
+                        },500);
+                    }
+
+                 },
+                 error:function(){
+                     layer.msg(getI18nPageByKey("failToRequest"));
+                 }
+
+
+
+               })
+            });
+
+         //修改生日
+         function editBirthday(BD){
+              Datas({
+                url:"/buyer/update_info",
+                datas:{
+                    "user_id":ls.getItem("userId"),
+                    "birthday":BD.val()
+                },
+                success:function(data){
+                      
+                        
+                        if(data.status){
+                             layer.msg(getI18nPageByKey("editBirthdayOk"));
+                           
+                        }
+                      
+                },
+                error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                }
+            })
+               
+         }
+        
+
+
+         
+
+         </script>
+    </body>
+</html>

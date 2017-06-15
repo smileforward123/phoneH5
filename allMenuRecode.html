@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="js/public.js"></script> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title>退款记录</title>
+    <link rel="stylesheet" type="text/css" href="css/loading.css">
+	<link rel="stylesheet" type="text/css" href="css/orderSearchComplate.css">
+	<script type="text/javascript">
+		document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	<style>
+    	.shop_detail h4{
+    		height: 1.8rem;
+    		background: #fff;
+    		line-height: 1.8rem;
+    	}
+    	.shop_detail h4 i{
+    		font-style: normal;
+    		font-size: 0.7rem;
+    		color: #4d4d4d;
+    		float: left;
+    		padding-left: 0.4rem;
+    	}
+    	.shop_detail h4 span{
+    		font-style: normal;
+    		font-size: 0.7rem;
+    		color: #4d4d4d;
+    		float: right;
+    		padding-right: 0.4rem;
+    		color:#c90c1e;
+    	}
+    	.item_price{
+    		height: 1.6rem;
+    		background: #fff;
+    		padding: :0 0;
+    		line-height: 1.6rem;
+    	}
+  </style>
+</head>
+<body>
+	<div class="wrapper">
+		<header style="height:2.25rem;">
+			<div class="titTop" >
+				 <a href="allMenu.html"></a>
+		        <span></span>
+				<h2>
+             <em>
+                  <script>writeI18nPageByKey("returnRecord")</script><!-- 退款记录 -->
+             </em>
+        </h2>
+			</div>
+		</header>
+		<section id="box" style="margin-top:2.25rem;">
+			<!-- 全部 -->
+			<div class="all">
+				<div class="wrap">
+					   <div class="wrap_box" ></div>
+             <div class="loading">
+                    <img src="images/loading_more.gif" class="loadImg">
+                    <span>
+                          <script>writeI18nPageByKey("isLoading")</script><!-- 加载中 -->...
+                    </span>
+             </div>
+				</div>
+				<div class="no_menu" style="display:none;padding-top:-2rem">
+					<dl>
+						<dt><img src="images/nomenu.png"></dt>
+						<dd>
+							            <script>writeI18nPageByKey("youHaveNoSuchOrder")</script><!-- 您还没有相关定单 -->
+						</dd>
+					</dl>
+				</div>
+			
+			</div>
+		</section>
+	</div>
+
+	 <script src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="css/layer/layer.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+    var page=0;
+      loadAdd();
+       $(window).scroll(function () {
+            var scrollTop=$(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop+windowHeight==scrollHeight) {
+                $('.all .no_menu').hide();
+                  loadAdd();
+            };
+        })
+  	//买家退款记录
+    function loadAdd(){
+        $('.loading').show(); 
+        $('.all .no_menu').hide();
+        page+=1;
+        Datas({
+         url:"buyer/buyer_refund ",
+          datas:{"user_id":ls.getItem('userId'),"currentPage":page},
+          types:"get",
+          success:function(data){
+              if (data.status&&data.data!="") { 
+                $('.all .no_menu').hide();
+                //退款成功47   退款失败   退款中45  已退款;
+                $.each(data.data,function(k,v){
+                    var str='';
+                    var txt,str1='';
+                    if(v.status==47){//退款成功
+                        txt=getI18nPageByKey("refundOk");       /*"退款成功"*/
+                         str+= '<div class="shop_detail" >'+
+                              '<h4><i>'+getI18nPageByKey("OrderNumber")/*订单号*/+':'+v.order_id+'</i><span>'+txt+'</span></h4>'+
+                               '<div class="shop_item">'
+                                $.each(v.gcpList,function(k1,v1){
+                                  str+='<a class="orderImg" href="javascript:void(0)"  style="border-top:1px solid #ccc;" onclick="recode_detail('+v.id+')">'+
+                                      '<dl>'+
+                                           '<dt><img src="'+v1.goodsMainPhotos+'" /></dt>'+
+                                          '<dd class="shop_info">'+
+                                            '<h2>'+v1.goodsName+'</h2>'+
+                                            '<p><span>'+v1.specInfo+'</span></p>'+
+                                            '<p><i>RM'+v1.gcPrice+'</i><em>x'+v1.count+'</em></p>'+
+                                          '</dd>'+
+                                                                     
+                                      '</dl>'+
+                                    '</a>'
+                                })
+                                str+='</div>'+                  
+                               '<div class="item_prices" style="border-top:1px solid #ccc"><p class="span_left">'+getI18nPageByKey("dealAmount")/*交易金额*/+'：<b>'+v.totalPrice+'</b></p><p style="margin-right:0.5rem;margin-left:0.6rem" class="span_right">'+getI18nPageByKey("amountOfRefund")/*退款金额*/+'：RM<b>'+v.refundAmount+'</b></p></div>'+
+                            '</div>'
+     
+                    }else if(v.status==48){
+                         txt=getI18nPageByKey("sellerRefuseToRefund");   /*"卖家拒绝退款"*/    
+                         str+= '<div class="shop_detail" >'+
+                              '<h4><i>订单号:'+v.order_id+'</i><span>'+txt+'</span></h4>'+
+                               '<div class="shop_item">'
+                                $.each(v.gcpList,function(k1,v1){
+                                  str+='<a class="orderImg" href="javascript:void(0)"  style="border-top:1px solid #ccc;" onclick="recode_detail('+v.id+')">'+
+                                      '<dl>'+
+                                           '<dt><img src="'+v1.goodsMainPhotos+'" /></dt>'+
+                                          '<dd class="shop_info">'+
+                                            '<h2>'+v1.goodsName+'</h2>'+
+                                            '<p><span>'+v1.specInfo+'</span></p>'+
+                                            '<p><i>RM'+v1.gcPrice+'</i><em>x'+v1.count+'</em></p>'+
+                                          '</dd>'+                                    
+                                      '</dl>'+
+                                    '</a>'
+                                })
+                                str+='</div>'+                  
+                               '<div class="item_prices" style="border-top:1px solid #ccc"><p class="span_left">'+getI18nPageByKey("dealAmount")/*交易金额*/+'：<b>'+v.totalPrice+'</b></p><p style="margin-right:0.5rem;margin-left:0.6rem" class="span_right">'+getI18nPageByKey("amountOfRefund")/*退款金额*/+'：RM<b>'+v.refundAmount+'</b></p></div>'+
+                            '</div>'
+                    } 
+                      setTimeout(function(){
+                             $(".loading").hide();
+                             $('.wrap_box').append(str);
+                      },500);  
+
+                })
+                 
+                
+              }else{
+                       if (page==1) {
+                                setTimeout(function(){
+                                $(".loading").hide();
+                                $('.all .no_menu').show(); 
+                             },500)   
+                              // 
+                            }else if(page>1){
+                               $(".loading").hide(); 
+                               $('.all .no_menu').hide(); 
+                               // 
+                             } 
+               
+              }
+
+          },
+          error:function(){
+            
+          }
+
+        })
+  }
+	</script>
+</body>
+</html>

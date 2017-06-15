@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+         <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+         <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/setOrderVisited.css" rel="stylesheet"/>
+        <link href="css/manageAddress.css" rel="stylesheet"/>
+        <link href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" rel="stylesheet"/>
+        <link href="css/idangerous.swiper.css" rel="stylesheet"/>
+        <link href="css/transFee.css" rel="stylesheet"/>
+    </head>
+    <style>
+      .choseds{
+        float: right;
+        display: inline-block;
+        margin-right: 0.65rem;
+        width: 0.4rem;
+        height: 0.8rem;
+        background: url(images/rightArrow.png) no-repeat;
+        background-size: contain;
+      }
+
+    </style>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <div class="content">
+                <header class="header clear">
+                  <span class="back"></span><a href="#" class="mainLogo"></a>
+                  <h3 class="pageTitle"><script>writeI18nPageByKey("setOrder")</script></h3> 
+               </header>
+               <div class="scroll scroll1">
+                   <div class="pageTip">
+                      <div class="clear addTitle"><span class="title"><script>writeI18nPageByKey("receiveAddress")</script></span><span class="defaultBtn"><script>writeI18nPageByKey("default")</script></span></div>
+                      <div class="clear areaList">
+                        <span class="addressLogo"></span><span class="addPlace recPlace" id="recPlace">
+                          <!-- <strong>张天乐</strong>
+                          <strong>13512581083</strong>&nbsp;&nbsp;<strong>100053</strong>&nbsp;&nbsp;<strong>北京市朝阳区惠新西街北口千鹤家园1号楼</strong> -->
+                        </span><span class="choseds" ></span> 
+                      </div>
+                               
+                  </div>
+                  <div class="blank">
+                  
+                  </div>
+                  <div class="pageTip">
+                      <div class="clear addTitle"><span class="title"><script>writeI18nPageByKey("invoiceAddress")</script></span></div>
+                      <div class="clear areaList">
+                        <span class="addressLogo"></span><span class="addPlace " id="addPlace">
+                         <!--  <strong>张天乐</strong>
+                         <strong>13512581083</strong>&nbsp;&nbsp;<strong>100053</strong>&nbsp;&nbsp;<strong>北京市朝阳区惠新西街北口千鹤家园1号楼</strong> -->
+                        </span><span class="choseds" ></span> 
+                      </div>
+                               
+                  </div>
+                  <div class="blank">
+                  
+                  </div>
+                  <div class="orderBox">
+                    <div class="storeBox">
+                      <!-- <div class="storeList">
+                         <h4 class="storeName">
+                         <span class="storeIco"></span>
+                         <b id="storeName">飞腾旗舰店</b>
+                         </h4>
+                        <ul class="orderList">
+                            <li class="clear">
+                                 <a class="orderImg"href="#">
+                                     <img src="images/clothes1.png" />
+                                 </a>
+                                 <dl class="orderInfo">
+                                     <dt class="txtElipse">南极人2016夏季新款男士修身牛仔短裤破洞中裤直筒五分</dt>
+                                     <dd>
+                                         <h5 class="color info">颜色:701颜色</h5>
+                                         <h5 class="size info">尺码:32</h5>
+                                         <p class="price clear">
+                                             <strong class="priceNow">¥46.00</strong ><strong  class="num">×1</strong>
+                                         </p>
+                                     </dd>
+                                 </dl>
+                             </li>
+                             <li class="clear">
+                                 <a class="orderImg"href="#">
+                                     <img src="images/clothes1.png" />
+                                 </a>
+                                 <dl class="orderInfo">
+                                     <dt class="txtElipse">南极人2016夏季新款男士修身牛仔短裤破洞中裤直筒五分</dt>
+                                     <dd>
+                                         <h5 class="color info">颜色:701颜色</h5>
+                                         <h5 class="size info">尺码:32</h5>
+                                         <p class="price clear">
+                                             <strong class="priceNow">¥46.00</strong ><strong  class="num">×1</strong>
+                                         </p>
+                                     </dd>
+                                 </dl>
+                             </li>
+                        </ul>
+                                           </div>
+                                           <div class="storeList">
+                         <h4 class="storeName">
+                         <span class="storeIco"></span>
+                         <b id="storeName">飞腾旗舰店</b>
+                         </h4>
+                        <ul class="orderList">
+                            <li class="clear">
+                                 <a class="orderImg"href="#">
+                                     <img src="images/clothes1.png" />
+                                 </a>
+                                 <dl class="orderInfo">
+                                     <dt class="txtElipse">南极人2016夏季新款男士修身牛仔短裤破洞中裤直筒五分</dt>
+                                     <dd>
+                                         <h5 class="color info">颜色:701颜色</h5>
+                                         <h5 class="size info">尺码:32</h5>
+                                         <p class="price clear">
+                                             <strong class="priceNow">¥46.00</strong ><strong  class="num">×1</strong>
+                                         </p>
+                                     </dd>
+                                 </dl>
+                             </li>
+                             <li class="clear">
+                                 <a class="orderImg"href="#">
+                                     <img src="images/clothes1.png" />
+                                 </a>
+                                 <dl class="orderInfo">
+                                     <dt class="txtElipse">南极人2016夏季新款男士修身牛仔短裤破洞中裤直筒五分</dt>
+                                     <dd>
+                                         <h5 class="color info">颜色:701颜色</h5>
+                                         <h5 class="size info">尺码:32</h5>
+                                         <p class="price clear">
+                                             <strong class="priceNow">¥46.00</strong ><strong  class="num">×1</strong>
+                                         </p>
+                                     </dd>
+                                 </dl>
+                             </li>
+                        </ul>
+                      </div> -->
+                    </div>
+                     
+                      
+                  <!--    <div class="salerMes">
+                      <script>writeI18nPageByKey("sellerMessage")</script>：
+                      <input class="mesContent"type="text" name="" palceholder="">
+                  </div>
+                                      <div class="blankBk blank2"></div>
+                   -->
+                  </div>
+                  <div id="blank">
+                    
+
+                  </div>
+                <!--    <div class="express">
+                 <h4 class="clear"><span class="method">配送方式</span><span class="jisong">急送快递</span> <span class="chosed chosed2" id="chosed2"></span></h4>
+                 <p class="expressDate"><em ></em><span id="expressDate" style="margin-right:5px">2016-7-15[周五] </span><span id="expressTime">10.00-12:00</span></p>
+
+                 
+                </div> -->
+                <div class="totalMoney">
+                    <p class="clear">
+                        <span class="leftName"><script>writeI18nPageByKey("productMoney")</script></span><span class="Money productMoney"><!-- 92.00 --></span>
+                    </p>
+                    <!-- <p class="clear">
+                        <span class="leftName"><script>writeI18nPageByKey("taxonSales")</script><em></em></span><span class="Money taxMoney">¥7.98</span>
+                    </p> -->
+                    <p class="clear">
+                        <span class="leftName"><script>writeI18nPageByKey("shipPrice")</script><em></em></span><span class="Money transfeeMoney"><!-- +¥6.00 --></span>
+                    </p>
+                </div>
+                <div class="blankBk blank3"></div>
+          </div>
+          <footer class="totalFooter">
+                <h4 class="total clear"><strong class="totalPay"><!--实付款： RM105.98 --></strong><input type="button" name="" value="" class="submitOrder"/></h4>
+          </footer>
+        </div>
+        <!--选择快递和配送方式页面 -->
+       <div class="dialog" style="display:none">
+           <header class="header clear">
+              <span class="back" id="back"></span><a href="#" class="mainLogo"></a>
+              <h3 class="pageTitle"><script>writeI18nPageByKey("chooseExpress")</script></h3>          
+          </header>
+          <div class="scroll expressBox">
+            <div class="blankBk blank2">     
+            </div>
+            <div class="method padding2">
+                <h4 class="fontS1 lineH color3"><script>writeI18nPageByKey("ExpressMethod")</script></h4>
+                <p class="methodChose fontS2" id="methodChose ">
+                    <span class="txtC color3  common  active"><script>writeI18nPageByKey("commonExpress")</script></span><span class="txtC color3 fast "><script>writeI18nPageByKey("quickExpress")</script></span>
+                </p>
+            </div>
+            <div class="date  clear dateFast">  
+                    <h4 class="fontS1 lineH1 color3"><script>writeI18nPageByKey("expressDate")</script></h4>
+                    <p  id="expressDate"class=" datebox  color3 clear">
+                        <input type="text" name="" value="" id="demo">
+                        <span class="calender"></span>
+                    </p>
+                    <h4 class="fontS1 lineH1 color3"><script>writeI18nPageByKey("expressTime")</script></h4>
+                    <div class=" datebox  color3 clear">
+                        <h5 class="defTime"><strong class="time"><!-- 10:00-12:00 --></strong><em class="blackTri"></em></h5>
+                        <ul class="timeWhile">
+                         <!--    <li>10:00-12:00<em class="correct"></em></li>
+                            <li>12:00-15:00<em class="correct"></em></li>
+                            <li>15:00-18:00<em class="correct"></em></li>
+                            <li>18:00-20:00<em class="correct"></em></li>
+                            <li>20:00-22:00<em class="correct"></em></li> -->
+                        </ul>
+                    </div>   
+            </div>
+            <input class="okBtn"type="button" name="" value="" id="confirm" class="confirm"/>   
+          </div>
+       </div>
+       <script src="js/jquery-2.2.1.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+        <script src="js/zepto.min.js"></script>
+        <script src="js/common.js"></script>
+        <script src="js/idangerous.swiper.min.js"></script>
+        <script src="js/chooseExpress.js"></script>
+        
+         <script>
+          $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("setOrder"));
+          })
+        
+         $(".okBtn").attr("value",getI18nPageByKey("okBtn"));
+         $(".submitOrder").attr("value",getI18nPageByKey("submitOrder"));
+         $(".mesContent").attr("placeholder",getI18nPageByKey("messageContent"));
+         function removeDuplicatedItem(arr) {
+          var ret = [];
+
+          arr.forEach(function(e, i, arr) {
+              if (arr.indexOf(e) === i) {
+                  ret.push(e);
+              }
+          });
+
+          return ret;
+        }
+
+
+        var user= ls.getItem("userId");//获取用户id;
+        var cartSessionId=ls.getItem("cartSessionId");//获取游客ID;
+        var goods_id=ls.getItem("goodsId");
+        var storeId=ls.getItem("storeId");
+        var count=ls.getItem("count");
+        //地址id对象：
+        var addressId=getParam();
+       
+        var flag=true;//定义变量作为判断是否显示快递的标识;
+        var arr;//地址json字符串：
+       
+        var goodsCartsIdArr=[];//存goodsCartId的数组：
+        var goodsCartsIdString='';//把数组转成字符串：
+        var goodsIdArr=[];
+        var storeIdArr=[],ShippingTimeArr=[],storeCarArr=[],storeShipPrice=[];
+        var goodsIdString,storeIdString,addId,addrInvoId,shipPrice;
+        var mesArr=[];//定义留言数组;
+      
+        if(ls.getItem("shopCar")=='false'){
+             //立即购买；
+            buyNow();
+        }else{
+           //从购物车点结算过来的：
+            
+            buyNow2();
+        }
+        function buyNow(){
+            
+            Datas({
+                url:"buyer/buy_now",
+                types:"get",
+                datas:{
+                  "goods_id":goods_id,
+                   "user_id":user?user:"",
+                   "gsp":ls.getItem("gsf"),
+                   "cart_session_id":user?"":cartSessionId,
+                   "addr_id":addressId.addressId,
+                   "goodscart_id":"",
+                   "invoiceAddr":"",
+                   "store_id":storeId,
+                   "count":count
+                },
+                success:function(data){
+                  if(data.status){
+                    if(addressId.default=="true"){
+                      $(".defaultBtn").show();
+                    }
+                      var str1="<strong class='trueName' style='display:block;'>"+data.data.addName+"</strong><strong class='tel' style='display:block;'>"+data.data.addMobile+"</strong><strong class='info'>"+data.data.addInfo+"</strong>";
+                      
+                   
+
+                      for(var i=0;i<data.data.dateInfo.length;i++){
+                          goodsIdArr.push(data.data.dateInfo[i].goodsCarts[0].goods.id);
+                          storeIdArr.push(data.data.dateInfo[i].storeId);
+                          goodsCartsIdArr.push(data.data.dateInfo[i].goodsCarts[0].id)
+                        
+                      }
+                    
+                     
+                      goodsCartsIdString=goodsCartsIdArr.join(",");
+                      goodsIdString=goodsIdArr.join(",");
+                      storeIdString=storeIdArr.join(",");
+                      ls.setItem('goodsCartsId',goodsCartsIdString);
+                      ls.setItem("storesId",storeIdString);
+                      ls.setItem("goodsId",goodsIdString);
+                    
+                       $(".addPlace").html(str1);
+                      
+                      render(data.data);
+                   }else{
+                    layer.msg(data.message);
+                   }
+                     
+                      
+                    
+                      
+
+                },
+                error:function(data){
+                   
+                }
+             })
+        }
+       
+        function buyNow2(){
+             
+               Datas({
+                    url:"buyer/buy_now",
+                    types:"get",
+                    datas:{
+                      "goods_id":ls.getItem("goodsId"),
+                       "user_id":user?user:"",
+                       "gsp":ls.getItem("gsf"),
+                       "cart_session_id":user?"":cartSessionId,
+                       "addr_id":addressId.addressId,
+                       "goodscart_id":ls.getItem("goodsCartsId"),
+                       "invoiceAddr":"",
+                       "store_id":ls.getItem("storesId"),
+                       "count":""
+                    },
+                    success:function(data){
+                      
+                    
+                          if(data.status){
+                            if(addressId.default=="true"){
+                               $(".defaultBtn").show();
+                            }
+                            var str1="<strong class='trueName' style='display:block;'>"+data.data.addName+"</strong><strong class='tel'style='display:block;'>"+data.data.addMobile+"</strong><strong class='info'>"+data.data.addInfo+"</strong>";
+                         
+                            $(".addPlace").html(str1);
+                            //把选择的商品信息带到订单页面；
+                            render(data.data);
+                          }else{
+                            layer.msg(data.message);
+                          }
+                          
+                         
+                    },
+                    error:function(){
+                     
+                    }
+
+                 })
+        }
+    
+        
+        
+       
+        
+       
+
+        $(".back").click(function(){
+            
+           if ($('.content').css("display")=="block") {
+               history.back(-1);
+           }else{
+              $('.content').show();
+              $('.dialog').hide();
+           }
+        })
+        //点击地址跳转：
+        $('.areaList').on("click",function(){
+          
+            if(user){
+              //用户存在的情况;
+              window.location.href="manageAddress.html";
+            }else{
+              //游客的情况;
+               window.location.href="editAddress.html?name="+$(".recPlace .trueName").text()+"&mobile="+$(".recPlace .tel").text()+"&zip="+$(".recPlace .post").text()+"&areaInfo="+$(".recPlace .info").text()+"";
+             }
+            
+        })
+          
+          //税费跳转页面并展示
+         $(".totalMoney em").click(function(){
+               var fastArr=[];
+             $(".storeBox .storeList").each(function(index,item){
+              
+                  if($(this).find('#expressDate').text()!==""){
+                    fastArr.push(index);
+                  }
+            })
+              window.location.href="transFee.html?addressId="+addressId.addressId+"&fastArr="+fastArr.join(",")+"";
+          })
+        
+
+        var storeCarIds=[];//存储物流方式的数组：
+        var shipTimeArr=[];//存储物流时间的数组：
+        var shipPriceArr=[];//存储物流运费的数字：
+        var storesArr=[];
+        var storeFast=[];
+          //渲染商品数据以及快递方式选择：
+        function render(obj){
+            
+              var transfee;
+              //地址信息;
+              if(obj.addName==""){
+                $(".addPlace").html(getI18nPageByKey("noReceiveAddressTip"));
+              }
+                var orderStr="";
+                var expressStr="";
+                var storeListStr="";
+                
+              
+
+                //总实付款; 总运费；
+                 var totalPay=0,totalShip=0;
+                for(var i=0;i<obj.dateInfo.length;i++){
+                 
+                    orderStr+='<div class="storeList"><h4 class="storeName clear" id='+obj.dateInfo[i].id+' storeId='+obj.dateInfo[i].storeId+'  totalPrice='+obj.dateInfo[i].totalPrice+' zoomPrice='+obj.dateInfo[i].zoomtotalPrice+'><span class="storeIco"></span><b class="storeNames">'+obj.dateInfo[i].storeName+'</b></h4><ul class="orderList">';
+                    //时间段的选择;
+                    if(obj.dateInfo[i].etList.length!=0){
+                         var timeWhileStr="";
+                      for(var k=0;k<obj.dateInfo[i].etList.length;k++){
+                          timeWhileStr+='<li>'+obj.dateInfo[i].etList[k].elStartTime+'-'+obj.dateInfo[i].etList[k].elEndTime+'<em class="correct"></em></li>'
+                      }
+                      
+                        $(".timeWhile").html(timeWhileStr);
+                    }
+                    
+                    
+
+                    
+                      for(var j=0;j<obj.dateInfo[i].goodsCarts.length;j++){
+                        orderStr+='<li class="clear" goodsCartId='+obj.dateInfo[i].goodsCarts[j].id+' goodsId='+obj.dateInfo[i].goodsCarts[j].goods.id+'>'+
+                                             '<a class="orderImg"href="javascript:void(0)">'+
+                                                 '<img src='+obj.dateInfo[i].goodsCarts[j].goodsUrl+' >'+
+                                             '</a>'+
+                                             '<dl class="orderInfo">'+
+                                                 '<dt class="txtElipse">'+obj.dateInfo[i].goodsCarts[j].goods.goods_name+'</dt>'+
+                                                 '<dd>'+
+                                                     '<h5 class="color info">'+obj.dateInfo[i].goodsCarts[j].spec_info+'</h5>'+
+                                                      '<p class="price clear">'+
+                                                         '<strong class="priceNow">RM'+obj.dateInfo[i].goodsCarts[j].price+'</strong ><strong  class="num">×'+obj.dateInfo[i].goodsCarts[j].count+'</strong>'+
+                                                     '</p>'+
+                                                 '</dd>'+
+                                             '</dl>'+
+                                         '</li>';
+                                  
+                          if(obj.dateInfo[i].goodsCarts[j].goods.goods_choice_type=="1"){
+                              flag =false;
+                              //快递不显示;
+                              
+                              expressStr="";
+                              
+                              
+
+                          }else{
+                              flag=true;
+                          } 
+                      }
+                    
+                      if(!flag){
+                              
+                              expressStr='<input class="common"type="hidden" name="" value='+obj.dateInfo[i].storeShipPrice+'>';
+                               totalPay+=parseFloat(obj.dateInfo[i].totalPrice);
+                              totalShip+=parseFloat(obj.dateInfo[i].storeShipPrice);
+                          
+                              storeCarIds.push(obj.dateInfo[i].id+"_");
+                              
+                      }else{
+
+                          if(!obj.dateInfo[i].isShow){
+                             
+                              expressStr='<input class="common"type="hidden" name="" value='+obj.dateInfo[i].storeShipPrice+'><div class="express">'+
+                                          '<h4 class="clear"><span class="method">'+getI18nPageByKey("ExpressMethod")+'</span><span class="jisong">'+getI18nPageByKey("commonExpress")+'</span></h4>'+
+                                          '</div>';
+                              totalPay+=parseFloat(obj.dateInfo[i].totalPrice);
+                              totalShip+=parseFloat(obj.dateInfo[i].storeShipPrice);
+                             
+                          
+                              storeCarIds.push(obj.dateInfo[i].id+"_"+"1");
+                              
+                          }else{
+                             
+                              expressStr='<input class="common"type="hidden" name="" value='+obj.dateInfo[i].storeShipPrice+'><input id="fastExpress"type="hidden" name="" value='+obj.dateInfo[i].zoomPrice+'><div class="express">'+ 
+                              '<h4 class="clear"><span class="method">'+getI18nPageByKey("ExpressMethod")+'</span><span class="jisong" id="fast">'+getI18nPageByKey("commonExpress")+'</span> <span class="chosed chosed2" id="chosed2"></span></h4>'+
+                              '<p class="expressDate"><em></em><span id="expressDate" style="margin-right:5px"></span><span id="expressTime"></span></p>'+
+                              '</div>';
+                              totalPay+=parseFloat(obj.dateInfo[i].totalPrice);
+                              totalShip+=parseFloat(obj.dateInfo[i].storeShipPrice);
+                              
+                              
+                              
+                          }
+                      }    
+                     orderStr+='</ul>'+expressStr+'<div class="salerMes">'+getI18nPageByKey("sellerMessage")+'： <input class="mesContent"type="text" name="" palceholder=""></div><div class="blankBk blank2"></div></div>';
+                    
+                    
+                }
+
+                var timeStr='<em></em><span id="expressDate" style="margin-right:5px"></span><span id="expressTime"></span>';
+                 $(".storeBox").html(orderStr);
+                
+
+                $(".txtElipse").each(function(){
+                     
+                    var maxLength=23;
+                    var length=$(this).text().length;
+                    if(length>=maxLength){ 
+                      var str=$(this).text().substring(0,maxLength)+"...";
+                      $(this).text(str);
+                    }
+                 })
+                  //点击选择按钮快递方式显示，可以选择时间;
+                  $(".chosed").click(function(ev){
+                        $('.content').hide();
+                        $('.dialog').show();
+                        ev.stopPropagation();
+                        chooseTime($(this).parents(".storeList"));
+                    
+                  })
+                
+                  //点击快递方式，极速显示时间：
+                  $(".txtC").click(function(){
+                   
+                      $(".txtC").removeClass("active");
+                      $(this).addClass("active");
+                     
+                      if($(this)[0].innerText==getI18nPageByKey("commonExpress")){
+                          $(".date").hide();
+
+                      }else{
+                          $(".date").show();
+                      }
+    
+                  })
+                //点击确定把选择的时间和快递方式带过来：
+                  function chooseTime(obj){
+                    $('#confirm').off("click");
+                      $('#confirm').on("click",function(ev){ 
+                        ev.stopPropagation();   
+                        var date=$('#expressDate input').val();
+                        var time=$('.time').text();
+                        var express=$(".active")[0].innerText;
+                     
+                             if(express==getI18nPageByKey("commonExpress")){
+                              obj.find(".expressDate").html("");
+                              obj.find(".jisong").text(express);
+                              totalPay=totalPay+parseFloat(obj.find(".storeName").attr("totalPrice"))-parseFloat(obj.find(".storeName").attr("zoomPrice"));
+                              totalShip=totalShip+parseFloat(obj.find("#fastExpress").prev().val())-parseFloat(obj.find("#fastExpress").val());
+
+                              
+                              
+                              
+                             }else{
+                                  if(date==""){
+                                    layer.msg("You have not selected delivery time");
+                                   return;
+                                  }else if(time==""){
+                                    layer.msg("You have not selected the delivery period!");
+                                    return;
+                                  }else{
+                                   
+                                      obj.find(".expressDate").html(timeStr);
+                                      obj.find("#expressDate").text(date);
+                                      obj.find("#expressTime").text(time);
+                                      obj.find("#fast").text(express);
+                                       
+                                      //zoom算报错：
+                                      if($("#fastExpress").val()==""){
+                                        $("#fastExpress").val("0");
+                                      }
+                                      if(obj.find(".storeName").attr("zoomPrice").length==0){
+                                        obj.find(".storeName").attr("zoomPrice","0");
+                                      }
+                                     totalPay=totalPay+parseFloat(obj.find(".storeName").attr("zoomPrice"))-parseFloat(obj.find(".storeName").attr("totalPrice"));
+                                       totalShip=totalShip+parseFloat(obj.find("#fastExpress").val())-obj.find("#fastExpress").prev().val();
+                                      }
+                                      
+                                     
+                                  }
+                           
+                             $(".productMoney").html("RM"+(totalPay-totalShip).toFixed(2));
+                              $(".transfeeMoney").html("RM"+(totalShip).toFixed(2));
+                             $(".totalPay").html(getI18nPageByKey("totalPay")+ "：RM"+totalPay.toFixed(2));
+                           $(".content").show();
+                            $(".dialog").hide();
+                      })
+                  }
+                  
+                 
+                 // $("#transfeeWrap").html(transfeeStr);
+                  //商品总金额，总运费，总税费;
+                  $(".productMoney").html("RM"+(totalPay-totalShip).toFixed(2));
+                  $(".transfeeMoney").html("RM"+(totalShip).toFixed(2));
+                 $(".totalPay").html(getI18nPageByKey("totalPay")+"：RM"+totalPay.toFixed(2));
+              }
+         
+         //点击提交订单：
+         $(".submitOrder").click(function(){
+            mesArr=[];
+            shipTimeArr=[];
+            shipPriceArr=[];
+            
+
+         
+          
+            $(".storeBox .storeList").each(function(index,item){
+                     
+                    mesArr.push($(this).find(".storeName").attr("id")+"_"+$(this).find(".mesContent").val());
+                    storesArr.push($(this).find(".storeName").attr("storeid"));
+                 
+                    
+                
+                    if($(this).find(".jisong")[0]){
+                   
+                      if($(this).find(".jisong")[0].innerText==getI18nPageByKey("quickExpress")){
+                            storeCarIds.push($(this).find(".storeName").attr("id")+"_"+"2");
+                            shipTimeArr.push($(this).find(".storeName").attr("id")+"_"+$(this).find("#expressDate").text()+"/"+$(this).find("#expressTime").text()); 
+                            shipPriceArr.push($(this).find(".storeName").attr("id")+"/"+$(this).find("#fastExpress").val());
+                        }else{
+                             storeCarIds.push($(this).find(".storeName").attr("id")+"_"+"1");
+                            shipTimeArr.push($(this).find(".storeName").attr("id")+"_"); 
+                          shipPriceArr.push($(this).find(".storeName").attr("id")+"/"+$(this).find(".common").val());
+
+
+                       }
+                     }else{
+                       
+                         storeCarIds.push($(this).find(".storeName").attr("id")+"_"+"1");
+                            shipTimeArr.push($(this).find(".storeName").attr("id")+"_"); 
+                          shipPriceArr.push($(this).find(".storeName").attr("id")+"/"+$(this).find(".common").val());
+
+
+
+
+
+                     }
+                       
+                   
+                  
+                     
+                
+                
+
+
+
+            })
+              
+
+           submitOrder();
+              
+
+
+
+
+         })
+         function submitOrder(){
+               Datas({
+                 "url":"/buyer/goods_cart3",
+                 "types":"get",
+                 datas:{
+                     "store_id":storesArr.join(","),
+                    "addr_id":addressId.addressId,
+                    "goods_id":ls.getItem("goodsId"),
+                    "goodsCartId":ls.getItem("goodsCartsId"), 
+                    "user_id":ls.getItem("userId")?ls.getItem("userId"):"",
+                    "cart_session_id":ls.getItem("userId")?"":ls.getItem("cartSessionId"),
+                    "invoiceAddr":addressId.addressId,
+                    "ShippingTime":shipTimeArr.join(","),
+                    "Shipping":storeCarIds.join(","),
+                    "message":mesArr.join(","),
+                    "shipPrice":shipPriceArr.join(","),
+                    "from":"H5"
+                 },
+                 success:function(data){
+                  
+                   
+                   if(data.status){
+                        
+                        if(ls.getItem("userId")){
+                          //用户：
+                         
+                             window.location.href="guestPayBill.html?lineType="+data.data.lineType+"&totalPrice="+data.data.totalPrice+"&orderId="+data.data.orderId+"";
+
+                        }else{
+                          //游客：
+                         
+                              window.location.href="guestPay.html?lineType="+data.data.lineType+"&totalPrice="+data.data.totalPrice+"&orderId="+data.data.orderId+"";
+                        }
+                        
+
+
+                    }else{
+                      layer.msg(data.message);
+                    }
+                 },
+                 error:function(){
+                  
+
+                 }
+                
+
+
+
+               }) 
+
+
+
+         }
+           
+
+
+        
+        </script>
+    </body>
+</html>

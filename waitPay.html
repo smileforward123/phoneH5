@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/allmenu.css">
+  <link rel="stylesheet" type="text/css" href="css/loading.css">
+	<link rel="stylesheet" type="text/css" href="css/orderSearchComplate.css">
+	<script type="text/javascript">
+		document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header style="height:2.25rem">
+			<div class="titTop">
+				 <a href="aboutMe.html"></a>
+		        <span></span>
+				<h2>
+              <em>
+                   <script>writeI18nPageByKey("waitForPaying")</script><!-- 待付款 -->
+              </em>
+        </h2>
+			</div>
+		</header>
+		<section style="margin-top:2.25rem">
+      <div class="all">
+          <div class="wrap">
+              <div class="wrap_box" ></div>
+              <div class="loading">
+                      <img src="images/loading_more.gif" class="loadImg">
+                      <span>
+                           <script>writeI18nPageByKey("isLoading")</script><!-- 加载中 -->...
+                      </span>
+              </div>
+          </div>
+          <div class="no_menu" style="display:none">
+              <dl>
+                <dt><img src="images/nomenu.png"></dt>
+                <dd>
+                   <script>writeI18nPageByKey("youHaveNoSuchOrder")</script><!-- 您还没有相关定单 -->
+                </dd>
+              </dl>
+          </div>
+      </div>
+		</section>
+	</div>
+	 <script src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="css/layer/layer.js"></script>
+  <script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+      var page=0;
+      loadAdd();
+       $(window).scroll(function () {
+            var scrollTop=$(this).scrollTop();
+            var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop+windowHeight==scrollHeight) {
+               $('.all .no_menu').hide();   
+                  loadAdd();
+            };
+        })
+	    //订单商品 buyer/order 待付款orderStatus=10
+      function loadAdd(){
+        $('.loading').show(); 
+        $('.all .no_menu').hide(); 
+        page+=1;
+        Datas({
+          url:"buyer/order",
+          datas:{"order_status":10,"user_id":ls.getItem("userId"),"currentPage":page},
+          success:function(data){
+            var str='';
+            if (data.status&&data.data!="") {
+              $('.all .no_menu').hide();
+              $.each(data.data,function(k,v){
+                str+='<div class="shop_item shop_goods">'+
+                    '<div class="shop_detail">'+
+                              '<h4 class="store_name">'+
+                                       '<span class="store_icon"></span>'+
+                                       '<b class="shop_name">'+v.store_name+'</b>'+
+                                       '<a href="javascript:void(0)">'+getI18nPageByKey("waitForPaying")/*待付款*/+'</a>'+
+          
+                                '</h4>'+
+
+                               '<div class="shop_item">'
+                                $.each(v.gcpList,function(k1,v1){
+                                  txt=getI18nPageByKey("waitForPaying");/*"待付款"*/
+                                  str+='<a class="orderImg" onclick="menuDetai('+v.id+','+v.store_id+',11)">'+
+                                      '<dl>'+
+                                        '<dt><img src="'+v1.goodsMainPhotos+'" /></dt>'+
+                                        '<dd class="shop_info">'+
+                                          '<h2>'+v1.goodsName+'</h2>'+
+                                          '<p><span>'+v1.specInfo+'</span></p>'+
+                                          '<p><i>RM'+v1.gcPrice+'</i><em>x'+v1.count+'</em></p>'+
+                                        '</dd>'+     
+                                      '</dl>'+
+                                    '</a>'
+                                })
+                                str+='</div>'+                      
+                                '<div class="item_price"><p class="span_left">'+getI18nPageByKey("theTotal")/*共*/+''+v.totalcount+''+getI18nPageByKey("itemsGoods")/*件商品*/+'</p><p style="margin-right:0.5rem" class="span_right">'+getI18nPageByKey("totalPay")/*合计*/+'：RM<b>'+v.totalPrice+'</b>('+getI18nPageByKey("includePostage")/*含运费*/+')</p></div>'+
+                                '<div class="footers_info">'+
+                          '<nav class="nav_info">'+
+                              '<div class="right rig1" style="float:right">'+
+                                '<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+                                '<a href="javascript:void(0)" class="cancel_menu" onclick="cancelOrder('+v.id+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消订单*/+'</a>'+
+                                '<a href="javascript:void(0)"  onclick="pay('+v.lineType+','+v.totalPrice+','+v.id+')">'+getI18nPageByKey("paying")/*付款*/+'</a>'+
+                              '</div>'+
+                              
+                          '</nav>'+
+                        '</div>'+
+                            '</div>'+
+                  '</div>'
+                  // $('.all .wrap').html(str);
+                  
+              })
+                setTimeout(function(){
+                         $(".loading").hide();
+                         $('.wrap_box').append(str);
+               },500);
+
+            }else{
+              // $('.all .no_menu').show();
+                     if (page==1) {
+                        setTimeout(function(){
+                        $(".loading").hide();
+                        $('.all .no_menu').show(); 
+                     },500)   
+                                     
+                    }else if(page>1){
+                       $(".loading").hide(); 
+                       $('.all .no_menu').hide(); 
+                        
+                     } 
+            }
+
+          },
+          error:function(){
+           
+          }
+
+        })
+       }
+
+
+       $(document).ready(function(){
+
+           $('title').text(getI18nPageByKey("waitForPaying"));
+       })
+	</script>
+</body>
+</html>

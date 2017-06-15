@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/public.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+    <title id="title"></title>
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    <link rel="stylesheet" href="css/publicClear.css">
+    <link rel="stylesheet" href="css/ClassficationOfCommodity-search.css">
+    <link rel="stylesheet" type="text/css" href="css/loading.css">
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+</head>
+<body style="background:none;">
+   <header class='header clear'>
+        <h3 > <span class="back" id="back"></span><a href="javascript:void(0)" class="mainLogo"></a><b style="font-size:normal;font-weight:normal;" id="txtTitle"></b></h3>
+
+   </header>
+   <div class="wrapper">
+       <div class="sort-filter">
+           <a href="javascript:void(0)" class="sort" id="href_sort"><img src="images/up-down.png"><span>
+           <script>writeI18nPageByKey("queue")</script><!-- 排序 --></span></a>
+           <a href="javascript:void(0)" id="sortGood"><img src="images/sortIcon.png"  class="filters"><span>
+           <script>writeI18nPageByKey("searchFiter")</script><!-- 筛选 --></span></a>
+           <a href="javascript:void(0)" id="Item" class="icon">
+            <!--    <img src="images/three_line.png"/> -->
+           </a>
+           <div class="clear"></div>
+       </div>
+	   <div class="main-containner">
+	        <div class="left-containner"></div>		
+			<div class="scroll" style="display:none"></div>
+			<div class="loading"><img src="images/loading_more.gif" class="loadImg"><span>
+			<script>writeI18nPageByKey("isLoading")</script><!-- 加载中 -->...</span></div>
+            <div class="noMore"><span>
+            <script>writeI18nPageByKey("noMoreData")</script><!-- 没有更多数据了 --></span></div>  
+	   </div>
+
+   </div>
+
+</body>
+  		<script src="js/jquery-2.2.1.js"></script>
+  		  <script type="text/javascript" src="css/layer/layer.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+		<script>
+			$(document).ready(function(){
+            	$("#title").text(getI18nPageByKey("goodsSortTitle"));
+      		})
+	    	var params = getParam(),
+                goods_id=params.goods_id,
+               // className=params.className,
+               gpids=params.gpids,
+               type=params.type,
+               orderBy=params.orderBy;
+               className=ls.getItem("className");
+              // $('#txtTitle').text(className);
+              if (ls.getItem("className")) {
+              	 $('#txtTitle').text(ls.getItem("className"));
+              };
+			//后退
+			$('.back').on("click",function(){
+				// if (ls.getItem("list")) {
+				// 	location.href="picList.html?goods_id="+goods_id;
+				// }else{
+				// 	location.href="index.html";		
+				// }	
+				if (type) {
+					 window.location.href="picList.html?goods_id="+goods_id;
+				}else{
+					 window.location.href="index.html";	
+				}					
+			})
+			var orderBy; 
+			var num=0;
+			if (gpids) {
+				Add();
+			}else{
+				loadAdd();
+			}
+			$(window).scroll(function(){
+				var scrollTop=$(this).scrollTop();
+				var scrollHeight = $(document).height();
+      			var windowHeight = $(this).height();
+      			if (scrollTop+windowHeight==scrollHeight) {
+      				
+      				
+      			};
+			})		
+			function loadAdd(){	
+				$('.loading').show();
+				num+=1;	
+				Datas({
+						url:"goods/listGoodsByParams",
+						types:"get",
+						datas:{"begin":num,
+							  	"gc_id":goods_id,
+								"max":10,
+								"orderBy":orderBy?orderBy:"3",
+								"sginType":1,
+								"userId":ls.getItem("userId")?ls.getItem("userId"):""
+
+						},
+						success:function(data){
+							if (data.status&&data.data!="") {
+									shopDetail(data);
+							}else{
+								if (num==1) {
+										$('.loading').hide();
+										$('.noMore').show();	
+								}else if (num>1){
+										$('.noMore').show();
+										$('.loading').hide();
+								}
+								
+							}
+						},	
+						error:function(){
+							
+						}
+				    })
+						
+			}
+			var userId,followType,typeId;	
+			//请求成功之后回调的函数;  
+			function shopDetail(data){
+				var val=data.data;
+					$.each(val,function(k,v){
+						var str='',
+					    str1="";
+						var str2="";
+						if (v.description_evaluate==0) {
+							for (var i = 0;i<5;i++) {
+								str2+= '<img src="images/gray-star.png"/>'
+							};
+						}else if (v.description_evaluate==1) {
+							str2+= '<img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>'
+						}else if(v.description_evaluate==2){
+							str2+='<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>'
+						}else if(v.description_evaluate==3){
+							str2+= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>'
+						}else if(v.description_evaluate==4){
+							str2+= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/>'
+						}else if(v.description_evaluate==5){
+							str2+= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/>'
+						}
+							if (v.store_price==v.goods_price) {
+						
+							if ($('#Item').hasClass('icon')) {
+								str+='<div class="search_good_detail" style="width:48%:margin-left:0.3rem;" >'+
+							     ' <img class="main-photos" style="width:5.5rem;height:5.5rem;margin:0.7rem 0.7rem;background-size:contain" src="'+v.goods_imageUrl+'" onclick="goodsType('+v.id+')"  data-id="'+v.id+'"/>'+
+								  '<ul class="price-discount">'+
+								      '<li><a href="javascript:void(0)" onclick="goodsType('+v.id+')">'+v.goods_name+'</a></li>'+
+									  '<li>RM'+v.store_price+'</li>'+
+								
+									  '<li class="lis_img"> '+str2+   
+			 						 ' </li>'+	  
+								  '</ul>' +
+								  '<a href="javascript:void(0)" onclick="changeFavorite(this)" class="fav1 favor"></a>'+
+			                      '<div class="clear"></div>'+
+							 '</div>';
+						    }else{
+								str1+='<div class="search_good_detail" style="width:96%;height:7rem;margin-left:0.4rem" onclick="goodsType('+v.id+')">'+
+								     ' <img class="main-photos" style="width:5.5rem;height:5.5rem;margin:0.7rem 0.7rem;float:left;background-size:contain" onclick="goodsType('+v.id+')" src="'+v.goods_imageUrl+'"  data-id="'+v.id+'"/>'+
+									  '<ul class="price-discount" style="float:left">'+
+									      '<li><a href="javascript:void(0)" onclick="goodsType('+v.id+')">'+v.goods_name+'</a></li>'+
+										  '<li>RM'+v.store_price+'</li>'+
+										  '<li> '+str2+
+				 						 ' </li>'+	  
+									  '</ul>' +
+									  '<a href="javascript:void(0)" onclick="changeFavorite(this)" class="fav1 favor"></a>'+
+				                      '<div class="clear"></div>'+
+								 '</div>';					 
+								
+						    }
+					    }else{
+					    	if ($('#Item').hasClass('icon')) {
+								str+='<div class="search_good_detail" style="width:48%:margin-left:0.3rem;" >'+
+							     ' <img class="main-photos" style="width:5.5rem;height:5.5rem;margin:0.7rem 0.7rem;background-size:contain" src="'+v.goods_imageUrl+'" onclick="goodsType('+v.id+')"  data-id="'+v.id+'"/>'+
+								  '<ul class="price-discount">'+
+								      '<li><a href="javascript:void(0)" onclick="goodsType('+v.id+')">'+v.goods_name+'</a></li>'+
+									  '<li>RM'+v.store_price+'</li>'+
+									 '<li class="lis"><s style="margin-right:0.2rem">RM'+v.goods_price+'</s><b>'+(-((v.store_price/v.goods_price)*100).toFixed())+'%</b></li>'+
+									  '<li class="lis_img"> '+str2+   
+			 						 ' </li>'+	  
+								  '</ul>' +
+								  '<a href="javascript:void(0)" onclick="changeFavorite(this)" class="fav1 favor"></a>'+
+			                      '<div class="clear"></div>'+
+							 '</div>';
+						    }else{
+								str1+='<div class="search_good_detail" style="width:96%;height:7rem;margin-left:0.4rem" onclick="goodsType('+v.id+')">'+
+								     ' <img class="main-photos" style="width:5.5rem;height:5.5rem;margin:0.7rem 0.7rem;float:left;background-size:contain" onclick="goodsType('+v.id+')" src="'+v.goods_imageUrl+'"  data-id="'+v.id+'"/>'+
+									  '<ul class="price-discount" style="float:left">'+
+									      '<li><a href="javascript:void(0)" onclick="goodsType('+v.id+')">'+v.goods_name+'</a></li>'+
+										  '<li>RM'+v.store_price+'</li>'+
+										 '<li><style="margin-right:0.2rem">Rm'+v.goods_price+'</s><b>'+(-((v.store_price/v.goods_price)*100).toFixed())+'%</b></li>'+
+										  '<li> '+str2+
+				 						 ' </li>'+	  
+									  '</ul>' +
+									  '<a href="javascript:void(0)" onclick="changeFavorite(this)" class="fav1 favor"></a>'+
+				                      '<div class="clear"></div>'+
+								 '</div>';					 
+								
+						    }
+					    }
+					
+
+
+					    	setTimeout(function(){
+					    		$('.loading').hide();
+								$('.left-containner').append(str);
+								$('.left-containner').append(str1);
+					    	},500)
+					      
+								 //判断是否被关注过
+								if (v.favorite==1) {
+									 $('.search_good_detail').eq(k).find('.favor').removeClass('.fav1').addClass('cur');
+									
+					             };
+					    
+						
+					})
+
+			}
+
+			//关注和取消关注
+			function changeFavorite(obj){
+				typeId=$(obj).parent().find('img').data('id');
+				if (!ls.getItem("userId")){
+					layer.msg(getI18nPageByKey("focusWarn"));/*'您不是用户！不能关注'*/
+					return;
+				}
+				if (!$(obj).hasClass("cur")) {
+					$(obj).addClass("cur");
+					
+					Fouce();			
+				}else{
+					$(obj).removeClass("cur");
+					delFouce();
+				}
+				
+			}
+			function Fouce(){
+				 Datas({
+	                  url:"buyer/svaeFavoriteInfo",
+	                  datas:{"user_id":ls.getItem("userId"),"follow_type":0,'type_id':typeId},
+	                  success:function(data){
+	                       if(data.status == 'success'){
+	                          layer.msg(data.message);        
+	                        }else{
+	                          layer.msg(data.message);
+	                        }
+	                  },
+	                  error:function(){
+	                    layer.msg(getI18nPageByKey("failToRequest"));
+	                  }
+	            })
+			}
+			function delFouce(){
+				 Datas({
+	                    url:"buyer/cancelFavoriteInfo",
+	                    datas:{
+	                    	"type_id":typeId,
+	                    	"user_id":ls.getItem("userId"),
+	                    	"follow_type":0
+	                    },
+	                    success:function(data){
+	                         if(data.status == 'success'){
+	                            layer.msg(data.message);			                            
+	                          }else{
+	                            layer.msg(data.message);
+	                          }
+	                    },
+	                    error:function(data){
+	                      layer.msg(getI18nPageByKey("failToRequest"));
+	                    }
+	                 })
+			}
+			//点击商品进入商品详情
+			function goodsType(goods_id){
+				 window.location.href = "product.html?goods_id="+goods_id;
+			} 
+			//点击小图标切换内容显示的样式
+			$("#Item").on("click",function(){
+				if ($(this).hasClass("icon")) {
+					$(this).removeClass("icon").addClass("no");					
+					$(this).parents(".wrapper").find('.left-containner>div').css({"width":"96%","height":"7rem","margin-left":"0.4rem"});
+					$(this).parents(".wrapper").find('.left-containner>div').find('.main-photos').css("float","left");
+					$(this).parents(".wrapper").find('.left-containner>div').find('.price-discount').css("float","left");
+				}else{
+					$(this).removeClass("no").addClass('icon');
+					$(this).parents(".wrapper").find('.left-containner>div').css({"width":"48%","height": "12.5rem","margin-bottom": "0.4rem","margin-left": "0.2rem"});
+					$(this).parents(".wrapper").find('.left-containner>div').find('.main-photos').css({"width": "5.5rem","height": "5.5rem"," margin-left": "0.15rem"});
+					$(this).parents(".wrapper").find('.left-containner>div').find('.price-discount').css("float","none");
+					
+				}
+				
+			})
+			//
+			$('#href_sort').on("click",function(){
+				 window.location.href="Sort.html?goods_id="+goods_id;
+			})
+			$('#sortGood').on("click",function(){
+				 window.location.href="shopTriage.html?goods_id="+goods_id;
+			})
+			function Add(){
+					$('.loading').show();		
+					num+=1;
+					Datas({
+						url:"goods/listGoodsByParams",
+						datas:{"begin":num,
+							  	"gbids":"",
+							  	"gc_id":goods_id,
+							  	"gpids":gpids,
+								"max":10,
+								"orderBy":"3",
+								"sginType":1,
+								"userId":ls.getItem("userId")?ls.getItem("userId"):""
+						},
+						types:"get",
+						success:function(data){
+							if (data.status&&data.data!="") {
+									shopDetail(data);
+							}else{
+								if (num==1) {
+										$('.loading').hide();
+										$('.noMore').show();	
+								}else if (num>1){
+										$('.noMore').show();
+										$('.loading').hide();
+								}
+								
+							}
+						},	
+						error:function(){
+							
+						}
+				    })
+			}
+
+		</script>
+</html>

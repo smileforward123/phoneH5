@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>搜索页面</title>
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="css/publich5.css">
+	<link rel="stylesheet" type="text/css" href="css/indexSearch.css">
+	 <script>
+	    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<a href="#" class="back"></a><span></span>
+			<div>
+				<i></i>
+				<input type="text"  placeholder="搜商品"  class="search-txt">
+				<a href="javascript:void(0);" class="clear_icon" style="display:none" onclick="$('.search-txt').val(''); $(this).hide()"></a>
+			</div>
+			<a href="#" class="search_right">搜索</a>
+		</header>
+		<section  class="section_content">
+			<div class="shop_item">
+				<div class="shop_logo_info">
+					<img src="images/shopLogo.png">
+					<div>
+						<h3>起点运动户外运动足球...</h3>
+						<p>33.8万人关注</p>
+					</div>
+					<a href="#" class="enter_shop">进店</a>
+				</div>
+				<div class="shop_item_class">
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg2.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg3.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+				</div>
+			</div>
+			<div class="shop_item">
+				<div class="shop_logo_info">
+					<img src="images/shopLogo.png">
+					<div>
+						<h3>起点运动户外运动足球...</h3>
+						<p>33.8万人关注</p>
+					</div>
+					<a href="#" class="enter_shop">进店</a>
+				</div>
+				<div class="shop_item_class">
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg2.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg3.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+				</div>
+			</div>
+			<div class="shop_item">
+				<div class="shop_logo_info">
+					<img src="images/shopLogo.png">
+					<div>
+						<h3>起点运动户外运动足球...</h3>
+						<p>33.8万人关注</p>
+					</div>
+					<a href="#" class="enter_shop">进店</a>
+				</div>
+				<div class="shop_item_class">
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg2.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+					<a href="#">
+						<dl>
+							<dt><img src="images/shop_item_infoImg3.png"></dt>
+							<dd>
+								<p>RM1213.00</p>
+							</dd>
+						</dl>
+					</a>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+	var txt;
+	//鼠标点击icon显示，为空图标消失，点击图标内容清空
+		$('.search-txt').on("input propertychange",function(){
+		    txt=$.trim($(this).val());
+			if (txt!="") {
+				$('.clear_icon').show();
+				$('.section_content').show();
+				$('.search_right').text("取消");			
+				Act();
+			}else{
+				$('.clear_icon').hide();
+				$('.section_content').hide();
+				$('.search_right').text("搜索");
+			}
+		})
+		$('.clear_icon').on("click",function(){
+			if (!$('.search-txt').val('')) {
+				$('.section_content').show();
+			}else{
+				$('.search-txt').val('');
+				$('.section_content').hide();		
+			}
+		})
+
+		$('.back').on("click",function(){
+			history.back(-1);
+		}) 
+
+
+	</script>
+</body>
+</html>

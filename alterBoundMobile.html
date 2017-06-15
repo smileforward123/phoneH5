@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+        <style>
+            .layui-layer-btn1{
+                height: 30px;
+                line-height: 30px;
+                margin: 0 6px;
+                padding: 0 15px;
+                border: 1px solid #dedede;
+                background-color: #f1f1f1;
+                color: #333;
+                border-radius: 2px;
+                font-weight: 400;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("changeMobilePhone")</script>
+            </h3>
+        </header>
+        <div class="scroll">
+            <h3 class="alterTitle">
+                  <script>writeI18nPageByKey("alterMobileIdentity")</script>
+            </h3>
+            <ul class="alterMobileList">
+                <li>
+                    <a class="canReceive" href="javascript:void(0)">
+                         <script>writeI18nPageByKey("oldPhoneCanReceive")</script> 
+                         <em></em>
+
+                    </a>
+                </li>
+                 <li>
+                    <a  class="cant" href="javascript:void(0)">
+                           <script>writeI18nPageByKey("oldPhoneCantReceive")</script> 
+                           <em></em>
+                    </a>
+                </li>
+                
+            </ul>
+            <p class="alterMobileTip">
+                 <script>writeI18nPageByKey("hotlineTip")</script> 
+            </p>
+         </div>
+        <script>
+           
+
+            
+             $(".back").click(function(){
+
+                window.location.href="myAccount.html";
+             })
+            var str="<p class='layerCodeTip'></p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder=''/><input type='button' value='' class='testBtn' onclick='settime(this);sendMessageCode();'/></p>";
+            $(".canReceive").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("verifyThePnumber"),
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                  /* location.href="alterPwByMobile.html";*/
+
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+                $('.layui-layer-btn1').replaceWith("<input type='button' class='layui-layer-btn1' value='' style='font-size:0.35rem'/>")
+                
+                 $('.layui-layer-btn1').val(getI18nPageByKey("okBtn"));
+                 $(".testBtn").val(getI18nPageByKey("getCheckCode"));
+                 $(".testCode").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"))
+                 
+                var phoneNum=ls.getItem('HP');
+                $('.layerCodeTip').text(getI18nPageByKey("enterTailNumber")+phoneNum.substring(phoneNum.length-4,phoneNum.length)+getI18nPageByKey("CheckCodeYouGot"));
+
+
+
+
+                $('.layui-layer-btn1').bind('click',function(){
+                    verifyMessCode();
+                    setTimeout(function(){
+                        $('.layui-layer').remove();
+                        $('.layui-layer-shade').remove();
+                    },1000)
+                })
+            })
+
+            function sendMessageCode(){
+                var phoneNum = ls.getItem('HP');
+               
+                var num = phoneNum.substr(1);
+                Datas({
+                    url:"send_mobile_message",
+                    datas:{
+                        "mobile":num,
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("phonecodeSendOk"));
+                        }else if(!data.status){
+                            layer.msg(getI18nPageByKey("failToSendphonecode"));
+                        }
+                    },
+                    error:function(){
+                       
+                         layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+                })
+            }
+
+            //验证手机短信
+            function verifyMessCode(){
+
+                var number=  ls.getItem('HP');
+               
+                Datas({
+                    url:"buyer/validation_email",
+
+                    datas:{
+                        "phone_num": number.substr(1),
+                        "code":$(".testCode").val()
+                    },
+                    success:function(data){
+                        
+                        if(!data.status){
+
+                            layer.msg(getI18nPageByKey("errorCode"));
+                            return;
+                        }else if(data.status){
+                            layer.msg(getI18nPageByKey("codeOk"));
+                            window.location.href="boundMobile.html";
+                        }
+                    },
+                    error:function(){
+                        
+                    }
+                })
+            }
+
+            //重新发送验证码倒计时
+            var countdown=60;
+            function settime(obj) {
+                if (countdown == 0) {
+                    obj.removeAttribute("disabled");
+                    obj.value=getI18nPageByKey("getCheckCode");
+                    countdown = 60;
+                    return;
+                } else {
+                    obj.setAttribute("disabled", true);
+                    obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                    countdown--;
+                }
+                setTimeout(function() {
+                            settime(obj) }
+                        ,1000)
+            }
+            $(".cant").click(function(){
+               window.location.href="identityTest2.html";
+            })
+         
+
+//国际化
+         $(document).ready(function(){
+                
+                  $("#title").text(getI18nPageByKey("changeMobilePhone"));
+
+            })
+
+        </script>
+    </body>
+</html>

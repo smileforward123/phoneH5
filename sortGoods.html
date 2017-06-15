@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript" src="js/public.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/shTrigge.css"/>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+</script>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<head>
+
+<body>
+    <header class="car_header red">
+         <h2><a href="javascript:void(0)" class="top_delete"></a><div class="fitertxt">
+              <script>writeI18nPageByKey("searchSort")</script><!-- 顺序 --></div>
+         <div class="sweep">
+    	    <script>writeI18nPageByKey("clearaway")</script></div></h2>
+    </header>
+   <div class="cle"></div>
+    <div class="listsize">
+       <ul id="triagelist">
+            <li><a class="shtrhov" href="javascript:void(0)" data-id="1">
+                   <script>writeI18nPageByKey("byHighPrice")</script><!-- 价格高 --><b></b></a></li>
+            <li><a class="shtrhov" href="javascript:void(0)"data-id="2">
+                    <script>writeI18nPageByKey("byLowPrice")</script><!-- 价格低 --><b></b></a></li>
+            <li><a class="shtrhov" href="javascript:void(0)" data-id="3">
+                   <script>writeI18nPageByKey("storeSales")</script><!-- 销量 --><b></b></a></li>
+        </ul>
+   </div>
+   <footer>
+       <div class="bottom_confirm"><script>writeI18nPageByKey("determine")</script></div>
+  </footer>
+<script src="js/jquery-2.2.1.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+ <script src="css/layer/layer.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+<script  type="text/javascript">
+     //解析地址栏
+     var param=getParams(),
+         goods_id=param.goods_id,
+         className=param.className;
+         //返回键
+    $('.top_delete').on("click",function(){
+      window.location.href="picDetail.html?goods_id="+goods_id+"&className="+className;
+    })
+    //点击确定
+    $(".bottom_confirm").on("click",function(){
+      if ($('.shtrhov>b').hasClass("greenbtn")) {}else{
+        layer.msg(getI18nPageByKey("pleaseChoose"))
+      }
+        // location.href="picDetail.html";
+    })
+    //默认添加的样式
+    $("#triagelist li").click(function(){
+    	$(this).find("a").find("b").addClass("greenbtn");
+    	$(this).siblings().children("a").children("b").removeClass("greenbtn")
+    })
+     
+     //点击清楚选中的样式
+    $(".sweep").click(function(){
+      $("#triagelist li a b").removeClass("greenbtn");
+    })
+</script>
+</body>
+</html>

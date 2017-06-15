@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" style="background:#f3f5f7;">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title">充值管理</title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/manageCharge.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">充值管理</h3>
+             <a href="javascript:void(0)" class="edit">
+                 编辑
+             </a>
+        </header>
+        <div class="scroll" >
+            <div class="transactInfor clear">
+
+                   <div class="selectBox">
+                       <label ><input type="checkbox" name="mes"><i></i></label>
+                   </div>
+
+                    <ul>
+                        <li class="amount clear">
+                            <div class="amountL">
+                                充值金额：RM<span>60</span>
+                            </div>
+
+                            <div class="amountR">
+                                充值状态：<span>充值中</span>
+                            </div>
+                           
+                        </li>
+                        <li class="clear">
+                            <div class="amountL">
+                                支付方式：<span>中国银行</span>
+                            </div>
+
+                            <div class="amountR">
+                                支付状态：<span>支付完成</span>
+                            </div>
+                            <div style="clear:both;"></div>
+                        </li>
+                        <li>
+                            交易时间：2016-10-15 13:00:00
+                        </li>
+                    </ul>
+                   
+            </div>
+            <div class="transactInfor clear">
+                <div class="selectBox">
+                       <label ><input type="checkbox" name="mes"><i></i></label>
+                </div>
+                <ul>
+                    <li class="amount clear">
+                        <div class="amountL">
+                            充值金额：RM<span>60</span>
+                        </div>
+
+                        <div class="amountR">
+                            充值状态：<span>充值中</span>
+                        </div>
+                        
+                    </li>
+                    <li class="clear">
+                        <div class="amountL">
+                            支付方式：<span>中国银行</span>
+                        </div>
+
+                        <div class="amountR">
+                            支付状态：<span>支付完成</span>
+                        </div>
+                        
+                    </li>
+                    <li>
+                        交易时间：2016-10-15 13:00:00
+                    </li>
+                </ul>
+                
+            </div>
+            <div class="operator">
+                <a href="javascript:void(0)" class="cancel">取消</a>
+                <a href="javascript:void(0)" class="del">删除</a>
+            </div>
+        </div>
+        <script type="text/javascript">
+            $(".edit").click(function(){
+                $(".operator").show();
+                $(".selectBox label").css("visibility","visible");
+                $(this).hide();
+
+
+
+            })
+            $(".cancel").click(function(){
+                 $(".selectBox label").css("visibility","hidden");
+                  $(".operator").hide();
+
+            })
+            $(".del").click(function(){
+                $(".transactInfor input").each(function(index,item){
+                 
+                    if($(this).prop("checked")){
+                        $(this).parents(".transactInfor").remove();
+
+
+                    }
+
+
+
+                })
+                $(this).parent().hide();
+                 $(".selectBox label").css("visibility","hidden");
+
+
+
+
+            })
+           
+
+
+
+        </script>
+    </body>
+</html>

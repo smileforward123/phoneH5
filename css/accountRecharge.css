@@ -1,0 +1,50 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background:#f3f5f7;
+}
+
+.rechargeList li{
+    border-bottom: 1px solid #ccc;
+    height:2rem;
+    font-size: 0.65rem;
+    line-height:2rem;
+    color:#333333;
+    position:relative; 
+    padding:0 0.5rem;
+}
+.rechargeList li em{
+    position: absolute;
+    right: 0.5rem;
+    top: 1rem;
+    width: 0.35rem;
+    height: 0.6rem;
+    background: url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+    /* margin-left: 0.5rem; */
+    vertical-align: middle;
+}
+.rechargeList li span{
+    vertical-align: middle;
+}
+.rechargeList li input{
+    vertical-align: middle;
+}
+.nextBox{
+    width:15rem;
+    margin:1.5rem auto 0;
+}
+.nextBox span{
+    display:inline-block;
+    width:100%;
+    height:2.2rem;
+    background:#e6e6e6;
+    font-size:0.75rem;
+    line-height:2.2rem;
+    text-align: center;
+    color:#c7c7c7;
+    border-radius: 5px;
+}

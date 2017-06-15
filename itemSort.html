@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title id="title"></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" type="text/css" href="css/itemSort.css">
+	<link rel="stylesheet" type="text/css" href="css/loading.css">
+	<link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+	<script type="text/javascript">
+		 document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	
+</head>
+<body>
+	<div class="wrap">
+			<header style="width:100%;height:2.2rem;position:fixed;left:0;top:0; ">
+	            <h2 style="font-size:0.8rem;"><a href="javascript:void(0)" class="back"></a><span></span><script>writeI18nPageByKey("goodsSort")</script></h2>
+			</header>
+			<div class="allItem" style="margin-top:2.2rem">
+				<a href="javascript:void(0)" class="all" onclick="Classify(classId,goods_store)"><script>writeI18nPageByKey("allGoods")</script><span></span></a>	
+			</div>
+			<div class="itemList"></div>
+			<div class="loading"><img src="images/loading_more.gif" class="loadImg"><span>
+			       <script>writeI18nPageByKey("isLoading")</script><!-- 加载中 -->...</span></div>
+            <div class="noMore"><span>
+                 <script>writeI18nPageByKey("noMoreData")</script><!-- 没有更多数据了 --></span></div>  
+	</div>
+	  <script src="js/jquery-2.2.1.js"></script>
+	  <script type="text/javascript" src="css/layer/layer.js"></script>
+      <script type="text/javascript" src="js/common.js"></script>
+      <script type="text/javascript">
+      $("#title").text(getI18nPageByKey("goodsSortTitle"));
+       var classNames,gc_id,orderBy,Obj;
+       var params = getParam(),
+           signType=params.signType,
+           goods_id=params.goods_id,
+           goods_store=params.goods_store;
+           classId="";
+       $('.back').on("click",function(){
+         	history.back(-1);
+       	
+       })
+       loading();
+       	function loading(){
+       		$('.loading').show();
+	      	Datas({
+	      		url:"store_class/store_classify",
+	      		datas:{"store_id":goods_store},
+	      		success:function(data){    			
+	      			var val=data.data,
+	      				str='';
+	      				if (data.status) {
+			      			$.each(val,function(k,v){	
+								str+='<a href="javascript:void(0)"  class="sort" style="margin:0.3rem 0.3rem" onclick="Classify('+v.id+')"><span>'+v.categoryName+'</span></a>';		
+			      			})
+			      			setTimeout(function(){
+			      				$('.loading').hide();
+			      				$('.itemList').append(str);
+			      			},500)
+			      			
+	      			};
+	      		},
+	      		error:function(){
+	      			layer.msg(getI18nPageByKey("noGoodsWarn"));
+	      		}
+
+	      	})
+	 }
+	 function Classify(id){
+	 	 window.location.href="itemSortProduct.html?class_id="+id+"&goods_store="+goods_store;
+	 }
+      </script>
+</body>
+</html>

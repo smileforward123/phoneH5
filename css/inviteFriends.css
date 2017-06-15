@@ -1,0 +1,119 @@
+@charset "UTF-8";
+@import url(reset.css);
+* {
+  margin: 0;
+  padding: 0; }
+
+html, body, .wrap {
+  width: 100%;
+  height: 100%; }
+
+body {
+  font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+  /*使用无衬线字体*/ }
+
+a, img {
+  -webkit-touch-callout: none;
+  /*禁止长按链接与图片弹出菜单*/ }
+
+html, body {
+  -webkit-user-select: none;
+  /*禁止选中文本*/
+  user-select: none; }
+
+button, input, optgroup, select, textarea {
+  -webkit-appearance: none;
+  /*去掉webkit默认的表单样式*/ }
+
+a, button, input, optgroup, select, textarea {
+  -webkit-tap-highlight-color: transparent;
+  /*去掉a、input和button点击时的蓝色外边框和灰色半透明背景*/ }
+
+input::-webkit-input-placeholder {
+  color: #ccc;
+  /*修改webkit中input的placeholder样式*/ }
+
+body {
+  -webkit-text-size-adjust: 100% !important;
+  /*禁止IOS调整字体大小*/ }
+
+input::-webkit-input-speech-button {
+  display: none;
+  /*隐藏Android的语音输入按钮*/ }
+
+a {
+  text-decoration: none; }
+
+.wrap {
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  display: -ms-box;
+  -ms-box-orient: vertical;
+  position: relative; }
+  .wrap header {
+    height: 2.2rem;
+    background: #C90C1E;
+    color: #fff;
+    line-height: 2.25rem; }
+    .wrap header h2 {
+      text-align: center;
+      color: #fff;
+      position: relative; }
+      .wrap header h2 a {
+        width: 1rem;
+        height: 1rem;
+        left: 0.3rem;
+        top: 0.5rem;
+        position: absolute;
+        background: url(../images/shareShop_r2_c1.png) no-repeat;
+        background-size: 100% 100%; }
+      .wrap header h2 span {
+        width: 1.275rem;
+        height: 1.55rem;
+        left: 2.1rem;
+        top: 0.5rem;
+        position: absolute;
+        display: inline-block;
+        background: url(../images/shareShop_r1_c3.png) no-repeat;
+        background-size: contain; }
+  .wrap section {
+    background: #FCFCFC;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    -ms-box-flex: 1;
+    width: 100%;
+    background: url(../images/inviteFriends3.png) no-repeat;
+    background-size: 100% 100%;
+    position: relative; }
+  .wrap footer {
+    width: 100%;
+    height: 9.255rem;
+    position: absolute;
+    left: 0;
+    bottom: 0; }
+    .wrap footer nav {
+      width: 100%;
+      height: 9.255rem; }
+      .wrap footer nav a {
+        display: inline-block;
+        width: 100%;
+        height: 2.2rem;
+        width: 8.775rem;
+        position: absolute;
+        left: 50%; }
+        .wrap footer nav a:nth-child(1) {
+          background: url(../images/android.png) no-repeat center center;
+          background-size: contain;
+          bottom: 3.5rem;
+          margin-left: -4.325rem; }
+        .wrap footer nav a:nth-child(2) {
+          background: url(../images/ios.png) no-repeat center center;
+          background-size: contain;
+          bottom: 1rem;
+          margin-left: -4.325rem; }
+
+/*# sourceMappingURL=inviteFriends.css.map */

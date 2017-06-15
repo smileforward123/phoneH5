@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/identifyTest.css" />
+        <style>
+            .nextBox .red{
+                  background:rgb(242, 47, 51);
+                  color:white;
+                 
+                width: 15rem;
+               font-size: 0.8rem;
+              height: 2rem;
+              line-height: 2rem;
+             
+            text-align: center;
+            display: block;
+            border-radius: 5px;
+                   
+             }
+        </style>
+
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                  <script>writeI18nPageByKey("alterStoreToBindEmail")</script><!-- 绑定邮箱 -->
+            </h3>
+        </header> 
+         <div class="scroll">
+             <h3 class="alterTitle">
+                    <script>writeI18nPageByKey("boundEmailForSafety")</script><!-- 绑定邮箱可以最大程度保障您的账户安全 -->
+             </h3>
+             <ul class="mobileList">
+                 <li class="clear ">
+                    <span class="payPwTitle">
+                         <script>writeI18nPageByKey("appasiaEmail")</script><!-- 邮箱 -->:
+                    </span>
+                     <input class="payPw" type="email" name="" value="" placeholder="">
+                 </li>
+                  <li class="clear">
+                   <input class="identifyTxt"type="text" name="" value="" placeholder=""/><input id="getCode" type="button" value="" onclick="sendCode();settime(this)" class="identifyBtn"/>
+                 </li>
+            </ul>
+            <div class="nextBox">
+                <span id="Confirm">
+                         <script>writeI18nPageByKey("sureToBind")</script><!-- 确定绑定 -->
+                </span>
+            </div>
+        </div>
+    </body>
+    <script>
+           $(".back").click(function(){
+
+                history.back(-1);
+           })
+
+
+        $(".identifyTxt").keyup(function(){
+               
+           
+                $(".nextBox span").addClass("red");
+                  if($(this).val()==""){
+                      $(".nextBox span").removeClass("red");
+
+                }
+         
+        })
+
+        //重新发送验证码倒计时
+        var countdown=60;
+        function settime(obj) {
+            if (countdown == 0) {
+                obj.removeAttribute("disabled");
+                obj.value=getI18nPageByKey("getCheckCode");
+                countdown = 60;
+                return;
+            } else {
+                obj.setAttribute("disabled", true);
+                obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                countdown--;
+            }
+            setTimeout(function() {
+                        settime(obj) }
+                    ,1000)
+        }
+
+        //发送验证码
+        function sendCode(){
+            Datas({
+                url:"sendEmail",
+                datas:{
+                    "email":$(".payPw").val(),
+                },
+                success:function(data){
+                 
+                    if(data.status){
+                        layer.msg(getI18nPageByKey("sendEmailSuccessful"));
+                    
+                    }else if(!data.status){
+                        layer.msg(getI18nPageByKey("failTosendEmail"));
+                    }
+                },
+                error:function(){
+                   
+                
+                }
+            })
+        }
+
+        //确定邦定
+        $("#Confirm").click(function(){
+            Datas({
+                url:"buyer/validation_email",
+                datas:{
+                    "email":$(".payPw").val(),
+                    "code":$(".identifyTxt").val()
+                },
+                success:function(data){
+                   
+                    if(!data.status){
+                        layer.msg(getI18nPageByKey("errorCode"));
+                    }else if(data.status){
+                        boundNewEmail();
+                    }
+                },
+                error:function(){
+                  
+                }
+            })
+        })
+       //
+        function boundNewEmail(){
+            
+            Datas({
+                url:"buyer/bind_email",
+                datas:{
+                    "email":$(".payPw").val(),
+                    "user_id":ls.getItem("userId")
+                },
+                success:function(data){
+                    
+                    if(data.status){
+                        layer.msg(getI18nPageByKey("boundEmailOk"));
+                       
+                        setTimeout(function() {
+                            window.location.href="aboutMe.html";
+                                     },1000)
+                    }else if(!data.status){
+                        layer.msg(data.message);
+                    }
+                },
+                error:function(){
+                    
+             
+                }
+            })
+        }
+
+
+        $(document).ready(function(){
+
+             $(".payPw").attr("placeholder",getI18nPageByKey("enterEmailNum"));
+             $(".identifyTxt").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"));
+             $("#getCode").val(getI18nPageByKey("getCheckCode"));
+
+        })
+    </script>
+</html>

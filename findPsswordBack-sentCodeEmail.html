@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link rel="stylesheet" href="css/findPsswordBack-sentCodeEmail.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("findPWback")</script><!-- 找回密码 -->
+            </h3>
+        </header>
+        <div class="scroll">
+            <p class="reminder">
+                <!-- 验证码已发送到151@******的邮箱上 -->
+            </p>
+
+            <div class="box">
+                <b> 
+                    <script>writeI18nPageByKey("appasiaUser")</script><!-- 账号 -->:
+                </b>
+                <span></span>
+                <div style="clear:both"></div>
+            </div>
+
+            <div class="box1">
+                  <input type="text" id="code" placeholder=""/>
+                  <input type="button" id="btn" onclick="settime(this);resend()" value="" />
+                  <div style="clear:both"></div>
+            </div>
+            <input type="button" value=""  class="nextStep"/><br/>
+            <a href="javascript:void(0)">
+                 <script>writeI18nPageByKey("anyProbelemContact")</script><!-- 遇到问题？请联系客服 -->
+            </a>
+        </div>
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+
+          var userObj=getParam();
+         
+           $(document).ready(function(){
+             $(".box span").text(userObj.userName);
+              if (userObj.type) {
+                $(".reminder").text(getI18nPageByKey("codeSendTo")+userObj.Number);
+              }else{
+                 $(".reminder").text(getI18nPageByKey("codeSendTo")+userObj.userName);
+              }  
+
+           })
+
+
+
+           $(".back").click(function(){
+               history.back(-1);
+           })
+
+          /* function getRequest(){
+               var url = location.search;
+               var url1 =url.substr(1);
+               var userInfor = url.split("&");
+              
+               return userInfor;
+
+           }*/
+
+           var countdown=60;
+           function settime(obj) {
+               if (countdown == 0) {
+                   obj.removeAttribute("disabled");
+                   obj.value=getI18nPageByKey("resend");/*"重新发送"*/
+                   countdown = 60;
+                   return;
+               } else {
+                   obj.setAttribute("disabled", true);
+                   obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                   countdown--;
+               }
+               setTimeout(function() {
+                           settime(obj) }
+                       ,1000)
+           }
+           //重新发送验证码倒计时提示
+           function resend(){
+              /* var userNum =getRequest();
+               var emailNum=userNum[5];*/
+               if (userObj.type) {//手机号码
+                     Datas({
+                       url:"send_mobile_msg",
+                       datas:{
+                           "mobile":userObj.Number,
+                           "username":userObj.userName
+                       },
+                       success:function(data){
+                           if(data.status){
+                               layer.msg(getI18nPageByKey("phonecodeSendOk"));/*"手机验证码发送成功！"*/
+                      
+                           }else if(!data.status){
+                               layer.msg(getI18nPageByKey("failToSendphonecode"))/*"手机验证码发送失败！"*/
+                           }
+                       },
+                       error:function(){
+                        
+                          
+                       }
+                   })
+
+                 }else{//邮箱
+                   Datas({
+                   url:"sendEmail",
+                   datas:{
+                       "email":userObj.email
+                   },
+                   success:function(data){
+                    
+                       if(data.status){
+                           layer.msg(getI18nPageByKey("sendEmailSuccessful"));/*"邮件发送成功！"*/
+                        
+                       }else if(!data.status){
+                           layer.msg(getI18nPageByKey("failTosendEmail"));/*"邮件发送失败！"*/
+                       }
+                   },
+                   error:function(){
+                    
+                       layer.msg(getI18nPageByKey("failTosendEmail"))/*"邮件发送失败！"*/
+                   }
+               })
+                 }
+              
+           }
+           //下一步
+           $(".nextStep").click(function(){
+                if($("#code").val()==""){
+                  layer.msg(getI18nPageByKey("testnotEmpty"));
+                }else{
+                    $(this).css("background","#c90c1e");
+                    $(this).css("color","#fff");
+                   sentCode();
+                }
+               
+           })
+           function sentCode(){
+              if (userObj.type) {//手机
+                  Datas({
+                     url:"buyer/validation_phone",
+                     datas:{
+                         "phone_num":userObj.Number,
+                         "code":$("#code").val()
+                     },
+                     success:function(data){
+                        
+                         if(!data.status){
+                             layer.msg(getI18nPageByKey("errorCode"));/*"验证码错误!"*/
+                         }else if(data.status){
+                             layer.msg(getI18nPageByKey("codeOk"));/*"验证码正确!"*/
+                              window.location.href="findPasswordBack-finish.html"+location.search;
+                         }
+                     },
+                     error:function(){
+                       
+                     }
+                })
+              }else{//邮箱
+                   Datas({
+                   url:"buyer/validation_email",
+                   datas:{
+                       "email":userObj.email,
+                       "code":$("#code").val()
+                   },
+                   success:function(data){
+                      
+                       if(!data.status){
+                           layer.msg(getI18nPageByKey("errorCode"));/*"验证码错误!"*/
+                       }else if(data.status){
+                           layer.msg(getI18nPageByKey("codeOk"));/*"验证码正确!"*/
+                            window.location.href="findPasswordBack-finish.html"+location.search;
+                       }
+                   },
+                   error:function(){
+                     
+                   }
+               })
+              }
+              
+           }
+        
+       $(document).ready(function(){
+
+           $("#btn").val(getI18nPageByKey("resend"));
+           $("#code").attr("placeholder",getI18nPageByKey("appasiaTestCodeTip"));
+           $(".nextStep").val(getI18nPageByKey("theNextStep"));
+       })
+       
+
+       </script>
+    </body>
+</html>

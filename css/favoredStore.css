@@ -1,0 +1,119 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部代码*/
+*{ margin:0; padding:0;}
+html{
+   /*  height:100%; */
+}
+body{
+    font-family: "Arial";
+    position:relative;
+   /*  overflow:hidden; */
+   /*  height:100%; */
+}
+.header{
+    width:100%;
+    height:1.775rem;
+    line-height: 1.775rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    position:fixed;
+    left:0;
+    top:0; 
+    z-index: 1;
+
+}
+.back{
+    float:left;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.4rem ;
+}
+.mainLogo{
+    float:left;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.7rem;
+    margin-top: 0.15rem;
+}
+input{
+    border:1px solid #999999;
+}
+
+.scroll{
+        /*padding-bottom:4rem;*/
+      margin-top: 1.775rem;
+}
+.pageTitle{
+ float:left;
+  color: #fff;
+    display:inline-block;
+}
+.pageTitle2{
+  background:#a10a18;
+  display:inline-block;
+   padding-left:0.3rem;
+    padding-right:0.3rem;
+    border-radius:5px;
+    margin-left:0.75rem;
+}
+.pageTitle3{
+           display:block;
+           float:right;
+           margin-right:0.5rem;
+}
+.pageTitle1{
+    width:4.25rem;
+    text-align:right;
+}
+.wrappers{
+      border-bottom:1px solid #cccccc;
+      padding-top:0.6rem;
+      padding-bottom:0.5rem;
+
+}
+.shopInfor{
+    width:15rem;
+    margin:0 auto;
+
+}
+.buttons img{
+       height:0.75rem;
+       width:0.75rem;
+}
+.operation{
+           width:3rem;
+          float:right;
+          margin-top:0.6rem;
+
+}
+.gradeName{
+          display:block;
+          width:6.5rem;
+          float:left;
+          text-indent:0.2rem;
+}
+.storeLog{
+        width:4.6rem;
+        height:2rem;
+       float:left;
+}
+.grade{
+       margin-top:0.3rem;
+}
+.grade img{
+      width: 0.8rem;
+      height: 0.8rem;
+      background-size: contain;
+      margin-right: 0.2rem;
+}
+.buttons{
+        padding-left:0.2rem;
+        padding-right:0.2rem;
+}

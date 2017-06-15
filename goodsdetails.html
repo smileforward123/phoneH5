@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<link rel="stylesheet" type="text/css" href="css/publicClear.css"/>
+<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+<script type="text/javascript" src="css/layer/layer.js"></script>
+<style type="text/css">
+.bottom_footer a{ float:left; }
+.swiper-slide img{width: 100%;height: 15.3rem;}
+.swiper-slide{height: 15.3rem;}
+ .swiper-container{height: 15.3rem;}
+/* .godmytotal a{ display: inline-block;width: 5rem;text-align: center;position: relative;color: #333333;float: right;color: #FFF;background: red;} */
+.indot{display: inline-block;width: 5rem;text-align: center;position: relative;color: #333333;float: right;color: #FFF;background: red;}
+ a.opun{background:#918f8f;}
+</style>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+
+</head>
+<body>
+    <header class="car_header red">
+                      <h2><a  href="javascript:void(0)" class="backs" id="godbacks"></a><p class="iconbox"></p><script>writeI18nPageByKey("goodDetail")</script></h2>
+      </header>
+      <div class="content">
+          <div class="goodsimg"><!-- <img src="images/godimg.jpg"/> --></div>
+          <div class="goodsList">
+               <ul>
+               <li>
+                    <div class="goodsNamebox">
+                    <!-- <div class="introduce"></div>
+                    <div class="inttwo"><script>writeI18nPageByKey("goodmarketprice")</script>：<b></b></div>
+                    <div class="inthree"><div class="intrin"><p style="float:left;"><script>writeI18nPageByKey("interalleft")</script>：</p><p id="intboxs" style="float:left;"></p><script>writeI18nPageByKey("point")</script></div>  <div class="godclick"></div></div>
+                                      </div> -->
+                 </li>
+              <li class="numbertxt"><!-- <div>商品编号: gift201402281005341</div> --></li>
+                <li class="putaway"><!-- <div>上架时间：2014-02-28</div> --></Li>
+                <li><script>writeI18nPageByKey("productsintroduction")</script></li>
+                <li class="contxt"><!-- <p>Apple iPhone 6s (A1700) 64G 玫瑰金色 移动联通电信4G手机</p> --></li> 
+               </ul>
+         </div>
+     </div>
+    <footer>
+        <div class="godmytotal"><!-- <p>我的积分：<i>2131分</i></p><a href="javascript:void(0)" id="myinerthref">我要兑换</a> --></div>    
+    </footer>
+
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript">
+   //解析地址栏获取goods_id的值   
+   var params = getParam(),
+			  goods_id=getParam().goods_id,
+       count=params.count,
+       myIntegral=params.myIntegral;
+			 		
+      
+      $("#godbacks").on("click",function(){
+         window.location.href="myIntegral.html";
+        ls.removeItem('end');
+        ls.removeItem('time');
+      })
+
+var iocn='';
+function itel_goods_list(){
+    Datas({
+            url:"buyer/integral_goods_info",
+            datas:{"integral_goods_id":goods_id},
+            success:function(data){
+             if(data.status){ 
+                //添加图片
+                var str3='',st4='',str5='',str6='',str7='';
+                 var url=data.data.url;
+                 var goodsnum=data.data.ig_goods_sn;
+                 var sjsj=data.data.addTime;
+                 var spxq=data.data.ig_content;
+                 ls.setItem('goods_integral',data.data.ig_goods_integral);
+               
+               
+                 if (data.data.ig_time_type==true) {
+                    ls.setItem('time',data.data.ig_time_type);
+                    ls.setItem('end',data.data.ig_end_time);
+                 };
+                   var str3='<img src="'+url+'"/>';
+                   var str4='<div>'+getI18nPageByKey("ProductID")+': '+data.data.ig_goods_sn+'</div>';
+                     var  str7=' <div class="introduce">'+data.data.ig_goods_name+'</div>'
+                       str7+=' <div class="inttwo">'+getI18nPageByKey("goodmarketprice")+'：<b> '+data.data.ig_goods_price+'</b></div>'
+                       str7+=' <div class="inthree"><div class="intrin"><p style="float:left;">'+getI18nPageByKey("interalleft")+'：</p><p id="intboxs" style="float:left;"> '+data.data.ig_goods_integral+' </p>'+getI18nPageByKey("point")+'</div>  <div class="godclick"></div></div>'
+                   var str5='<p>'+data.data.ig_content+'</p>';
+                   var str6='<div>'+getI18nPageByKey("dateissued")+'：'+data.data.addTime+'</div>';
+                   //按钮我要兑换
+                     var  str8='<p>'+getI18nPageByKey("myIntegral")+'：<i>'+myIntegral+' '+getI18nPageByKey("point")+'</i></p><a class="indot" onclick="intSaveCart(this,'+data.data.ig_limit_type+','+data.data.ig_limit_count+')">'+getI18nPageByKey("tochange")+'</a>';
+                  $(".godmytotal").append(str8);
+
+                     $(".goodsimg").html(str3);
+                     $(".goodsNamebox").html()
+                     $(".numbertxt").html(str4); 
+                     $(".contxt").html(str5);
+                     $(".putaway").html(str6);
+                     $(".goodsNamebox").html(str7);
+
+                 }
+
+            }
+ });
+  }
+   var userNames= ls.getItem("userId");
+
+function intSaveCart(ele,type,counts){
+     if(!userNames){
+             window.location.href="Appsia_login.html";
+    }else{
+          if(count<=0){//库存不足
+             $(".godmytotal a").addClass("opun");
+             $(".godmytotal a").css("background","#918f8f");
+            return;
+          }
+          function putTime(dateStr){
+             var dateStrArr = dateStr.split(" "),
+                 dateOne = dateStrArr[0].split("-"),
+                 dateTwo = dateStrArr[1].split(":");
+              return  new Date(dateOne[0],dateOne[1],dateOne[2],dateTwo[0],dateTwo[1],dateTwo[2]).getTime();           
+          }
+         //过期时间限制
+         if (Boolean(ls.getItem('time'))) {//
+               var end=ls.getItem('end');
+               var todays=putTime(getNowFormatDate()),
+                    yesterday= putTime(end);
+                 if (todays-yesterday>0) {
+                    layer.msg(getI18nPageByKey("exchangeExpired"));
+                    return;
+                 }; 
+          };
+          if (parseInt(ls.getItem('goods_integral'))>parseInt(ls.getItem('sumIntegral')) ) {
+
+              layer.msg(getI18nPageByKey("lackIntegral"));//积分不足
+            return;
+         };
+          Datas({
+              url:"buyer/cart_integral_save",
+              datas:{'user_id':userNames,
+                     'integral_goods_id':goods_id ,
+                     'integral':ls.getItem('goods_integral') //商品积分：
+              },
+              success:function(data){
+                if(data.status){
+                     window.location.href="integralconvert_repertoire.html?count="+count+"&goods_id="+goods_id+"&myIntegral="+myIntegral;
+                }else{
+                  layer.msg(data.message);
+                }
+              },
+              error:function(){
+                
+          }
+      })  
+   }
+}
+    
+    //获取当前日期
+     function getNowFormatDate() {
+          var date = new Date();
+          var seperator1 = "-";
+          var seperator2 = ":";
+          var month = date.getMonth() + 1;
+          var strDate = date.getDate();
+          if (month >= 1 && month <= 9) {
+              month = "0" + month;
+          }
+          if (strDate >= 0 && strDate <= 9) {
+              strDate = "0" + strDate;
+          }
+          var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                  + " " + date.getHours() + seperator2 + date.getMinutes()
+                  + seperator2 + date.getSeconds();
+          return currentdate;
+      } 
+$(function(){
+  itel_goods_list();
+})
+</script>
+
+</body>
+</html>

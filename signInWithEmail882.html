@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/sign.css" />
+        <link rel="stylesheet" href="css/mobiscroll/css/mobiscroll.custom-3.0.0-beta4.min.css" type="text/css" />
+        
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script> 
+    <script src="css/layer/layer.js"></script>
+    <script src="js/mobiscroll.custom-3.0.0-beta4.min.js"></script>
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("userReg")</script><!-- 注册 -->
+            </h3>
+           
+        </header>
+        <div class="scroll">
+            <ul class="signList">
+                <li>
+                    <input class="signInput" type="text" name=""  id="email" value="" placeholder="">
+                </li>
+                <li>
+                    <label style="width:10%;">
+                        <select id="demo">
+                          <option value="+60">+60</option>
+                          <option value="+65">+65</option>
+                          <option value="+673">+673</option>        
+                        </select>
+                    </label>
+                    <input  style="width:80%;" class="signInput"type="text" name="" value="" id="phone" placeholder="">
+                </li>
+                <li>
+                    <input  class="signInput" type="text" name="" value="" id="name" placeholder="">
+                </li>
+                <li>
+                    <input  class="signInput" type="password" name="" value="" id="pw" placeholder="">
+                </li>
+                <li>
+                    <input  class="signInput" type="password" name="" value="" id="pwAgain" placeholder="">
+                </li>
+            </ul>
+            <label class="userComment">
+                <input type="checkbox" class="admission"/>
+                <i></i>
+                <span>
+                     <script>writeI18nPageByKey("agreeTip")</script><!-- 我已阅读并接受了 -->
+                    
+                </span>
+                 <a href="javascript:void(0)" id="thePolicy">
+                     <!-- <script>writeI18nPageByKey("userAgreement")</script> --><!-- 《用户协议》 -->
+                    《Terms of Service》
+                </a>
+            </label>
+            <div class="registerBox">
+                <a href="javascript:void(0)">
+                     <script>writeI18nPageByKey("userReg")</script><!-- 注册 -->
+                </a>
+            </div>
+        </div>
+        <script>
+          var params=getParam(),
+                login=params.login,
+                loginBack=params.loginBack,
+                goods_store=params.goods_store,
+                goods_id=params.goods_id;
+             $(".back").click(function(){
+                if (login) {
+                   window.location.href="Appsia_login.html?login="+login;
+                }else if(loginBack==2){
+                  window.location.href="Appsia_login.html?loginBack="+loginBack;
+                }else if(loginBack==3){
+                  window.location.href="Appsia_login.html?loginBack="+loginBack+"&goods_store="+goods_store+"&goods_id="+goods_id;
+                }else if(loginBack==4){
+                   window.location.href="Appsia_login.html?loginBack="+loginBack+"&goods_store="+goods_store+"&goods_id="+goods_id;
+                }else{
+                   window.location.href="Appsia_login.html";
+                }
+              
+            }) 
+
+            var instance=mobiscroll.select('#demo', {
+                        theme: 'mobiscroll',    
+                        lang: 'zh',         
+                        display: 'bottom',  
+                        minWidth: 200  ,
+            });
+            $("#demo_dummy").css({"width":"10%"});
+             var regEmail = /^([a-zA-Z0-9-\._])+@([a-zA-Z0-9-])+(\.[a-zA-Z0-9_-])+/;
+            //var regEmail = /^[0-9a-zA-Z]*$/;
+            var numReg=/^\d{5,15}$/;
+             //var numReg =/^[0-9]{5-15}$/; 
+             var regPs=/^[0-9A-Za-z]{6,20}$/;
+            $(".registerBox").click(function(){
+                    if($("#email").val()==""){
+                         layer.msg(getI18nPageByKey("EmailCantBeNull"));/*'邮箱不可为空'*/
+                         return;
+                    }else if(!regEmail.test($("#email").val())){
+                         layer.msg(getI18nPageByKey("EmailFormatIncorrectly"));/*'邮箱格式错误'*/
+                         return;
+                    }else if($("#phone").val()!=""&&!numReg.test($("#phone").val())){
+                          layer.msg(getI18nPageByKey("phoneFormatError"));/*'手机号码格式错误'*/
+                            return;
+                    }else if($("#name").val()==""){
+                             layer.msg(getI18nPageByKey("enterYourWholeName"));
+                              return;
+                    }else if($("#pw").val()==""){
+                             layer.msg(getI18nPageByKey("pwnotEmpty"));/*'密码不能为空'*/
+                              return;
+                    }else if(!regPs.test($("#pw").val())){
+                              layer.msg(getI18nPageByKey("PWformatError"));/*'密码格式不对'*/
+                              return;
+                    }else if($("#pwAgain").val()==""){
+                               layer.msg(getI18nPageByKey("confirmPWnotNull"));/*'确认密码不可为空'*/
+                                return;
+                    }else if($("#pwAgain").val()!=$("#pw").val()){
+                                layer.msg(getI18nPageByKey("bothTimePWDiffer"));/*'两次输入密码不一致'*/
+                               return;
+                    }else if(!$(".admission").prop("checked")){
+                        layer.msg(getI18nPageByKey("pleaseAcceptAgreement"));/*"请同意用户协议！"*/
+                        return;
+                    }
+
+                    Submit();
+
+
+
+            })
+            function Submit(){
+             Datas({ 
+                    url:"register",
+                    datas:{
+                        "userName":$("#email").val(),
+                        "mobile":$("#demo").val()+$('#phone').val(),
+                        "password":$("#pw").val(),
+                         "trueName":$("#name").val(),
+                        "regType":2
+                        },
+                   success:function(data){ 
+                        if (data.status) {
+                           
+                           layer.msg("Register Success！");
+                           Login();
+                          setTimeout(function(){
+                             window.location.href="index.html";
+                          },500);
+                           
+                           
+                        } else {
+                            layer.msg(data.message);
+                            
+                        }
+                    },
+                    error:function(data){
+                          layer.msg(data.message);
+                    },
+                    
+  
+              });
+          }
+           //用户登录：
+          function Login(){
+                Datas({
+                  url:"user_login",
+                  datas:{
+                    "loginName":$("#email").val(),
+                    "password":$("#pw").val(),
+                    "cart_session_id":ls.getItem("cartSessionId")
+
+                    
+                  },
+                  success:function(data){
+                    
+                    if(data.status){
+                      
+                        ls.setItem("userId",data.data.id);
+                      ls.setItem("goodsCount",data.data.goodsCount);
+                      ls.setItem("storeCount",data.data.storeCount);
+                      ls.setItem("availablebalance",data.data.availablebalance);
+                      ls.setItem("integral",data.data.integral);
+                      ls.setItem("trueName",data.data.truename);
+                      ls.setItem("rebateTotal",data.data.rebateTotal);
+                      
+                      
+                      
+                    }else{
+                      layer.msg(data.message);
+                    }
+                    
+
+
+                  },
+                  error:function(){
+                   
+                  }
+
+                })
+
+
+
+          }
+
+
+
+              //当用户点击  用户协议时与存储  之前填写的内容
+          $("#thePolicy").click(function(){
+              
+
+              ls.setItem("emailAsAccount",$("#email").val());
+              ls.setItem("areaNumber",$("#demo_dummy").val());
+              ls.setItem("theMobileNumber",$("#phone").val());
+              ls.setItem("userNamess",$("#name").val());
+              ls.setItem("PWord",$("#pw").val());
+              ls.setItem("PWordAgain",$("#pwAgain").val());          
+           
+
+               window.location.href="userComment.html";
+
+          })
+
+
+         //所填内容 从用户协议页面 返回本页时 自动填写
+         $(document).ready(function(){
+               var emailAsAccount= ls.getItem("emailAsAccount");
+               var areaNumber= ls.getItem("areaNumber");
+               var theMobileNumber= ls.getItem("theMobileNumber");
+               var userNamess= ls.getItem("userNamess");
+               var PWord= ls.getItem("PWord");
+               var PWordAgain= ls.getItem("PWordAgain"); 
+               if(emailAsAccount==null){
+                  $("#email").val("");
+               }else {
+                 
+                    $("#email").val(emailAsAccount);  
+               };
+              
+                  if(areaNumber){
+                       $("#demo_dummy").val(areaNumber);
+                   }
+               
+                    if(theMobileNumber==null){
+                        $("#phone").val("");
+                     }else{
+                          $("#phone").val(theMobileNumber);
+                    }
+                        
+                        if(userNamess==null){
+                              $("#name").val("");
+                        }else {
+                                 $("#name").val(userNamess);
+                        }
+
+                             if(PWord==null){
+                                     $("#pw").val("");
+                             }else {
+                                        $("#pw").val(PWord);
+                             } 
+
+                                  if(PWordAgain==null){
+                                       $("#pwAgain").val("")  ; 
+                                  }else{
+                                            $("#pwAgain").val(PWordAgain) ;
+                                  }
+
+         })
+
+
+          //国际化占位符
+          $(document).ready(function(){
+                $("#name").attr("placeholder",getI18nPageByKey("enterYourWholeName"));
+                 $("#phone").attr("placeholder",getI18nPageByKey("pleaseEntrerYourPnumber"));
+                  $("#pw").attr("placeholder",getI18nPageByKey("enterPW620NumberOrLetter"));
+                   $('#email').attr("placeholder",getI18nPageByKey("enterEmailAsAccount"))
+                     $("#pwAgain").attr("placeholder",getI18nPageByKey("appasiaPwTipAgain"))
+          })
+        </script>
+    </body>
+</html>

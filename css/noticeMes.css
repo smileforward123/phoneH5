@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background:#f3f5f7;
+}
+.noticeMesBox{
+    margin:0.5rem;
+}
+.noticeMesBox ul li{
+    width:15rem;
+    border:1px solid #e6e6e6;
+    margin-bottom: 0.5rem;
+}
+.noticeMesBox li a{
+    display:block;
+    width:100%;
+    padding:0.65rem 0;
+    font-size:0.6rem ;
+    line-height:0.95rem ;
+    color:#323232;
+    position: relative;
+}
+.noticeMesBox li span{
+    float: left;
+    width:12.625rem;
+    margin-left: 0.5rem;
+}
+.noticeMesBox li em{
+    float: right;
+    position: absolute;
+    right: 0.5rem;
+    top: 1.25rem;
+    width: 0.35rem;
+    height: 0.65rem;
+    background: url(../images/rightArrow.png) no-repeat;
+    background-size: contain;
+
+}
+.noticeMesBox  .date{
+    margin: 0.5rem auto;
+    width:4.95rem;
+    height:1rem;
+    font-size:0.5rem ;
+    line-height: 1rem;
+    background:#cccccc;
+    color:#fff;
+    text-align: center;
+    border-radius: 5px;
+
+}
+

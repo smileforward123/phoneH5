@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <script type="text/javascript" src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<link rel="stylesheet" type="text/css" href="css/itemSort.css">
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+	<link rel="stylesheet" type="text/css" href="css/sort.css">
+	<script type="text/javascript">
+		 document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+
+</head>
+<body>
+	<div class="wrap">
+		<header>
+	            <h2><a href="javascript:void(0)" class="back"></a><span></span>
+	             <script>writeI18nPageByKey("queue")</script><!-- 排序 --></h2>
+		</header>
+		<section>
+			<label for="radio1"><span>
+			 <script>writeI18nPageByKey("byHighPrice")</script><!-- 价格高 --></span><input type="radio" id="radio1" value="1" name="radio"><i></i></label>
+			<label for="radio2"><span>
+			<script>writeI18nPageByKey("byLowPrice")</script><!-- 价格低 --></span><input type="radio" id="radio2" value="2" name="radio"><i></i></label>
+			<label for="radio3"><span>
+			<script>writeI18nPageByKey("storeSales")</script><!-- 销量 --></span><input type="radio" id="radio3" value="3" name="radio"><i></i></label>
+		</section>
+		<footer>
+			<button id="btn">
+			          <script>writeI18nPageByKey("okBtn")</script><!-- 确定 -->
+			</button>
+		</footer>
+	</div>
+  	<script src="js/jquery-2.2.1.js"></script>
+	<script type="text/javascript" src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+		var params = getParam(),
+             goods_id=params.goods_id,
+             // className=params.className,
+             signType=params.signType,
+             type=params.types,
+             goods_store=params.goods_store,
+             sortGood=params.params;
+            
+			//后退
+			$('.back').on("click",function(){
+				if (type) {
+					 window.location.href="obussinessmanShop.html?goods_store="+goods_store+"&goods_id="+goods_id;				
+				}else{
+					  window.location.href="picDetail.html?goods_id="+goods_id;
+				}
+					
+					
+			})  
+	$('#btn').on("click",function(){
+		var len=0;
+		$('section>label').each(function(k,v){
+			
+			if ($(this).find("input").prop("checked")) {
+				var orderBy=$(this).find("input").val();
+				
+				if (!type){
+					 window.location.href="picDetail.html?goods_id="+goods_id+"&orderBy="+orderBy;
+				}else{
+					 window.location.href="ClassficationOfCommodity-search.html?orderBy="+orderBy+"&signType="+signType+"&goods_store="+goods_store+"&goods_id="+goods_id;
+				}
+				
+			}else{
+				layer.msg(getI18nPageByKey("pleaseChoose"));
+			}
+		})
+	})
+
+
+	</script>
+</body>
+</html>

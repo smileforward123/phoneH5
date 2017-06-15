@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link rel="stylesheet" href="css/findPsswordBack-sentCheckCode06.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("findPWback")</script><!-- 找回密码 --></h3>
+        </header>
+        <div class="scroll">
+            <p class="reminder">
+              <!--   验证码已发送到151******12134的手机上 -->
+            </p>
+
+            <div class="box">
+               <b> <!-- 账号: -->  <script>writeI18nPageByKey("appasiaUser")</script><!-- 账号 -->:</b>
+               <span></span>
+                <div style="clear:both"></div>
+            </div>
+
+            <div class="box1">
+                  <!-- <input type="text" placeholder="请输入验证码"/>
+                  <input type="button" value="重新发送(36s)"/>
+                  <div style="clear:both"></div> -->
+                  <input type="text" id="code" placeholder=""/>
+                  <input type="button" id="btn" onclick="settime(this);resend()" value="" />
+                  <div style="clear:both"></div>
+            </div>
+          <!--   <input type="button" value="下一步" class="nextStep"/><br/>
+            <a href="#">遇到问题？请联系客服</a> -->
+               <input type="button" value=""  class="nextStep"/><br/>
+              <a href="javascript:void(0)">
+                 <script>writeI18nPageByKey("anyProbelemContact")</script><!-- 遇到问题？请联系客服 -->
+            </a>
+        </div>
+       <script src="js/jquery-2.2.1.js"></script>
+       <script src="css/layer/layer.js"></script>
+       <script src="js/common.js"></script>
+       <script type="text/javascript">
+        var userObj=getParam();
+         
+           $(document).ready(function(){
+            
+               $(".box span").text(userObj.userName);
+             
+               $(".reminder").text(getI18nPageByKey("codeSendTo")+userObj.userName);
+
+           })
+           $(".back").click(function(){
+               history.back(-1);
+           })
+
+           function getRequest(){
+               var url = location.search;
+               var url1 =url.substr(1);
+               var url11 = url.split("&");
+               var userName = url11[1];
+               return userName;
+           }
+           $(document).ready(function(){
+               var userName = getRequest();
+               $(".box span").text(userName);
+
+             
+               $(".reminder").text("验证码已发送到"+userName[3].substring(0,3)+"*******"+userName[3].substr(userName[3].length-3)+"电话号码");
+           })
+       </script>
+    </body>
+</html>

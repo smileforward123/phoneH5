@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/complaintDetail.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("DetailOfComplaint")</script>
+            </h3>
+        </header>
+        <div class="scroll">
+            <div class="orderBox">
+                <div  class="orderBoxDetail">
+                   <p class="orderNum clear">
+                         <span class="num">
+                               <script>writeI18nPageByKey("OrderNumber")</script>：
+                               <strong><!-- 2016070517756 --></strong>
+                         </span>
+                         <strong class="status"><!-- 新投诉 --></strong>
+                   </p>
+                   <p class="orderNum">
+                         <span>
+                               <script>writeI18nPageByKey("OrderCreatedDate")</script>：
+                               <strong class="date"><!--2016-04-12 12:20:13--></strong>
+                         </span>
+                   </p>
+                   <div class="orderProduct">
+                       <!--<div class="orderPro clear">
+                            <div>
+                                <a class="complaintImg"href="javascipt:void(0)">
+                                    <img src="images/complaintImg.png" />
+                                </a>
+                                <div class="complaintName">
+                                    <p><a href="javascipt:void(0)">小米随身风扇USB蛇形迷你笔记本电脑小电风扇超静音便携A626662C0</a></p>
+                                    <p>
+                                        <span>RM18.90</span><span>数量:2</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <p class="clear"><span class="left">问题描述：</span><span class="right status">急急急</span></p>
+                        </div>-->
+                        
+                   </div>
+
+                    
+                    <p class="totalMoney">
+                           <script>writeI18nPageByKey("TheAmountOfOrder")</script>：
+                           <strong><!--RM37.80 --></strong>
+                    </p>
+                </div>
+                <div class="complaintTopic">
+                    <!--<p class="clear"><span class="left">投诉主题：</span><span class="rightTopic"> 卖家投诉</span></p>
+                    <p class="clear"><span class="left">投诉内容：</span><span class="right">东西有破损东西有破损东西有破损东西有破损东西有破损东西有破损东西有破损</span></p><!-->
+                </div>
+                <div class="complaintStore">
+                    <!--<p class="clear"><span class="left">卖家店铺：</span>
+                    <span class="right">心悦元</span></p>
+                    <p class="clear"><span class="left">投诉状态：</span>
+                    <span class="right status">新投诉</span></p>
+                    <p class="clear"><span class="left">投诉类别：</span>
+                    <span  class="right">买家投诉</span></p>
+                    <p class="clear"><span class="left">投诉时间：</span>
+                    <span class="right">2016-7-5 12.00.00</span></p>
+                    <div class="clear">
+                        <span class="left">取证图片：</span>
+                        <p class="right evidenceBox">
+                            <a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a>
+                        </p>
+                    </div><!-->
+                </div>
+            </div>
+            <div class="cancelBtn">
+               <span>
+                   <script>writeI18nPageByKey("cancelComplaint")</script>
+              </span>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("DetailOfComplaint"));
+             
+            })
+            $(".back").click(function(){
+             history.back(-1);
+           })
+                var complaintObj=getParam();
+               
+                var statusStr="";
+                var str="";//商品信息数据：
+                var complaintStr="";//买家投诉信息：
+                var sellerComplaintStr="";//卖家投诉信息：
+                var typeStr="";//投诉类别：
+                Datas({
+                    url:"/buyer/complaint_view",
+                    datas:{
+                        "complaint_id":complaintObj.complaintId
+
+
+                    },
+                    success:function(data){
+                       
+                        if(data.data.status=="0"){
+                                statusStr=getI18nPageByKey("newComplaint");
+                            $(".cancelBtn").show();
+                            $(".cancelBtn span").click(function(){
+                                //取消投诉：
+                                cancelComplaint();
+                                
+                            })
+                            
+
+                        }else if(data.data.status=="1"){
+                                statusStr=getI18nPageByKey("waitForapeal");
+                        }else if(data.data.status=="2"){
+                                statusStr=getI18nPageByKey("isTalking");
+                        }else if(data.data.status=="3"){
+                                statusStr=getI18nPageByKey("waitArbitration");
+                        }else{
+                                statusStr=getI18nPageByKey("haveCompleted");
+                        }
+                        if(data.data.type=="buyer"){
+                           
+                            typeStr=getI18nPageByKey("buyersComplaint");
+                        }else{
+                            
+                            typeStr=getI18nPageByKey("sellersComplaint");
+                        }
+                        $(".orderNum .num").find("strong").text(data.data.of_sn);
+                        $(".orderNum .status").text(statusStr);
+                        $(".orderNum .date").text(data.data.addTime);
+                       for(var i=0;i<data.data.goodsList.length;i++){
+                            str+='<div class="orderPro">'+
+                                    '<div class="clear">'+
+                                        '<a class="complaintImg"href="javascipt:void(0)">'+
+                                            '<img src='+data.data.goodsList[i].path+' />'+
+                                        '</a>'+
+                                        '<div class="complaintName">'+
+                                            '<p><a href="javascipt:void(0)">'+data.data.goodsList[i].goods_name+'</a></p>'+
+                                            '<p>'+
+                                                '<span>RM'+data.data.goodsList[i].goods_price+'</span><span>'+getI18nPageByKey("number")+':'+data.data.goodsList[i].count+'</span>'+
+                                            '</p>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '<span class="clear">'+getI18nPageByKey("describeIssue")+'：'+data.data.goodsList[i].desc+'</span>'+
+                            '</div>';
+
+
+                        }
+                        complaintStr='<p class="clear"><span class="left">'+getI18nPageByKey("themeOfComplaint")+'：</span><span class="rightTopic">'+data.data.title+'</span></p>'+
+                            '<p class="clear"><span class="left">'+getI18nPageByKey("contentOfComplaint")+'：</span><span class="right">'+data.data.fromContent+'</span></p>';
+                    
+                  sellerComplaintStr+='<p class="clear">'+
+                        '<span class="left">'+getI18nPageByKey("sellersStore")+'：</span>'+
+                        '<span class="right">'+data.data.storeName+'</span>'+
+                    '</p>'+
+                    '<p class="clear">'+
+                        '<span class="left">'+getI18nPageByKey("statusOfComplaint")+'：</span>'+
+                        '<span class="right status">'+statusStr+'</span>'+
+                    '</p>'+'<p class="clear">' +
+                        '<span class="left">'+getI18nPageByKey("categoryOfComplaint")+'：</span>'+
+                        '<span  class="right">'+typeStr+'</span>'+
+                    '</p>'+'<p class="clear">'+
+                        '<span class="left">'+getI18nPageByKey("DateOfComplaint")+'：</span>'+
+                        '<span class="right">'+data.data.addTime+'</span>'+
+                    '</p>'+'<div class="clear">'+
+                        '<span class="left">'+getI18nPageByKey("imgOfComplaint")+'：</span>'+
+                        '<p class="right evidenceBox">'+
+                            '<a href="javascipt:void(0)"><img src='+data.data.fromPath1+'/></a><a href="javascipt:void(0)"><img src='+data.data.fromPath2+'/></a><a href="javascipt:void(0)"><img src='+data.data.fromPath3+'/></a>'+
+                        '</p>'+
+                    '</div>';
+                        
+                        $(".orderProduct").html(str);
+                        $(".complaintTopic").append(complaintStr);
+                        $(".complaintStore").append(sellerComplaintStr);
+                       
+                        $(".totalMoney strong").text(data.data.totalMoney);
+                        
+
+
+
+                    },
+                    error:function(){
+                        
+                    }
+
+
+
+
+
+
+                })
+            //取消投诉：
+            function cancelComplaint(){
+                Datas({
+                  url:"/buyer/cancle_complaint",
+                  datas:{
+                    "complaint_id":complaintObj.complaintId
+
+
+                  },
+                  success:function(data){
+                   
+                    if(data.status){
+                      layer.msg(data.message);
+                      window.location.href="complaintManage.html";
+
+                    }else{
+                       layer.msg(data.message);
+                    }
+                  },
+                  error:function(){
+                   
+                  }
+
+
+
+
+
+                })
+
+
+
+            }
+
+
+            $(document).ready(function(){
+
+                $("#title").text(getI18nPageByKey("DetailOfComplaint"));
+            })
+        </script>
+    </body>
+</html>

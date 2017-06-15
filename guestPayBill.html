@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/guestPay.css" rel="stylesheet"/>
+         <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    </head>
+    <style>
+        .accountNum{
+            color:#c90c1e;
+        }
+    </style>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("payChoose")</script></h3>
+            
+        </header>
+        <div class="scroll scroll3">
+            <h3 class="payTitle">
+                <em class="payMethod"></em><script>writeI18nPageByKey("payMethodTitle")</script>
+            </h3>
+            <ul class="payList">
+                <li >
+                    <label><input class="radio"type="radio" name="payMethod" value="">
+                        <i class="radioImg " ></i><span class="payWay"><script>writeI18nPageByKey("bankCard")</script></span>
+                    </label>
+                </li>
+                <li >
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><span class="payWay"><script>writeI18nPageByKey("cyberBank")</script></span></label>
+                </li>
+                 <li >
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><span class="payWay"><script>writeI18nPageByKey("accountBalance")</script></span><span class="accountNum"></span></label>
+                </li>
+                 <li class="pay">
+                    <label><input class="radio" type="radio" name="payMethod" value=""> <i class="radioImg" ></i><span class="payWay"><script>writeI18nPageByKey("offlinePayment")</script></span></label>
+                </li>              
+            </ul>
+             <div class="payListRig">
+                 <label ><input class="radio rebateRadio" type="checkbox"  value=""><i class="radioImg"></i><script>writeI18nPageByKey("rebateMoney")</script>:<span style="color:#c90c1e;" class="rebate"><!-- 300 --></span></label>
+                
+            </div>
+            <div class="blankBk blank6">
+                
+            </div>
+        </div>
+        <div class="PayGuestBtn">
+            <span id="confirm"><script>writeI18nPageByKey("okBtn")</script></span>
+        </div>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script src="js/zepto.min.js"></script>
+        <script src="js/common.js"></script>   
+    <script>
+       var params = getParam();
+     
+        if(params.lineType=="0"){
+            $(".pay").hide();
+        }else{
+            $(".pay").show();
+        }
+        if(ls.getItem("intergalOn")){
+            $(".payListRig").hide();
+        }
+        $("#title").text(getI18nPageByKey("payMethodTitle"));
+        $(".back").click(function(){
+            history.back(-1);
+        })
+       
+        Datas({
+                url:"/getUserInfo",
+                datas:{
+                  "user_id":ls.getItem("userId"),  
+                },
+                success:function(data){
+                    
+                    $(".accountNum").text("RM"+data.data.availablebalance);
+                    $(".rebate").text("RM"+data.data.rebateTotal);
+                   
+
+
+
+                },
+                error:function(){
+                    
+                }
+
+
+
+
+
+        })
+
+        
+         var payType;
+         var isUserRebate;
+        
+        $(".PayGuestBtn").click(function(){
+             var length=0;
+             var payLen=0;
+                   $(".scroll input").each(function(index,item){
+                      if($(this).prop("checked")){
+                        length++;
+                       
+                      }
+
+
+
+                   })
+                 
+                   if(length==0){
+                        //没有选择支付方式：
+                        layer.msg( getI18nPageByKey("youHaventChoosePayMethod"));
+                        return ;
+                   }else{
+                        //选择了支付方式：
+                        if($(".payListRig input").prop("checked")){
+                               
+                                
+                            $(".payList li ").each(function(index,item){
+                                if($(this).find('input').prop("checked")){
+                                    payLen++;
+                                    isUserRebate="1"; 
+                                      //  银行卡         
+                                    if($(this).find(".payWay")[0].innerText==getI18nPageByKey("bankCard")){
+                                    payType=6;
+                                    return;
+                                       //网银
+                                    }else if($(this).find(".payWay")[0].innerText== getI18nPageByKey("cyberBank")){
+                                        payType=7;
+                                         return;
+                                          //账户余额
+                                    }else if($(this).find(".payWay")[0].innerText==getI18nPageByKey("accountBalance")){
+                                     payType=8;
+                                      return;                  
+                                         //线下支付
+                                    }else if($(this).find(".payWay")[0].innerText==getI18nPageByKey("offlinePayment")){
+                                        payType=9;
+                                         return;
+                                        
+                                    }
+                                }
+                            })
+                            
+                        }else{
+                          
+                            isUserRebate="0";
+                            $(".payList li ").each(function(index,item){
+                                if($(this).find('input').prop("checked")){
+                                    payLen++;
+                                     
+                                     
+                                    if($(this).find(".payWay")[0].innerText== getI18nPageByKey("bankCard")){
+                                        payType=1;
+                                         //  银行卡 
+                                       
+                                    }else if($(this).find(".payWay")[0].innerText==getI18nPageByKey("cyberBank")){
+                                        payType=2;
+                                        //网银
+                                        
+                                    }else if($(this).find(".payWay")[0].innerText== getI18nPageByKey("accountBalance")){
+                                        payType=3;//账户余额
+
+                                        
+                                    }else if($(this).find(".payWay")[0].innerText== getI18nPageByKey("offlinePayment")){
+                                        payType=4; //线下支付
+                                        
+                                    }
+
+                                }
+
+
+
+                            })
+                            
+                            
+                        }
+                        //不组合支付：
+                        if(payLen==0){
+                            payType=5;
+                             isUserRebate="0";
+                        }
+                   }
+                    
+                   
+                    window.location.href="Appsia_cashier.html?payType="+payType+"&price="+params.totalPrice+"&isUserRebate="+isUserRebate+"&orderId="+params.orderId+"";
+                  
+        })
+            
+
+
+
+        
+       
+    </script>
+    </body>
+</html>

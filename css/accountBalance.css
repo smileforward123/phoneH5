@@ -1,0 +1,78 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background:#f3f5f7;
+}
+.balanceBox{
+    padding:0 0.5rem;
+    border-bottom:1px solid #cccccc;
+    margin-bottom: 0.5rem;
+}
+.balanceBox h3{
+    font-size: 0.7rem;
+    height:3.1rem;
+    line-height:3.1rem;
+    color:#808080;
+}
+.balance{
+    height:2.4rem;
+}
+.balance b{
+    float: left;
+    font-weight: 300;
+    color:#c90c1e;
+}
+.balance span{
+    float: right;
+    width:3.4rem;
+    height:1.25rem;
+    background:#ec6726;
+    font-size:0.75rem ;
+    line-height:1.25rem ;
+    border-radius:5px ;
+    color:#fff;
+    text-align: center;
+}
+.nav{
+    padding:0 1.7rem; 
+    border-top:1px solid #dbdbdb;
+    border-bottom: 1px solid  #dbdbdb;
+    /* height:1.6rem; */
+    font-size:0.65rem ;
+    line-height: 1.6rem;
+}
+.nav a{
+    padding: 0 0.5rem 0 0.6rem;
+    color:#333333;
+    float: left;
+    margin-right:1.5rem ;
+}
+.nav .active{
+    border-bottom: 3px solid #c90c1e;
+}
+.content{
+    overflow-y:scroll;
+    height:16rem;
+}
+.balanceList{
+    width:100%;
+  /*   height:20rem; */
+}
+.balanceList li{
+    padding:0.6rem 0.5rem;
+    border-bottom:1px solid #dbdbdb;
+    font-size: 0.5rem;
+    line-height: 0.95rem;
+
+}
+.balanceList li .method{
+    float: left;
+    width:80%;
+}
+.balanceList li .date{
+    float: right;
+    width:20%;
+}

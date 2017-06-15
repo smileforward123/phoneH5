@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title id="title"></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<link rel="stylesheet" href="css/publicStyle.css" />
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.min.js"></script>
+<script type="text/javascript" src="js/picList.js"></script>
+<style type="text/css">
+.car_header .textin input[type="text"]{/*margin-left: 0.7rem;*/}
+</style>
+<script type="text/javascript" >
+  document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+ </script>
+</head>
+<body>
+
+    <header class="car_header red">
+          <h2>
+            <a  href="javascript:void(0)" class="backs"></a>
+              <p class="iconbox"></p>
+                <div class="textin"><i></i>
+                <input  type="text" placeholder="Search" id="search"/></div><b></b></h2>
+    </header>
+    <div class="warp_banner">
+          <div class="banbox" id="banbox">
+               <div class="banimg">
+                <ul id="slide_bigimg"> </ul>
+               </div>
+               <ol class="smaCon" id="circle">
+               </ol>
+          </div>
+         
+    </div>
+      <div class="title">
+            <!--  <div class="titcon"><h3><script>writeI18nPageByKey("con_title")</script></h3></div> -->
+             <div class="titcon"><h3>
+              <script>writeI18nPageByKey("con_title")</script><!-- 标题 --></h3></div>
+       </div>
+        <div class="imgList" id="imgList">
+         
+          <!--  <a href="javascript:void(0)">
+           <dl>
+             <dt><img src="images/activity_item1.png"></dt>
+             <dd class="img_text">1213212121</dd>
+             <dd class="layer"></dd>
+           </dl>
+                    </a> -->
+
+       </div>
+   
+    <footer class="footer">
+      <ul class="ul-nav">
+        <li  class="active">
+          <a href="index.html">
+            <img src="images/footer1.png" />
+            <p>
+            <script>writeI18nPageByKey("botindex")</script><!-- 首页 --></p>
+          </a>
+        </li>
+        <li>
+          <a href="myIntegral.html">
+            <img src="images/footer02.png" />
+            <p>
+            <script>writeI18nPageByKey("integralMall")</script><!-- 积分商城 --> </p>
+          </a>
+        </li>
+        <li>
+          <a href="shopping_cars.html">
+            <img src="images/footer03.png" />
+            <p>
+            <script>writeI18nPageByKey("shoppingCar")</script><!-- 购物车 --></p>
+          </a>
+        </li>
+        <li>
+          <a href="aboutMe.html">
+            <img src="images/footer04.png" />
+            <p>
+            <script>writeI18nPageByKey("botmine")</script><!-- 我的 --></p>
+          </a>
+        </li>
+        <li>
+          <a href="more.html">
+            <img src="images/footer05.png" />
+            <p>
+            <script>writeI18nPageByKey("botmore")</script><!-- 更多 --></p>
+          </a>
+        </li>
+      </ul>
+    </footer>
+  <script type="text/javascript">
+      $(document).ready(function(){
+            $("#title").text(getI18nPageByKey("goodsSortTitle"));
+      })
+     var params = getParam(),
+        goods_id=params.goods_id,
+        type=params.type;
+      $('.backs').on("click",function(){
+             window.location.href="index.html";
+      })
+      $('#search').on("click",function(){
+         window.location.href="indexSearch.html";
+      })
+      Datas({
+        url:"category_details",
+        datas:{"id":goods_id}, 
+        success:function(data){
+          var str="",str1="",str3='';
+          if (data.status) {
+            //轮播
+              $.each(data.data.advertList,function(k,v){
+                  str+='<li><a href="javascript:void(0)" onclick="Slider('+v.ad_type+',\''+v.ad_type_value+'\')"><img src="'+v.img_url+'" /></a></li>';
+                  str1+='<li></li>';
+              })
+              $('#slide_bigimg').html(str);
+              $("#circle").html(str1);
+              $('#circle').find("li").eq(0).addClass("opacityBoxwhite");
+              //商品
+              $.each(data.data.category,function(k,v){
+                  str3+= '<a href="javascript:void(0)" onclick="item('+v.id+')">'+
+                           '<dl>'+
+                             '<dt><img src="'+v.icon_img+'"></dt>'+
+                             '<dd class="img_text">'+v.className+'</dd>'+
+                             '<dd class="layer"></dd>'+
+                           '</dl>'+
+                         '</a>'
+                         
+              })
+              $('#imgList').html(str3);
+          };
+        },
+        error:function(){
+         
+        }
+
+    })
+    function item(goods_id){
+       window.location.href="picDetail.html?goods_id="+goods_id+"&type="+type;
+    }   
+
+  </script> 
+</body>
+</html>

@@ -1,0 +1,76 @@
+@charset "UTF-8";
+.feeHeader{
+    font-size:0.8rem ;
+    height:2.2rem;
+    line-height: 2.05rem;
+    background:#fff;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+}
+.closePage{
+    float:left;
+    width:0.95rem;
+    height:0.95rem;
+    background:url(../images/closePage.png) no-repeat;
+    background-size:contain;
+    margin-left: 1rem;
+    margin-top:0.625rem;
+}
+.transTitle{
+    float:left;
+    font-size: 0.8rem;
+    margin-left: 4.35rem;
+}
+.scrollBox{
+    padding:0 0.75rem;
+    box-sizing: border-box;
+    bottom:0;
+}
+.store{
+    height:2.2rem;
+   
+    line-height:2.1rem ;
+}
+.transfeeStoreName{
+    float:left;
+}
+.transFee{
+    float:right;
+}
+.goodsfeeBox{
+    width:100%;
+    height:5.15rem;
+    overflow:hidden;
+}
+.goodsList{
+    height:5.15rem;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.goodsList li{
+    float:left;
+    width:3.4rem;
+    /* margin-right:0.15rem ; */
+}
+.showImg{
+    display:block;
+    box-sizing: border-box;
+    width:3.4rem;
+    height:3.4rem;
+    border:1px solid #ccc;
+    border-radius:0.2rem;
+}
+.showImg img{
+    width:100%;
+    height:100%;
+}
+.taxfeeM{
+    font-size:0.525rem ;
+    height:1.75rem;
+    line-height:1.425rem;
+    width:100%;
+
+}
+

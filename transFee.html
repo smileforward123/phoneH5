@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+        <title id="title"></title>
+        <link href="css/idangerous.swiper.css" rel="stylesheet"/>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/transFee.css" rel="stylesheet"/>
+        <link href="css/layer/skin/layer.css" rel="stylesheet"/>
+    </head>
+   
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+    
+        <header class="feeHeader clear">
+            <span class="closePage"></span><h4 class="transTitle"><script>writeI18nPageByKey("transfeeTitle")</script></h4>
+         </header>
+         <div class="scroll scrollBox">
+            
+         </div>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script src="js/idangerous.swiper.min.js"></script>
+        <script src="css/layer/layer.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+       
+       <script type="text/javascript">
+         $(document).ready(function(){
+                $("#title").text(getI18nPageByKey("transfeeTitle"));
+        })
+      
+        var user= ls.getItem("userId");//获取用户id;
+        var cartSessionId=ls.getItem("cartSessionId");//获取游客ID;
+        var goods_id=ls.getItem("goodsId");
+        var storeId=ls.getItem("storeId");
+        var addressObj=getParam();
+      
+        var fastArr=[];
+        if(addressObj.fastArr.length==0){
+         fastArr=[];
+        }else{
+          fastArr=addressObj.fastArr.split(",")
+        }
+          $(".closePage").click(function(){
+              history.back(-1);
+
+          })
+          //判断ls.getItem("shopCar")为true,从购物车过来：
+          if(ls.getItem("shopCar")=="true"){
+             buyNow2();
+          }else{
+            buyNow1();
+          }
+
+          function buyNow1(){
+             
+               Datas({
+                    url:"buyer/buy_now",
+                    datas:{
+                      "goods_id":goods_id,
+                       "user_id":user?user:"",
+                       "gsp":"",
+                       "cart_session_id":user?"":cartSessionId,
+                       "addr_id":addressObj.addressId,
+                       "goodscart_id":ls.getItem("goodsCartsId"),
+                       "invoiceAddr":"",
+                      "store_id":storeId,
+                       "count":""
+                    },
+                    success:function(data){
+                    
+                       renderTransfee(data.data);
+                       
+                       
+                      
+                          
+                      
+                    },
+                    error:function(data){
+                     
+                    }
+                 })
+          }
+          function buyNow2(){
+             
+               Datas({
+                    url:"buyer/buy_now",
+                    datas:{
+                      "goods_id":ls.getItem("goodsId"),
+                       "user_id":user?user:"",
+                       "gsp":"",
+                       "cart_session_id":user?"":cartSessionId,
+                       "addr_id":addressObj.addressId,
+                       "goodscart_id":ls.getItem("goodsCartsId"),
+                       "invoiceAddr":"",
+                       "store_id":ls.getItem("storesId"),
+                       "count":""
+                    },
+                    success:function(data){
+                     
+                      renderTransfee(data.data);
+                     
+
+                         
+                    },
+                    error:function(data){
+                    
+                    }
+
+                 })
+          }
+          //渲染运费和税费数据：
+          var str="";
+          function renderTransfee(obj){
+           
+            var transfee;
+
+            for(var i=0;i<obj.dateInfo.length;i++){
+              if(obj.dateInfo[i].storeShipPrice==""){
+                obj.dateInfo[i].storeShipPrice=0;
+              }
+              if(obj.dateInfo[i].zoomPrice==""){
+                obj.dateInfo[i].zoomPrice=0;
+              }
+              transfee= parseFloat(obj.dateInfo[i].storeShipPrice).toFixed(2);
+              for(var j=0;j<fastArr.length;j++){
+              
+                if(i==fastArr[j]){
+                 
+                  transfee= parseFloat(obj.dateInfo[i].zoomPrice).toFixed(2);
+                }else{
+                  transfee= parseFloat(obj.dateInfo[i].storeShipPrice).toFixed(2);
+                }
+              }
+             
+             str+="<div class='taxFee'>"+
+                  "<h4 class='store clear fontS4 color5'><span class='storeNames'>"+obj.dateInfo[i].storeName+"</span><span class='transFee'>"+getI18nPageByKey("shipPrice")+"：RM"+transfee+"</span></h4><div class='goodsfeeBox swiper-container'><ul class='goodsList  swiper-wrapper clear'>";
+                  for(var j=0;j<obj.dateInfo[i].goodsCarts.length;j++){
+                    str+="<li class='swiper-slide'>"+
+                           "<a class='showImg' href='javascript:void(0)'>"+
+                               "<img src="+obj.dateInfo[i].goodsCarts[j].goodsUrl+">"+
+                           "</a>"+
+                         
+                       "</li>";
+
+
+
+                  }
+                  str+="</ul></div></div>";
+              }
+             
+              $(".scroll").html(str);
+              var swiper = new Swiper('.swiper-container', {
+       
+                slidesPerView: 4,
+               
+              });
+              $('.goodsfeeBox').each(function(){
+                  $(this).swiper({
+                      slidesPerView:'4',
+                      
+                  })
+              }) 
+              $(".storeNames").each(function(){
+                    
+                    var maxLength=10;
+                    var length=$(this).text().length;
+                    if(length>=maxLength){ 
+                      var str=$(this).text().substring(0,maxLength)+"...";
+                      $(this).text(str);
+                    }
+              })
+
+
+
+
+          }
+          
+       </script>
+       
+
+    </body>
+</html>

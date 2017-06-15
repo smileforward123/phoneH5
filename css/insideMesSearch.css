@@ -1,0 +1,31 @@
+@charset "UTF-8";
+.searchBox{
+    float: left;
+    height:1.25rem ;
+    width: 11.5rem; /* */
+    border:1px solid #ccc;
+    border-radius: 5px;
+    background:#fff;
+    margin-left: 0.75rem;
+    position: relative;
+    overflow: hidden;
+}
+.searchBox span{
+     position: absolute; /**/
+    width:1.5rem;
+    height:1.25rem;
+    background:url(../images/searchLogo.png) no-repeat;
+     left:0;
+   top:0; /**/
+    background-size: contain;
+    float: left;
+}
+.searchBox input{
+    float: left;
+    width:9.95rem;
+    height:1.25rem;
+    line-height: 1.25rem;
+    position:absolute;
+    left:1.5rem;
+    top:0;
+}

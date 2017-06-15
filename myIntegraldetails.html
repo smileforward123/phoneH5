@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <script type="text/javascript" src="js/public.js"></script>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+         <title id="title"></title>
+         <link href="css/base.css" rel="stylesheet" type="text/css" />
+         <link href="css/myintdetsils.css" rel="stylesheet" type="text/css"/>
+      </head>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript">
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+</head>
+<body style="background:#f4f6f8;">
+       <header class="car_header red">
+    <h2><a href="javascript:void(0)" class="backs" id="godbadbut"></a>
+        <p class="iconbox"></p><script type="text/javascript">writeI18nPageByKey("myIntegral")</script>
+    </h2>
+</header>
+<div class="myintcon">
+ <h2><script type="text/javascript">writeI18nPageByKey("integralQuantity")</script> </h2>
+ <div class="intifor"><p class="intNum"></p><a id="intershop" href="javascript:void(0)"><script type="text/javascript">writeI18nPageByKey("integralMall")</script></a></div>
+ <div class="detilst" id="detilst" id="detilst"><script type="text/javascript">writeI18nPageByKey("integralDetail")</script>>></div>
+</div>
+<div class="intrecord" id="intrecord"><b class="reicon"></b><script type="text/javascript">writeI18nPageByKey("redeemRecord")</script><p></p></div>
+<script type="text/javascript">
+ 
+        $("#godbadbut").click(function(){
+          location.href="aboutMe.html";
+        })
+        $("#intrecord").click(function(){
+          location.href="integralconvert_record.html";
+        })
+        $("#intershop").click(function(){
+          location.href="myIntegral.html";
+        })
+        $("#detilst").click(function(){
+          location.href="particulars.html";
+        })
+        $(function(){
+               
+                Datas({
+                  url:"/getUserInfo",
+                  datas:{
+                    "user_id":ls.getItem("userId"),  
+                  },
+                  success:function(data){
+                    
+                      $(".intNum").text(data.data.integral);
+                    },
+                  error:function(){
+                    
+                  }
+
+
+
+
+
+                })
+
+
+
+        })
+</script>
+</body>
+</html>

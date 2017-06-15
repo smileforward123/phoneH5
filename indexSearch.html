@@ -1,0 +1,139 @@
+<!doctype html>
+<html>
+<head>
+     <script type="text/javascript" src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="css/indexSearch.css">
+	 <script>
+	    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<a href="javascript:void(0)" class="back"></a><span></span>
+			<div>
+				<i></i>
+				<input type="text"  placeholder=""  class="search-txt">
+				<!-- <a href="javascript:void(0);" class="clear_icon" style="display:none" onclick="$('.search-txt').val(''); $(this).hide()"></a> -->
+				<a href="javascript:void(0);" class="clear_icon"></a>
+			</div>
+		<a href="javascript:void(0)" class="search_right">
+		       <script>writeI18nPageByKey("searchtxt")</script><!-- 搜索 -->
+		</a>
+		</header>
+		<section class="section_content" id="section_content">
+			
+		</section>
+	</div>
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/mui.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script type="text/javascript">
+	
+	//鼠标点击icon显示，为空图标消失，点击图标内容清空
+	var  searchStr="";
+	// var  page=0;
+	// 		 $("#section_content").scroll(function () {
+	// 	        var scrollTop=$(this).scrollTop();
+	// 	        var scrollHeight = $(window).height();
+	// 	        var windowHeight = $(this).height();
+	// 	        if (scrollTop+windowHeight>=scrollHeight) {
+	// 	        	  if($(".search-txt").val()!=""){//不为空搜索
+	//                         Act();
+
+	//                    }
+	// 	        };
+	// 	    }) 
+		 $(".search-txt").on("input",function(){
+		 	var txt;
+		 	  txt=$.trim($(this).val());
+		 		if (txt!="") {
+				 	 searchStr="";
+		             Act(txt);		
+		 		}else{
+		 			$("#section_content").html("");
+		 		   
+		 		}
+        })
+		$('.clear_icon').on("click",function(){
+			$('.search-txt').val('');
+			$('#section_content').html("");
+		})
+		$('.back').on("click",function(){
+			window.location.href="index.html";
+		})
+
+		var params = getParam(),
+            actId=params.act_id;
+            function Act(txt){
+            	// page++;
+           		Datas({
+		  			url:"goods/searchGoodsByParams",
+		  			types:"post",
+		  			async:false,
+		  			datas:{"orderBy":"","goods_name":txt},
+		  			success:function(data){
+		  				if (data.status) {
+           					searchStr+='<h2 onclick="shop(\''+txt+'\')"><p>'+getI18nPageByKey("searchtxt")/*搜索*/+'<span>'+txt+'</span>'+getI18nPageByKey("store")/*店铺*/+'</p></h2><ul id="ul_content">'
+		           				$.each(data.data,function(k,v){			           					
+		           					searchStr+='<li><a href="javascript:void(0)" data-id="'+v.id+'" onclick="hrefGoods(this,'+v.id+')">'+v.goods_name+'</a></li>'
+		           				})
+							 searchStr+='</ul>';
+							$('.section_content').html(searchStr);
+           				}
+           				
+		  			},
+		  			error:function(){
+		  			
+		  			}
+		  		})
+            }
+		$('.search_right').on('click',function(){
+     		if ($(this).text()!=getI18nPageByKey("searchtxt")) {
+     			history.back(-1);
+     		}
+     		
+		 })		 
+		function hrefGoods(ele,aId){
+			$(ele).attr("href","product.html?goods_id="+aId);
+		}
+		function shop(Txt){
+			Datas({
+				url:"store_class/searchStoreByParams",
+				datas:{"store_name":Txt,"user_id":ls.getItem("userId")?ls.getItem("userId"):""},
+				success:function(data){
+				
+					if (data.status) {
+					
+						$.each(data.data,function(k,v){
+							var id=v.id;
+						
+							ls.setItem("searchShop",1);
+							window.location.href="searchShop.html?shop_id="+id+"&Txt="+Txt;
+						})
+						
+					};
+				},
+				error:function(){
+					
+				}
+			})
+		}
+
+
+
+		$(document).ready(function(){
+
+			 $(".search-txt").attr("placeholder",getI18nPageByKey("searchGoods"));
+
+		})
+	</script>
+</body>
+</html>

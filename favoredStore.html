@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title">店铺</title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
+        <link rel="stylesheet" href="css/favoredStore.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header">
+             <span class="back"></span><a href="#" class="mainLogo"></a>
+             <span class="pageTitle pageTitle1">
+                 <script>writeI18nPageByKey("productIndex")</script>
+             </span>
+             <span class="pageTitle pageTitle2">
+                <script>writeI18nPageByKey("store")</script>
+             </span>
+            
+        </header>
+        <div class="scroll" style="background:white;">
+             <div class="wrap">
+                
+            </div>
+            <div class="loading">
+                   <img src="images/loading_more.gif" class="loadImg">
+                   <span>
+                      <script>writeI18nPageByKey("isLoading")</script>...
+                  </span>
+            </div>
+            <div class="noMore">
+                 <span>
+                      <script>writeI18nPageByKey("noMoreData")</script>
+                 </span>
+            </div>  
+           <!--  <div class="wrappers">
+             <div class="shopInfor">
+               <div class="storeLog">
+                   <img src="images/shopLogo.png" style="width:4.6rem;height:2rem;border:1px solid #cccccc;"/>
+               </div>
+           
+               <ul class="gradeName">
+                   <li style="font-size:0.5rem;">起点运动户外...</li>
+                   <li class="grade">
+                       <img src="images/heart_img.png" style="width:0.7rem;"/>
+                       <img src="images/heart_img.png" style="width:0.7rem;"/>
+                       <img src="images/heart_img.png" style="width:0.7rem;"/>
+                       <img src="images/heart_img.png" style="width:0.7rem;"/>
+                       <img src="images/heart_img.png" style="width:0.7rem;"/>
+                   </li>
+               </ul>
+           
+               <div class="operation">
+                   <a href="javascript:void(0)" class="buttons"><img src="images/sharebutton.jpg"/></a>
+                   <a href="javascript:void(0)" class="buttons"><img src="images/del.png"/></a>
+               </div>
+               <div style="clear:both;"></div>
+             </div>
+           </div>
+           
+           <div class="wrappers">
+               <div class="shopInfor">
+                   <div class="storeLog">
+                       <img src="images/shopLogo.png" style="width:4.6rem;height:2rem;border:1px solid #cccccc;"/>
+                   </div>
+           
+                   <ul class="gradeName">
+                       <li style="font-size:0.5rem;">起点运动户外...</li>
+                       <li class="grade">
+                           <img src="images/heart_img.png" style="width:0.7rem;"/>
+                           <img src="images/heart_img.png" style="width:0.7rem;"/>
+                           <img src="images/heart_img.png" style="width:0.7rem;"/>
+                           <img src="images/heart_img.png" style="width:0.7rem;"/>
+                           <img src="images/heart_img.png" style="width:0.7rem;"/>
+                       </li>
+                   </ul>
+           
+                   <div class="operation">
+                       <a href="javascript:void(0)" class="buttons"><img src="images/sharebutton.jpg"/></a>
+                       <a href="javascript:void(0)" class="buttons"><img src="images/del.png"/></a>
+                   </div>
+                   <div style="clear:both;"></div>
+               </div>
+           
+           
+           </div> -->
+
+        </div>
+        <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript">
+    $('.back').on("click",function(){
+        window.location.href="aboutMe.html";
+    })
+     var page=0;
+     loadAdd();
+    $(window).scroll(function () {
+        var scrollTop=$(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop+windowHeight==scrollHeight) {
+              // alert(44);
+              loadAdd();
+        };
+    }) 
+     $('.pageTitle1').on("click",function(){
+          window.location.href="favoredGoods.html"
+    })
+    function loadAdd(){
+      $(".loading").show();
+       page+=1;
+       Datas({
+            url:"buyer/follow_info",
+            datas:{"user_id":ls.getItem("userId"),"follow_type":1},
+            success:function(data){
+           
+
+                if (data.status&&data.data!="") {    
+                    $.each(data.data,function(k,v){
+                          var str="",str1='';
+                        var substr=v.store.storeCredit;
+                        var  string1=substr.substr(0,1),
+                             string2=substr.substr(2,1);          
+                      if (string1==1) {//1是红心，2是钻石，3是皇冠
+                           for(var i=0;i<string2.length;i++){
+                                // str1+='<img src="images/diamond.png">'//钻石
+                                // str1+='<img src="images/hg.png">'//皇冠
+                                 str1+='<img src="images/heart_img.png">'//皇冠
+                           }
+                          
+                      }else if(string1==2){
+                         for(var i=0;i<string2.length;i++){
+                                str1+='<img src="images/diamond.png">'//钻石 
+                           }
+                      }else if(string1==3){
+                          for(var i=0;i<string2.length;i++){
+                               str1+='<img src="images/hg.png">'//皇冠
+                         }
+                      }
+                          str='<div class="wrappers">'+
+                                    ' <div class="shopInfor" >'+
+                                         '<div class="storeLog"  onclick="Store('+v.store.id+')"><img src="'+v.store.store_logo.path+'" style="width:4.6rem;height:2rem;border:1px solid #cccccc;"/></div>'+
+                                         '<ul class="gradeName"  onclick="Store('+v.store.id+')">'+
+                                            ' <li style="font-size:0.5rem;">'+v.store.store_name+'</li>'+
+                                             '<li class="grade">'+str1+
+                                             '</li>'+
+                                        ' </ul>'+
+                                         '<div class="operation">'+
+                                           /*  '<a href="javascript:void(0)" class="buttons"><img src="images/sharebutton.jpg"/></a>'+*/
+                                             '<a href="javascript:void(0)" class="buttons" onclick="del('+v.id+')"><img src="images/del.png"/></a>'+
+                                         '</div>'+
+                                        ' <div style="clear:both;"></div>'+
+                                     '</div>'+
+                                ' </div>'
+                           setTimeout(function(){
+                             $(".loading").hide();
+                             $('.wrap').append(str);
+                    
+                        },500)
+                     })
+                 
+
+                }else{
+                    $(".loading").hide();
+                    $('.noMore').show();    
+                }
+            },
+            error:function(){
+               
+            }
+       }) 
+    } 
+    //取消关注
+    function del(id){
+        Datas({
+            url:"buyer/delFavoriteInfo",
+            datas:{"type_id":id},
+            success:function(data){
+           
+                if (data.status) {
+                    $('.loading').show();
+                    setTimeout(function(){
+                        $('.loading').hide();
+                    })
+                }else{
+                      location.reload();
+                }
+            },
+            error:function(){
+                
+            }
+        })
+    }
+    function add(id){
+        location.href="product.html?goods_id="+id;
+    }
+    function Store(id){
+      ls.setItem("storeSort",1);
+       window.location.href="obussinessmanShop.html?goods_store="+id;
+    }
+    </script>
+    </body>
+</html>

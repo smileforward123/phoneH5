@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="js/public.js"></script>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/evaluationDetail.css">
+	<style>
+           section .eval_shop .eval_user span{
+           	font-size:0.4rem;
+           }
+	</style>
+</head>
+<body>
+		<div class="wrapper">
+			<header>
+				  <h2>
+		        	<a href="javascript:void(0)" class="back"></a>
+		        	<span></span>
+		        	<script>writeI18nPageByKey("detailEval")</script>
+                      <!-- 评价详情 -->
+		        </h2>
+			</header>
+			<section>
+			<!-- <div class="eval_shop">
+				<p class="eval_user"><i><img src="images/eval_user.png"></i><span>1**3</span><b>[VIP]</b></p>
+				<div class="eval_title">
+					<img src="images/eval_titleImg.png">
+					<span>北迈约[买两件宋T恤]夏季薄款仔短裤...</span>
+				</div>
+				<p class="eval_good">好评</p>
+				<p class="eval_msg">好的手机，使用一个月的手机，使用一个月是在不错，货物没问题实在是真不错</p>
+				<ul class="eval_good_detail">
+					<li><img src="images/eval_gooddetail.png"></li>
+					<li><img src="images/eval_gooddetail.png"></li>
+					<li><img src="images/eval_gooddetail.png"></li>
+					
+				</ul>
+				<p class="eval_time">
+					2016-03-23
+				</p>
+			</div> -->
+			<!-- <div class="eval_shop">
+				<p class="eval_user"><i><img src="images/eval_user.png"></i><span>1**3</span><b>[VIP]</b></p>
+				<div class="eval_title">
+					<img src="images/eval_titleImg.png">
+					<span>北迈约[买两件宋T恤]夏季薄款仔短裤...</span>
+				</div>
+				<p class="eval_good">好评</p>
+				<p class="eval_msg">没有填写评价</p>
+				<p class="eval_time">
+					2016-03-23
+				</p>
+			</div> -->
+				</section>
+		</div>
+		<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="js/activity.js"></script>
+		<script type="text/javascript" src="js/common.js"></script>
+		  <script src="css/layer/layer.js"></script>
+		<script type="text/javascript">
+		 var params = getParam(),
+	        menu_id = params.menuId;
+	        $('.back').on("click",function(){
+	        	history.back(-1);
+	        })
+			  // 评价详情
+			  Datas({
+			    url:"evaluate/watch_evaluate",
+			    datas:{"of_id":menu_id},
+			    success:function(data){
+			   
+			      var str="";
+			      var eval="";
+			      if (data.status) {
+					       $.each(data.data.goodsInfo,function(k,v){
+								 
+
+								 if(v.evaluateBuyerVal=="1"){
+                                     eval=getI18nPageByKey("goodEval")/*"好评"*/;
+								 }else if(v.evaluateBuyerVal=="-1"){
+                                         eval=getI18nPageByKey("badEval")/*"差评"*/;
+								 }else if(v.evaluateBuyerVal=="0"){
+                                         eval=getI18nPageByKey("mediateEval")/*"中评"*/;
+								 }
+                                 
+                                 if(v.imag1==""){
+                                       
+
+
+                                        str+='<div class="eval_shop">'+
+										'<p class="eval_user"><i><img src="'+data.data.userAcc+'"></i><span>'+data.data.userName+'</span><b></b></p>'+
+										'<div class="eval_title">'+
+											'<img src="'+v.goodsAcc+'">'+
+											'<span>'+v.goodsName+'</span>'+
+										'</div>'+
+										'<p class="eval_good">'+eval+'</p>'+
+										'<p class="eval_msg">'+v.evaluateInfo+'</p>'+
+										
+										'<p class="eval_time">'+v.addTime+'</p>'+
+									    '</div>'
+                                 }else if(v.imag1!="" && v.imag2==""){
+                                          str+='<div class="eval_shop">'+
+										'<p class="eval_user"><i><img src="'+data.data.userAcc+'"></i><span>'+data.data.userName+'</span><b></b></p>'+
+										'<div class="eval_title">'+
+											'<img src="'+v.goodsAcc+'">'+
+											'<span>'+v.goodsName+'</span>'+
+										'</div>'+
+										'<p class="eval_good">'+eval+'</p>'+
+										'<p class="eval_msg">'+v.evaluateInfo+'</p>'+
+										'<ul class="eval_good_detail">'+
+											'<li><img src="'+v.imag1+'"></li>'+
+											
+											
+										'</ul>'+
+										'<p class="eval_time">'+v.addTime+'</p>'+
+									   '</div>'
+
+                                 }else if(v.imag1!="" && v.imag2!="" && v.imag3==""){
+                                        
+
+                                         str+='<div class="eval_shop">'+
+										'<p class="eval_user"><i><img src="'+data.data.userAcc+'"></i><span>'+data.data.userName+'</span><b></b></p>'+
+										'<div class="eval_title">'+
+											'<img src="'+v.goodsAcc+'">'+
+											'<span>'+v.goodsName+'</span>'+
+										'</div>'+
+										'<p class="eval_good">'+eval+'</p>'+
+										'<p class="eval_msg">'+v.evaluateInfo+'</p>'+
+										'<ul class="eval_good_detail">'+
+											'<li><img src="'+v.imag1+'"></li>'+
+											'<li><img src="'+v.imag2+'"></li>'+
+										
+											
+										'</ul>'+
+										'<p class="eval_time">'+v.addTime+'</p>'+
+									   '</div>'
+                                 } else if(v.imag1!="" && v.imag2!="" && v.imag3!=""){
+                                         
+                                         str+='<div class="eval_shop">'+
+										'<p class="eval_user"><i><img src="'+data.data.userAcc+'"></i><span>'+data.data.userName+'</span><b></b></p>'+
+										'<div class="eval_title">'+
+											'<img src="'+v.goodsAcc+'">'+
+											'<span>'+v.goodsName+'</span>'+
+										'</div>'+
+										'<p class="eval_good">'+eval+'</p>'+
+										'<p class="eval_msg">'+v.evaluateInfo+'</p>'+
+										'<ul class="eval_good_detail">'+
+											'<li><img src="'+v.imag1+'"></li>'+
+											'<li><img src="'+v.imag2+'"></li>'+
+											'<li><img src="'+v.imag3+'"></li>'+
+											
+										'</ul>'+
+										'<p class="eval_time">'+v.addTime+'</p>'+
+									   '</div>'
+
+                                 }
+
+								 
+						  })
+					     $('section').html(str);
+			      }else{
+			      	layer.msg(data.message);
+			     	 setTimeout(function(){
+                     	 history.back(-1);
+                	  },500)
+			      }
+			     
+			    },
+			    error:function(){
+			   
+			    }
+			  })
+
+		</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+body{
+    font-family: "MicroSoft YaHei",sans-serif;/*如果没有微软雅黑 就使用移动端默认的字体*/
+    font-size: 0.35rem;
+    color: #333;
+}
+a{color:#333333;}
+/* a:hover{color:#333333;} */
+
+
+
+.header{
+    width:100%;
+    height:1.375rem;
+    line-height: 1.375rem;
+    vertical-align: middle;
+    background:#c90c1e;
+    font-size: 0.75rem;
+    padding: 0.4rem 0 0.425rem;
+
+
+}
+.back{
+    float:left;
+    width:0.8rem;
+    height:0.8rem;
+    background:url(../images/back.png) no-repeat;
+    background-size:contain;
+    margin-left: 0.525rem;
+    margin-top:0.3rem ;
+}
+.mainLogo{
+    float:left;
+    width:1.225rem;
+    height:1.375rem;
+    background:url(../images/mainLogo.png) no-repeat;
+    background-size: contain;
+    margin-left: 0.7rem;
+}
+.pageTitle{
+    float: left;
+    margin-left: 1.6rem;
+    color:#fff;
+}
+body{
+    height:100%;
+    width:100%;
+    background:#F3F5F7 ;
+}
+section ul{
+    background: #ffffff;
+}
+section ul li{
+    height:2.15rem;
+    line-height: 2.15rem;
+border-bottom:1px solid #ccc;
+    font-size: 0.7rem;
+    text-indent: 0.5rem;
+}
+section ul li span{
+    float: right;
+    margin-right: 1rem;
+    font-weight: 400;
+}
+
+.confirm input{
+    display: block;
+    width:15rem;
+    height:2rem;
+    border-radius:0.3rem;
+    background: #C90C1E;
+    margin: 1.15rem auto;
+    font-size:0.8rem;
+    color:#ffffff;
+    font-family: "MicroSoft YaHei";
+
+}

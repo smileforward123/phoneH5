@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="js/public.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title id="title"></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css"/>
+<link rel="stylesheet" href="css/loading.css"/>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="css/layer/layer.js"></script>
+<script type="text/javascript" src="js/json2.js"></script>
+
+
+
+<style type="text/css">
+.adrigbtn{ position: absolute;width:0.9rem; height:2rem; right: 0.8rem; top:3rem; background:url(images/riggtn.png) no-repeat; }
+p.areain{ margin-top:0.3rem;width:13rem; overflow: hidden; }
+
+/* .coneimtot{
+  height:20rem;
+  overflow-y:auto;
+} */
+#IntegralList{
+  clear:none;
+}
+/* #IntegralList li{
+  float: none;
+} */
+.clear:after:{
+  content:"";
+  display:block;
+  clear:both;
+}
+.scroll {
+    width: 100%;
+   /*  position: fixed;
+   left: 0;
+   top: 2.2rem; */
+  /*  margin-top:2.2rem; */
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* bottom: 0; */
+    background: #f3f5f7;
+}
+</style>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+</script>
+
+</head>
+<body style="background: #f7f7f7;">
+      <header class="car_header red">
+                        <h2><a  href="javascript:void(0)" class="backs" id="orddtashe"></a><p class="iconbox"></p><script>writeI18nPageByKey("theconsignee")</script></h2>
+      </header>
+      <div class="cle mR"></div>
+       <div class="scroll">
+          <div class="backwhile botback" style="height:auto; overflow: hidden;">
+            <div class="locationbox" id="locationbox">
+              <!-- <div class='address' style="height: 5rem; overflow: hidden;"><P class="nametxttwo mt15"> <a>默认</a> </P>
+              <P class="nametxttwo" ></P>
+              <p class="areain"></p>
+              <img style="top:3rem;" class="cominimg" src="images/comin.png"/>
+              <div class="adrigbtn" onclick="addressbox()"></div> 
+              </div> -->
+              <div style='display: block;' class='address' style="height: 5rem; overflow: hidden;">
+                <!-- <P class="nametxttwo mt15"><a>默认</a> </P> -->
+                 <P class="nametxttwo" ></P>
+                 <p class="areain" data="" ></p>
+                  <img style="top:3rem;" class="cominimg" src="images/comin.png"/>
+                 <div class="adrigbtn"  style="margin-bottom:0.5erm;"></div>
+              </div>
+           </div>
+          </div>
+
+        <div class="backwhile ">
+        <div class="consumetxt nonebackin">
+          <div class="condetitle"><script>writeI18nPageByKey("exchangeofgifts")</script></div>
+          <div class="coneimtot">
+            <ul id="IntegralList">
+             <!--  <li><img src="images/img6.jpg"></li>
+             <li>
+             <div class="tdstion"><P>消耗积分：231</P>
+             <p>1个=<i class="numberin">390积分</i></p>
+             
+             <p>积分:390   <spam class="flatone">×1</spam></p>
+             </div>
+             </li> -->
+            </ul>
+            <div class="loading">
+                      <img src="images/loading_more.gif" class="loadImg">
+                      <span>
+                         <script>writeI18nPageByKey("isLoading")</script>...
+                      </span>
+            </div>
+            <div class="noMore">
+                  <span>
+                       <script>writeI18nPageByKey("noMoreData")</script>
+                  </span>
+            </div>
+          </div>
+        </div>
+
+        </div>
+
+        <div class="backwhile">
+    <div class="datlsitimg">
+          <p class="maeesagesin"><script>writeI18nPageByKey("leaveMessage")</script>：<input id="eaveto" type="text" 
+          placeholder="" /></p>
+    </div>
+        </div>
+   
+       <div class="intconfbtn"><a href="javascript:void(0)" id="sucinerot"><script>writeI18nPageByKey("successConvert")</script></a></div>
+      </div>
+     
+
+<script type="text/javascript">
+
+var params=getParam(),
+    goods_id=params.goods_id;
+$(function(){
+
+	$(".tdstion p:eq(1)").css("color","#848689");
+	$(".numberin").css("color","#ed9f08");
+	$(".tdstion p:eq(2)").css("color","#d15d64");
+	$(".flatone").css("float","right");
+})
+  $(".backs").click(function(){
+    window.location.href="integralconvert_repertoire.html?goods_id="+goods_id;
+  })
+  var userNames=ls.getItem('userId')
+  var int=0;
+	var  addressId=getParam();
+  var integralNum=ls.getItem("integralNum");
+  var integralArray=ls.getItem("integralIds").split(",");
+  var cartId=[];
+  var page=0;
+   var str = '';
+  $(window).scroll(function () {
+              var scrollTop=$(this).scrollTop();
+                var scrollHeight =$(document).height(); ;
+                var windowHeight = $(this).height();
+            
+                if (scrollTop+windowHeight>=scrollHeight) {
+                     list();
+                };
+  })
+  list();
+  function list(){
+        page++;
+       $(".loading").show();
+       Datas({
+          url:"buyer/cart_integral_list",
+          datas:{
+                  'user_id':userNames,
+                  'currentPage':page
+                },
+          success:function(data){
+             if(data.status){
+                 if(data.data.length==0){
+                      $(".loading").hide();
+  
+                  }
+                for (var i = 0; i < data.data.length; i++) {
+                   for(var j=0;j<integralArray.length;j++){
+                    if(i==integralArray[j]){
+                       cartId.push(data.data[i].id);
+                          str+='<li class="clear">'+
+                                '<img src=' + data.data[i].goods.url + '>'+
+                                 '<div class="tdstion" data="'+data.data[i].goods.ig_goods_name+'">'+
+                                '<p>' + data.data[i].goods.ig_goods_name + '</p>'+
+                                '<p style="color: #808080; text-decoration: line-through;">'+getI18nPageByKey("conmarketprice")+'：'+data.data[i].goods.ig_goods_price+'</p>'+
+                                '<p>'+getI18nPageByKey("conintegral")+':' + data.data[i].goods.ig_goods_integral + '   <span class="flatone" style="float:right;">×'+data.data[i].count+'</span></p>'+
+                                '</div>'+
+                            '</li>';
+                            
+              
+                        }
+                    }
+                      
+                }
+                $("#IntegralList").html(str);
+         
+              }      
+          },
+          error:function(){
+
+          }
+      }) 
+  }  
+     
+             
+//收货地址
+  Datas({
+    		    url:"buyer/cart_address",
+            datas:{"user_id":userNames},
+            success:function(data){
+              if(data.status){
+           
+                for(var i=0;i<data.data.length;i++){
+                   if(data.data[i].id==addressId.addressId){
+                      var str1='';
+                            str1+="<div style='display: block;' class='address'>";
+                           str1+='<P class="nametxttwo mt15">'+data.data[i].trueName+'</P>'
+                           str1+='<P class="nametxttwo" >'+data.data[i].mobile+'</P>'
+                           str1+='<p class="areain" data="'+data.data[i].area_info+'">'+data.data[i].area_info+'</p>'
+                           str1+='<img style="top:3rem;" class="cominimg" src="images/comin.png"/>'
+                           str1+='<div class="adrigbtn"  style="margin-bottom:0.5erm;"></div>'
+                           str1+="</div>";
+                    }
+                }
+                $("#locationbox").html(str1);
+
+
+
+
+
+              }
+            
+              
+            },
+            error:function(){
+         
+            }
+    })
+
+
+    $("#locationbox").on("click",function(){
+        window.location.href="manageAddress.html";
+    })
+
+    //兑换完成
+    function sucinerot(){
+    
+            Datas({
+                    url:"buyer/exchang_integral_goods",
+                    datas:{
+                          "user_id":userNames,
+                         "cartIds":cartId.join(","),
+                         "content":$("#eaveto").val(),
+                        "address_id":addressId.addressId,
+                        "integral":integralNum
+                       
+                    },
+                    success:function(data){
+                       
+                           if(data.status){
+                              window.location.href="convertComplete.html?orderId="+data.data.id+"&orderSn="+data.data.order_sn+"&transfee="+data.data.ig_transfee+"";
+                           }else{
+                             layer.msg(data.message);
+                           }
+                          
+                    },
+                    error:function(){
+                    
+                    }
+            })
+    } 
+    $("#sucinerot").click(function(){
+        if(addressId.addressId){
+          sucinerot();
+        }else{
+          layer.msg(getI18nPageByKey("establishAaddres"));
+        }
+        
+
+    })
+   $(document).ready(function(){
+      $("#eaveto").attr("placeholder",getI18nPageByKey("Certificate"))
+
+   })   
+ 
+   
+</script>
+</body>
+</html>

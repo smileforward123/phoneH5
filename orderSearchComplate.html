@@ -1,0 +1,577 @@
+<!doctype html>
+<html>
+<head>
+    <script src="js/public.js"></script>
+	<meta charset="UTF-8">
+	<title></title>
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="css/loading.css">
+	<link rel="stylesheet" type="text/css" href="css/orderSearchComplate.css">
+	 <script>
+	    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrapper">
+		<header class="headers">
+			<a href="javascript:void(0)" class="back"></a><span></span>
+			<div class="search_header">
+				<i></i>
+				<input type="text" id="searchInput" placeholder=""  class="search-txt">
+			
+			</div>
+		</header>
+		<div id="section" style="margin-top:2.25rem;background:#fff">
+			<div class="all">
+				<div class="wrap">
+					<div class="wrap_box"></div>
+				
+           		
+				</div>
+			    <div class="loading">
+			           <img src="images/loading_more.gif" class="loadImg"/>
+			           <span>
+			                 <script>writeI18nPageByKey("isLoading")</script><!-- 加载中 -->...
+			           </span>
+			    </div>
+				<div class="noMore">
+				       <span>
+				             <script>writeI18nPageByKey("noMoreData")</script><!-- 没有更多数据了 -->
+				       </span>
+				</div>
+				<div class="no_menu" style="display:none">
+					<dl>
+						<dt><img src="images/nomenu.png"></dt>
+						<dd>
+							<script>writeI18nPageByKey("youHaveNoSuchOrder")</script><!-- 您还没有相关订单 -->
+						</dd>
+					</dl>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	<script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	<script src="css/layer/layer.js"></script>
+	<script type="text/javascript" src="js/menu.js"></script>
+	<script type="text/javascript">
+		var param=getParam(),
+			status=param.orderStatus;
+
+			$('.nav_info>a').on('click',function(){
+				if (!$(this).hasClass('on')) {
+					$(this).addClass('on').siblings().removeClass('on');
+				};
+				
+			})
+			$('.back').on("click",function(){
+				if (status=="") {
+					 window.location.href="allMenu.html";
+				}else if (status==10){
+					 window.location.href="allMenuPay.html";
+				}else if(status==20){
+					 window.location.href="allMenuPreGood.html";
+				}else if(status==30){
+					 window.location.href="allMenuReviece.html";
+				}else if(status==40){
+				    window.location.href="allMenuComGood.html";
+				}
+				
+			})
+		  var page=0;
+			 $(window).scroll(function () {
+		        var scrollTop=$(this).scrollTop();
+		        var scrollHeight = $(document).height();
+		        var windowHeight = $(this).height();
+		        if (scrollTop+windowHeight==scrollHeight) {
+		        	  if($(".search-txt").val()!=""){//不为空搜索
+	                        search();
+	                    }else{
+	                        Fn();
+	                   }
+		        };
+		    }) 
+ 	    
+			//订单列表 buyer/order
+			Fn();
+			function Fn(){
+				$('.loading').show();
+				$(".no_menu").hide(); 	
+				page+=1;
+			
+				var txt;
+				Datas({
+					url:"buyer/order",
+					datas:{"order_status":status,"user_id":ls.getItem("userId"),"currentPage":page},
+					success:function(data){
+					
+					if (data.status&&data.data!="") {
+						$('.all .no_menu').hide();
+						$.each(data.data,function(k,v){
+							var str='',str1='';
+							if (v.status==10) {
+								txt=getI18nPageByKey("waitForPaying")/*"待付款"*/;
+								str1= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+						  						'<a href="javascript:void(0)" class="cancel_menu" onclick="cancelOrder('+v.id+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消订单*/+'</a>'+
+						  						'<a href="javascript:void(0)" onclick="pay('+v.lineType+','+v.totalPrice+','+v.id+')">'+getI18nPageByKey("paying")/*付款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+				  						'</div>';
+				  		    	Str(txt,str1);
+							}else if (v.status==20){
+								txt=getI18nPageByKey("waitForDelivery")/*"待发货"*/;
+								str1= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+						  							'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+					  								'<a href="javascript:void(0)" class="return_money" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+				  						'</div>';
+				  				Str(txt,str1);
+							}else if (v.status==30) {
+								txt=getI18nPageByKey("waitForSigning")/*"待收货"*/;
+								str1= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+			  								'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+					  						'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+					  						'<a href="javascript:void(0)" class="confirm_item" onclick="confirmOrder('+v.id+')">'+getI18nPageByKey("sureYouGotGoods")/*确定收货*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+				  				Str(txt,str1);
+							}else if (v.status==40) {
+								txt=getI18nPageByKey("haveReceivedGoods")/*"已收货"*/;
+								if (v.evaluate==true) {
+								
+										str1= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+									  		'<div class="left">'+
+			  									'<a href="javascript:void(0)" class="more" onclick="more(this,'+v.id+')">'+getI18nPageByKey("botmore")/*更多*/+'</a>'+
+				  									'<div class="box" style="display:none">'+
+				  										'<div class="pos_border">'+
+				  											'<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+					  									'</div>'+
+					  									'<i class="icon"></i>'+
+					  									'<i class="icons"></i>'+
+				  									'</div>'+		  									
+				  								'</div>'+
+				  								'<div class="right" style="float:right">'+
+				  									'<a href="javascript:void(0)"  onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+							  						'<a href="javascript:void(0)"  onclick="watchEval(this,'+v.id+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+				  							'</div>'+
+			  							'<nav>'+
+			  						'</div>';
+								}else{
+									
+										str1= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+									  		'<div class="left">'+
+			  									'<a href="javascript:void(0)" class="more" onclick="more(this,'+v.id+')">'+getI18nPageByKey("botmore")/*更多*/+'</a>'+
+				  									'<div class="box" style="display:none">'+
+				  										'<div class="pos_border">'+
+				  											'<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+					  									'</div>'+
+					  									'<i class="icon"></i>'+
+					  									'<i class="icons"></i>'+
+				  									'</div>'+		  									
+				  								'</div>'+
+				  								'<div class="right" style="float:right">'+
+				  									'<a href="javascript:void(0)"  onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+							  						'<a href="javascript:void(0)">'+getI18nPageByKey("ToEvaluate")/*去评价*/+'</a>'+
+				  							'</div>'+
+			  							'<nav>'+
+			  						'</div>';
+								}							
+			  				
+								Str(txt,str1);
+							}else if(v.status==47){
+								txt=getI18nPageByKey("haveReTurned")/*"已退款"*/;
+				  				str1= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+			  								'<a href="javascript:void(0)" style="margin-left:4rem" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  							'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+				  				Str(txt,str1);
+							}else if(v.status==50){
+								txt=getI18nPageByKey("haveCompleted")/*"已完成"*/;
+		  						str1= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+		  									'<a href="javascript:void(0)" style="margin-left:60%" onclick="watchEval(this,'+v.id+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+				  				Str(txt,str1);
+							}else if (v.status==15) {
+								txt=getI18nPageByKey("offlinePayWaitChecking")/*"线下支付待审核"*/;
+								str1= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)"  class="cancel_menu" onclick="cancelOrder('+v.id+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消订单*/+'</a>'+
+			  									'<a href="javascript:void(0)"  class="confirm_item" onclick="pay('+v.lineType+','+v.totalPrice+','+v.id+')">'+getI18nPageByKey("payInstantly")/*立即付款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+			  							'</div>';
+								Str(txt,str1);
+							}else if(v.status==25){
+								txt=getI18nPageByKey("prepareToSend")/*"准备发货"*/;
+								str1= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									/*'<a href="javascript:void(0)" style="margin-left:60%" >准备发货</a>'+*/
+	  									 '<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  						'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+				  					    '<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+								Str(txt,str1);
+							}else if (v.status==0) {
+								txt=getI18nPageByKey("haveConcelled")/*"已取消"*/;
+								str1='';
+		  						Str(txt,str1);
+							}else if(v.status==45){
+									txt=getI18nPageByKey("applyForReturn")/*"申请退款"*/;
+									str1= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									'<a href="javascript:void(0)" style="margin-left:4rem" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+	  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+/*	  									'<a href="javascript:void(0)">取消退款</a>'+*/
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+		  						Str(txt,str1);
+							}else if (v.status==47) {
+								 txt=getI18nPageByKey("refundOk")/*"退款成功"*/;
+									str1= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+	  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+		  						Str(txt,str1);
+							}else if(v.status==48){
+								 txt=getI18nPageByKey("sellerRefuseToRefund")/*"卖家拒绝退款"*/;
+								 str1= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+			  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+		  							'</div>';
+		  						Str(txt,str1);
+							}
+							function Str(txt,str1){
+								str+='<div class="shop_item shop_goods">'+
+										'<div class="shop_detail">'+
+						              		'<h4 class="store_name">'+
+							                         '<span class="store_icon"></span>'+
+							                         '<b class="shop_name">'+v.store_name+'</b>'+
+							                         '<a href="javascript:void(0)">'+txt+'</a>'+					
+						                    '</h4>'+
+						                   '<div class="shop_item">'
+						                    $.each(v.gcpList,function(k1,v1){
+							                    str+='<a class="orderImg" href="javascript:void(0)" onclick="menuDetai('+v.id+','+v.store_id+')">'+
+								                  		'<dl>'+
+								                  			'<dt><img src="'+v1.goodsMainPhotos+'" /></dt>'+
+								                  			'<dd class="shop_info">'+
+								                  				'<h2>'+v1.goodsName+'</h2>'+
+								                  				'<p><span>'+v1.specInfo+'</span></p>'+
+								                  				'<p><i>RM'+v1.gcPrice+'</i><em>x'+v1.count+'</em></p>'+
+								                  			'</dd>'+
+								                  							
+								                  		'</dl>'+
+							                  		'</a>'
+						                    })
+						                    str+='</div>'+				              
+						              		'<div class="item_price"><p class="span_left">'+getI18nPageByKey("theTotal")/*共*/+''+v.totalcount+''+getI18nPageByKey("itemsGoods")/*件商品*/+'</p><p style="margin-right:0.5rem" class="span_right">'+getI18nPageByKey("totalPay")/*合计*/+'：RM<b>'+v.totalPrice+'</b>('+getI18nPageByKey("includePostage")/*含运费*/+')</p></div>'+str1+
+						              	'</div>'+
+									'</div>'
+							
+								
+							}
+							setTimeout(function(){
+	                           $(".loading").hide();
+	                           $('.wrap_box').append(str);
+             		  		 },500);
+						})
+					}else{
+						// $('.all .no_menu').show();
+						if (page==1) {
+                            setTimeout(function(){
+	                            $(".loading").hide();
+	                            $('.all .no_menu').show(); 
+                         },500)   
+                                     
+                        }else if(page>1){
+                           $(".loading").hide(); 
+                           $('.all .no_menu').hide(); 
+                                   
+                         } 	
+					}
+
+				},
+				error:function(){
+					
+				}
+
+			})
+		}
+		//定单商品搜索
+		var  searchStr="";
+		 $(".search-txt").on("input",function(){
+		 	 page=0;
+		 	 searchStr="";
+             search();
+        })
+		 var text;
+		function search(){
+			$('.loading').show();
+			page+=1;
+			Datas({
+				url:"buyer/order",
+				datas:{"order_status":status,"user_id":ls.getItem("userId"),"currentPage":page,"condition":$(".search-txt").val()},
+			    async:false,
+			  	types:"post",
+				success:function(data){
+					
+					if (data.status&&data.data!="") {
+						$('.all .no_menu').hide();
+						$.each(data.data,function(k,v){
+							var str3="";
+							if (v.status==10) {
+								text=getI18nPageByKey("waitForPaying")/*"待付款"*/;
+								str3= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+						  						'<a href="javascript:void(0)" class="cancel_menu" onclick="cancelOrder('+v.id+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消订单*/+'</a>'+
+						  						'<a href="javascript:void(0)" onclick="pay('+v.lineType+')">'+getI18nPageByKey("paying")/*付款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+				  						'</div>';
+				  		    
+							}else if (v.status==20){
+								text=getI18nPageByKey("waitForDelivery")/*"待发货"*/;
+								str3= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+						  							'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+					  								'<a href="javascript:void(0)" class="return_money" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+				  						'</div>';
+				  			
+							}else if (v.status==30) {
+								text=getI18nPageByKey("waitForSigning")/*"待收货"*/;
+								str3= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+			  								'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+					  						'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+					  						'<a href="javascript:void(0)" class="confirm_item" onclick="confirmOrder('+v.id+')">'+getI18nPageByKey("sureYouGotGoods")/*确定收货*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+				  			
+							}else if (v.status==40) {
+								text=getI18nPageByKey("haveReceivedGoods")/*"已收货"*/;									
+			  					if (v.evaluate==true) {
+								
+										str3= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+									  		'<div class="left">'+
+			  									'<a href="javascript:void(0)" class="more" onclick="more(this,'+v.id+')">'+getI18nPageByKey("botmore")/*更多*/+'</a>'+
+				  									'<div class="box" style="display:none">'+
+				  										'<div class="pos_border">'+
+				  											'<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+					  									'</div>'+
+					  									'<i class="icon"></i>'+
+					  									'<i class="icons"></i>'+
+				  									'</div>'+		  									
+				  								'</div>'+
+				  								'<div class="right" style="float:right">'+
+				  									'<a href="javascript:void(0)"  onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+							  						'<a href="javascript:void(0)"  onclick="watchEval(this,'+v.id+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+				  							'</div>'+
+			  							'<nav>'+
+			  						'</div>';
+								}else{
+									
+										str3= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+									  		'<div class="left">'+
+			  									'<a href="javascript:void(0)" class="more" onclick="more(this,'+v.id+')">'+getI18nPageByKey("botmore")/*更多*/+'</a>'+
+				  									'<div class="box" style="display:none">'+
+				  										'<div class="pos_border">'+
+				  											'<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+					  									'</div>'+
+					  									'<i class="icon"></i>'+
+					  									'<i class="icons"></i>'+
+				  									'</div>'+		  									
+				  								'</div>'+
+				  								'<div class="right" style="float:right">'+
+				  									'<a href="javascript:void(0)"  onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+							  						'<a href="javascript:void(0)" onclick="Evaluate('+v.id+')">'+getI18nPageByKey("ToEvaluate")/*去评价*/+'</a>'+
+				  							'</div>'+
+			  							'<nav>'+
+			  						'</div>';
+								}	
+							}else if(v.status==47){
+								text=getI18nPageByKey("haveReTurned")/*"已退款"*/;
+				  				str3= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+			  								'<a href="javascript:void(0)" style="margin-left:4rem" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  							'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+							}else if(v.status==50){
+								text=getI18nPageByKey("haveCompleted")/*"已完成"*/;
+		  						str3= '<div class="footers_info">'+
+				  						'<nav class="nav_info">'+
+								  		 '<div class="right" style="float:right">'+
+		  									'<a href="javascript:void(0)" style="margin-left:60%" onclick="watchEval(this,'+v.id+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+			  							' </div>'+
+			  							'<nav>'+
+			  						'</div>';
+							}else if (v.status==15) {
+								text=getI18nPageByKey("offlinePayWaitChecking")/*"线下支付待审核"*/;
+								str3= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)"  class="cancel_menu" onclick="cancelOrder('+v.id+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消订单*/+'</a>'+
+			  									'<a href="javascript:void(0)"  class="confirm_item" onclick="pay('+v.lineType+','+v.totalPrice+','+v.id+')">'+getI18nPageByKey("payInstantly")/*立即付款*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+			  							'</div>';
+							}else if(v.status==25){
+								text=getI18nPageByKey("prepareToSend")/*"准备发货"*/;
+								str3= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									/*'<a href="javascript:void(0)" style="margin-left:60%">准备发货</a>'+*/
+	  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+				  						'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+				  					    '<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+							}else if (v.status==0) {
+								text=getI18nPageByKey("haveConcelled")/*"已取消"*/;
+								str3='';
+							}else if(v.status==45){
+									txt=getI18nPageByKey("applyForReturn")/*"申请退款"*/;
+									str1= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									'<a href="javascript:void(0)" style="margin-left:4rem" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+	  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+/*	  									'<a href="javascript:void(0)">取消退款</a>'+*/
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+							}else if (v.status==47) {
+								 text=getI18nPageByKey("refundOk")/*"退款成功"*/;
+									str3= '<div class="footers_info">'+
+			  						'<nav class="nav_info">'+
+							  		 '<div class="right" style="float:right">'+
+	  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+	  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+		  							' </div>'+
+		  							'<nav>'+
+		  						'</div>';
+							}else if(v.status==48){
+								 text=getI18nPageByKey("sellerRefuseToRefund")/*"卖家拒绝退款"*/;
+								 str3= '<div class="footers_info">'+
+					  						'<nav class="nav_info">'+
+									  		 '<div class="right" style="float:right">'+
+			  									'<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+			  									'<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+				  							' </div>'+
+				  							'<nav>'+
+		  							'</div>';
+							}
+						
+								searchStr+='<div class="shop_item shop_goods">'+
+										'<div class="shop_detail">'+
+						              		'<h4 class="store_name">'+
+							                         '<span class="store_icon"></span>'+
+							                         '<b class="shop_name">'+v.store_name+'</b>'+
+							                         '<a href="javascript:void(0)">'+text+'</a>'+					
+						                    '</h4>'+
+						                   '<div class="shop_item">'
+						                    $.each(v.gcpList,function(k1,v1){
+							                    searchStr+='<a class="orderImg" href="javascript:void(0)" onclick="menuDetai('+v.id+','+v.store_id+')">'+
+								                  		'<dl>'+
+								                  			'<dt><img src="'+v1.goodsMainPhotos+'" /></dt>'+
+								                  			'<dd class="shop_info">'+
+								                  				'<h2>'+v1.goodsName+'</h2>'+
+								                  				'<p><span>'+v1.specInfo+'</span></p>'+
+								                  				'<p><i>RM'+v1.gcPrice+'</i><em>x'+v1.count+'</em></p>'+
+								                  			'</dd>'+				
+								                  		'</dl>'+
+							                  		'</a>'
+						                    })
+						                    searchStr+='</div>'+
+						              		'<div class="item_price"><p class="span_left">'+getI18nPageByKey("theTotal")/*共*/+''+v.totalcount+''+getI18nPageByKey("itemsGoods")/*件商品*/+'</p><p style="margin-right:0.5rem" class="span_right">'+getI18nPageByKey("totalPay")/*合计*/+'：RM<b>'+v.totalPrice+'</b>('+getI18nPageByKey("includePostage")/*含运费*/+')</p></div>'+str3+
+						              	'</div>'+
+									'</div>';
+								
+							
+						})
+							
+					 }
+
+					 if(data.data.length==0){
+					 	 $(".loading").hide();
+                         $('.noMore').show();   
+                     }
+
+                    setTimeout(function(){
+                        $(".loading").hide();
+                        $(' .wrap_box').html(searchStr);
+                
+                    },500);
+
+				},
+				error:function(){
+					
+				}
+
+			})
+		}
+
+
+		$(document).ready(function(){
+			$("#searchInput").attr("placeholder",getI18nPageByKey("searchGoods"));
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script type="text/javascript" src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+        <style>
+      .layui-layer-btn .layui-layer-btn1{
+                height: 30px;
+                line-height: 30px;
+                margin: 0 6px;
+                padding: 0 15px;
+                border: 1px solid #dedede;
+                background-color: #f1f1f1;
+                color: #333;
+                border-radius: 2px;
+                font-weight: 400;
+                cursor: pointer;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                   <script>writeI18nPageByKey("alterStoreToBindEmail")</script><!-- 修改绑定邮箱 -->
+            </h3>
+        </header> 
+         <div class="scroll">
+            <h3 class="alterTitle">
+                   <script>writeI18nPageByKey("youAreAlteringEmail")</script><!-- 您正在修改AppAsia账户绑定的邮箱，请进行身份验证 -->
+            </h3>
+            <ul class="alterMobileList">
+                <li>
+                    <a class="canReceive" href="javascript:void(0)">
+                          <script>writeI18nPageByKey("oldEmailCanReceived")</script><!-- 原邮箱号能接收验证码 -->
+                          <em></em>
+                    </a>
+                </li>
+                
+                 <li>
+                    <a class="PWbindEmail"  href="javascript:void(0)">
+                          <script>writeI18nPageByKey("oldEmailCantReceived")</script><!-- 原邮箱号不能接收验证码 -->
+                          <em></em>
+                    </a>
+                </li>
+            </ul>
+            <p class="alterMobileTip">
+                         <script>writeI18nPageByKey("hotlineTip")</script>
+                         <!-- 如无法自助修改，请拨打人工客服<span>400-000-5500</span>转<span>7</span>，由客服协助您进行修改 -->
+            </p>
+         </div> 
+         <script type="text/javascript">
+           
+
+             $(".back").click(function(){
+
+                window.location.href="myAccount.html";
+             })
+             var str="<p class='layerCodeTip'></p><p class='layerCodeText'><input class='testCode'type='text' name=''placeholder='"+getI18nPageByKey("appasiaTestCodeTip")+"'/><input type='button' onclick='sendCode();settime(this)' value='"+getI18nPageByKey("getCheckCode")+"' class='testBtn'/></p>";
+
+            $(".PWbindEmail").click(function(){
+                  window.location.href="identityTest.html"+location.search;
+            })
+
+
+            $(".canReceive").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("verifyTheEmail"),/*'验证邮箱'*/
+                  area: ['14.8rem', '10rem'],
+                  closeBtn: 0,
+                  content: str,
+                  btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                  /* location.href="alterPwByMobile.html";*/
+
+                  }
+                  
+                })
+                 $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-btn a").css({
+                    "font-size":"0.35rem"
+                })
+                //填写弹出框，提示验证码接收邮箱
+                getRequest();
+
+
+                //替换弹出框的确定按钮为 Button
+                $(".layui-layer-btn1").replaceWith("<input type='button' style='font-size:0.35rem;' class='layui-layer-btn1'  value='"+getI18nPageByKey("okBtn")+"'/>")
+                 //给验证码输入框绑定事件
+                $(".testCode").bind("blur",function(){
+                    codeInoutBlur();
+                })
+                //给确定按钮绑定点击事件
+                $(".layui-layer-btn1").bind("click",function(){
+                    if($(".testCode").val()==""){
+                        layer.msg(getI18nPageByKey("testnotEmpty"));
+                        return;
+                    }else if($(".testCode").val()!=""){
+                        sendCodeForChecking();
+                         //设置延时才能获取输入框的验证码
+                        window.setTimeout(function(){
+                            $(".layui-layer-shade").remove();
+                            $(".layui-layer").remove();
+                        },500)
+                    }
+                })
+
+            })
+           //当验证码输入框失去焦点调用函数
+             function codeInoutBlur(){
+                 if($(".testCode").val()==""){
+                     layer.msg(getI18nPageByKey("testnotEmpty"));
+                 }
+             }
+
+             //弹出框确定按钮点击函数
+             function sendCodeForChecking(Code){
+                
+                 Datas({
+                     url:"buyer/validation_email",
+                     datas:{
+                         "email": ls.getItem("userEmail"),
+                         "code":$(".testCode").val()
+                     },
+                     success:function(data){
+                       
+                         if(!data.status){
+                             layer.msg(getI18nPageByKey("errorCode"));
+                         }else if(data.status){
+                             
+                             window.location.href="boundEmail.html";
+                         }
+                     },
+                     error:function(){
+                         
+                     }
+                 })
+             }
+
+            //截取字符串
+             function getRequest(){
+                var emails=  ls.getItem("userEmail");
+                 $(".layerCodeTip").text(getI18nPageByKey("enterEmailNum")+emails.substring(0,3)+"******"+getI18nPageByKey("CheckCodeYouGot"));
+                 
+
+             };
+
+            function sendCode(){
+               
+                Datas({
+                    url:"sendEmail",
+                    datas:{
+                        "email":ls.getItem("userEmail"),
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                            layer.msg(getI18nPageByKey("sendEmailSuccessful"));
+                          
+                          /*  location.href="findPsswordBack-sentCodeEmail.html"+location.search;*/
+                        }else if(!data.status){
+                            layer.msg(getI18nPageByKey("failTosendEmail"));
+                        }
+                    },
+                    error:function(){
+                        
+                       
+                    }
+                })
+            }
+           //重新发送验证码倒计时
+             var countdown=60;
+             function settime(obj) {
+                 if (countdown == 0) {
+                     obj.removeAttribute("disabled");
+                     obj.value=getI18nPageByKey("getCheckCode");/*"获取验证码"*/
+                     countdown = 60;
+                     return;
+                 } else {
+                     obj.setAttribute("disabled", true);
+                     obj.value=getI18nPageByKey("resend")+"(" + countdown + ")";
+                     countdown--;
+                 }
+                 setTimeout(function() {
+                             settime(obj) }
+                         ,1000)
+             }
+
+         </script>
+    </body>
+</html>

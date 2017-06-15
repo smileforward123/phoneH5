@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="js/public.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<!-- <script type="text/javascript" src="js/integraStore.js"></script> -->
+
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/myInt.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<link rel="stylesheet" href="css/publicStyle.css" />
+<link rel="stylesheet" type="text/css" href="css/loading.css">
+<script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/jquery.SuperSlide.min.js"></script>
+<script type="text/javascript" src="css/layer/layer.js"></script>
+<script type="text/javascript">
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+ </script>
+
+<style type="text/css">
+    .header  h3{
+         line-height: 1.375rem;
+         height: 1.375rem;
+         text-align: center;
+         font-size: 0.6rem;
+         color: #fff;
+         position: relative;
+    }
+    .back{
+       position: absolute;
+       left: 0.2rem;
+       top:0rem;
+        width:0.8rem;
+        height:0.8rem;
+        background:url(./images/back.png) no-repeat;
+        background-size:contain;
+        margin-left: 0.525rem;
+        margin-top:0.3rem ;
+    }
+    .mainLogo{
+        position: absolute;
+        left: 2.2rem;
+        top:0rem;
+        width:1.225rem;
+        height:1.375rem;
+        background:url(./images/mainLogo.png) no-repeat;
+        background-size: contain;
+        
+    }
+    .sort-filter a span{
+      font-size: 0.7rem;
+      vertical-align: middle;
+    } 
+    
+    .main-containner .search_good_detail{
+       box-sizing: border-box;
+        width: 7.4rem;
+        float: left;
+    }
+    .commodityDetail .aImg img {
+        height: 5.5rem;
+        width: 5.5rem;
+        margin-top: 0.5rem;
+        background-size: contain;
+        margin-left: 0.3rem;
+  }
+  .car_header .widbox{width:12rem;}
+  .search_good_detail{width: 7.6rem;}
+  .search_good_detail{ float: left; height:12rem; }
+  .myinter{width:100%;overflow:hidden;height: 1.4rem;}
+  .main-photos{margin:0 0.4rem;}
+  .price-discount{margin:0 0.2rem;}
+  div.backbadk{ background:#7b7878; }
+</style>
+</head>
+<body>
+
+<div class="container" id="content">
+  <header class="car_header red">
+          <h2><p style="left:0.8rem;" class="iconbox"></p><div class="textin" style="width:11rem;left:2.5rem;"><i></i><input  type="text" value="" id="goodName" placeholder="Search"/></div><div class="iconbtn" id="Item"></div></h2>
+  </header>
+  <div class="cle mR"></div>
+  <div class="myInt_title">
+   <div class="myinter"><script>writeI18nPageByKey("myIntegral")</script>：<b class="intenumber"><!-- 1348 --></b> <a href="javascript:void(0)" id="redbtnin" onclick="inerNumber()"><script>writeI18nPageByKey("intRecord")</script></a>
+   </div> 
+  </div>
+  <div class="warp_banner mrot" style="position:relative;">
+    <div class="banbox" id="banbox">
+     <div class="banimg">
+      <ul id="slide_bigimg">
+      </ul>
+       <div class="noMore"><span><script>writeI18nPageByKey("noneData")</script></span></div>
+     </div>
+     <ol class="smaCon">
+    <!--   <li class="hover"></li>
+    <li></li>
+    <li></li>
+    <li></li> -->
+     </ol>
+    </div>
+  </div>
+  <div class="cle"></div>
+ <div class="wrapper">
+   <div class="left-containner">
+   </div>
+   
+  </div>
+
+<div class="clear"></div>
+<footer class="footer">
+  <ul class="ul-nav">
+  <li  >
+      <a href="index.html">
+        <img src="images/footer01.png" />
+        <p><script>writeI18nPageByKey("index")</script></p>
+      </a>
+    </li>
+    <li class="active">
+      <a href="myIntegral.html">
+        <img src="images/footer2.png" />
+        <p><script>writeI18nPageByKey("intShoping")</script></p>
+      </a>
+    </li>
+    <li>
+      <a href="shopping_cars.html">
+        <img src="images/footer03.png" />
+        <p><script>writeI18nPageByKey("shoppingCart")</script></p>
+      </a>
+    </li>
+    <li>
+      <a href="aboutMe.html">
+        <img src="images/footer04.png" />
+        <p><script>writeI18nPageByKey("mine")</script></p>
+      </a>
+    </li>
+    <li>
+      <a href="more.html">
+        <img src="images/footer05.png" />
+        <p><script>writeI18nPageByKey("more")</script></p>
+      </a>
+    </li>
+  </ul>
+</footer>
+</div>
+<script  type="text/javascript">
+var userNames= ls.getItem("userId");
+var goods_id="";
+ var num=0;
+    var str="";
+    $(window).scroll(function(){
+       var scrollTop=$(this).scrollTop();
+        var scrollHeight = $(document).height();
+            var windowHeight = $(this).height();
+            if (scrollTop+windowHeight==scrollHeight) {
+              loadAdd();             
+            };
+    })
+    //积分列表：
+  function loadAdd(){ 
+  ls.removeItem('time');
+  ls.removeItem('end');   
+      num+=1; 
+      Datas({
+          url:"buyer/integral_goods_list",
+          datas:{
+              "user_id":userNames,
+              "currentPage":num,
+              "orderBy":"addTime"
+              
+            },
+          success:function(data){
+            if(data.status&&data.data!=""){
+              //我的积分数量
+             var myIntegral=data.statusStr;
+
+              $(".myinter").find("b.intenumber").text(myIntegral);
+              var v=data.data;
+              var btnStr='<input class="exchangeBtn" type="button" name="" value="'+getI18nPageByKey("myconvert")+'">';
+               for(var i=0;i<v.length;i++ ){
+                 // goods_id=v[i].id;
+               if(v[i].ig_goods_count<=0){
+                   btnStr='<input   class="exchangeBtn disabled" type="button" name="" value="'+getI18nPageByKey("myconvert")+'" >';
+                  }else{
+                     btnStr='<input  class="exchangeBtn" type="button" name="" value="'+getI18nPageByKey("myconvert")+'" >';
+                  }
+                  
+                if ($('#Item').hasClass('iconbtn')) {//横排
+                    str+='<div data-count="'+v[i].ig_goods_count+'"  num='+v[i].ig_goods_integral+' data-id="'+v[i].id+'" class="search_good_detail" style="width:48%:margin-left:0.3rem;" data-sum="'+data.statusStr+'"  data-end="'+v[i].ig_end_time+'" data-type="'+v[i].ig_limit_type+'" data-limit="'+v[i].ig_limit_count+'" data-time="'+v[i].ig_time_type+'">'+
+                           ' <img onclick="godsDetails(this,'+v[i].id+','+v[i].ig_goods_count+','+myIntegral+')" class="main-photos" style="width:6.5rem;height:5rem;margin:0.7rem 0.5rem;background-size:contain"   src="'+v[i].url+'" />'+
+                          '<ul class="price-discount">'+
+                              '<li><a href="javascript:void(0)" >'+v[i].ig_goods_name+'</a></li>'+
+                              '<li><b>'+getI18nPageByKey("interal")+'：'+v[i].ig_goods_integral+'</b></li>'+
+                            '<li class="marketprice">'+getI18nPageByKey("marketprice")+'：RM'+v[i].ig_goods_price+'</li>'+ 
+                          ' <li><div class="convertin">'+btnStr+'</div></li>'+
+                           '</ul>' +
+                          '<div class="clear"></div>'+
+                       '</div>';
+                     }else{//竖排
+                          str+='<div data-count="'+v[i].ig_goods_count+'"  num='+v[i].ig_goods_integral+'  class="search_good_detail" style="width:100%;height:7rem;margin-left:0" data-sum="'+data.statusStr+'" data-begin="'+v[i].ig_begin_time+'" data-end="'+v[i].ig_end_time+'" data-type="'+v[i].ig_limit_type+'" data-limit="'+v[i].ig_limit_count+'" data-time="'+v[i].ig_time_type+'">'+
+                               ' <img class="main-photos" style="width:6.5rem;height:5rem;margin-left:0.15rem;float:left;background-size:contain" src="'+v[i].url+'" onclick="godsDetails(this,'+v[i].id+','+v[i].ig_goods_count+','+myIntegral+')" data-id="'+v.id+'"/>'+
+                              '<ul class="price-discount" style="float:left">'+
+                                  '<li><a href="javascript:void(0)">'+v[i].ig_goods_name+'</a></li>'+
+                                  '<li><b >'+getI18nPageByKey("interal")+'：'+v[i].ig_goods_integral+'</b></li>'+
+                                '<li class="marketprice">'+getI18nPageByKey("marketprice")+'：RM'+v[i].ig_goods_price+'</li>'+
+                               ' <li><div class="convertin">'+btnStr+'</div></li>'+
+                              '</ul>' +
+                              '<a href="javascript:void(0)" class="no-favorite"></a>'+
+                                        '<div class="clear"></div>'+
+                           '</div>';
+                           }
+                         
+                          
+                           
+                }
+                 $('.left-containner').html(str);
+               
+            }else{
+              $('.noMore').show();
+            }
+          },
+          error:function(){
+          }
+
+          
+        }) 
+ }
+
+ loadAdd();
+
+//切换横排竖排：
+$("#Item").on("click",function(){
+        if ($(this).hasClass("iconbtn")) {//竖排
+          $(this).removeClass("iconbtn").addClass("sortbtn");         
+          $(".wrapper").find('.left-containner>div').css({"width":"100%","height":"7rem","margin-left":0});
+          $(".wrapper").find('.left-containner>div').find('.main-photos').css("float","left");
+          $(".wrapper").find('.left-containner>div').find('.price-discount').css("float","left");
+        }else{//横排
+          $(this).removeClass("sortbtn").addClass('iconbtn');
+          $(".wrapper").find('.left-containner>div').css({"width":"48%","height": "12rem","margin-bottom": "0.4rem","margin-left": "0.2rem","float": "left"});
+          $(".wrapper").find('.left-containner>div').find('.main-photos').css({"width": "6.5rem","height": "5rem","margin": "0.7rem 0.5rem"});
+          $(".wrapper").find('.left-containner>div').find('.price-discount').css("float","none");
+
+       }
+        
+})
+//banner轮播
+Datas({
+        url:"buyer/advertList_mark",
+        datas:{'mark':4},
+        success:function(data){
+         var data=data.data,str2='',str='';
+         for(var i=0; i < data.length; i++) {
+           str+='<li onclick="Slider('+data[i].ad_type+',\''+data[i].ad_type_value+'\')"><img src="'+data[i].img_url+'"/></li>';
+           str2+='<li></li>';
+          }
+          $("#slide_bigimg").html(str); 
+          $('.smaCon').html(str2);
+          $('.smaCon').find('li').eq(0).addClass('hover');
+          jQuery("#banbox").slide({mainCell:".banimg ul",titCell:".smaCon li",trigger:"click",effect:"leftLoop",autoPlay:true,delayTime:500,interTime:5000,pnLoop:false,titOnClassName:"hover"});
+        }
+})
+  //图片轮播点击判断type value
+    function Slider(type,val){
+      if (val!="") {
+        if (type==1) {//商品详情
+         window.location.href="product.html?goods_id="+val;
+        }else if(type==2){//店铺
+           window.location.href="obussinessmanShop.html?goods_store="+val;
+        }else if(type==3){//积分商城
+           window.location.href="myIntegral.html";
+        }else if(type==4){//活动
+           window.location.href="activity.html?act_id="+val;
+        }else if(type==5){//网页
+           window.location.href=val;
+        }else if(type==6){
+           window.location.href="allMenu.html";
+        }
+      }else{
+         window.location.href="index.html";
+      }
+  }
+
+//兑换记录
+function inerNumber(){
+  if(!userNames){   
+    window.location.href="Appsia_login.html";
+  }else{
+     window.location.href= "integralconvert_record.html";
+  }
+}
+
+//兑换积分点击事件：
+ function exchangeList(goods_id,integral,count){
+        Datas({
+              url:"buyer/cart_integral_save",
+              datas:{'user_id':userNames,
+                     'integral_goods_id':goods_id ,
+                     'integral':integral //商品积分：
+              },
+              success:function(data){
+
+                if(data.status){
+                     window.location.href="integralconvert_repertoire.html?goods_id="+goods_id;
+                }else{
+                  layer.msg(data.message);
+                }
+              },
+              error:function(){
+                
+              }
+      })  
+                      
+}
+$(".left-containner").delegate(".exchangeBtn","click",function(){
+      var count=$(this).parents(".search_good_detail").data("count"),//库存
+          goodsId=$(this).parents(".search_good_detail").data("id"),
+          integral=$(this).parents(".search_good_detail").attr("num"),//商品的积分
+          sum=$(this).parents(".search_good_detail").data("sum"),//总积分
+          //时间限制
+          end=$(this).parents(".search_good_detail").data("end"),
+          //限制兑换数量
+          type=$(this).parents(".search_good_detail").data("type"),//兑换类型判断
+          limit=$(this).parents(".search_good_detail").data("limit"),//兑换数量
+          time=$(this).parents(".search_good_detail").data("time");//限制时间类型判断
+      if(ls.getItem("userId")){//判断用户存在
+              if (integral>sum){
+                  layer.msg(getI18nPageByKey("lackIntegral"));//积分不足
+                  return;
+               }
+               //库存
+                if (count<=0){
+                  layer.msg(getI18nPageByKey("lackInventory"));//库存不足
+                  return;
+                }
+              //判断过期时间
+                   function putTime(dateStr){
+                     
+                       var dateStrArr = dateStr.split(" "),
+                           dateOne = dateStrArr[0].split("-"),
+                           dateTwo = dateStrArr[1].split(":");
+                        return  new Date(dateOne[0],dateOne[1],dateOne[2],dateTwo[0],dateTwo[1],dateTwo[2]).getTime();           
+                    }
+                 if (time==true) {
+                     var todays=putTime(getNowFormatDate()),
+                          yesterday= putTime(end);
+                       if (todays-yesterday>0) {
+                          layer.msg(getI18nPageByKey("exchangeExpired"));
+                          return;
+                       }; 
+                 };
+                exchangeList(goodsId,integral,count);
+
+
+
+        }else{
+           window.location.href="Appsia_login.html";
+        }
+     
+     
+      
+})
+    //商品情况
+
+    function godsDetails(ele,goods_id,count,myIntegral){
+       var sum=$(ele).parents(".search_good_detail").data("sum"),//总积分
+        integral=$(this).parents(".search_good_detail").attr("num");//商品的积分
+       if (integral>sum) {
+            layer.msg(getI18nPageByKey("lackIntegral"));//积分不足
+       }else{
+            window.location.href="goodsdetails.html?count="+count+"&goods_id="+goods_id+"&myIntegral="+myIntegral;
+       }
+     
+    }
+    //积分搜索
+    $('#goodName').on("click",function(){
+         window.location.href="integralSearch.html";
+    })
+    
+    //获取当前日期
+     function getNowFormatDate() {
+          var date = new Date();
+          var seperator1 = "-";
+          var seperator2 = ":";
+          var month = date.getMonth() + 1;
+          var strDate = date.getDate();
+          if (month >= 1 && month <= 9) {
+              month = "0" + month;
+          }
+          if (strDate >= 0 && strDate <= 9) {
+              strDate = "0" + strDate;
+          }
+          var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+                  + " " + date.getHours() + seperator2 + date.getMinutes()
+                  + seperator2 + date.getSeconds();
+          return currentdate;
+      } 
+      
+</script>
+</body>
+</html>

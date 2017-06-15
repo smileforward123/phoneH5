@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部代码*/
+*{ margin:0; padding:0;}
+input{
+    border:1px solid #999999;
+}
+.pageTitle{
+    margin-left: 3.15rem;
+}
+.transactInfor{
+                 font-size:0.6rem;
+                 width:15rem;
+                 margin:0 auto;
+                 border-bottom:1px solid #cccccc;
+                 padding-bottom:0.3rem;
+}
+.amount{
+       position:relative;
+}
+.amountL{
+         width:50%;
+         float:left;
+         text-align:left;
+}
+.amountR{
+        width:50%;
+        float:right;
+        text-align:right;
+}
+.transactInfor ul li{
+        display:block;
+        padding-top:0.2rem;
+        padding-bottom:0.2rem;
+}

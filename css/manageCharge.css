@@ -1,0 +1,130 @@
+@charset "utf-8";
+/* CSS Document */
+/*头部代码*/
+/* *{ margin:0; padding:0;}
+input{
+    border:1px solid #999999;
+} */
+.pageTitle{
+    margin-left: 3.15rem;
+}
+.scroll{
+    bottom:0;
+}
+.transactInfor{
+                 font-size:0.5rem;
+                 background:white;
+                 margin:0 auto;
+                 border-bottom:1px solid #cccccc;
+                 padding-bottom:0.3rem; border-top:1px solid #cccccc;
+                 padding-top:0.2rem;
+                 position:relative;
+                 margin-bottom:0.5rem;
+}
+.transactInfor ul{
+    width:13.5rem;
+   
+    display:inline-block;
+    float: left;
+
+
+
+}
+.amount{
+       position:relative;
+}
+.amountL{
+         width:50%;
+         float:left;
+         text-align:left;
+}
+.amountR{
+        width:45%;
+        float:right;
+        text-align:right;
+}
+.transactInfor ul li{
+        display:block;
+        padding-top:0.2rem;
+        padding-bottom:0.2rem;
+}
+.edit{
+    color:white;
+    font-size:0.8rem;
+    display:inline-block;
+    text-align:center;
+    width:3rem;
+    float:right;
+
+}
+.selectBox{
+    display:inline-block;
+    height:100%;
+
+    width:1rem;
+    padding-left:0.25rem;
+    padding-right:0.25rem;
+    float: left;
+
+}
+.selectBox label{
+    visibility:hidden;
+}
+.selectBox i {
+    display: inline-block;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-right: 0.25rem;
+    background: url(../images/radio.png) no-repeat;
+    vertical-align: middle;
+    background-size: contain;
+}
+.selectBox  input:checked+i {
+    background: url(../images/guestRadio.png) no-repeat;
+    background-size: contain;
+}
+.transactInfor ul{
+    float: left;
+}
+/* .select{
+     display:block;
+    background:url(../images/check_radio.png) no-repeat center;
+    background-size:cover;
+    height:1rem;
+    width:1rem;
+    position:absolute;
+    top:1.4rem;
+} */
+.clicked{
+    display:block;
+    background:url(../images/clicked.jpg) no-repeat center;
+    background-size:cover;
+    height:1rem;
+    width:1rem;
+}
+
+.operator{
+    height:2rem;
+    background:#e6e6e6;
+    line-height:2rem;
+    position:fixed;
+     bottom:0;
+    width:100%;
+    left:0;
+    display:none;
+}
+.operator a{
+    display:inline-block;
+    box-sizing:border-box;
+    width:50%;
+    float:left;
+    text-align:center;
+
+}
+.cancel{
+    border-right:1px solid #999999;
+    color:#333333;
+}
+.del{
+    color:#da2a2e;
+}

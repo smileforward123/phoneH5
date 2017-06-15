@@ -1,0 +1,23 @@
+@charset "utf-8";
+.myintcon{margin-top:2.2rem; background:#FFF;padding:0.4rem 0.6rem; display:inline-block;width:92.1%;border-bottom:solid 0.01rem #eeeeee;}
+.myintcon h2{ color:#737373; font-size:0.6rem; line-height:1.7rem; height:1.7rem;}
+.intifor p{ font-size:0.82rem;color:#ff8001; padding-left:1rem; font-weight:bold; float: left;}
+.intifor a{ float: right; background: #ec6726;width:4rem; height:1.2rem; line-height: 1.2rem; text-align: center; color:#FFF; border-radius:1rem;-moz-border-radius:1rem;
+  -webkit-border-radius:1rem;}
+  .detilst{ clear:left;font-size:0.65rem;padding:0.8rem 0;text-align:center; display:block;color:#ff8a14;font-weight:bolder;}
+  .intrecord{margin:0.5rem 0; background: #ffffff;border-bottom:solid 0.01rem #eeeeee; border-top:solid 0.01rem #eeeeee; height: 2.5rem; line-height: 2.5rem;padding:0 0.8rem; font-size:0.6rem; color: #0e0e0e;}
+  .reicon{background:url(../images/recotu1.png) no-repeat; width:1.3rem; height: 1.3rem; background-size:100% 100%; display:inline-block;margin:0 0.1rem;
+    vertical-align:middle;margin-right:0.2rem;}
+  .intrecord p{background:url(../images/record2.png) no-repeat;width:0.8rem; height: 1.2rem;background-size:100% 100%; display:inline-block; float:right; vertical-align:middle;margin:0.8rem 0 0 0; }
+  /* .conAllbox{margin-top:2.2rem;padding-top:0.4rem;} */
+  .atitle{ width:100%; display: block;}
+  .timer{ float:left;width:80%;font-size:0.6rem;line-height: 1rem; height: 1rem;font-weight:normal; }
+  .atitle b{float: right;font-weight:normal;font-size:0.65rem;color:red;margin-right:0.4rem; }
+  .parList{}
+  .parList li{font-size: 0.6rem;background:#FFF;display:inline-block;margin:0.4rem auto;width: 100%;}
+  .parList li p{clear: left;width:100%; line-height: 1rem; height: auto;}
+
+
+/* Added by Elias - 20/01/2017 */
+.atitle b{margin-right: 1.4rem;}
+.parList li{padding-left: 0.7rem;}

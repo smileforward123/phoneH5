@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<script src="js/public.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<meta content="email=no" name="format-detection" />
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/publicComment.css">
+	<script type="text/javascript">
+		document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<!-- 引用核心层插件 -->
+<!-- 	<link rel="stylesheet" type="text/css" href="css/diyUpload/css/webuploader.css">
+<link rel="stylesheet" type="text/css" href="css/diyUpload/css/diyUpload.css">
+<script type="text/javascript" src="css/diyUpload/js/webuploader.html5only.min.js"></script>
+<script type="text/javascript" src="css/diyUpload/js/diyUpload.js"></script> -->
+	<!-- 星星插件 -->
+	<link type="text/css" rel="stylesheet" href="demo/css/application.css">
+    <script type="text/javascript" src="lib/jquery.raty.min.js"></script>
+    <style>
+		.star img{
+			margin-top: 0.4rem;
+		} 
+       .photos{
+          height:3rem;
+          width:3rem;
+          margin-left:0.5rem;
+          float:left;
+         
+          position:relative;
+       }
+       .photos img{
+       	height:100%;
+       	width:100%;
+       }
+       .commentP{
+       	width:100%;
+       	height:100%;
+       	opacity:0;
+       }
+       .as{
+       	 background:url(images/camera.png) no-repeat center;
+       	 border:1px solid #cccccc;
+       }
+       img{
+       	border:none;
+       }
+       h2{
+       	border-bottom:none;
+       }
+       #btn{
+       	width:100%;
+       	height:2rem;
+       	color:white;
+       	background:#C90C1E;
+       	border:none;
+        font-size:0.5rem; 
+       }
+       body{
+        background:none;
+       }
+
+       .wrapper header h2{
+        line-height:2.3rem;
+       }
+      header{
+           z-index:100000;
+      } 
+    </style>
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			  <h2>
+	        	<a href="allMenuComGood.html" class="back"></a>
+	        	<span></span>
+	        	 <script>writeI18nPageByKey("ToComment")</script><!-- 发表评论 -->
+	        </h2>
+		</header>
+		<section>
+		<div id="goodbox">
+					
+			</div>
+			<div class="shop_comment">
+					<h2>
+              <script>writeI18nPageByKey("scoreOfStore")</script><!-- 店铺评分 -->
+          </h2>
+					<div class="div_com" id="meeting">
+						<span>
+                <script>writeI18nPageByKey("descriptionAccordWith")</script><!-- 描述相符 -->
+            </span>
+						<div class="star"></div>
+					</div>
+					<div class="div_com" id="delivery">
+						<span>
+                <script>writeI18nPageByKey("deliverGoodsSpeed")</script><!-- 发货速度 -->
+            </span>
+						<div class="star"></div>
+					</div>
+					<div class="div_com" id="serviceA">
+						<span>
+                <script>writeI18nPageByKey("serviceAttitude")</script><!-- 服务态度 -->
+            </span>
+						<div class="star"></div>
+					</div>
+			</div>
+		</section>
+		<div class="footers">
+			<button id="btn">
+                <script>writeI18nPageByKey("ToComment")</script><!-- 发表评论 -->
+      </button>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="js/zepto.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	  <script src="css/layer/layer.js"></script>
+	<script type="text/javascript">
+		
+        var url=getRequest();
+        var orderID = url[0].split("=");
+        var storeID =url[1].split("=");
+        var userID  =ls.getItem('userId');     
+      
+           //解析地址栏
+          function getRequest(){
+               var url = location.search;
+               var url1 =url.substr(1);
+                var userInfor = url1.split("&");
+              /* var userName = url11[1];*/
+               return userInfor;
+           }
+
+              
+            var divs=$("<div id='covers' style='width:100%;height:100%;opacity:0.5;position:absolute;z-index:10000;background:url(images/loading_more.gif) no-repeat center;'></div>") ;
+             $("body").prepend(divs);
+            
+
+            
+
+             Datas({
+                  url:"order_view",
+                  datas:{
+                           "id":orderID[1],
+                      "storeId":storeID[1],
+                      "user_id":userID,
+                  },
+                  success:function(data){
+                      
+                     
+
+                    var goodVolume =  data.data.gcs;
+                      
+                    if(data.status){
+                        $("#covers").remove();
+                    
+                    for(var i=0;i<goodVolume.length;i++){
+                                 var str1="";
+                        
+		 			                str1 +='<div class="goodscore" title="'+goodVolume[i].id+'">'+
+		 			                  '<div class="top">'+
+		 				              '<img src="'+goodVolume[i].goodsUrl+'">'+
+		 				              '<textarea title="'+goodVolume[i].id+'" placeholder="'+getI18nPageByKey("HowDoYouThinkAboutTheGoods")/*请写下对宝贝的感觉,对他人帮助很大哦！*/+'"></textarea>'+
+		 			                  '</div>'+
+		 			                   '<div id="demo" class="public_photo">'+
+		 				               '<div  class="photos as">'+
+		                               '<input type="file" id="'+goodVolume[i].id+'" class="commentP"/>'+
+		 				               '</div>'+
+		 				               '<div  class="photos ppp CP" style="background:none;display:none">'+
+		                               '<img title="'+goodVolume[i].id+'" src=""/>'+
+		 				               '</div>'+
+		 				               '<div  class="photos ppp CP1" style="display:none;background:none">'+
+		                               '<img title="'+goodVolume[i].id+'" src=""/>'+
+		 				               '</div>'+
+		 				               '<div  class="photos ppp CP2" style="display:none;background:none">'+
+		                               '<img title="'+goodVolume[i].id+'"  src=""/>'+
+		 				               '</div>'+
+		 			                   '</div>'+
+		 			                   '<div class="type_comment">'+
+		 				               '<div title="'+goodVolume[i].id+'" class="good_comment">'+
+		 					           '<a href="javascript:void(0)">'+getI18nPageByKey("goodEval")/*好评*/+'</a>'+
+		 				               '</div>'+
+		 				               '<div title="'+goodVolume[i].id+'" class="middle_comment">'+
+		 					           '<a href="javascript:void(0)">'+getI18nPageByKey("mediateEval")/*中评*/+'</a>'+
+		 				               '</div>'+
+		 				               '<div title="'+goodVolume[i].id+'" class="lower_comment">'+
+		 					           '<a href="javascript:void(0)">'+getI18nPageByKey("badEval")/*差评*/+'</a>'+
+		 				               '</div>'+
+		 			                   '</div>'+
+		 			                   '</div>';
+		 			                   $("#goodbox").append(str1);
+		 			                  
+
+
+                                        
+		 			                 
+                            }
+
+                                     
+		 			                   $(".commentP").bind("change",function(){
+                                         
+                                            uploadImg($(this));
+		 	                           
+		 	                               }).parent().parent().siblings(".type_comment").find(".good_comment a").bind("click",function(){
+                                                       
+                                               
+                                               
+                                                if (!$(this).hasClass('add')) {
+				                                
+				                                $(this).addClass('add').attr("title","1");
+				                                
+				                                $(this).parent().siblings().find("a").removeClass("add").removeAttr("title");
+
+			                                    }else{
+				                                     
+				                                      $(this).removeClass('add');
+				                                       $(this).removeAttr('title');
+
+		                                          	}  
+		 	                                 
+		 	                               });
+
+                                        $(".commentP").parent().parent().siblings(".type_comment").find(".middle_comment a").bind("click",function(){
+                                                       
+                                               
+                                                  if (!$(this).hasClass('add')) {
+				                                   $(this).addClass('add').attr("title","0");
+				                                   $(this).parent().siblings().find("a").removeClass("add").removeAttr("title");
+			                                    }else{
+				                                      $(this).removeClass('add');
+				                                      $(this).removeAttr('title');
+		                                          	}  
+		 	                                 
+		 	                               });
+
+                                        $(".commentP").parent().parent().siblings(".type_comment").find(".lower_comment a").bind("click",function(){
+                                                       
+                                                
+                                                  if (!$(this).hasClass('add')) {
+				                                               $(this).addClass('add').attr("title","-1");
+				                                $(this).parent().siblings().find("a").removeClass("add").removeAttr("title");
+			                                    }else{
+				                                      $(this).removeClass('add');
+				                                      $(this).removeAttr('title');
+		                                          	}  
+		 	                                 
+		 	                               }) 
+
+                       } 
+
+                                        
+
+
+
+
+
+                  },
+                  error:function(){
+                    
+                  }
+
+                })
+
+      
+      var meetings="";
+      var delivery ="";
+      var serviceA ="";
+
+		
+        
+//星星评分
+      $(function() {
+        $.fn.raty.defaults.path = 'lib/img';
+      $('#meeting .star').raty({
+          click: function(score, evt) {
+            
+            meetings =score;
+            $(this).addClass("scored");
+           
+            
+          }
+        })
+      });  
+
+
+      $(function() {
+        $.fn.raty.defaults.path = 'lib/img';
+      $('#delivery .star').raty({
+          click: function(score, evt) {
+            
+            delivery =score;
+            $(this).addClass("scored");
+           
+           
+          }
+        })
+      }); 
+
+       $(function() {
+        $.fn.raty.defaults.path = 'lib/img';
+      $('#serviceA .star').raty({
+          click: function(score, evt) {
+           
+            serviceA =score;
+            $(this).addClass("scored");
+           
+          }
+        })
+      });   
+
+
+
+
+
+            var photo=[];//图片数组：
+           
+    	
+			function uploadImg(obj){
+				
+                
+                 //判断图片格式
+                  if( !/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(obj.val())){
+                     layer.msg(getI18nPageByKey("formatOfImages"));
+                     /*"图片类型必须是.gif,jpeg,jpg,png中的一种"*/
+                     return;
+                  }
+
+				//获取需要上传的图片
+				
+				
+				
+				       var back= obj.parent().siblings(".CP").find("img").attr("src");
+                var back2= obj.parent().siblings(".CP1").find("img").attr("src");
+                 var back3=  obj.parent().siblings(".CP2").find("img").attr("src");
+                 
+                if(back && back2 && back3){
+                   layer.msg(getI18nPageByKey("imagesReachMaximum"));/*"图片数量已达上限"*/
+                      return;
+                               
+                  }
+			//上传图片过程中的遮罩层
+          
+             $("body").prepend(divs);
+                 
+				 
+
+                   
+        var fileUpload = obj[0].files[0];
+				var fd = new FormData();
+				var reader = new FileReader();
+				reader.readAsDataURL(fileUpload);
+				fd.append("file",fileUpload);
+				$.ajax({   
+                    url:"/upload",   
+                    type : 'post',
+					processData : false, 
+					contentType : false,
+                    data : fd,   
+                    success : function(data){   
+                      
+                       
+                         var dataObj=JSON.parse(data);
+                        
+                        if(dataObj.status){
+                            
+                            photo.push(dataObj.data[0].id);
+                            var url="https://devimg0119.oss-cn-hongkong.aliyuncs.com/" + dataObj.data[0].path+"/"+dataObj.data[0].name; 
+                            $("#covers").remove();
+                                  
+                                      if(!back){
+                                                 
+                                                 obj.parent().siblings(".CP").css("display","block");
+				                                 obj.parent().siblings(".CP").find("img").attr("src",url);
+                                                 obj.parent().siblings(".CP").attr("title",dataObj.data[0].id).addClass("havess");
+                                                
+                                              
+                                          }else if(back && !back2){
+                                                  
+
+                                              
+                                                 obj.parent().siblings(".CP1").css("display","block");
+                                                 obj.parent().siblings(".CP1").find("img").attr("src",url);
+                                                 obj.parent().siblings(".CP1").attr("title",dataObj.data[0].id).addClass("havess1");
+                                        
+                                               
+                                                
+                                             }else if(back2 && !back3){
+                                             	 
+                                             	  obj.parent().siblings(".CP2").css("display","block");
+                                             	  obj.parent().siblings(".CP2").find("img").attr("src",url);
+                                                  obj.parent().siblings(".CP2").attr("title",dataObj.data[0].id).addClass("havess2");
+                                             
+                                           }
+                            
+                  　}
+                  },
+                    error:function(){
+                            $("#covers").remove();
+                          
+                    }    
+                });
+			};
+            
+   
+			//发表评论
+			$("#btn").click(function(){
+                  
+                 var evlText="";
+                 var EvalScore ="";
+                 var imgId="";
+                 var image="";
+                 var text=''; 
+               
+
+       
+              
+                 if(!$("#delivery .star").hasClass('scored') || !$("#meeting .star").hasClass('scored') || !$("#serviceA .star").hasClass('scored')){
+                   layer.msg(getI18nPageByKey("pleaseScoreStore"));/*"请为店铺评分"*/
+                   return;
+                 }
+               
+                $(".goodscore").each(function(index,current){
+                   
+                
+                   text=  $(this).children(".top").find("textarea").val();
+                  var score=  $(this).children(".type_comment").find("div").find('.add').attr("title");
+              
+                  evlText += $(this).attr('title')+'_'+text+',';
+                  EvalScore +=$(this).attr('title')+'_'+score+',';
+                 
+               
+                });
+                  
+                    if(EvalScore.indexOf('undefined')>0){
+                       layer.msg(getI18nPageByKey("commentCantBeNull"));/*"评价不可为空"*/
+                       return;
+                 }else if(text==''){
+                     layer.msg(getI18nPageByKey("pleaseEnterContent"));/*"请填写评价内容"*/
+                     return;
+                 } 
+                if($(".havess")){
+                 
+                     $(".havess").each(function(){
+                        
+                                 var  thechild= $(this).children().attr('title')+'_'+$(this).attr('title')+"/"+$(this).siblings(".havess1").attr('title')+'/'+$(this).siblings(".havess2").attr('title')+',';
+                                  
+                                 
+                                   if(thechild.indexOf('/undefined/undefined')>0){
+                                    imgId = thechild.replace('/undefined/undefined',"")
+                                        
+                                   }else if(thechild.indexOf('/undefined')>0){
+                                             imgId = thechild.replace('/undefined',"")
+                                             
+                                   }else if(thechild.indexOf('/undefined')<0){
+                                               imgId = thechild;
+                                             
+                                   }
+
+                    
+                                    image +=imgId;
+                     
+                     })
+                  }
+                  
+
+
+                   imgId=image.substring(0,image.length-1);
+                   evlText =evlText.substring(0,evlText.length-1);
+                   EvalScore =EvalScore.substring(0,EvalScore.length-1);
+                   
+                        
+                   $("body").prepend(divs);
+                              
+
+
+                     Datas({
+                      url:"evaluate/evaluate_save",
+                       types:"POST",
+                       
+                       datas:{
+                         "evluateInfo":evlText,
+                              "buyVal":EvalScore,
+                                 "img":imgId,
+                             "desEval":meetings,
+                         "serviceEval":serviceA,
+                            "shipEval":delivery,
+                               "of_id":orderID[1],
+                             "user_id":userID
+                    
+                  },
+                    success:function(data){
+                     
+                      if(data.status){
+                         layer.msg(getI18nPageByKey("evaluatedOk"));
+                         /*"评价成功"*/
+                         $("#covers").remove();
+                          window.location.href="allMenu.html";
+
+                      }else {
+                           /* layer.msg("评价失败");*/
+                           $("#covers").remove();
+                           
+                      } 
+                  },
+                  error:function(){
+                   /*  layer.msg("请求失败");*/
+                     
+                     
+                  }
+
+                })
+
+			})
+			
+       
+   
+	</script>
+</body>
+</html>

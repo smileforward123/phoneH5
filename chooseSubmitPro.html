@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+         <link rel="stylesheet" href="css/complaintDetail.css" />
+         <link href="css/submitProList.css" rel="stylesheet"/>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <div class="submitProBox">
+            <header class="header clear">
+                 <span class="back"></span>
+                <a href="#" class="mainLogo"></a>
+                <h3 class="pageTitle">
+                        <script>writeI18nPageByKey("chooseGoodsOfComplaining")</script><!-- 选择投诉商品 -->
+                </h3>
+               
+            </header>
+            <div class="submitProScroll">
+                <div class="proList">
+                   <!--  <div class="shopDetail clear">
+                           <label>
+                               <input type="checkbox" name="" />
+                               <i></i>
+                           </label>
+                           <a href="javascript:void(0)" class="orderImg">
+                               <dl>
+                                   <dt class="imgBox"><img src="https://devimg0119.oss-cn-hongkong.aliyuncs.com/store/114/3e75dc15-e9ee-4604-8a6e-6a5bab3473e8.png">
+                                   </dt>
+                                   <dd class="shop_info">
+                                       <h2 class="title">平台发货-1kg-13</h2> 
+                                       <p class="propertyBox"><span>Size:LColor:White</span>
+                                       </p>
+                                   </dd>
+                                   <dd class="shop_price">
+                                       <b  class="price">RM100</b>
+                                      
+                                       <i class="count">x1</i> 
+                                   </dd>
+                               </dl> 
+                           </a>
+                   </div>
+                   <div class="shopDetail clear">
+                               <label>
+                                   <input type="checkbox" name="" />
+                                   <i></i>
+                               </label>
+                           <a href="#" class="orderImg" onclick="Item(99914)">
+                               <dl>
+                                   <dt class="imgBox"><img src="https://devimg0119.oss-cn-hongkong.aliyuncs.com/store/114/3e75dc15-e9ee-4604-8a6e-6a5bab3473e8.png">
+                                   </dt>
+                                   <dd class="shop_info">
+                                       <h2 class="title">平台发货-1kg-13</h2> 
+                                       <p class="propertyBox"><span>Size:LColor:White</span>
+                                       </p>
+                                   </dd>
+                                   <dd class="shop_price">
+                                       <b  class="price">￥100</b>
+                                      
+                                       <i class="count">x1</i> 
+                                   </dd>
+                               </dl> 
+                           </a>
+                   </div> -->
+                </div>
+                <div class="nextBtn">
+                        <script>writeI18nPageByKey("theNextStep")</script><!-- 下一步 -->
+                </div>
+            </div>
+        </div>
+       <script>
+            $(document).ready(function(){
+             $("#title").text(getI18nPageByKey("chooseGoodsOfComplaining"));
+             
+          })
+            $(".back").click(function(){
+                history.back(-1);
+            })
+            var orderObj=getParam();
+       
+            var str="";//投诉的商品列表：
+             //订单详情接口：
+            Datas({
+                url:"order_view",
+                datas:{   "id":orderObj.order_id,
+                        "storeId":orderObj.storeId,
+                        "user_id":ls.getItem('userId')
+                        },
+                success:function(data){
+               
+                    for(var i=0;i<data.data.gcs.length;i++){
+                      
+                        str+='<div class="shopDetail clear" checked="false">'+
+                            '<label>'+
+                                '<input type="checkbox" name="" />'+
+                                '<i></i>'+
+                            '</label>'+
+                            '<a href="javascript:void(0)" class="orderImg" id='+data.data.gcs[i].goods.id+'>'+
+                                '<dl>'+
+                                    '<dt class="imgBox">'+
+                                        '<img src='+data.data.gcs[i].goodsUrl+'>'+
+                                    '</dt>'+
+                                    '<dd class="shop_info">'+
+                                        '<h2 class="title">'+data.data.gcs[i].goods.goods_name+'</h2>'+ 
+                                        '<p class="propertyBox">'+
+                                            '<span>'+data.data.gcs[i].spec_info+'</span>'+
+                                        '</p>'+
+                                    '</dd>'+
+                                    '<dd class="shop_price">'+
+                                        '<b  class="price">'+data.data.gcs[i].price+'</b>'+
+                                         '<i class="count">x'+data.data.gcs[i].count+'</i>'+ 
+                                    '</dd>'+
+                                '</dl>'+ 
+                            '</a>'+
+                        '</div>';
+
+                    }
+                    $(".proList").append(str);
+                },
+                error:function(){
+                
+                }
+            });
+            var arr=[];//定义数组存储选中的i值：
+            var goodsArr=[];
+            $(".nextBtn").click(function(){
+              
+                var len=0;//选中的个数;
+                $(".proList .shopDetail").each(function(index,item){
+                    if($(this).find("input[type='checkbox']").prop("checked")){
+                      
+                        arr.push(index);
+                        goodsArr.push($(this).find(".orderImg").attr("id"));
+                        len++;
+                    }
+
+
+
+
+                })
+           
+                if(len==0){
+                    layer.msg(getI18nPageByKey("noGoodsOfCompl"));/*"您没有选择投诉的商品!"*/
+                }else{
+                   window.location.href="submitComplaint.html?order_id="+orderObj.order_id+"&storeId="+orderObj.storeId+"&goodsIdArr="+goodsArr.join(",")+"&arr="+arr.join(",")+"";
+                   
+                   
+                }
+
+
+
+            })
+        
+       </script>
+    </body>
+</html>

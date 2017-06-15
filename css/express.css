@@ -1,0 +1,114 @@
+@charset "UTF-8";
+.expressBox{
+    bottom:0;
+}
+.method{
+    width:100%;
+    box-sizing: border-box;
+    padding-bottom: 0;
+    
+}
+.methodChose{
+    border-bottom: 1px solid #ccc;
+    padding-top:0.55rem;
+    padding-bottom:1.2rem ;
+}
+.methodChose span{
+    display:inline-block;
+    width:4.6rem;
+
+    height:1.35rem;
+    line-height:1.35rem;
+    border:2px solid #ccc;
+    border-radius:0.25rem;
+    margin-right: 0.5rem;
+}
+.methodChose .active{
+   
+    color:#f33737;
+    border:2px solid #f33737;
+}
+.date{
+    padding:0 0.5rem 2rem;
+    
+}
+.date h4{
+    padding-left: 0.075rem;
+}
+.datebox{
+    width:15rem;
+    font-size: 0.7rem;
+   /*  height:2.2rem; */
+    line-height: 2.2rem;
+    border:2px solid #c2c3c4;
+    border-radius: 0.25rem ;
+    text-indent: 0.65rem;
+    box-sizing: border-box;
+    position:relative;
+
+}
+#expressDate input{
+    width:85%;
+    line-height: 2.2rem;
+}
+
+.calender{
+    float:right;
+    width:0.95rem;
+    height:0.95rem;
+    background:url(../images/calender.png) no-repeat;
+    background-size:contain;
+    margin-right:0.55rem;
+    margin-top:0.55rem;
+}
+.defTime{
+    position:relative;
+}
+.blackTri{
+    position:absolute;
+    right:0.55rem;
+    top:0.95rem;
+    width:0.675rem;
+    height:0.425rem;
+    background:url(../images/blackTri.png) no-repeat;
+    background-size: contain;
+    transition: transform ease 0.5s;
+}
+.timeWhile{
+    width:15rem;
+    box-sizing: border-box;
+    position:absolute;
+    left:-0.08rem;
+    top:2.0rem;
+    width:15rem;
+    border:2px solid #ccc;
+   
+    border-radius: 0 0 0.25rem 0.25rem;
+    display:none;
+    background:#fff;
+
+}
+.correct{
+    float:right;
+    width:0.8rem;
+    height:0.55rem;
+    margin:0.75rem;
+    display:inline-block;
+    background:url(../images/correct.png) no-repeat;
+    background-size: contain;
+    display:none;
+
+}
+.okBtn{
+    width:15rem;
+    height:2.2rem;
+    font-size:0.75rem;
+    line-height:2.2rem;
+    color:#fff;
+    background:#c90c1e;
+   margin:0 0.5rem;
+   border-radius:0.25rem;
+
+}
+
+

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title">充值管理</title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/rechargeManage.css" />
+         <link rel="stylesheet" href="css/loading.css"/>
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <style>
+        .rechargeList .rechargeDetail .left {
+            float: left;
+            width: 59%;
+        }
+         .rechargeList .rechargeDetail .right {
+            float: left;
+            width: 41%;
+        }
+    </style>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+         <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+               <script>writeI18nPageByKey("manageCharging")</script>
+            </h3>
+           <!-- <span class="edit">编辑</span> -->
+        </header>
+        <div class="scroll">
+            <ul class="rechargeList">
+                <!-- <li class="clear">
+                    <label class="btn">
+                        <input type="checkbox" name="" ><i></i>
+                    </label>
+                    <div class="rechargeDetail">
+                        <p class="clear">
+                           <span class="left">充值金额：<strong>60</strong></span><span class="right">充值状态：<strong>充值中</strong></span> 
+                        </p>
+                        <p class="clear">
+                            <span class="left">支付方式：<strong>中国银行</strong></span><span class="right">支付状态：<strong>支付完成</strong></span>
+                        </p>
+                        <p class="clear">
+                            <span class="left">充值时间：<strong>2016-07-03</strong></span> 
+                        </p>
+                    </div>
+                </li>
+                <li class="clear">
+                    <label class="btn">
+                        <input type="checkbox" name="" ><i></i>
+                    </label>
+                    <div class="rechargeDetail">
+                        <p class="clear">
+                           <span class="left">充值金额：<strong>60</strong></span><span class="right">充值状态：<strong>充值中</strong></span> 
+                        </p>
+                        <p class="clear">
+                            <span class="left">支付方式：<strong>中国银行</strong></span><span class="right">支付状态：<strong>支付完成</strong></span>
+                        </p>
+                        <p class="clear">
+                            <span class="left">充值时间：<strong>2016-07-03</strong></span> 
+                        </p>
+                    </div>
+                </li>
+                <li class="clear">
+                    <label class="btn">
+                        <input type="checkbox" name="" ><i></i>
+                    </label>
+                    <div class="rechargeDetail">
+                        <p class="clear">
+                           <span class="left">充值金额：<strong>60</strong></span><span class="right">充值状态：<strong>充值中</strong></span> 
+                        </p>
+                        <p class="clear">
+                            <span class="left">支付方式：<strong>中国银行</strong></span><span class="right">支付状态：<strong>支付完成</strong></span>
+                        </p>
+                        <p class="clear">
+                            <span class="left">充值时间：<strong>2016-07-03</strong></span> 
+                        </p>
+                    </div>
+                </li> -->
+            </ul>
+            <!-- <div class="delBtnBox">
+                <span class="cancel">取消</span><span class="del">删除(0)</span>
+            </div> -->
+             <div class="loading">
+                  <img src="images/loading_more.gif" class="loadImg">
+                  <span>
+                       <script>writeI18nPageByKey("isLoading")</script>...
+                 </span>
+            </div>
+                <div class="noMore">
+                    <span>
+                        <script>writeI18nPageByKey("noMoreData")</script>
+                   </span>
+               </div>
+        </div>
+        <script type="text/javascript">
+           $(".back").click(function(){
+             history.back(-1);
+           })
+            var type;
+            var typeObj=getParam();
+         
+            var status;//代表支付状态：
+            var str="";
+            var begin=0;
+            $(".scroll").scroll(function () {
+               
+                var scrollTop=$(this).scrollTop();
+               
+                var scrollHeight =$(window).height() ;
+              
+                var windowHeight = $(this).height();
+             
+                if (scrollTop+windowHeight>=scrollHeight) {
+                   
+                      balance();
+                };
+            })
+            function balance(){
+                $(".loading").show();
+                begin++;
+             
+               Datas({
+                    url:"/my_balance",
+                    datas:{
+                        "user_id":ls.getItem("userId"),
+                        "type": 0,
+                        "balance_type":typeObj.type,
+                        "begin":begin
+                    },
+                    success:function(data){
+                     
+                        if(data.status){
+                           
+
+                            for(var i=0;i<data.data.length;i++){
+                                if(data.data[i].mobile_pay_status=="1"){
+                                    status=getI18nPageByKey("isPaying");
+                                }else if(data.data[i].mobile_pay_status=="2"){
+                                     status=getI18nPageByKey("okay");
+                                }else if(data.data[i].mobile_pay_status=="3"){
+                                     status=getI18nPageByKey("failToPay");
+                                }else if(data.data[i].mobile_pay_status=="4"){
+                                     status=status=getI18nPageByKey("applyForReturn");
+                                }else if(data.data[i].mobile_pay_status=="5"){
+                                     status=getI18nPageByKey("ReturnFinished");
+                                }else{
+                                     status=getI18nPageByKey("failToReturn");
+                                }
+
+                            str+='<li class="clear">'+
+                                 '<div class="rechargeDetail">'+
+                                    '<p class="clear">'+
+                                       '<span class="left">'+getI18nPageByKey("TheAmountOfCharge")+'：<strong>'+data.data[i].pd_log_amount+'</strong></span><span class="right">'+getI18nPageByKey("TheDateOfCharge")+'：<strong>'+data.data[i].addTime+'</strong></span>'+
+                                    '</p>'+
+                                    '<p class="clear">'+
+                                        '<span class="left">'+getI18nPageByKey("payMethod")+'：<strong>'+data.data[i].pd_op_type+'</strong></span><span class="right">'+getI18nPageByKey("statusOfPaying")+'：<strong>'+status+'</strong></span>'+
+                                    '</p>'+
+                                '</div>'+
+                            '</li>';
+                            }
+                           
+
+
+                        }else{
+                        
+                           
+                            if(data.data.length==0){
+                                // layer.msg(data.message);
+                                $(".noMore").show();
+                            }
+                        }
+                     
+                        setTimeout(function(){
+                            $(".loading").hide();
+                            $(".rechargeList").html(str);
+                    
+                        },500);
+                         
+                    },
+                    error:function(data){
+                       
+                    }
+
+
+
+
+                }) 
+            }
+             balance();
+         
+         $(document).ready(function(){
+              $("#title").text(getI18nPageByKey("manageCharging"));
+         })
+        </script>
+    </body>
+</html>

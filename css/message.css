@@ -1,0 +1,45 @@
+@charset "UTF-8";
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background: #f3f5f7;
+}
+
+.messageList li{
+    padding:0 0.5rem;
+    height:2.2rem;
+    font-size:0.675rem ;
+    line-height: 2.2rem;
+    border-bottom:1px solid #cccccc;
+}
+.messageList li a{
+    color:#333333;
+    width:100%;
+    display:block;
+    position: relative;
+    box-sizing:border-box;
+    text-indent: 1.75rem;
+}
+.messageList li a em{
+    position: absolute;
+    left:0;
+    top:0.5rem;
+    width:1.25rem;
+    height:1.25rem;
+    
+    margin-right: 0.5rem;
+}
+.messageList li .sysMessage{
+    background:url(../images/message.png) no-repeat;
+    background-size: contain;
+}
+.messageList li .indideMessage{
+    background:url(../images/insideMessage.png) no-repeat;
+    background-size: contain;
+}
+.messageList li .noticeMes{
+    background:url(../images/noticeMes.png) no-repeat;
+    background-size: contain;
+}

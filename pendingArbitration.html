@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+         <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/complaintDetail.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("DetailOfComplaint")</script></h3>
+            <!--<span class="submit">提交</span>!-->
+        </header>
+        <div class="scroll">
+            <div class="orderBox">
+                <div  class="orderBoxDetail">
+                   <p class="orderNum clear"><span class="num"><!-- 订单号：2016070517756 --></span><strong class="status"><!-- 待仲裁 --></strong></p>
+                   <p class="orderNum"><span class="date"><!-- 下单时间：2016-04-12 12:20:13 --></span></p>
+                   <div class="orderProduct">
+                       <!--  <div class="orderPro clear">
+                           <a class="complaintImg"href="javascipt:void(0)">
+                               <img src="images/complaintImg.png" />
+                           </a>
+                           <div class="complaintName">
+                               <p><a href="javascipt:void(0)">小米随身风扇USB蛇形迷你笔记本电脑小电风扇超静音便携A626662C0</a></p>
+                               <p>
+                                   <span>RM18.90</span><span>数量:2</span>
+                               </p>
+                           </div>
+                       </div> -->
+                   </div>
+                    <p class="totalMoney"><!-- 订单总额：RM37.80 --></p>
+                </div>
+                <div class="complaintTopic">
+                   <!--  <p class="clear"><span class="left">投诉主题：</span><span class="right">卖家投诉</span></p>
+                   <p class="clear"><span class="left">问题描述：</span><span class="right">东西有破损</span></p>
+                   <p class="clear"><span class="left">投诉内容：</span><span class="right">东西有破损东西有破损东西有破损东西有破损东西有破损东西有破损东西有破损</span></p> -->
+                </div>
+                <div class="complaintStore">
+                    <!-- <p class="clear"><span class="left">卖家店铺：</span>
+                    <span class="right">心悦元</span></p>
+                    <p class="clear"><span class="left">投诉状态：</span>
+                    <span class="right status">对话中</span></p>
+                    <p class="clear"><span class="left">投诉类别：</span>
+                    <span  class="right">买家投诉</span></p>
+                    <p class="clear"><span class="left">投诉时间：</span>
+                    <span class="right">2016-7-5 12.00.00</span></p>
+                    <div class="clear">
+                        <span class="left">取证图片：</span>
+                        <p class="right evidenceBox">
+                            <a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"/></a>
+                        </p>
+                    </div> -->
+                </div>
+                <div class="pendInfo">
+                    <!-- <h4>申诉信息</h4>
+                    <p class="clear">
+                        <span class="left">申诉人：</span><span class="right">心悦园</span>
+                    </p>
+                    <p class="clear">
+                        <span class="left">投诉时间：</span><span class="right">2016-7-5 12:31</span>
+                    </p>
+                    <div class="clear">
+                        <span class="left">申诉图片：</span>
+                        <div class="right pendImg">
+                            <a href="javascipt:void(0)"><img src="images/complaintImg.png"></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"></a><a href="javascipt:void(0)"><img src="images/complaintImg.png"></a>
+                        </div>
+                    </div>
+                    <p class="clear">
+                        <span class="left">申诉内容：</span><span class="right">东西坏了东东西坏了东西坏了东西坏了东西坏了东西坏了东西坏了</span>
+                    </p> -->
+                </div>
+                <div class="dialogInfo">
+                    <h4><script>writeI18nPageByKey("talkAmongBuyerSeller")</script></h4>
+                    <h3><script>writeI18nPageByKey("talkRecord")</script></h3>
+                    <ul class="dialogList">
+                       <!--  <li>
+                           <div class="apply">
+                               <span>申请人[xionmao]2016-07-27 11:39:43</span>
+                               <p>说东西坏了怎么不退</p>
+                           </div>
+                           <div class="complainted">
+                               <span>投诉人[xionmao]2016-07-27 11:39:43</span>
+                               <p>那是在派送中正常的剐蹭，物品详情页面也做了说明物品会在派送中有破损</p> 
+                           </div>
+                       </li> -->
+                    </ul>
+                    <div class="talkTxt">
+                         <input type="text" class="talk" value="" placeholder=""/>
+                    </div>
+                    <p class="btns">
+                       
+                        <input type="button" class="sayWord" value=""/><input type="button" class="refresh" value=""/><input type="button" class="submitBtn"value="" disabled="true">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+                $(document).ready(function(){
+                     $("#title").text(getI18nPageByKey("DetailOfComplaint"));
+                       $(".talk").attr("placeholder",getI18nPageByKey("enterWhatYouWantTosay"));
+                    $(".sayWord").attr("value",getI18nPageByKey("toSendMessage"));
+                    $(".refresh").attr("value",getI18nPageByKey("refreshMessage"));
+                    $(".submitBtn").attr("value",getI18nPageByKey("submitAppeal"));
+             
+                 })
+                $(".back").click(function(){
+                    history.back(-1);
+                })
+                //提交仲裁;
+                $(".submitBtn").css("background","#e3923b")
+                var complaintObj=getParam();
+              
+                var statusStr="";
+                var str="";
+                var sellerComplaintStr="";//卖家投诉信息；
+                var complaintStr="";//买家投诉：
+                var pendStr="";//申诉信息：
+                var talkStr="";//对话信息;
+                Datas({
+                    url:"buyer/complaint_view",
+                    datas:{
+                        "complaint_id":complaintObj.complaintId
+
+
+                    },
+                    success:function(data){
+
+                     
+                    if(data.status){
+
+
+                            if(data.data.status=="0"){
+                                   statusStr=getI18nPageByKey("newComplaint");
+                            }else if(data.data.status=="1"){
+                                  statusStr=getI18nPageByKey("waitForapeal");
+                            }else if(data.data.status=="2"){
+                                   statusStr=getI18nPageByKey("isTalking");
+                            }else if(data.data.status=="3"){
+                                  statusStr=getI18nPageByKey("waitArbitration");
+                            }else{
+                                  statusStr=getI18nPageByKey("haveCompleted");
+                            }
+                            if(data.data.type=="buyer"){
+                           
+                                  typeStr=getI18nPageByKey("buyersComplaint");
+                            }else{
+                            
+                                typeStr=getI18nPageByKey("sellersComplaint");
+                            }
+                           $(".orderNum .num").text(getI18nPageByKey("OrderNumber")+"："+data.data.of_sn);
+                            $(".orderNum .status").text(statusStr);
+                            $(".orderNum .date").text(getI18nPageByKey("DateOfOrder")+"："+data.data.addTime);
+                           for(var i=0;i<data.data.goodsList.length;i++){
+                                str+='<div class="orderPro">'+
+                                        '<div class="clear">'+
+                                            '<a class="complaintImg"href="javascipt:void(0)">'+
+                                                '<img src='+data.data.goodsList[i].path+' />'+
+                                            '</a>'+
+                                            '<div class="complaintName">'+
+                                                '<p><a href="javascipt:void(0)">'+data.data.goodsList[i].goods_name+'</a></p>'+
+                                                '<p>'+
+                                                    '<span>RM'+data.data.goodsList[i].goods_price+'</span><span>count:'+data.data.goodsList[i].count+'</span>'+
+                                                '</p>'+
+                                            '</div>'+
+                                        '</div>'+
+                                        '<span class="clear">'+getI18nPageByKey("describeIssue")+'：'+data.data.goodsList[i].desc+'</span>'+
+                                '</div>';
+
+
+                            }
+                            complaintStr='<p class="clear"><span class="left">'+getI18nPageByKey("themeOfComplaint")+'：</span><span class="rightTopic">'+data.data.title+'</span></p>'+
+                                '<p class="clear"><span class="left">'+getI18nPageByKey("contentOfComplaint")+'：</span><span class="right">'+data.data.fromContent+'</span></p>';
+                        
+                        sellerComplaintStr+='<p class="clear">'+
+                            '<span class="left">'+getI18nPageByKey("sellersStore")+'：</span>'+
+                            '<span class="right">'+data.data.storeName+'</span>'+
+                        '</p>'+
+                        '<p class="clear">'+
+                            '<span class="left">'+getI18nPageByKey("statusOfComplaint")+'：</span>'+
+                            '<span class="right status">'+statusStr+'</span>'+
+                        '</p>'+'<p class="clear">' +
+                            '<span class="left">'+getI18nPageByKey("categoryOfComplaint")+'：</span>'+
+                            '<span  class="right">'+typeStr+'</span>'+
+                        '</p>'+'<p class="clear">'+
+                            '<span class="left">'+getI18nPageByKey("DateOfComplaint")+'：</span>'+
+                            '<span class="right">'+data.data.addTime+'</span>'+
+                        '</p>'+'<div class="clear">'+
+                            '<span class="left">'+getI18nPageByKey("imgOfComplaint")+'：</span>'+
+                            '<p class="right evidenceBox">'+
+                                '<a href="javascipt:void(0)"><img src='+data.data.fromPath1+'/></a><a href="javascipt:void(0)"><img src='+data.data.fromPath2+'/></a><a href="javascipt:void(0)"><img src='+data.data.fromPath3+'/></a>'+
+                            '</p>'+
+                        '</div>';
+                        //申诉信息：
+                        pendStr='<h4>'+getI18nPageByKey("appealingInfor")+'</h4>'+
+                       '<p class="clear">'+
+                           '<span class="left">'+getI18nPageByKey("WhoAppeal")+'：</span><span class="right pendName">'+data.data.storeName+'</span>'+
+                       '</p>'+
+                       '<p class="clear">'+
+                           '<span class="left">'+getI18nPageByKey("DateOfComplaint")+'：</span><span class="right pendTime">'+data.data.mAppeal.appeal_time+'</span>'+
+                       '</p>'+
+                       '<div class="clear">'+
+                           '<span class="left">'+getI18nPageByKey("photoOfAppeal")+'：</span>'+
+                           '<div class="right pendImg">'+
+                               '<a href="javascipt:void(0)"><img src='+data.data.mAppeal.toPath1+'></a><a href="javascipt:void(0)"><img src='+data.data.mAppeal.toPath2+'></a><a href="javascipt:void(0)"><img src='+data.data.mAppeal.toPath3+'></a>'+
+                           '</div>'+
+                       '</div>'+
+                       '<p class="clear">'+
+                           '<span class="left">'+getI18nPageByKey("ContentOfAppealing")+'：</span><span class="right pendContent">'+data.data.mAppeal.toContent+'</span>'+
+                       '</p>';
+                       //对话信息：
+                       if(data.data.talkContent!=null){
+                            for(var i=0;i<data.data.talkContent.length;i++){
+                                        for(var key in data.data.talkContent[i]){
+                                       
+                                            talkStr+='<li>'+
+                                               '<div class="apply">'+
+                                                   '<span>'+key+'</span>'+
+                                                   '<p>'+data.data.talkContent[i][key]+'</p>'+
+                                               '</div>'+
+                                            '</li>'; 
+                                        }
+
+                            }
+                       }
+                       
+                       
+
+                           
+                            $(".orderProduct").html(str);
+                            $(".complaintTopic").append(complaintStr);
+                            $(".complaintStore").append(sellerComplaintStr);
+                          
+                            $(".totalMoney ").text("orderMoney：RM"+data.data.totalMoney);
+                            $(".pendInfo").html(pendStr);
+                            $(".dialogList").append(talkStr);
+                        
+                    
+                        }else{
+                           
+                            layer.msg(data.message);
+                        }
+
+                    },
+                    error:function(){
+                      
+                    }
+
+
+
+
+
+
+                })
+                //刷新对话;
+                $(".refresh").click(function(){
+                    $(".dialogList").html("");
+                    refresh();
+               })
+               function refresh(){
+                    Datas({
+                        url:"/buyer/refresh_talk ",
+                        datas:{
+                            "complaint_id":complaintObj.complaintId
+                        },
+                        success:function(data){
+                            var refreshTalkStr="";
+                         
+                            if(data.status){
+                                for(var i=0;i<data.data.talk_list.length;i++){
+                                    for(var key in data.data.talk_list[i]){
+                                   
+                                    
+                                        refreshTalkStr+='<li>'+
+                                           '<div class="apply">'+
+                                               '<span>'+key+'</span>'+
+                                               '<p>'+data.data.talk_list[i][key]+'</p>'+
+                                           '</div>'+
+                                        '</li>'; 
+                                    }
+
+                                }
+                              
+                                $(".dialogList").append(refreshTalkStr);
+
+
+                            }else{
+                                layer.msg(data.message);
+                            }
+                        },
+                        error:function (){
+                         
+                        }
+
+
+
+
+                    })
+               }
+               //发起对话：
+              
+
+
+               $(".sayWord").click(function(){
+                 if($(".talk").val()==""){
+                    layer.msg(getI18nPageByKey("writeYourAppealingtext"));
+                 }else{
+
+                    sayWord();
+                     $(".talk").val("");
+                 }
+                 
+               })
+               function  sayWord() {
+                   Datas({
+                        url:"/buyer/complaint_talk ",
+                        datas:{
+                           "user_id": ls.getItem("userId"),
+                           "complaint_id":complaintObj.complaintId,
+                           "talk_content":$(".talk").val()
+                        },
+                        success:function(data){
+                         
+                            if(data.status){
+                              $(".dialogList").html("");
+                              refresh();
+                            }
+                        },
+                        error:function(){
+                           
+                        }
+
+                   })
+               }
+              
+               
+       
+               
+        </script>
+    </body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+         <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/manageAddress.css" rel="stylesheet"/>
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    </head>
+    <script>
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+          
+         <header class="header clear">
+             <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+             <h3 class="pageTitle"><script>writeI18nPageByKey("addressManage")</script></h3>
+             
+         </header>
+         <div class="scroll addressScroll">
+            <!--  <div class='bigs'>
+              <div class='addressBox'>
+                <div class='Addhead'>
+                  <strong>黎明</strong>&nbsp;&nbsp;<strong>15890656879</strong>&nbsp;&nbsp;<strong>邮编:100000</strong><strong class='areaInfo'>北京市朝阳区惠新西街北口千鹤家园1号楼</strong>
+                </div>
+                <p class='setBtnList'><a class='single'>默认地址</a><a class='editor'>编辑</a><a class='delete'>删除</a></p>
+              </div>
+            </div>
+            <div class='bigs'>
+              <div class='addressBox'>
+                <div class='Addhead'>
+                  <strong>刘敏</strong>&nbsp;&nbsp;<strong>15890656987</strong>&nbsp;&nbsp;<strong>邮编:100000</strong><strong class='areaInfo'>北京市朝阳区惠新西街北口千鹤家园2号楼</strong>
+                </div>
+                <p class='setBtnList'><a class='single'>默认地址</a><a class='editor'>编辑</a><a class='delete'>删除</a></p>
+              </div>
+            </div>
+            <div class='bigs'>
+              <div class='addressBox'>
+                <div class='Addhead'>
+                  <strong>李明明</strong>&nbsp;&nbsp;<strong>15890656879</strong>&nbsp;&nbsp;<strong>邮编:100000</strong><strong class='areaInfo'>北京市朝阳区惠新西街北口千鹤家园8号楼</strong>
+                </div>
+                <p class='setBtnList'><a class='single'>默认地址</a><a class='editor'>编辑</a><a class='delete'>删除</a></p>
+              </div>
+            </div> -->
+         </div>
+         <footer class="footer  clear">
+             <span class="newBtn"><script>writeI18nPageByKey("newAddress")</script></span>
+         </footer>
+        <script src="js/jquery-2.2.1.js"></script>
+        <script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript" src="css/layer/layer.js"></script>
+        <script>
+          $("#title").text(getI18nPageByKey("addressManage"));
+        var user=ls.getItem("userId");//用户id;
+        var intergalObj=getParam();
+       
+       
+         //点击返回：
+         $(".back").click(function(){
+          
+           history.back(-1);
+         })
+          //新建地址;
+          $(".newBtn").click(function(){
+              window.location.href="fillInAddress.html";
+          })
+        
+
+           //获取地址列表：
+         function getAddress(){
+        
+            Datas({
+              url:"buyer/cart_address",
+              datas:{"user_id":user},
+              success:function(data){
+                  
+                      var str="";
+                     var str1="";
+                  for(var i=0;i<data.data.length;i++){
+                      
+
+                     if(data.data[i].defaultAddress){
+                     
+                       str1="<p class='setBtnList'><a class='single selected' >"+getI18nPageByKey("defaultAddress")+"</a><a class='editor'>"+getI18nPageByKey("editAddress")+"</a><a class='delete'>"+getI18nPageByKey("delAddress")+"</a></p></div></div>";
+
+
+                     }else{
+                     
+                      str1="<p class='setBtnList'><a class='single' >"+getI18nPageByKey("defaultAddress")+"</a><a class='editor'>"+getI18nPageByKey("editAddress")+"</a><a class='delete'>"+getI18nPageByKey("delAddress")+"</a></p></div></div>";
+                     }
+               
+                     str+="<div class='bigs'><div class='addressBox'><div class='Addhead'><strong class='name' style='display:block;'>"+data.data[i].trueName+"</strong><strong class='mobile'style='display:block;'>"+data.data[i].mobile+"</strong><strong class='areaInfo'></strong><strong class='areaInfo1'>"+data.data[i].area_info+"</strong><input  class='addressId'type='hidden' value="+data.data[i].id+"><input  class='addressUser'type='hidden' value="+data.data[i].user+"><input class='areaId'type='hidden' value="+data.data[i].area.id+"></div>"+str1;
+                    
+                  }
+                 
+                  $(' .scroll').html(str);
+                 $(".scroll .single").data("setDefault",false);
+                 $(".single").each(function(index,item){
+                 
+                    if($(this).hasClass("selected")){
+                      $(this).data("setDefault",true);
+                    }else{
+                      $(this).data("setDefault",false);
+                    }
+                 })
+                 //设置默认地址：
+                  $(".single").click(function(ev){
+                    ev.stopPropagation();
+                    
+                    $(this).parents(".bigs").siblings().find(".single").removeClass("selected").data("setDefault",false);
+                    var addressId=$(this).parents(".bigs").find(".addressId").val();
+                    var addressUser=$(this).parents(".bigs").find(".addressUser").val();
+                    var areaId=$(this).parents(".bigs").find(".areaId").val();
+               
+                      if(!$(this).data("setDefault")){
+                      
+                        $(this).addClass("selected");
+                        $(this).data("setDefault",true);
+                      }else{
+                         $(this).removeClass("selected");
+                        $(this).data("setDefault",false);
+                      }
+                    var setDefault=$(this).hasClass("selected");
+                 
+                      Datas({
+                        url:"/buyer/address_default",
+                        datas:{
+                          "user_id":ls.getItem("userId"),
+                          "id":addressId,
+                           "defaultAddress":setDefault?1:0
+
+                        },
+                        success:function(data){
+                       
+                          if(data.status){
+                            layer.msg(data.message);
+                          }
+                        },
+                        error:function(){
+                        
+                        }
+
+
+                       })
+                    
+                   
+                      
+                  });
+
+                  //删除：
+                  $(".delete").click(function(){
+                    $(this).parent().parent().parent().remove();
+                     var addressId=$(this).parent().prev().find(".addressId").val();
+                   
+                     delAddress(addressId);
+                  })
+                  //删除地址;
+                  function delAddress(id){
+                      Datas({
+                           url:"buyer/cart_address_del", 
+                          datas:{
+                            "user_id":user,
+                              "id":id
+                          }, 
+                         success:function(data){
+                        
+                           if(data.status){
+                            layer.msg(data.message);
+                           }
+                           
+                         },
+                         error:function(){
+                          
+                         }
+                            
+
+
+
+
+
+
+
+                      })
+
+
+
+
+
+                  }
+                  
+                  
+
+
+                  //点击哪个地址就放在收货地址;
+                  $(".Addhead").click(function(){
+                   
+                       var name,mobile,zip,defaultAddress,country,addressId,araeName,areaInfo,areaInfo1;
+                      defaultAddress=$(this).next().find(".single").hasClass("selected");
+                   
+                      if(ls.getItem("intergalOn")=="true"){
+                        //如果是从积分过来的;
+                        window.location.href="consigneeData.html?addressId="+$(this).find(".addressId").val();
+                      }else{
+                        window.location.href="setOrderVisited.html?addressId="+$(this).find(".addressId").val()+"&default="+defaultAddress+"";
+                      }
+                     
+                       
+                  })
+                  //点击编辑;
+                  $(".editor").click(function(){
+                    var name,mobile,zip,defaultAddress,areaInfo,id;
+                    var name1=$(this).parent().prev().find(".name").text();
+                    var mobile1=$(this).parent().prev().find(".mobile").text();
+                    var zip1=$(this).parent().prev().find(".zip").text();
+                    var defaultAddress1=$(this).hasClass('selected');
+                  
+                    var addressId=$(this).parent().prev().find(".addressId").val();
+
+                   
+                      window.location.href="editAddress.html?name="+name1+"&mobile="+mobile1+"&zip="+zip1+"&defaultAddress="+defaultAddress1+"&id="+addressId+"";
+                  })
+                  
+
+                       
+
+            },
+            error:function(data){
+              
+            }
+
+
+                 
+          })
+        }
+         
+         getAddress();
+         
+        </script>
+    </body>
+</html>

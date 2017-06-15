@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/public.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title id="title"></title>
+    <link rel="stylesheet" href="./Swiper demo_files/swiper.min.css">
+    <link rel="stylesheet" href="css/publicClear.css">
+    <link rel="stylesheet" href="css/4-0-2.css">
+	<link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <style>
+		.swiper-pagination-bullet-active{opacity:1;background:#fff;}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+      <header class='header clear'>     
+    		  <h3> 
+    		        <span class="back" id="back"></span>
+    		        <a href="javascript:void(0)" class="mainLogo"></a>
+    		        <script>writeI18nPageByKey("storeTitle")</script><!-- 店铺首页 -->
+    		  </h3>
+     </header>
+  	  <div class="scroll">
+	  	  
+	  			   <div class="themeBanner">
+	  	                <div class="themeBanner-content clear">
+	  	                	<div class="shopInfo">
+	  	                			<!--  <div class="shopLog">
+				  									 <img src="images/shop-banner.png"/>
+				  								  </div>
+				  								  <div class="numberOfFocus">
+				  									  <a href="javascript:void(0)">起点运动户外运动..</a>
+				  									  <p>33.8万人关注</p>
+				  								  </div> -->
+	  	                    </div>
+	  	                    <div class="focuBtn" id="focus">
+	  	                    	<p>
+	  								<script>writeI18nPageByKey("focus")</script><!-- 关注 -->
+	  							</p>
+	  						</div>
+	  			       </div>
+	  			   </div>
+	  				<div id="slider" class="swipe swiper-container" style="visibility:visible;">
+	  			  		<div class="swiper-wrapper">
+	  			  		</div>
+	  		  		   <div class="swiper-pagination"></div>
+	  		         </div>
+	         		 <div class="divider"></div>
+	  
+	  			   <div class="showCase"></div>
+	  		
+  	   </div>
+  	   <div class="hotClassDetail" id="goup">
+  		    <ul>
+  		    	<li onclick="Filter(1)">
+  		    	      <a href="javascript:void(0)" class="all"  >
+  		    	         <script>writeI18nPageByKey("storeAll")</script><!-- 全部 -->
+  		    	      </a>
+  		    	</li>
+  				<li onclick="Filter(2)">
+  				      <a href="javascript:void(0)"  >
+  				         <script>writeI18nPageByKey("storePrice")</script><!-- 价格 -->
+  				      </a>
+  				</li>
+  				<li  onclick="Filter(3)">
+  				     <a href="javascript:void(0)" >
+  				        <script>writeI18nPageByKey("storeCrowd")</script><!-- 人气 -->
+  				     </a>
+  				</li>
+  				<li style="border-bottom:none" onclick="Filter(3)">
+  				     <a href="javascript:void(0)" >
+  				        <script>writeI18nPageByKey("storeSales")</script><!-- 销量 -->
+  				     </a>
+  				</li>				
+  			</ul>
+  		   <div></div>
+  	   </div>
+  	   <div class="bottomMenu">
+  		   <div>
+  			   <a href="javascript:void(0)" class="detailShop">
+  			        <script>writeI18nPageByKey("storeDetail")</script><!-- 店铺详情 -->
+  			   </a>
+  		   </div>
+  
+  		   <div>
+  
+  			   <a href="javascript:void(0)" class="hotClass" >
+  			        <script>writeI18nPageByKey("hotCategory")</script><!-- 热门分类 -->
+  			   </a>
+  		   </div>
+  
+  		   <div>
+  			   <a href="javascript:void(0)" onclick="cantact(this,3)">
+  			        <script>writeI18nPageByKey("customerService")</script><!-- 联系客服 -->
+  			   </a>
+  		   </div>
+  	   </div>
+  
+  </div>
+</body>
+
+<script src="js/zepto.min.js"></script>
+<script src="./Swiper demo_files/swiper.min.js"></script>
+<script src="js/jquery-2.2.1.js"></script>
+<script src="css/layer/layer.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#title").text(getI18nPageByKey("storeTitle"));
+    }) 
+ 	//解析地址栏
+	// var orderBy,signType,goods_store;
+	var params = getParam(),
+        goods_store=params.goods_store,
+        goods_id=params.goods_id,
+        Txt=params.Txt,
+        shop=params.shop;
+     //店铺详情
+	 $('.detailShop').on("click",function(){
+		$(this).attr("href","shopDetail.html?goods_store="+goods_store+"&goods_id="+goods_id);
+	 })
+	$('#back').on("click",function(){
+	     if (ls.getItem('storeSort')) {//关注店铺
+	     	 window.location.href="favoredStore.html";
+	     }else if(ls.getItem('searchShop')){
+	     	 window.location.href="searchShop.html?shop_id="+goods_store+"&Txt="+Txt;//搜索店铺
+	     }else if(shop){
+	     	 window.location.href="index.html";
+	     }else{//商品详情
+	     	 //window.location.href="product.html?goods_id="+goods_id;
+	     	 window.history.back();
+	     }
+
+
+	})
+
+	//热门分类
+	$(".hotClass").click(function(){
+		if($("#goup").css("display")=="none"){
+			$("#goup").show();
+		}
+		else if($("#goup").css("display")=="block"){
+			$("#goup").hide();
+		}
+	})
+	//店铺接口	
+	Datas({
+		url:"store_class/store_info",
+		datas:{"id":goods_store,"user_id":ls.getItem("userId")?ls.getItem("userId"):""},//店铺Id
+		success:function(data){
+			if (data.status) {
+				ls.setItem('store_userId',data.data.store_userId);
+				ls.setItem('store_userName',data.data.store_userName);
+					var v=data.data.goodsInfo,
+					str='',str1='';
+					$.each(v,function(k,val){
+							str+='<a href="javascript:void(0)"><img src="'+val.goods_logo+'"  onclick="goodsType('+val.id+')"/><p>'+val.goods_name+'</p></a>';
+					})
+					$('.showCase').append(str);
+					//轮播;
+					if (data.data.storeSlide!="") {
+						var str2='';
+						$.each(data.data.storeSlide,function(k1,v1){
+							str2+='<div class="swiper-slide" ><img src="'+v1+'" width="100%" height="100%" /></div>';
+						})
+						$('.swiper-wrapper').html(str2);
+						var swiper = new Swiper('.swiper-container', {
+							        pagination: '.swiper-pagination',
+							        slidesPerView: 1,
+							        paginationClickable: true,
+							        spaceBetween: 30,
+							        loop: true,
+							        autoplay:2000
+							    });
+					};
+					
+					//店铺头部信息
+					str1+='<div class="shopLog">'+
+							  '<img src="'+data.data.store_logo+'" style="height:2rem;background-size:contain"/>'+
+						  '</div>'+
+						  '<div class="numberOfFocus">'+
+								  '<a href="javascript:void(0)">'+data.data.store_name+'</a>'+
+								  '<span></span>'+
+								  '<p>'+data.data.favorite_count+'&nbsp;'+getI18nPageByKey("millionsFocus")+'</p>'+
+						  '</div>';
+					$('.shopInfo').html(str1);
+					//判断是否被关注过
+					 if (data.data.favorite==1) {
+	                    // alert(33);
+	                      $(".focuBtn").addClass('focuBtnon');
+	                 };
+			}else{
+				layer.msg(data.message);
+			}
+		},
+		error:function(){
+			
+		}
+	})
+	//关注店铺取消店铺
+	$('.focuBtn').on("click",function(){//focuBtnon
+		if (!ls.getItem('userId')) {
+			layer.msg(getI18nPageByKey("focusWarn"));/*"您不是用户，不能关注！"*/
+			return;
+		}
+		if (!$(this).hasClass("focuBtnon")) {
+			$(this).removeClass("focuBtn").addClass("focuBtnon");
+			Fouce();
+			$("#focus").text(getI18nPageByKey("haveFocuse"));/*"已关注"*/
+		}else{
+			$(this).removeClass("focuBtnon").addClass("focuBtn");
+			noFouce();
+			$("#focus").text(getI18nPageByKey("focus"));/*"关注"*/
+		}
+	})
+	function Fouce(){
+ 			Datas({
+              url:"buyer/svaeFavoriteInfo",
+              datas:{"user_id":ls.getItem("userId"),"follow_type":1,"type_id":goods_store},
+              success:function(data){
+                   if(data.status == 'success'){
+                      layer.msg(data.message);
+
+                    }else{
+                      layer.msg(data.message);
+                    }
+              },
+              error:function(){
+                layer.msg(getI18nPageByKey("failToRequest"));/*"请求失败"*/
+              }
+          })
+	}
+	function noFouce(){
+		Datas({
+                url:"buyer/delFavoriteInfo",
+                datas:{
+                    	"type_id":goods_store,
+                    	"user_id":ls.getItem("userId"),
+                    	"follow_type":1//0商品1店铺
+                },
+                success:function(data){
+                     if(data.status == 'success'){
+                        layer.msg(data.message);
+                      }else{
+                        layer.msg(data.message);
+                      }
+                },
+                error:function(){
+                   layer.msg(getI18nPageByKey("failToRequest"));
+                }
+        })
+	}
+	//进入店铺全部商品
+	function Filter(orderById){	
+		var signType=2;
+		 window.location.href="ClassficationOfCommodity-search.html?orderBy="+orderById+"&signType="+signType+"&goods_store="+goods_store+"&goods_id="+goods_id;
+	}
+	//商品列表
+	function goodsType(goods_id){
+	  location.href = "product.html?goods_id="+goods_id;
+	} 
+	//联系客服
+	function cantact(ele,login){
+		var store_userId=ls.getItem('store_userId');
+		   store_userName=ls.getItem('store_userName');
+		   if (!ls.getItem("userId")) {
+		   		 window.location.href="Appsia_login.html?loginBack="+login+"&goods_store="+goods_store+"&goods_id="+goods_id;
+		   }else{
+		   		if (store_userId==ls.getItem("userId")){
+			   		layer.msg(getI18nPageByKey("youCantTalkWithYou"));/*"您不能和自己聊天"*/
+			   }else{
+			   	 	$(ele).attr("href","talkingMessage.html?good_userId="+store_userId+"&good_userName="+store_userName);  
+			   }
+		   }
+		   // else if (store_userId==ls.getItem("userId")){
+		   // 		layer.msg("您不能和自己聊天");
+		   // }else{
+		   // 	 	$(ele).attr("href","talkingMessage.html?good_userId="+store_userId+"&good_userName="+store_userName);  
+		   // }
+		 
+	}
+	//
+</script>
+</html>

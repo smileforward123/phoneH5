@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/accountBalance.css" />
+    </head>
+     <script src="js/jquery-2.1.1.min.js"></script>
+     <script src="js/zepto.min.js"></script>
+     <script src="js/common.js"></script>
+     <script src="css/layer/layer.js"></script>
+     <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle">
+               <script>writeI18nPageByKey("rebateMoney")</script>
+            </h3>
+           
+        </header>
+         <div class="scroll">
+            <div class="balanceBox">
+                <h3>
+                   <script>writeI18nPageByKey("rebateMoney")</script>
+               </h3>
+                <p class="balance"><b><!-- 300.00 --></b></p>
+            </div>
+            <nav class="nav clear">
+               
+                <a class="active" href="javascript:void(0)">
+                   <script>writeI18nPageByKey("storeAll")</script>
+                </a>
+               
+                <a href="javascript:void(0)">
+                  <script>writeI18nPageByKey("earnings")</script>
+                </a>
+                
+                <a href="javascript:void(0)">
+                  <script>writeI18nPageByKey("expense")</script>
+                </a>
+            </nav>
+            <ul class="balanceList">
+                <!-- <li>
+                    <p class="clear"><span class="method">在线支付</span><span class="date">2016-07-03</span></p>
+                    <p class="clear"><span class="method">余额:123.00</span><span class="date">-10</span></p>
+                </li>
+                <li>
+                    <p class="clear"><span class="method">在线支付</span><span class="date">2016-07-03</span></p>
+                    <p class="clear"><span class="method">余额:123.00</span><span class="date">-10</span></p>
+                </li> -->
+            </ul>
+        </div>
+        <script>
+           $(".back").click(function(){
+             history.back(-1);
+           })
+           var status=0;
+           var str="";
+           $(".nav a").each(function(index,item){
+              
+                if($(this).hasClass("avtive")){
+                    if($(this)[0].innerText==getI18nPageByKey("storeAll")){
+                        status=0;
+                    }else if($(this)[0].innerText==getI18nPageByKey("earnings")){
+                        status=1;
+                    }else{
+                        status=2;
+                    }
+                
+                }
+            })
+            $(".nav a").click(function(){
+                str="";
+                $(this).addClass('active').siblings().removeClass("active");
+                if($(this)[0].innerText==getI18nPageByKey("storeAll")){
+                    status=0;
+                }else if($(this)[0].innerText==getI18nPageByKey("earnings")){
+                    status=1;
+                }else{
+                    status=2;
+                }
+              
+                myRebate();
+               
+
+            })
+            function myRebate(){
+               
+                Datas({
+                    url:"getRebateLogInfo",
+                    datas:{
+                        "user_id":ls.getItem("userId"),
+                        "status":status
+
+
+
+
+                    },
+                    success:function(data){
+                        
+                        if(data.status){
+                           $(".balance b").html("RM"+data.data.rebate_total);
+                            for(var i=0;i<data.data.reList.length;i++){
+                                str+="<li>"+
+                                "<p class='clear'><span class='method'>"+data.data.reList[i].addTime+"</span></p>"+
+                                "<p class='clear'><span class='date'>"+data.data.reList[i].rebatePrice+"</span></p>"+
+                                "</li>";
+                            } 
+                        }else{
+                            layer.msg(data.message);
+                        }
+                        $(".balanceList").html(str);
+
+                        
+                        
+                    },
+                    error:function(){
+                        layer.msg(getI18nPageByKey("failToRequest"));
+                    }
+
+
+
+
+                })
+            }
+            myRebate();
+           
+           $(document).ready(function(){
+
+               $(title).text(getI18nPageByKey("rebateMoney"));
+           })
+
+        </script>
+    </body>
+</html>

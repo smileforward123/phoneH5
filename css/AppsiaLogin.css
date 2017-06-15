@@ -1,0 +1,157 @@
+@charset "UTF-8";
+.loginHeader{
+    background:#fff;
+}
+.loginSection{
+    box-sizing:initial ;
+}
+.closePage{
+    float:left;
+    width:0.95rem;
+    height:0.95rem;
+    background:url(../images/closePage.png) no-repeat;
+    background-size: contain;
+    margin-left:0.975rem ;
+    margin-top:0.1rem;
+}
+.pageLoginTitle{
+    /* float:left; */
+    /* margin-left: 3.475rem; */
+    width: 75%;
+    text-align: center;
+    margin-left: 15%;
+}
+.loginBox{
+    width:100%;
+    margin-top:1.475rem;
+  /*   padding:1.475rem  1rem  0; */
+}
+.loginList{
+   /*  width:14rem; */
+   width:90%;
+   /*  margin:0 auto; */
+   margin-left: 5%;
+   /* margin-right: 5%; */
+}
+.loginList li{
+    width:100%;
+  
+    height:2.3rem;
+    
+    border-bottom:1px solid #f0f0f0;
+    font-size: 0.725rem;
+    line-height: 2.3rem;
+    color:#000;
+}
+.loginInfo{
+    float:left;
+    width:20%;
+
+}
+.loginInput{
+    float:right;
+   /*  width:80%; */
+    /*height:100%;*/
+    font-size: 0.725rem;
+    width: 100%;
+    /*line-height: .88rem;*/
+    padding-top: .65rem;
+    text-indent: 0.8rem;
+}
+.loginIdentify{
+     float:left;
+    font-size: 0.725rem;
+   padding-top: .7rem;
+    /* margin-left:1.225rem ; */
+    width:58%;
+    text-indent: 0.8rem;
+}
+.loginTestImg{
+    /* float:left; */
+    float: right;
+    width:20%;
+   height:60%;  
+    margin-top: 0.375rem;
+}
+.loginTestImg img{
+    width:100%;
+    height:100%;
+}
+.loginList .loginBtn{
+    margin-top:2.025rem ;
+    border-bottom: none;
+}
+.loginBtn input{
+    height:2rem;
+    font-size:0.7rem;
+    line-height: 2rem;
+    width:100%;
+    background:#ededed;
+    border-radius:5px;
+}
+.loginList .find{
+    height:2.525rem;
+    font-size:0.575rem ;
+    line-height: 2.525rem;
+    border-bottom: none;
+
+}
+.loginList a{
+   color:#7d7d7d;
+}
+.loginList .findPw{
+    float:left;
+   
+}
+.loginList .regFast{
+    float:right;
+}
+.loginList .buyByGuest{
+    height:2rem;
+    margin-top:0.5rem ;
+    border-bottom: none;
+}
+.buyByGuest input{
+    background:#f22f33;
+    width:100%;
+    height:100%;
+    font-size: 0.8rem;
+    line-height: 2rem;
+    color:#fff;
+    border-radius: 5px;
+
+}
+.loginList .otherMethod{
+    margin-top:1.85rem;
+    color:#bcbcbc;
+    border-bottom: none;
+    height:4rem;
+}
+.otherMethod span{
+    color:#616161;
+}
+.facebookIco{
+    text-align:center;
+    color:#1e5b9a;
+}
+.facebookIco a{
+    display:block;
+    width:2.75rem;
+    margin:0 auto;
+}
+.facebookIco a,.facebookIco span{
+    color:#1e5b9a;
+   
+
+    
+}
+.facebookImg{
+    width:1.5rem;
+   height:1.5rem;
+   background:url(../images/facebook.png) no-repeat;
+   background-size: contain;
+   display:block; 
+   margin:0 auto;
+
+}
+

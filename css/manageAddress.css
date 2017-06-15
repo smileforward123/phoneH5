@@ -1,0 +1,156 @@
+@charset "UTF-8";
+body{background:#f3f5f7;}
+.addressScroll{
+    position:absolute;
+    left:0;
+    top:2rem;
+    bottom:2.525rem;
+    overflow-y:auto;
+
+}
+.manageBox{
+    width:100%;
+    height:100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background:#fff;
+}
+.setBtnList{
+    font-size: 0.75rem;
+    line-height: 1.0rem;
+    height: 1.5rem;
+}
+.setBtnList a{
+    float: left;
+    padding-left: 1rem;
+}
+/* .pageTip{
+    width:100%;
+    height:3.15rem;
+    font-size: 0.55rem;
+    line-height: 3.15rem;
+    color:#999999;
+    background:#fff;
+    background:url(../images/addressBk.png) no-repeat bottom;
+    background-size: contain;
+
+} */
+/* .scroll{
+    width:100%;
+     position:fixed;
+    left:0;
+    top:2.2rem;
+    bottom:2.525rem;
+    overflow:auto;
+    box-sizing: border-box;
+    
+} */
+/* .addressLogo{
+    display:inline-block;
+    float: left;
+    width:0.6rem;
+    height:0.7rem;
+    background:url(../images/addressLogo.png) no-repeat;
+    background-size:contain;
+   margin-left:0.75rem ;
+    margin-right: 0.5rem;
+      margin-top:1.25rem;
+}
+.chosed{
+    float: right;
+    display:inline-block;
+    margin-right:0.65rem ;
+    width:0.4rem;
+    height:0.8rem;
+    background:url(../images/rightArrow.png) no-repeat;
+    background-size:contain;
+    vertical-align: middle;
+    margin-top:1.25rem;
+} */
+.areaInfo{
+    display:block;
+   
+}
+.areaInfo1{
+    display:block;
+    max-width: 100%;
+    word-break: break-all;
+}
+/* .areaInfo1{
+     border-bottom: 1px solid #dddddd;
+} */
+.bigs{width:100%;background:white;margin-top:0.6rem;border-top:1px solid #cccccc;border-bottom:1px solid #cccccc;}
+.addressBox{
+    width:96%;margin:0 auto;
+    background:#fff;
+}
+.addressInDetail{width:100%;border-bottom:1px solid #e3e4e6;font-size:0.7rem;color:#666666;margin-top:0.6rem;padding-bottom:0.9rem;margin-bottom:0.6rem;}
+.Addhead{padding:0.5rem 0;}
+
+
+
+
+
+
+.single{
+    display:inline-block;
+    padding-left: 1rem;
+    background:url(../images/radio.png) no-repeat left;
+    background-size: contain;
+}
+.selected{
+    background:url(../images/guestRadio.png) no-repeat left;
+    background-size: contain;
+}
+.editor{
+   /*  width:2.4rem; */height:0.9rem;
+       
+        vertical-align:middle;
+        font-size:0.7rem;
+        background:url(../images/edit_03.png) no-repeat left center;
+         background-size:contain;
+        color:#666666;
+          margin-left:0.6rem;}
+.delete{
+   /*  width:2.4rem; */height:0.9rem;
+   font-size:0.7rem;
+    background:url(../images/del_05.png) no-repeat left center;
+    background-size:contain;
+    color:#666666;
+    margin-left:0.3rem;}
+.defaultAddre{font-size:0.8rem;color:#666666;}
+.Addhead{
+    font-size:0.75rem;
+    line-height: 1.2rem;
+}
+.Addhead a{
+    float: left;
+    padding-left: 1rem;
+}
+.left{float:left;  }
+.right{float:right;}
+.footer {
+    width: 100%;
+    border-top: 1px solid #c2c4c6;
+    height: 2.75rem;
+    background: #f3f5f7;
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+}
+.newBtn{
+    display:inline-block;
+    width:13.625rem;
+    height:2rem;
+    background: url(../images/newBtn.png) no-repeat 4rem  0.3rem #f22f33;
+    border-radius:5px;
+    font-size:0.8rem;
+    line-height:2rem;
+    color:#fff;
+    margin:0.3rem 1.25rem 0rem 1.25rem;
+    text-indent: 5.75rem;
+   
+}
+

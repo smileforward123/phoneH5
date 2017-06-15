@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="js/public.js"></script>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title id="title"></title>
+    <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+    <link href="css/publicClear.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/AppAaia_cashier.css">
+    <style>
+      .layerCodeText {
+        width: 80%;
+        margin: 0 auto;
+      }
+      .layerCodeText .password {
+        width: 100%;
+        line-height: 2rem;
+        border: 1px solid #dddddd;
+        text-indent: 1rem;
+      }
+    </style>
+    <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+</head>
+<body>
+  <header class="header clear">
+      <span class="back"></span><a href="#" class="mainLogo"></a>
+      <h3 class="pageTitle"><script>writeI18nPageByKey("appasiaCheckstand")</script></h3>
+
+  </header>
+  <form action="">
+  <section>
+      <ul>
+          <li><script>writeI18nPageByKey("orderMoney")</script><span style="color:#C90C1E;font-size: 0.75rem" class="money"><!-- 134.00元 --></span></li>
+          <li><script>writeI18nPageByKey("payMethod")</script><span class="payType"><a href="#"></a></span></li>
+      </ul>
+      <a href="javascript:void(0)" class="confirm"><input type="button" value=""></a>
+  </section>
+  </form>
+ <script src="js/jquery-2.2.1.js"></script>
+<script src="js/zepto.min.js"></script>
+<script src="js/common.js"></script> 
+<script src="css/layer/layer.js"></script>
+<script type="text/javascript">
+ $(document).ready(function(){
+        $("#title").text(getI18nPageByKey("checkstand"));
+
+         getInfor();
+
+          function getInfor(){
+
+               Datas({
+                url:"/buyer/member_info ",
+                datas:{
+                    "user_id":ls.getItem("userId")
+                },
+                success:function(data){
+                  
+                    ls.setItem("UsersID",data.data.user.id);
+                    ls.setItem("UsersPhone",data.data.user.mobile);
+                    ls.setItem("UsersEmail",data.data.user.email);
+                    var store = ls.getItem('UsersID');
+                   
+                },
+                error:function(){
+                   
+                }
+            })
+
+          }
+
+})
+$('.back').on("click",function(){
+    history.back(-1);
+})
+var type="";
+var payMoneyObj=getParam();
+//
+$(".money").text("RM"+payMoneyObj.price);
+if(payMoneyObj.payType=="1"){
+  //type="银行卡";
+  type=getI18nPageByKey("bankCard");
+}else if(payMoneyObj.payType=="2"){
+ // type="网银";
+  type=getI18nPageByKey("cyberBank");
+}else if(payMoneyObj.payType=="3"){
+ // type="账户余额";
+  type=getI18nPageByKey("accountBalance");
+}else if(payMoneyObj.payType=="4"){
+ // type="线下支付";
+   type=getI18nPageByKey("offlinePayment");
+}else if(payMoneyObj.payType=="5"){
+  //type="返利";
+  type=getI18nPageByKey("rebate");
+}else if(payMoneyObj.payType=="6"){
+  //type="返利+银行卡";
+  type=getI18nPageByKey("rebateAddBankcard");
+}else if(payMoneyObj.payType=="7"){
+  //type="返利+网银";
+  type=getI18nPageByKey("rebateAddOnlineBank");
+}else if(payMoneyObj.payType=="8"){
+  //type="返利+账户余额";
+  type=getI18nPageByKey("rebateAddAccountBalance");
+}else if(payMoneyObj.payType=="9"){
+ // type="返利+线下支付";
+  type=getI18nPageByKey("rebateAddOfflinePay");
+}
+$(".payType a").text(type);
+var str="<p class='layerCodeText'><input class='password'type='password' name=''placeholder='"+getI18nPageByKey("enter6numberOfPaypw")+"'/></p>";
+
+//点击确定付款调接口：
+$(".confirm").click(function(){
+  
+  
+
+   if(payMoneyObj.payType!="1"&&payMoneyObj.payType!="2"&&payMoneyObj.payType!="4"){
+    //检测是否设置支付密码：
+      checkSetPw();
+
+     
+   }else{
+     
+      if(ls.getItem("intergalOn")=="true"){
+      
+        integralOrderPay();
+      }else{
+         orderPay();
+       
+      }
+     
+   }
+    
+})
+//检测是否设置支付密码：
+function checkSetPw(){
+  Datas({
+    "url":"/buyer/checkPayPassword",
+     datas:{
+      user_id:ls.getItem("userId"),
+
+
+    },
+    success:function(data){
+      //
+      if(data.status){
+        //
+        if(data.data=="0"){
+          //没有设置支付密吗；
+          layer.msg(getI18nPageByKey("haveNoPayPW"));
+            //跳转到设置支付密码页面：
+            setTimeout(function(){
+               window.location.href="createPayPw.html";
+             },500); 
+           
+        }else if(data.data=="1"){
+          //设置了支付密码；
+          layer.open({
+              type: 1,
+              title :getI18nPageByKey("pleaseEnterPayPW"),
+              area: ['14.8rem', '7rem'],
+              closeBtn: 0,
+              content: str,
+              btn: [getI18nPageByKey("cancel"), getI18nPageByKey("okBtn")],btn2:function(){
+                checkPwCorrect();
+
+
+              }
+                                    
+          })
+          $(".layui-layer").css({
+            "font-size":"0.35rem"
+          }) 
+        }else {
+          //没有支付密码：
+          layer.msg(getI18nPageByKey("accountHasNoPayPW"));
+        }
+      }
+    },
+    error:function(){
+   
+    }
+
+
+
+
+  })
+
+
+
+
+
+
+}
+
+
+
+//检测支付密码是否正确;
+function checkPwCorrect(){
+   
+     Datas({
+        "url":"/buyer/pay_pwd",
+        datas:{
+           "user_id":ls.getItem("userId"),
+           "pay_pwd":$(".password").val()
+        },
+        success:function(data){
+        
+          if(data.status){
+            //订单支付：
+            if(ls.getItem("intergalOn")=="true"){
+              
+                integralOrderPay();
+            }else{
+              
+               orderPay();
+            }
+           
+
+          }else{
+            layer.msg(data.message);
+          }
+        },
+        error:function(){
+        
+        }
+
+
+
+
+
+
+     })
+     
+
+
+}
+    
+function orderPay(){
+  //订单支付：
+      Datas({
+            "url":"/orderPay",
+            datas:{
+            "payType":payMoneyObj.payType,
+            "order_id":payMoneyObj.orderId,
+            "user_id":ls.getItem("userId")?ls.getItem("userId"):ls.getItem("cartSessionId"),
+           
+            "callBackUrl":"h5_payfinsh",
+            "isUseRebate":payMoneyObj.isUserRebate
+
+
+
+
+
+            },
+            success:function(data){
+              
+                  
+               if(data.status){
+               
+               
+                    if(data.data.payUrl){
+                       window.location.href=data.data.payUrl;
+                    }else{
+                      setTimeout(function(){
+                           window.location.href="paymentSucceed.html?payMethod="+data.data.payType+"&goldExchange="+data.data.price+"";
+                      },500);
+                      
+                    }
+                    
+                }else{
+                    layer.msg(data.message);
+                  
+                }
+                
+            },
+            error:function(){
+             
+
+            }
+          })
+}
+function integralOrderPay(){
+    ls.setItem("intergalOn",false);
+    Datas({
+      "url":"/integrationPay",
+      datas:{
+            "payType":payMoneyObj.payType,
+            "order_id":payMoneyObj.orderId,
+             "callBackUrl":"h5integralPayfinsh",
+          },
+      success:function(data){
+      
+        if(data.status){
+           if(data.data.payUrl){
+            window.location.href=data.data.payUrl;
+          }else{
+
+            setTimeout(function(){
+                window.location.href="paymentSucceed.html?payMethod="+data.data.payType+"&goldExchange="+data.data.price+"";
+            },500);
+          }
+          
+         }else{
+            layer.msg(data.message);
+         }
+      },
+      error:function(){
+        
+      }
+    })
+
+
+
+
+}
+      
+//国际化
+$(document).ready(function(){
+
+  $(".confirm input").val(getI18nPageByKey("sureToPay"));
+})
+
+      
+
+     
+
+</script>
+</body>
+</html>

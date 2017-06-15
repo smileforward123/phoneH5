@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link rel="stylesheet" href="css/publich5.css" />
+        <link rel="stylesheet" href="css/alterPw.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="css/layer/layer.js"></script>
+    <script src="js/common.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="#" class="mainLogo"></a>
+            <h3 class="pageTitle"><script>writeI18nPageByKey("modifyPayPW")</script></h3>
+        </header> 
+        <div class="scroll">
+            <h3 class="alterTitle"><script>writeI18nPageByKey("youAreChangingPayPW")</script></h3>
+            <ul class="alterMobileList">
+                <li>
+                    <a href="setPayPwbyOld.html"><script>writeI18nPageByKey("modifyThroughOldPay")</script><em></em></a>
+                </li>
+                 <li>
+                    <a href="forgetPw.html"><script>writeI18nPageByKey("forgotPayPW")</script><em></em></a>
+                </li>
+             </ul>
+             <p class="alterMobileTip">
+                 <script>writeI18nPageByKey("hotlineTip")</script>
+            </p>
+<!--              <div class="finishBox alterPwBox">
+                 <span><script>writeI18nPageByKey("haveDone")</script></span>
+             </div> -->
+         </div>
+         <script>
+               $(".back").click(function(){
+
+                history.back(-1);
+           })
+               $(document).ready(function(){
+                   $("#title").text(getI18nPageByKey("modifyPayPW"));
+               })
+         </script>
+
+    </body>
+</html>

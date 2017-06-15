@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script type="text/javascript" src="js/public.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta content="email=no" name="format-detection" />
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="css/menuDetail.css">
+  <script type="text/javascript">
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <a href="javascript:void(0)" class="back"></a>
+          <span></span>
+      <h2><script type="text/javascript">writeI18nPageByKey("orderDetail")</script></h2>
+    </header>
+    <section>
+      <h1 class="igo_order_sn"><i style="font-size:0.65rem"><!-- 兑换单号:20160707223 --></i><span  style="font-size:0.65rem" class="status_txt"><!-- 待收货 --></span></h1>
+      <div class="address">
+        <div class="add1">
+               <h3><script type="text/javascript">writeI18nPageByKey("receiveAddress")</script></h3>
+               <p><span class="trueName"><!-- 张天乐 --></span></p>
+               <p><span class="mobile"><!-- 1351481083 --></span></p>
+               <h4><i></i><span class="area_info"><!-- 北京朝阳区三环到四环之间惠新西街千鹤家园1号楼14层1401房间 --></span></h4>
+          </div>
+      </div>
+      <div class="shopItem">
+        <div class="shop">
+                     <!--  <div class="shopDetail">
+                         <a href="javascript:void(0)" class="orderImg">
+                              <dl>
+                                <dt><img src="images/clothes1.png" /></dt>
+                                <dd class="shop_info">
+                                  <h2>迈约[送两件T恤]</h2>
+                              
+                                  <p><span>奖励积分消费：1</span></p>
+                                  <p><i class="i_left">数量：</i><em class="em_right">x1</em></p>
+                                </dd>
+                            </dl>
+                         </a>
+
+                      </div> -->
+        </div>
+        <!-- 配送信息 -->
+        <div class="shipping_info">
+          <p><script type="text/javascript">writeI18nPageByKey("exchangeTime")</script>：<span class="addTime"><!-- 454554545 --></span></p>
+          <p><script type="text/javascript">writeI18nPageByKey("modeOfPayment")</script>：<span class="pay_way"><!-- 送货费 --></span></p><!-- 支付方式： -->
+          <p><script type="text/javascript">writeI18nPageByKey("amountOfPayment")</script>：<span class="igo_payment"><!-- 15:00-19:00 --></span></p><!-- 支付金额： -->
+          <p><script type="text/javascript">writeI18nPageByKey("orderTime")</script>：<span class="igo_ship_time"><!-- 12131112512 --></span></p><!-- 下单时间： -->
+          <p><script type="text/javascript">writeI18nPageByKey("ShippingInstructions")</script>：<span class="igo_ship_content"></span></p><!-- 发货说明： -->
+        </div>
+        <!-- 发货 -->
+        <!--   <div class="footer_info">
+          <a href="#" style="float:left;margin-left:2.5rem">修改物流</a>
+          <a href="#" style="float:left">投诉</a>
+          <a href="#" style="float:left">退款</a>
+          </div> -->
+      </div>
+    </section>
+    
+  </div>
+    <script src="js/jquery-2.2.1.js"></script>
+   <script src="css/layer/layer.js"></script>
+   <script src="js/common.js"></script>
+   <script type="text/javascript">
+   //返回
+   $('.back').on("click",function(){
+     history.back(-1);
+   })
+   var params=getParam(),
+        igo_id=params.igo_id;
+    Datas({
+      url:"buyer/integral_order_info",
+      datas:{"igo_id":igo_id},
+      success:function(data){
+        if (data.status) {
+          var val=data.data[0];
+             var str1='';
+            //兑换单号
+            $('.igo_order_sn').find('i').text(getI18nPageByKey("exchangeNumber")+":"+data.data[0].igo_order_sn);
+            //判断状态
+            if (val.igo_status=="-1") {
+              $('.status_txt').text(getI18nPageByKey("haveConcelled"));/*已取消*/
+            }else if(val.igo_status=="0"){
+               $('.status_txt').text(getI18nPageByKey("waitForPaying"))/*待付款*/
+            }else if(val.igo_status=="20"){//已付款待发货
+               $('.status_txt').text(getI18nPageByKey("waitForDelivery"));/*待发货*/
+            }else if(val.igo_status=="30"){
+                 $('.status_txt').text(getI18nPageByKey("waitForSigning"));/*待收货*/
+            }else if(val.igo_status=="40"){
+                 $('.status_txt').text(getI18nPageByKey("haveCompleted"));/*已收货*/
+            }
+            //地址信息
+            $('.trueName').text(val.igo_addr.trueName);
+            $('.mobile').text(val.igo_addr.mobile);
+            $('.area_info').text(val.igo_addr.area_info);
+            var str="";
+            //商品信息
+               str+='<div class="shopDetail">'
+                  $.each(val.igo_gcs,function(k1,v1){ 
+                           str+= '<a href="javascript:void(0)" class="orderImg">'+
+                                    ' <dl>'+
+                                          '<dt><img src="'+v1.goods.url+'" /></dt>'+
+                                          '<dd class="shop_info">'+
+                                            '<h2>'+v1.goods.ig_goods_name+'</h2>'+
+                                        
+                                            '<p><span>'+getI18nPageByKey("bonusPointsConsumption")+'：'+v1.goods.ig_goods_integral+'</span></p>'+
+                                            '<p><i class="i_left">'+getI18nPageByKey("number")+'：x'+v1.count+'</i></p>'+
+                                          '</dd>'+
+                                    '</dl>'+
+                              '</a>'
+                   
+                  })
+                str+='</div>';
+              $('.shop').html(str);
+              //配送信息
+              $('.igo_payment').text("RM"+val.igo_trans_fee);//支付金额
+              $('.igo_ship_time').text(val.addTime);//下单时间
+              $('.igo_ship_content').text(val.igo_ship_content);//发货说明
+              $('.addTime').text(val.igo_pay_time);//兑换时间
+              $('.igo_trans_fee').text(val.igo_trans_fee);//
+              //支付方式
+              var type;
+              if (val.pay_way==0) {
+                  type=getI18nPageByKey("noFreight");//没有运费
+              }else if (val.pay_way==2) {//网银
+                type=getI18nPageByKey("cyberBank");
+
+              }else if(val.pay_way==1){//银行卡
+                type=getI18nPageByKey("bankCard");
+
+              }else if(val.pay_way==3){//账户余额
+                type=getI18nPageByKey("accountBalance");
+
+              }
+              $('.pay_way').text(type);
+        };
+      },
+      error:function(){
+
+      }
+    })
+
+
+
+
+
+
+
+   </script>
+</body>
+</html>

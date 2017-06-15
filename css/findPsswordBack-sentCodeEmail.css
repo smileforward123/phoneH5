@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+.pageTitle{
+    margin-left: 3.1rem;
+}
+.scroll {
+    bottom: 0;
+    background: #f3f5f7;
+    text-align:center;
+}
+.scroll input{
+    border:1px solid #d9d9d9;
+    height:2rem;
+    font-size:0.75rem;
+    line-height:2rem;
+}
+.box{
+
+    height:2rem;
+    width:14.75rem;
+    margin:0 auto;
+    margin-top:0.5rem;
+    position:relative;
+    font-size:0.5rem;
+
+}
+.box input{
+    text-indent:3.5rem;
+}
+.box *{
+    float:left;
+}
+.box b{
+    display:block;
+    height:2rem;
+    line-height:2rem;
+}
+.box span{
+
+
+    display:block;
+    height:2rem;
+    line-height:2rem;
+    cursor:pointer;
+}
+.box1{
+    height:2rem;
+    width:14.75rem;
+    margin:0 auto;
+    margin-top:0.5rem;
+    position:relative;
+}
+.box1 input[type=text]{
+    width:8rem;
+    background:white;
+    float:left;
+}
+.box1 input[type=button]{
+    width:5.7rem;
+    float:right;
+}
+.box1 a{
+    position:absolute;
+    display:block;
+    right:0;
+    top:1px;
+}
+.box1 a img{
+    height:2rem;
+    width:3.5rem;
+}
+
+.nextStep{
+    margin-top:2rem;
+    width:14.75rem;
+    background:#eeeeee;
+}
+p{
+    color:red;
+    font-size:0.5rem;
+    width:14.75rem;
+    margin:0 auto;
+    text-align:left;
+    padding-top:0.5rem;
+    padding-bottom:0.5rem;
+}
+a{
+    color:red;
+    font-size:0.5rem;
+}

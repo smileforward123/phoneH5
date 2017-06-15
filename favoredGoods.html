@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title id="title"></title>
+        <link href="css/publicClear.css" rel="stylesheet"/>
+       <!--  <link rel="stylesheet" href="css/publich5.css" /> -->
+        <link rel="stylesheet" type="text/css" href="css/loading.css">
+        <link rel="stylesheet" href="css/favoredGoods.css" />
+    </head>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/public.js"></script>
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body style="height:0">
+         <header class="header clear">
+             <span class="back"></span><a href="#" class="mainLogo"></a>
+             <span class="pageTitle pageTitle1">
+                 <script>writeI18nPageByKey("productIndex")</script>
+            </span>
+             <span class="pageTitle pageTitle2">
+                 <script>writeI18nPageByKey("store")</script>
+             </span>
+             
+        </header>
+        <div class="scroll" style="background:white;">
+            <div class="wrap">
+                
+            </div>
+            <div class="loading">
+                 <img src="images/loading_more.gif" class="loadImg">
+                 <span>
+                         <script>writeI18nPageByKey("isLoading")</script>...
+                 </span>
+            </div>
+            <div class="noMore">
+                    <span>
+                           <script>writeI18nPageByKey("noMoreData")</script>
+                    </span>
+            </div>  
+         <!--   <div class="goodsInfor">
+               <div class="leftpart">
+                   <img src="images/godimg.jpg"/>
+               </div>
+               <div class="rightpart">
+                   <ul class="rightInfor">
+                       <li class="Ptitle"><a href="#">App ipone 7(A1700) 2016 rose gold phone</a></li>
+                       <li style="color:#c61828">RM 29.00</li>
+                       <li>
+                           <s style="color:#c61828;">
+                               RM 29.00
+                           </s>
+                           <span style="color:#c61828;margin-left:0.1rem;">-48%</span>
+                       </li>
+                       <li class="review">
+                           <img src="images/yellow-star.png"/>
+                           <img src="images/yellow-star.png"/>
+                           <img src="images/yellow-star.png"/>
+                           <img src="images/half-star.png"/>
+                           <img src="images/gray-star.png"/>
+                       </li>
+                       <li>
+                           <input class="addToCart" type="button" value="加入购物车"/>
+                           <a href="javascript:void(0)" class="buttons"><img src="images/sharebutton.jpg"/></a>
+                           <a href="javascript:void(0)" class="buttons"><img src="images/del.png"/></a>
+                       </li>
+                   </ul>
+               </div>
+               <div style="clear:both;"></div>
+         
+         </div>
+         
+          <div class="goodsInfor">
+              <div class="leftpart">
+                  <img src="images/godimg.jpg"/>
+              </div>
+              <div class="rightpart">
+                  <ul class="rightInfor">
+                      <li class="Ptitle"><a href="#">App ipone 7(A1700) 2016 rose gold phone</a></li>
+                      <li style="color:#c61828">RM 29.00</li>
+                      <li>
+                          <s style="color:#c61828;">
+                              RM 29.00
+                          </s>
+                          <span style="color:#c61828;margin-left:0.1rem;">-48%</span>
+                      </li>
+                      <li class="review">
+                          <img src="images/yellow-star.png"/>
+                          <img src="images/yellow-star.png"/>
+                          <img src="images/yellow-star.png"/>
+                          <img src="images/half-star.png"/>
+                          <img src="images/gray-star.png"/>
+                      </li>
+                      <li>
+                          <input class="addToCart" type="button" value="加入购物车"/>
+                          <a href="javascript:void(0)" class="buttons"><img src="images/sharebutton.jpg"/></a>
+                          <a href="javascript:void(0)" class="buttons"><img src="images/del.png"/></a>
+                      </li>
+                  </ul>
+              </div>
+              <div style="clear:both;"></div>
+         
+          </div> -->
+        </div>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/zepto.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script src="css/layer/layer.js"></script>
+    <script type="text/javascript">
+    $('.back').on("click",function(){
+        window.location.href="aboutMe.html";
+    })
+     $('.pageTitle2').on("click",function(){
+        window.location.href="favoredStore.html"
+    })
+     var page=1;
+     loadAdd();
+    $(window).scroll(function () {
+        var scrollTop=$(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        if (scrollTop+windowHeight==scrollHeight) {
+              loadAdd();
+        };
+    }) 
+    function loadAdd(){
+      $(".loading").show();
+       page+=1;
+       Datas({
+            url:"buyer/follow_info",
+            datas:{"user_id":ls.getItem("userId"),"follow_type":0},
+            success:function(data){
+         
+                var str="",str1='';
+                if (data.status&&data.data!="") {
+                    $.each(data.data,function(k,v){
+                      if (v.goods.store_price==v.goods.goods_price) {
+                           str1= '<img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>';
+                      }else{
+                          if (v.goods.description_evaluate==0) {
+                            str1= '<img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>';
+                          }else if(v.goods.description_evaluate==1){
+                            str1= '<img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>';
+                          }else if(v.goods.description_evaluate==2){
+                            str1= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>';
+                          }else if(v.goods.description_evaluate==3){
+                            str1= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/><img src="images/gray-star.png"/>';
+                          }else if(v.goods.description_evaluate==4){
+                            str1= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/gray-star.png"/>';
+                          }else if(v.goods.description_evaluate==5){
+                              str1= '<img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/><img src="images/yellow-star.png"/>';  
+
+                          }
+                    }
+                   
+                                str+='<div class="goodsInfor" >'+
+                                      '<div class="leftpart" onclick="Goods('+v.goods.id+')"><img src="'+v.goods.goods_main_photo.path+'"/></div>'+
+                                     ' <div class="rightpart">'+
+                                          '<ul class="rightInfor">'+
+                                              '<li class="Ptitle" onclick="Goods('+v.goods.id+')"><a href="#">'+v.goods.goods_name+'</a></li>'+
+                                              '<li style="color:#c61828">RM'+v.goods.store_price+'</li>'+
+                                              '<li><s style="color:#c61828;">RM'+v.goods.goods_price+'</s><span style="color:#c61828;margin-left:0.1rem;">'+(-((v.goods.store_price/v.goods.goods_price)*100).toFixed())+'%</span></li>'+
+                                              '<li class="review"></li>'+str1+
+                                            '<li>'+
+                                                  '<input class="addToCart" type="button" value="Add to Cart" onclick="add('+v.goods.id+')"/>'+
+                                                /*  '<a href="javascript:void(0)" class="buttons" ><img src="images/sharebutton.jpg"/></a>'+*/
+                                                  '<a href="javascript:void(0)" class="buttons" onclick="del('+v.id+')"><img src="images/del.png"/></a>'+
+                                              '</li>'+
+                                          '</ul>'+
+                                      '</div>'+
+                                      '<div style="clear:both;"></div>'+
+                                  '</div>'
+                      
+                     })
+                        setTimeout(function(){
+                            $(".loading").hide();
+                          $('.wrap').html(str);
+                    
+                    },500)
+                  
+                }else{
+                    $(".loading").hide();
+                    $('.noMore').show();    
+                }
+            },
+            error:function(){
+               
+            }
+       }) 
+    } 
+    //取消关注
+    function del(id){
+        Datas({
+            url:"buyer/delFavoriteInfo",
+            datas:{"type_id":id},
+            success:function(data){
+          
+                if (data.status) {
+                
+                }else{
+                      location.reload();
+                }
+            },
+            error:function(){
+              
+            }
+        })
+    }
+    function add(id){
+        window.location.href="product.html?goods_id="+id;
+    }
+    function Goods(id){
+        window.location.href="product.html?goods_id="+id;
+    }
+
+    $(document).ready(function(){
+         
+         $("#title").text(getI18nPageByKey("productYouLike"));
+    })
+    </script>
+    </body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script type="text/javascript" src="js/public.js"></script>
+<meta charset="utf-8">
+<title><script>writeI18nPageByKey("head_title")</script></title>
+<link rel="stylesheet" type="text/css" href="css/base.css"/>
+<link rel="stylesheet" type="text/css" href="css/liststyle.css"/>
+<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+
+</head>
+<body style="background: #f7f7f7;">
+
+
+<header class="car_header red">
+                  <h2><a  href="javascript:void(0)" class="backs" id="ordeaditin"></a><p class="iconbox"></p>订单详情</h2>
+  </header>
+  <div class="cle mR"></div>
+  <div class="ordersize backwhile" id="otrdfertitle">
+   <!-- <h1>订单号：20160707223</h1> <b>待收货</b> -->
+</div>
+
+<div class="backwhile">
+<div class="locationbox">
+<div class="addressbox">
+<!-- <P class="nametxt">张天东  15**1083</P>
+
+<p>北京朝阳区三环到四环惠新西街千鹤家园1号楼14层1401房间</p> -->
+</div>
+<img class="cominimg" src="images/comin.png"/>
+ </div>
+</div>
+
+<div class="backwhile ">
+<div class="consumetxt">
+<!-- <ul>
+<li><img src="images/img6.jpg"></li>
+<li>
+<div class="tdstion"><P>消耗积分：231</P>
+<p>运费：￥2</p>
+
+<p>数量：*1</p>
+</div>
+</li>
+</ul> -->
+</div>
+
+</div>
+
+<div class="backwhile">
+<div class="datlsitimg">
+<P>
+兑换时间：2016-07-06 16：05</P>
+
+<P>支付金额：￥12</P>
+
+<p>支付留言：下次购买会便宜一点吗？</p>
+
+<p>发货说明：请快点发贷，最好今天</p>
+</div>
+ </div>
+ 
+ <footer>
+   <div class="conTake"><a href="javascript:void(0)" id="constakein">确定收货</a></div>
+   
+    </footer>
+<script type="text/javascript">
+//goodsGods();
+
+$(function(){
+
+	$(".tdstion p:eq(1)").css("color","#848689");
+	$(".tdstion p:eq(2)").css("color","#848689");
+})
+ var orderBy,follow_type;
+			var params = getParam(),
+			  signType=getParam().signType,
+			  goods_id=getParam().goods_id;
+			  //解析地址栏获取orderBy的值				
+			var params=getParam();
+				orderBy=params.orderBy;
+				signType=params.signType;
+			var gc_id = params.id ? params.id : null,
+				goods_id =params.goods_id?params.goods_id:null;
+				// follow_type=params.follow_type;
+      
+      $("#ordeaditin").on("click",function(){
+        location.href="myIntegral.html?goods_id="+goods_id+"&signtype="+signType;
+      })
+      
+      $("#constakein").on("click",function(){
+        location.href="integralconvert_record.html?goods_id="+goods_id+"&signtype="+signType;
+      })
+      var userNames=ls.getItem('userId')
+       Datas({
+             url:"buyer/exchange_record",
+             datas:{"igo_user_id":userNames,
+                    "currentPage":1,
+                    "orderBy":"addTime",
+                    "orderType":"desc"
+                  },
+            success:function(data){
+              var datas=data.data;
+             
+              for(var i=0;i<datas.length;i++){
+                var igo_gcs=datas[i].igo_gcs;
+            
+               for(var j=0;j<igo_gcs.length;j++){
+            
+                var goods=igo_gcs[j].goods
+              
+             
+              
+               var str='';
+                 str+='<ul style="clear: left;width:100%;display:inline-block;">'
+                  str+='<li><img src="'+goods.url+'"></li><li>';
+                 str+='<div class="tdstion"><P>'+goods.ig_goods_name+'</p>'
+                  str+='<P>消耗积分：'+goods.ig_goods_integral+'</P>';
+                 str+='<p>数量：*'+igo_gcs[j].count+'</p></div>';
+                str+='</li></ul>';
+                  $(".consumetxt").append(str);
+               var  str2='<h1>订单号：'+datas[i].igo_order_sn+'</h1> <b>待收货</b>'
+                 $("#otrdfertitle").append(str2);
+                 //
+               }
+
+              }
+ 
+          }
+         }) 
+        function cartAddress(){
+      Datas({
+        url:"buyer/cart_address",
+             datas:{"user_id":userNames},
+            success:function(data){
+              var datas=data.data;
+              for(var i=0;i<datas.length;i++){
+                
+                var str1='';
+                str1+='<P class="nametxt">'+datas[i].trueName+'  '+datas[i].mobile+'</P>'
+               str1+='<p>'+datas[i].area_info+'</p>'
+               $(".addressbox").append(str1);
+               }
+               //
+              
+            }
+      })
+    }
+$(function(){
+  cartAddress();
+}) 
+</script>
+</body>
+</html>

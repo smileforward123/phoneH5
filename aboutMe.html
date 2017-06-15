@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="screen-orientation" content="portrait">
+        <meta name="x5-orientation" content="portrait">
+        <meta name="format-detection" content="telephone=no">
+        <meta http-equiv="x-rim-auto-match" content="none">
+         <meta http-equiv="refresh" name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+         <title id="title"></title>
+         <link href="css/publicClear.css" rel="stylesheet"/>
+         <link rel="stylesheet" href="css/publich5.css" />
+         <link href="css/aboutMe.css" rel="stylesheet"/>
+    </head>
+  
+  
+
+    <script>
+         document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <h3 class="pageTitle">
+                 <script>writeI18nPageByKey("botmine")</script>
+            </h3>
+            <a  href="javascript:void(0)" class="btn" id="btn"><img src="images/messages.png"></a>
+        </header>
+        <div class="scroll">
+            <div class="myAccount">
+               <img src="images/aboutBk.png"/>
+                <section class="accountInfo">
+                    <div class="account clear">
+                        <a  class="accountLogo" href="javascript:void(0)"><img src=""/></a>
+                       <p class="accountName">
+                           <span class="truename"><!-- Login/Register --></span>
+                           <span class="userType"><!-- 普通用户 --></span>
+                       </p>
+                    </div>
+                     <div class="langBox">
+                         <!-- <a href="javascript:void(0)"><em class="countryLogo"></em>马来语<em class="down"></em></a> -->
+                         <a class="myAccountInfo" href="javascript:void(0)">
+                                 <script>writeI18nPageByKey("myAccount")</script>
+                                 <em class="right"></em>
+                         </a>
+                     </div>
+                </section>
+                <span class="mask"></span>
+                <nav class="nav">
+                    <a href="javascript:void(0)" class="favoredGoods"><strong class="num"> 0 <!----></strong>
+                         <strong>
+                           <script>writeI18nPageByKey("productYouLike")</script>
+                         </strong>
+                    </a>
+                    <a class="favoredStore" href="javascript:void(0)">
+                          <strong class="num">0<!--  --></strong>
+                          <strong>
+                              <script>writeI18nPageByKey("storeYouLike")</script>
+                          </strong>
+                    </a>
+                   <!--  <a class="myStore" href="javascript:void(0)">
+                          <strong>
+                               <script>writeI18nPageByKey("myStore")</script> >>
+                          </strong>
+                   </a> -->
+                </nav>
+            </div>
+            <ul class="myList">
+                <li>
+                   <p class="myOrder">
+                        <a class="myOrder1" href="javascript:void(0)">
+                              <em class="orderLogo"></em>
+                              <script>writeI18nPageByKey("myOrder")</script>
+                        </a>
+                        <a class="seeOrder" href="javascript:void(0)">
+                              <script>writeI18nPageByKey("haveAlookAtAllOrder")</script> >
+                        </a>
+                    </p>
+                   <nav class="orderNav clear">
+                       <a class="waitPay" href="javascript:void(0)">
+                           <strong class="statusLogo payWait"></strong>
+                           <strong class="statusText">
+                                <script>writeI18nPageByKey("waitForPaying")</script>
+                           </strong><!-- <em>0</em> -->
+                       </a><a class="receiptOfGoods" href="javascript:void(0)">
+                           <strong class="statusLogo receiveWait"></strong>
+                           <strong class="statusText">
+                                <script>writeI18nPageByKey("waitForSigning")</script>
+                          </strong>
+                       </a><a class="receivedStatus" href="javascript:void(0)">
+                           <strong class="statusLogo received "></strong>
+                           <strong class="statusText">
+                                <script>writeI18nPageByKey("haveReceivedGoods")</script>
+                           </strong>
+                       </a><a class="complateCancel" href="javascript:void(0)">
+                           <strong class="statusLogo canceld"></strong>
+                           <strong class="statusText">
+                                <script>writeI18nPageByKey("haveConcelled")</script>
+                           </strong>
+                       </a><a class="returnmoney" href="javascript:void(0)">
+                           <strong class="statusLogo drawBack"></strong>
+                           <strong class="statusText">
+                                <script>writeI18nPageByKey("refunding")</script>
+                           </strong>
+                       </a>
+                   </nav> 
+                </li>
+                <li class="clear ">
+                    <div class="accountDetail">
+                        <a class="title accountTitle" href="javascript:void(0)">
+                             <em class="accountLogo1"></em>
+                                 <script>writeI18nPageByKey("AccountNumber")</script>
+                             <span class="rightArrow"></span>
+                        </a>
+                        <div class="clear">
+                            <p class="balance" >
+                                <span class="balanceNum">0.00<!-- 100.00 --></span>
+                                <span>
+                                    <script>writeI18nPageByKey("TheBalance")</script>
+                                </span>
+                            </p>
+                            <a class="balanceDetail record" href="javascript:void(0)">
+                                <script>writeI18nPageByKey("InfromativeDeal")</script><span style="padding-right: 17px; float: right;"> >></span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="integral">
+                        <a class="title integralMall" href="javascript:void(0)">
+                              <em class="intelLogo"></em>
+                              <script>writeI18nPageByKey("integralMall")</script>
+                              <span class="rightArrow"></span>
+                        </a>
+                        <div class="clear">
+                            <p class="balance" id="blncebox">
+                               <span class="integralNum">0.00<!-- 200 --></span>
+                               <span>
+                                   <script>writeI18nPageByKey("integral")</script>
+                               </span>
+                            </p>
+                            <a class="balanceDetail integralRecord" href="javascript:void(0)">
+                                   <script>writeI18nPageByKey("integralDetail")</script><span style="padding-right: 7px; float: right;"> >></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="menuList">
+                    <a href="javascript:void(0)" id="inviteFriends" class="addthis_button_compact">
+                    <!-- <div class="addthis_inline_share_toolbox_u5kb_v420"></div> -->
+                          <script>writeI18nPageByKey("inviteFriends")</script>
+                          <em></em>
+                    </a>
+                </li>
+                <li class="menuList">
+                    <a class="complaintList" href="javascript:void(0)">
+                          <script>writeI18nPageByKey("manageComplaint")</script>
+                          <em></em>
+                    </a>
+                </li>
+                <li class="menuList">
+                    <a class="contactService" href="javascript:void(0)">
+                          <script>writeI18nPageByKey("customerService")</script>
+                          <em></em>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+       <footer class="footer">
+        <ul class="ul-nav">
+          <li>
+            <a href="index.html">
+              <img src="images/footer.png" />
+              <p>
+                 <script>writeI18nPageByKey("botindex")</script>
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="myIntegral.html">
+              <img src="images/footer02.png" />
+              <p>
+                 <script>writeI18nPageByKey("integralMall")</script>
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="shopping_cars.html">
+              <img src="images/footer03.png" />
+              <p>
+                 <script>writeI18nPageByKey("shoppingCar")</script>
+              </p>
+            </a>
+          </li>
+          <li  class="active">
+            <a href="aboutMe.html">
+              <img src="images/footer04active.png" />
+              <p>
+                 <script>writeI18nPageByKey("botmine")</script>
+              </p>
+            </a>
+          </li>
+          <li>
+            <a href="more.html">
+              <img src="images/footer05.png" />
+              <p>
+                  <script>writeI18nPageByKey("botmore")</script>
+              </p>
+            </a>
+          </li>
+        </ul>
+      </footer>
+         <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="css/layer/layer.js"></script>
+     <script src="js/common.js"></script>
+        <script>
+         var params=getParam(),
+             Login=params.Login;
+          $(".contactService").click(function(){
+                layer.open({
+                  type: 1,
+                  title :getI18nPageByKey("dialserviceNumber"),
+                  area: ['14.8rem', '5rem'],
+                  closeBtn: 0,
+                  btn: [getI18nPageByKey("cancel"),getI18nPageByKey("okBtn")]
+                   
+                  
+                });
+                $(".layui-layer").css({
+                "font-size":"0.35rem"
+                })
+                $(".layui-layer-title").css({
+                "padding-right":"0"
+                })
+                 $(".layui-layer-btn1").replaceWith("<a href='tel:03-2181 3666' id='layui-layer-btn1'>"+getI18nPageByKey("okBtn")+"</a>  ");
+           
+                $('#layui-layer-btn1').on("click",function(){
+                  $('.layui-layer-shade').remove();
+                  $('.layui-layer').remove();
+                  
+                })
+
+            })
+            //点击信息icon去登录
+            var login=1;
+            $('#btn').on("click",function(){
+              if (!ls.getItem('userId')) {
+                $(this).attr('href',"Appsia_login.html?login="+login);
+              }else{
+                $(this).attr('href',"message.html");
+              }
+            })
+            $(function(){
+              // if (ls.getItem("userId")) {
+              //  $(".truename").text(ls.getItem("trueName"));    
+                  Datas({
+                    url:"getUserInfo",
+                    datas:{
+                      "user_id":ls.getItem("userId")
+                    },
+                    success:function(data){
+                      if (data.status) {
+                          $(".balanceNum").text(data.data.availablebalance);
+                          $(".integralNum").text(data.data.integral);
+                          $(".favoredGoods .num").text(data.data.goodsCount);
+                          $(".favoredStore .num").text(data.data.storeCount);
+                          $(".truename").text(data.data.truename);
+                          if(data.data.url!=""){
+                            $(".accountLogo img").attr("src",data.data.url);
+                          }else{
+                             $(".accountLogo img").attr("src","images/accountLogo.png");
+                          }
+                          $("#inviteFriends").attr("class","addthis_button_compact");
+                        
+                      }else{
+                         $(".accountLogo img").attr("src","images/accountLogo.png");
+                         $(".truename").text("Login/Register");
+                    }
+                      // else{
+                      //    $(".accountLogo img").attr("src","images/accountLogo.png");
+                      //    $(".truename").text("Login/Register");
+              
+                      // }
+                      
+                        
+
+                    },
+                    error:function(){
+                    }
+
+
+                  })
+               // }
+               // else{
+               //    $(".accountLogo img").attr("src","images/accountLogo.png");
+               //     $(".truename").text("Login/Register");
+               // }
+
+
+            })
+          
+            //用户姓名；
+           
+              $(".truename").click(function(){
+                 if(!ls.getItem("userId")){
+                    layer.msg("login first");
+                    setTimeout(function(){
+                        window.location.href="Appsia_login.html?login=1";
+
+
+                    },500);
+                 }
+                    
+              })
+            
+            
+            $(".myAccountInfo").click(function(){
+                if(ls.getItem("userId")){
+                    window.location.href="myAccount.html";
+                }else{
+                    layer.msg("login first");
+                    setTimeout(function(){
+                        window.location.href="Appsia_login.html?login="+login;
+
+
+                    },500);
+                }
+            })
+            //积分详情
+            $("#blncebox").click(function(){
+              if(ls.getItem("userId")){
+               window.location.href="myIntegraldetails.html"
+             }else{
+               layer.msg("login first");
+                    setTimeout(function(){
+                        window.location.href="Appsia_login.html?login="+login;
+
+
+                    },500);
+             }
+              
+           })
+            //点的我的店铺：
+          // $(".myStore").click(function(){
+            //     //调取获取店铺信息的接口：
+            //     if(ls.getItem("userId")){
+            //         Datas({
+            //             url:"/seller/my_store_info",
+            //             datas:{
+            //                user_id:ls.getItem("userId"),
+
+
+
+            //             },
+            //             success:function(data){
+                          
+            //               if(data.status){
+            //                 if(data.data.storeStatus=="2"){
+            //                   //开店审核成功；
+                             
+                             
+            //                   location.href="../phoneSaler/salermyShop.html?type=2";
+            //                 }else{
+                              
+                            
+            //                   //店铺正在审核;
+                              
+            //                    location.href="../phoneSaler/identityAudit.html";
+            //                 }
+
+
+            //               }else{
+            //                   //还未开店铺：
+                             
+            //                  location.href="../phoneSaler/freeShop.html"; 
+            //               }
+            //             },
+            //             error:function(){
+                          
+            //             }
+            //         })
+            //     }else{
+            //         layer.msg("login first");
+            //         setTimeout(function(){
+            //             location.href="Appsia_login.html";
+
+
+            //         },500);
+            //     }
+                
+                
+            // })
+            //账户：
+           $(".accountTitle").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","accountManage.html?type=1");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })
+           //交易明细：
+           $(".record").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","accountBalanceDetail.html?type=1");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })
+          //积分商城;
+            $(".integralMall").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","myIntegral.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })
+           //积分明细：
+            $(".integralRecord").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","particulars.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })
+            //投诉管理：
+            $(".complaintList").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","complaintManage.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })
+            //关注商品：
+            $(".favoredGoods").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","favoredGoods.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })  
+          //关注店铺：
+            $(".favoredStore").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","favoredStore.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           })  
+           //查看订单： 
+          $(".seeOrder").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","allMenu.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html";
+
+
+                      },500);
+              }
+              
+           }) 
+           //待付款： 
+          $(".waitPay").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","waitPay.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           }) 
+          //待收货
+          $(".receiptOfGoods").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href"," receiptOfGoods.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;;
+
+
+                      },500);
+              }
+              
+           }) 
+          //已收货
+           $(".receivedStatus").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","receivedGoods.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;
+
+
+                      },500);
+              }
+              
+           }) 
+           //已取消：
+          $(".complateCancel").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href","complateCancel.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;;
+
+
+                      },500);
+              }
+              
+           })
+           //退款： 
+          $(".returnmoney").click(function(){
+              if(ls.getItem("userId")){
+                $(this).attr("href"," returnmoney.html");
+              }else{
+                      layer.msg("login first");
+                      setTimeout(function(){
+                          window.location.href="Appsia_login.html?login="+login;;
+
+
+                      },500);
+              }
+              
+           }) 
+         //邀请好友
+         $("#inviteFriends").on("click",function(){
+            if (ls.getItem("userId")) {
+              //window.location.href=defaults.url+"regInviter?user_id="+ls.getItem("userId");
+
+            }else{
+              layer.msg("Login first");
+               setTimeout(function(){
+                    window.location.href="Appsia_login.html?login="+login;
+                },500);
+            }
+         })
+        //  Datas({
+        //         url:"getUserInfo",
+        //         datas:{
+        //           "user_id":ls.getItem("userId") 
+        //         },
+        //         success:function(data){
+        //             if (data.status) {
+
+
+        //               $(".balanceNum").text(data.data.availablebalance);
+        //               $(".integralNum").text(data.data.integral);
+        //               $(".favoredGoods .num").text(data.data.goodsCount);
+        //               $(".favoredStore .num").text(data.data.storeCount);
+        //               $(".truename").text(data.data.truename);
+        //               if(data.data.url){
+        //                 $(".accountLogo img").attr("src",data.data.url);
+        //               }else{
+        //                 $(".accountLogo img").attr("src","images/accountLogo.png");
+        //               }
+        //             };   
+
+        //         },
+        //         error:function(){
+                    
+        //         }
+
+
+
+
+
+        // })
+          
+       $(document).ready(function(){
+           $("#title").text(getI18nPageByKey("aboutMe"));
+       })   
+
+</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-58185fed2291bbea"></script>
+<script type="text/javascript">
+    var addthis_share = {
+      url: defaults.url+"regInviter?user_id="+ls.getItem("userId"),
+      title: "Check out this new shopping experience!",
+      media: "http://img0119.oss-ap-southeast-1.aliyuncs.com/upload/advert/ce9f9ce4-e479-41d6-9190-97bd0c041073.jpg",
+      description: "Our 'Invite Friends' feature allows you to share your love of AppAsia to your friends via various types of social media platforms. Once signed up, people you've invited will be linked to you; in return, you'll receive a little something extra into your personal AppAsia account everytime they make a purchase.",
+      email_template: "AppAsia_Invite_Friends"
+    }
+    var addthis_config = addthis_config||{};
+    addthis_config.ui_email_from = 'care@appasia.my';
+    addthis_config.ui_email_note = 'Hey! Check this out!';
+    addthis_config.ui_email_image = "";
+  </script>
+    </body>
+</html>

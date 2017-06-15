@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="js/public.js"></script>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title></title>
+        <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+        <link href="css/publicClear.css" rel="stylesheet"/>
+        <link href="css/baseLogin.css" rel="stylesheet"/>
+        <link href="css/4-0-3store-detail.css" rel="stylesheet"/>
+		 <style type="text/css">
+			.description img{margin-left:2px;margin-right:2px;}
+			.star-rating p{padding-left:5px;}
+			.info{
+				width: 6rem;
+				height: 2rem;
+
+			}
+			.info a{
+				width: 5.5rem;
+				height: 1rem;
+				line-height: 1rem;
+				text-overflow:ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				display: inline-block;
+				font-size: 0.6rem;
+			}
+		</style>
+         
+    </head>
+     <script>
+        document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <body>
+        <header class="header clear">
+            <span class="back"></span><a href="javascript:void(0)" class="mainLogo"></a>
+            <h3 class="pageTitle">
+                  <script>writeI18nPageByKey("storeDetail")</script><!-- 店铺详情 -->
+            </h3>
+            
+        </header>
+        
+
+
+		<div class="focus0nShop">
+		     <div class="focus0nShop-content">
+               
+			  		<div class="shopInfo">
+                		<!-- 	<div class="shopLog">
+    									  <img src="images/shop-banner.png"/>
+							  </div>
+							  <div class="numberOfFocus">
+								  <a href="javascript:void(0)">起点运动户外运动..</a>
+								  <p>33.8万人关注</p>
+							  </div> -->
+                	</div>
+                    <div class="focuBtn" id="focus">
+                    	<p>
+							<script>writeI18nPageByKey("focus")</script><!-- 关注 -->
+						</p>
+					</div>
+				</div>
+			 <div>
+			     <ul class="comprehensives">
+			<!-- 	 <li><span>店铺名称 :</span> <b>天悦轩</b> </li>
+  					  <li><span>店铺等级 :</span> <b>白银</b></li>
+  					  <li><span>店铺类型 :</span> <b>中国货区专卖店</b></li>
+  					  <li></li>
+  					  <li><span>联系卖家 :</span> <input type="button" class="seller"/></li>
+  					  
+  					  <li><span>管理类型 :</span> <b>自管</b></li>
+  					  <li>
+  					      <span>信用等级 :</span> 
+  
+                            <div class="stars"> 
+  						     <img src="images/heart_img.png" />
+  						     <img src="images/heart_img.png" />
+  						     <img src="images/heart_img.png" />
+  						     <img src="images/heart_img.png" />
+  						     <img src="images/heart_img.png" />
+                            </div>
+  					  </li> -->
+					  
+				 </ul>
+			 </div>
+
+			 <div class="star-rating">
+			      <p>
+			          <script>writeI18nPageByKey("ShopDynamicRate")</script><!-- 店铺动态评分 -->
+			      </p>
+			     <ul class="description">
+     				<li class="des1">
+     				          <em>
+     				                <script>writeI18nPageByKey("descriptionAccordWith")</script><!-- 描述相符 -->:
+     				          </em>
+     				          <span></span><span></span><span></span><span></span><span></span><b></b>
+     				</li>
+     				<li class="des2">
+     				          <em>
+     				                <script>writeI18nPageByKey("serviceAttitude")</script><!-- 服务态度 -->:
+     				          </em>
+     				          <span></span><span></span><span></span><span></span><span></span><b></b>
+     				</li>
+     				<li class="des3">
+     				          <em>
+     				                <script>writeI18nPageByKey("deliverGoodsSpeed")</script><!-- 发货速度 -->:
+     				          </em>
+     				          <span></span><span></span><span></span><span></span><span></span><b></b>
+     				</li>
+     			</ul>
+				  
+			 </div>
+
+		
+		
+		</div>
+       
+        <script src="js/zepto.min.js"></script>
+        <script type="text/javascript" src="js/jquery-2.2.1.js"></script>
+        <script type="text/javascript" src="css/layer/layer.js"></script>
+       	<script type="text/javascript" src="js/common.js"></script>
+        <script type="text/javascript"> 
+        var goods_store; 
+        	goods_store=getParam().goods_store,
+        	goods_id=getParam().goods_id;
+        	$('.back').on("click",function(){
+        	    window.location.href="obussinessmanShop.html?goods_store="+goods_store+"&goods_id="+goods_id;
+            })
+        	Datas({
+        		url:"store_class/store_info",
+        		datas:{"id":goods_store,"user_id":ls.getItem("userId")?ls.getItem("userId"):""},////店铺Id
+        		success:function(data){
+        			var v=data.data,
+  						arr=[v.description_evaluate_halfyear,v.service_evaluate_halfyear,v.description_evaluate_halfyear];
+        			var str="",str1="",str2="",str3="",txt;	
+				   	  var substr=v.store_credit;
+                      var  string1=substr.substr(0,1),
+                             string2=substr.substr(2,1);          
+                       if (string1==1) {//1是红心，2是钻石，3是皇冠
+                           for(var i=0;i<string2.length;i++){
+                                 str1+='<img src="images/heart_img.png">'//皇冠
+                           }
+                      }else if(string1==2){
+                         for(var i=0;i<string2.length;i++){
+                                str1+='<img src="images/diamond.png">'//钻石 
+                           }
+                      }else if(string1==3){
+                          for(var i=0;i<string2.length;i++){
+                               str1+='<img src="images/hg.png">'//皇冠
+                         }
+                      }
+                      //判断管理类型
+                      if(v.storeType==1){
+                      	txt=getI18nPageByKey("flagStore")/*"旗舰店"*/;
+                      }else if(v.storeType==2){
+                        txt=getI18nPageByKey("StoreOfChinaArea")/*"中国货品专区店"*/;
+                      }else if(v.storeType==3){
+                      	txt=getI18nPageByKey("storeOfSpecialGoods")/*"马来西亚特产店"*/;
+                      }else if(v.storeType==4){
+                      	txt=getI18nPageByKey("storeOfC2C")/*"C2C店"*/;
+                      }
+                      str+="<li><span>"+getI18nPageByKey("shopName")/*店铺名称*/+":</span> <b>"+v.store_name+"</b> </li>"+
+	      					  "<li><span>"+getI18nPageByKey("shopGrade")/*店铺等级*/+" :</span> <b>"+v.gradeName+"</b></li>"+
+	      					/*  "<li><span>店铺类型 :</span> <b>"+v.storeClass+"</b></li>"+*/
+	      					 /* "<li></li> "+*/
+	      					  "<li onclick='contact(\""+v.store_userId+"\",\""+v.store_userName+"\",4)'><span>"+getI18nPageByKey("contactSeller")/*联系卖家*/+" :<input type='button' class='seller'/></li>"+
+	      					  "<li><span>"+getI18nPageByKey("manageType")/*管理类型*/+" :</span> <b>"+txt+"</b></li>"+
+	      					  "<li class='cride'>"+
+	      					      "<span>"+getI18nPageByKey("creditRatie")/*信用等级*/+" :</span>"+ str1+
+	      					  "</li>";
+				     $(".comprehensives").html(str);
+				   	//店铺的动态评分
+				   	function starStyle(obj,arr){
+						obj.find("li").each(function(k,v){
+							for(var i=0,len=arr[k];i<len;i++){
+								$(this).find("span").eq(i).addClass("cur");
+								
+							}			
+						})
+					}
+					starStyle($(".description"),arr);
+					$('.des1').find('b').html(v.description_evaluate_halfyear); 	
+					$('.des2').find('b').html(v.service_evaluate_halfyear); 	
+					$('.des3').find('b').html(v.description_evaluate_halfyear); 	
+					//店铺头部信息
+					str2+='<div class="shopLog">'+
+								'<img src="'+data.data.store_logo+'" style="height:2rem;background-size:contain;border:1px solid #ccc"/>'+
+							 ' </div>'+
+							  '<div class="numberOfFocus">'+
+								  '<a href="javascript:void(0)">'+data.data.store_name+'</a>'+
+								  '<span></span>'+
+								  '<p>'+data.data.favorite_count+getI18nPageByKey("millionsFocus")/*人关注*/+'</p>'+
+						  '</div>';
+					$('.shopInfo').html(str2);
+					//判断是否被关注过
+					 if (data.data.favorite==1) {
+	                    // alert(33);
+	                      $(".focuBtn").addClass('focuBtnon');
+	                 };
+				 
+        		},
+        		error:function(data){
+        			layer.msg(data.message);
+        		}         
+
+        	})
+			//关注店铺取消店铺
+		$('.focuBtn').on("click",function(){//focuBtnon
+			if (!ls.getItem('userId')) {
+				layer.msg(getI18nPageByKey("focusWarn"));/*"您不是用户，不能关注！"*/
+				return;
+			};
+			if ($(this).hasClass("focuBtn")) {
+				$(this).removeClass("focuBtn").addClass("focuBtnon");
+				Fouce();
+				$("#focus").text(getI18nPageByKey("haveFocuse"));/*"已关注"*/
+			}else{
+				$(this).removeClass("focuBtnon").addClass("focuBtn");
+				noFouce();
+				$("#focus").text(getI18nPageByKey("focus"));/*"关注"*/
+			}
+		})
+		function Fouce(){
+	 			Datas({
+	                  url:"buyer/svaeFavoriteInfo",
+	                  datas:{"user_id":ls.getItem("userId"),"follow_type":1,"type_id":goods_store},
+	                  success:function(data){
+	                       if(data.status == 'success'){
+	                          layer.msg(data.message);
+
+	                        }else{
+	                          layer.msg(data.message);
+	                        }
+	                  },
+	                  error:function(){
+	                    layer.msg(getI18nPageByKey("failToRequest"));/*"请求失败"*/
+	                  }
+	              })
+		}
+		function noFouce(){
+			Datas({
+                    url:"buyer/delFavoriteInfo",
+                    datas:{
+	                    	"type_id":goods_store,
+	                    	"user_id":ls.getItem("userId"),
+	                    	"follow_type":1//0商品1店铺
+	                    },
+                    success:function(data){
+                         if(data.status == 'success'){
+                            layer.msg(data.message);
+                          }else{
+                            layer.msg(data.message);
+                          }
+                    },
+                    error:function(data){
+                       layer.msg(getI18nPageByKey("failToRequest"));/*"请求失败"*/
+                    }
+            })
+		}
+		//联系客服
+		function contact(store_userId,store_userName,loginBack){
+			 if (!ls.getItem("userId")) {
+		   		 window.location.href="Appsia_login.html?goods_store="+goods_store+"&goods_id="+goods_id+"&loginBack="+loginBack;
+		    }else{
+		   		if (store_userId==ls.getItem("userId")){
+			   		layer.msg(getI18nPageByKey("youCantTalkWithYou"));/*"您不能和自己聊天"*/
+			   }else{
+			   	 	 window.location.href="talkingMessage.html?good_userId="+store_userId+"&good_userName="+store_userName; 
+			   }
+		   }
+			
+		}	
+        </script>
+    </body>
+</html>

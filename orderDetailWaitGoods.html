@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script src="js/public.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width">
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+  <meta content="telephone=no" name="format-detection" />
+  <meta content="email=no" name="format-detection" />
+  <title></title>
+   <link rel="stylesheet" type="text/css" href="css/loading.css">
+  <link rel="stylesheet" type="text/css"  href="css/menuDetail.css">
+   <link rel="stylesheet" type="text/css" href="css/layer/skin/layer.css">
+  <script type="text/javascript">
+    document.getElementsByTagName("html")[0].style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+  <style>
+        .delete_menu nav{
+            float: right;
+        }
+        .delete_menu nav a{
+            float: none;
+        }
+  </style>
+</head>
+<body>
+  <div class="wrapper" id="wrapper">
+    <header>
+      <a href="javascript:void(0)" class="back"></a>
+          <span></span>
+      <h2>
+          <script>writeI18nPageByKey("orderDetail")</script><!-- 订单详情 -->
+      </h2>
+    </header>
+    <section>
+      <h1 class="menu_order"><i style="font-size:0.7rem"><!-- 订单号:20160707223 --></i><span style="font-size:0.7rem"><!-- 待发货 --></span></h1>
+      <div class="address">
+        <div class="add1" id="add1">
+         <!--  <h3>收货地址</h3>
+         <p><span>张天乐</span></p>
+         <p><span>1351481083</span> <b>10005333</b></p>
+         <h4><i></i><span>北京朝阳区三环到四环之间惠新西街千鹤家园1号楼14层1401房间</span></h4> -->
+        </div>
+        <div class="add1" id="add2">
+         <!--  <h3>发票地址</h3>
+         <p><span>张天乐</span></p>
+         <p><span>1351481083</span> <b>10005333</b></p>
+         <h4><i></i><span>北京朝阳区三环到四环之间惠新西街千鹤家园1号楼14层1401房间</span></h4> -->
+        </div>
+      </div>
+      <div class="shopItem">
+        <div class="shop">
+            
+        </div>
+        <!-- 联系卖家 -->
+        <div class="contact_seller_box">
+          <!-- <a href="#" class="contact_seller"><span>联系卖家</span></a> -->
+        </div>
+        <!-- 配送信息 -->
+        <div class="shipping_info">
+         <!--  <p >配送信息: <span class="transInfo"></span> </p>
+         <p >配送方式：<span class="transport">普通快递</span> </p>
+         <p >配送时间：<span class="shipTime">2016-07-05</span><span>15:00-19:00</span></p> -->
+        </div>
+        <!-- 会员类型 -->
+        <div class="member_info" style="height:5.52rem;">
+          <p>
+             <span class="info_left">
+                  <script>writeI18nPageByKey("TotalPrice")</script><!-- 商品总价  --><!-- <b class="num"></b> -->:
+              </span>
+             <i class="info_right totalPrice"><!-- RM130.00 --></i>
+          </p>
+          <p>
+               <span class="info_left">
+                   <script>writeI18nPageByKey("shipPrice")</script><!-- 运费 -->:
+               </span>
+               <i class="info_right actual_Shipment"><!-- 免费 --></i>
+          </p>
+          <p>
+              <span class="info_left">
+                  <script>writeI18nPageByKey("taxPrice")</script><!-- 税费 -->:
+              </span>
+              <i class="info_right taxes"><!-- RM7.98 --></i>
+          </p>
+          <p>
+             <span class="info_left">
+                  <script>writeI18nPageByKey("actuallyPaying")</script><!-- 实付款 -->:
+             </span>
+             <i class="info_right disbursements" style="color:#ec2426;"><!-- RM137.98 --></i>
+          </p>
+        </div>
+        <!-- 下单时间 -->
+         <div class="time_infos" style="height:auto">
+         <!--   <p><span class="info_title">下单时间：</span><span class="info_left addTime"><i class="info_right">2016-07-25</i></span></p> -->
+         </div>
+        <!-- 评价定单按钮 -->
+         <!-- <div class="delete_menu">
+         <a href="#">投诉</a>
+       <a href="#">退款</a>
+        </div> -->
+      </div>
+    </section>
+   <script src="js/jquery-2.2.1.js"></script>
+   <script src="css/layer/layer.js"></script>
+   <script src="js/common.js"></script>
+   <script type="text/javascript" src="js/menu.js"></script>
+    <script type="text/javascript">
+   
+   var params = getParam(),
+       orderId = params.order_id,
+       storeId = params.store_id,
+       orderStatus=params.orderStatus;
+       //判断返回按钮返回的是那个页面
+        $('.back').on("click",function(){
+          if (orderStatus==111) {
+             window.location.href="allMenu.html";
+            return;
+          }else if(orderStatus==10){
+               window.location.href="allMenuPay.html";
+               return;
+          }else if(orderStatus==20){
+             window.location.href="allMenuPreGood.html";
+             return;
+          }else if(orderStatus==30){
+              window.location.href="allMenuReviece.html";
+              return;
+          }else if(orderStatus==40){
+              window.location.href="allMenuComGood.html";
+              return;
+          }else if(orderStatus==1){
+               window.location.href="allMenuOrder.html";
+               return;
+          }else if(orderStatus==2){
+                window.location.href="allMenuCancelCompalte.html";
+                return;
+          }else if(orderStatus==3){
+               window.location.href="allMenuCancel.html";
+               return;
+          }else if(orderStatus==11){
+              window.location.href="waitPay.html"
+          }else if(orderStatus==12){
+               window.location.href="receiptOfGoods.html"
+          }else if(orderStatus==13){
+              window.location.href="receivedGoods.html";
+          }else if(orderStatus==14){
+             window.location.href="complateCancel.html";
+          }else if(orderStatus==15){
+               window.location.href="returnmoney.html";
+          }
+       })
+      //买家退货物流信息接口
+      Datas({
+        url:"order_view",
+        datas:{"id":orderId,"storeId":storeId,"user_id":ls.getItem('userId')},
+        success:function(data){
+            var str5="";
+             var str1="",v=data.data,str2='';
+            if (data.status) {
+               
+                var strs="";
+                //判断买家信息显示
+                if (data.data.order_status==10) {
+                  strs='<p><span class="info_title">'+getI18nPageByKey("DateOfOrder")/*下单时间*/+'：</span><span class="info_left"><i class="info_right">'+v.addTime+'</i></span></p>';
+                       
+                    $('.time_infos').html(strs);     
+                }else{
+                     strs='<p><span class="info_title">'+getI18nPageByKey("DateOfOrder")/*下单时间*/+'：</span><span class="info_left addTime"><i class="info_right">'+v.addTime+'</i>        </span></p>'+
+                              '<p><span class="info_title">'+getI18nPageByKey("DateOfPaying")/*支付时间*/+'：</span><span class="info_left addTime"><i class="info_right">'+v.payTime+'</i></span></p>'+
+                              '<p><span class="info_title">'+getI18nPageByKey("invoiceNo")/*发票号*/+'：</span><span class="info_left addTime"><i class="info_right">'+v.invoice+'</i></span></p>'
+                    $('.time_infos').html(strs);   
+                }
+                //判断按钮
+                if (data.data.order_status==50) {
+                    $('.menu_order').find("span").text(getI18nPageByKey("haveCompleted"));/*"已完成"*/
+                    str5='<div class="delete_menu">'+
+                            '<a href="javascript:void(0)" onclick="watchEval(this,'+v.orderId+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+                          '</div>';
+                    $('.shopItem').append(str5);       
+                }else if (data.data.order_status==10) {
+                    $('.menu_order').find("span").text(getI18nPageByKey("waitForPaying"));/*"待付款"*/
+                         str5='<div class="delete_menu">'+
+
+                              
+
+                                '<a href="javascript:void(0)"  onclick="cancelOrder('+v.orderId+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消定单*/+'</a>'+
+                                '<a href="javascript:void(0)" onclick="pay('+v.lineType+','+v.disbursements+','+v.orderId+')">'+getI18nPageByKey("payInstantly")/*立即付款*/+'</a>'+
+
+                              '</div>';
+                        $('.shopItem').append(str5);
+
+                }else if (data.data.order_status==20) {
+                    $('.menu_order').find("span").text(getI18nPageByKey("waitForDelivery"));/*"待发货"*/
+                    str5= '<div class="delete_menu">'+
+                            '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                            '<a href="javascript:void(0)" class="return_money" onclick="applayOrder('+v.orderId+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+                          '</div>';
+                      $('.shopItem').append(str5);
+                }else if(data.data.order_status==30){
+                      $('.menu_order').find("span").text(getI18nPageByKey("waitForSigning"));/*"待收货"*/
+
+                      str5='<div class="delete_menu">'+
+                             '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                             '<a href="javascript:void(0)" class="confirm_item" onclick="confirmOrder('+v.orderId+')">'+getI18nPageByKey("sureYouGotGoods")/*确定收货*/+'</a>'+
+                          '</div>';
+                           $('.shopItem').append(str5);
+                }else if(data.data.order_status==40){
+                      $('.menu_order').find("span").text(getI18nPageByKey("haveReceivedGoods"));/*"已收货"*/
+                      if (v.evaluate==true) {
+                           str5 = '<div class="delete_menu" style="float:none">'+
+                                '<nav>'+
+                                 '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                                 '<a href="javascript:void(0)" class="confirm_item" onclick="applayOrder('+v.orderId+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+                                 '<a href="javascript:void(0)" onclick="watchEval(this,'+v.orderId+')">'+getI18nPageByKey("seeEval")/*查看评价*/+'</a>'+
+                                 '</nav>'+ 
+                             '</div>';
+                        }else{
+                            str5 = '<div class="delete_menu" style="float:none">'+
+                                '<nav>'+
+                                 '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                                 '<a href="javascript:void(0)" class="confirm_item" onclick="applayOrder('+v.orderId+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+                                 '<a href="javascript:void(0)"  onclick="Evaluate('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToEvaluate")/*去评价*/+'</a>'+
+                                 '</nav>'+ 
+                             '</div>';
+                        }
+                   
+                       $('.shopItem').append(str5);
+                }else if(data.data.order_status==47){
+                    // if (!ls.getItem('flag')) {
+                        $('.menu_order').find("span").text(getI18nPageByKey("haveReTurned"));/*"已退款"*/
+                        str5 = '<div class="delete_menu">'+
+                                    '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                              '</div>';
+                    // }else{
+                    //      $('.menu_order').find("span").text("退款成功");
+                    //        str5 = '<div class="delete_menu">'+
+                    //             '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">投诉</a>'+
+                    //         '</div>';
+
+                    // }
+                      
+                       $('.shopItem').append(str5);
+                }else if(data.data.order_status==15){
+                      $('.menu_order').find("span").text(getI18nPageByKey("offlinePayWaitChecking"));/*"线下支付待审核"*/
+                      str5 = '<div class="delete_menu">'+
+
+
+                                  
+
+                                  '<a href="javascript:void(0)"  class="cancel_menu" onclick="cancelOrder('+v.orderId+','+v.order_id+')">'+getI18nPageByKey("cancelOrder")/*取消定单*/+'</a>'+
+                                  '<a href="javascript:void(0)"  class="confirm_item" onclick="pay('+v.lineType+','+v.disbursements+','+v.orderId+')">'+getI18nPageByKey("payInstantly")/*立即付款*/+'</a>'+
+
+                              '</div>';
+                       $('.shopItem').append(str5);
+                }else if(data.data.order_status==25){
+                      $('.menu_order').find("span").text(getI18nPageByKey("prepareToSend"));/*"准备发货"*/
+                      str5 = '<div class="delete_menu">'+
+                             /*   '<a href="javascript:void(0)">准备发货</a>'+*/
+                             '<a href="javascript:void(0)" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\','+v.userID+','+v.userName+')">'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</a>'+
+                             '<a href="javascript:void(0)" onclick="complain('+v.id+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                              '<a href="javascript:void(0)" class="cancel" onclick="applayOrder('+v.id+')">'+getI18nPageByKey("refunding")/*退款*/+'</a>'+
+                            '</div>';
+                      $('.shopItem').append(str5);
+                }else if(data.data.order_status==0){
+                      $('.menu_order').find("span").text(getI18nPageByKey("haveConcelled"));/*"已取消"*/
+                      str5="";
+                       $('.shopItem').append(str5);
+
+                }else if(data.data.order_status==45){
+                      $('.menu_order').find("span").text(getI18nPageByKey("applyForReturn"));/*"申请退款"*/
+                        str5 = '<div class="delete_menu">'+
+                                '<a href="javascript:void(0)" onclick="complain('+v.orderId+','+v.store_id+')">'+getI18nPageByKey("ToComplain")/*投诉*/+'</a>'+
+                            '</div>';
+                         $('.shopItem').append(str5);
+
+                }
+                
+                //订单号   
+                 $('.menu_order').find('i').text(getI18nPageByKey("OrderNumber")+":"+data.data.order_id);
+                //地址
+                  str1+='<h3>'+getI18nPageByKey("receiveAddress")/*收货地址*/+'</h3>'+
+                        '<p><span>'+v.invoName+'</span></p>'+
+                        '<p><span>'+v.phone+'</span> <b>'+v.postCode+'</b></p>'+
+                        '<h4><i></i><span>'+v.sendAddress+'</span></h4>';
+                $('#add1').html(str1);
+                //发票地址
+                str2+=' <h3>'+getI18nPageByKey("invoiceAddress")/*发票地址*/+'</h3>'+
+                        '<p><span>'+v.invoName+'</span></p>'+
+                        '<p><span>'+v.invoMobile+'</span> <b>'+v.invoZip+'</b></p>'+
+                        '<h4><i></i><span>'+v.invoAddress+'</span></h4>';
+                $('#add2').html(str2);
+                //店铺和商品信息
+                var str3="";
+                  str3+='<div class="wrap">'+
+                         '<h4 class="storeName" onclick="shopDetail('+v.store_id+')">'+
+                           '<span class="storeIco"></span>'+
+                           '<b class="shop_name">'+v.store_name+'</b>'+
+                           '<i></i>'+
+                         '</h4>'+
+                         ' <div class="shopDetail">'
+                            $.each(v.gcs,function(k1,v1){
+                                str3+= '<a href="javascript:void(0)" class="orderImg" onclick="Item('+v1.goods.id+')">'+
+                                         '<dl>'+
+                                           '<dt><img src="'+v1.goodsUrl+'" /></dt>'+
+                                           '<dd class="shop_info">'+
+                                             '<h2>'+v1.goods.goods_name+'</h2>'+
+                                            ' <p><span>'+v1.spec_info+'</span></p>'+
+                                             '<p><i class="i_left">RM'+v1.price+'</i><em class="em_right">x'+v1.count+'</em></p>'+
+                                           '</dd>'+
+                                     
+                                        '</dl>'+
+                                    ' </a>'
+                            })
+                         str3+='</div>'+
+                    '</div>';
+                 $('.shop').html(str3);
+                //按钮买家用户可以联系卖家
+                var str4='';
+                str4+='<a href="javascript:void(0)" class="contact_seller" onclick="contactSaller(this,\''+v.store_userId+'\',\''+v.store_userName+'\')"><span>'+getI18nPageByKey("contactSeller")/*联系卖家*/+'</span></a>';
+                $('.contact_seller_box').html(str4);
+                //配送信息判断
+                  var Strs="";
+                  if (v.company==""&&v.shipCode=="") {
+                     Strs+='<p>'+getI18nPageByKey("shipInformation")/*配送信息*/+'  <span class="transInfo">'+v.transInfo+'</span></p>'+
+                          '<p>'+getI18nPageByKey("ExpressMethod")/*配送方式*/+'：<span class="transport">'+v.transport+'</span></p>'+
+                          '<p>'+getI18nPageByKey("expressTime")/*配送时间*/+'：<span class="shipTime">'+v.shipTime+'</p>';
+                  }else{
+                     Strs+='<p>'+getI18nPageByKey("shipInformation")/*配送信息*/+'  <span class="transInfo">'+v.transInfo+'</span></p>'+
+                            '<p>'+getI18nPageByKey("ExpressMethod")/*配送方式*/+'：<span class="transport">'+v.transport+'</span></p>'+
+                            '<p>'+getI18nPageByKey("expressTime")/*配送时间*/+'：<span class="shipTime">'+v.shipTime+'</p>'+
+                            '<p>'+getI18nPageByKey("expressCompany")/*物流公司*/+'：<span class="logicCompany">'+v.company+'</p>'+
+                            '<p>'+getI18nPageByKey("expressSerialNo")/*物流单号*/+'：<span class="shipCode">'+v.num+'</p>';
+                  }
+              $('.shipping_info').html(Strs);
+                //总价
+                $('.totalPrice').html("RM"+v.totalPrice);
+                //运费
+                $('.actual_Shipment').html("RM"+v.actual_Shipment);
+                //税费
+                $('.taxes').html("RM"+v.taxes);
+                //实付款
+                $('.disbursements').html("RM"+v.disbursements);
+
+            }
+        },
+        error:function(){
+          
+
+        }
+      })
+    </script>
+  </div>
+</body>
+</html>

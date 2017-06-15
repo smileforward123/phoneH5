@@ -1,0 +1,785 @@
+@import url("reset.css");
+@charset "utf-8";
+* {
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: "Arial";
+}
+a,
+img {
+  -webkit-touch-callout: none;
+  /*��ֹ����������ͼƬ�����˵�*/
+}
+html,
+body {
+  -webkit-user-select: none;
+  /*��ֹѡ���ı�*/
+  user-select: none;
+}
+button,
+input,
+optgroup,
+select,
+textarea {
+  -webkit-appearance: none;
+  /*ȥ��webkitĬ�ϵı�����ʽ*/
+}
+a,
+button,
+input,
+optgroup,
+select,
+textarea {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /*ȥ��a��input��button����ʱ����ɫ���߿��ͻ�ɫ��͸�󱳾�*/
+}
+input::-webkit-input-placeholder {
+  color: #ccc;
+  /*�޸�webkit��input��planceholder��ʽ*/
+}
+body {
+  -webkit-text-size-adjust: 100%!important;
+  /*��ֹIOS����������С*/
+}
+input::-webkit-input-speech-button {
+  display: none;
+  /*����Android���������밴ť*/
+}
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  display: -ms-box;
+  -ms-box-orient: vertical;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+}
+.wrapper header {
+  height: 2.25rem;
+  background: #C90C1E;
+  color: #fff;
+  width: 100%;
+  position: relative;
+  line-height: 2.25rem;
+}
+.wrapper header a {
+  width: 1rem;
+  height: 1rem;
+  left: 0.5rem;
+  top: 0.5rem;
+  position: absolute;
+  background: url(../images/shareShop_r2_c1.png) no-repeat;
+  background-size: 100% 100%;
+}
+.wrapper header span {
+  width: 1.275rem;
+  height: 1.55rem;
+  left: 2.1rem;
+  top: 0.5rem;
+  position: absolute;
+  display: inline-block;
+  background: url(../images/mainLogo.png) no-repeat;
+  background-size: contain;
+}
+.wrapper header h2 {
+  text-align: center;
+  color: #fff;
+  font-size: 0.8rem;
+  width: 60%;
+  margin-left: 20%;
+}
+.wrapper header i {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  position: absolute;
+  right: 0.3rem;
+  top: 0.65rem;
+  background: url(../images/searchBtn.png) no-repeat;
+  background-size: contain;
+}
+.wrapper section {
+  -webkit-box-flex: 1;
+  -ms-box-flex: 1;
+  -moz-box-flex: 1;
+  width: 100%;
+  background: #f7f7f7;
+  overflow-y: scroll;
+}
+.wrapper section h1 {
+  background: #fff;
+  height: 2rem;
+  line-height: 2rem;
+  border-bottom: 1px solid #cccccc;
+  width: 100%;
+  font-size: 0.8rem;
+  color: #666;
+}
+.wrapper section h1 i {
+  font-style: normal;
+  padding-left: 0.5rem;
+}
+.wrapper section h1 span {
+  float: right;
+  color: #cd2f3a;
+  padding-right: 0.6rem;
+}
+.wrapper section .address {
+  height: auto;
+  width: 100%;
+}
+.wrapper section .address .add1 {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0.65rem;
+}
+.wrapper section .address .add1 h3 {
+  padding: 0.3rem 0;
+  padding-left: 0.5rem;
+  font-size: 0.8rem;
+}
+.wrapper section .address .add1 p {
+  padding-left: 1.05rem;
+  padding-left: 0.5rem;
+  padding: 0.1rem 0;
+}
+.wrapper section .address .add1 p span:nth-child(1) {
+  margin-right: 0.5rem;
+  padding-left: 1.725rem;
+  font-size: 0.8rem;
+  color: #666666;
+}
+.wrapper section .address .add1 p b {
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #666666;
+}
+.wrapper section .address .add1 h4 {
+  height: auto;
+  width: 93%;
+  margin: 0 auto;
+  font-weight: normal;
+  font-size: 0.8rem;
+  color: #666666;
+  padding-top: 0.23rem;
+  padding-bottom: 0.3rem;
+}
+.wrapper section .address .add1 h4 i {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.7rem;
+  background: url(../images/addressLogo.png) no-repeat;
+  background-size: contain;
+  margin-right: 0.4rem;
+  vertical-align: top;
+}
+.wrapper section .address .add1 h4 span {
+  width: 92%;
+  height: auto;
+  display: inline-block;
+  font-size: 0.7rem;
+}
+.wrapper section .shopItem {
+  width: 100%;
+  height: auto;
+}
+.wrapper section .shopItem .shop {
+  width: 100%;
+  height: auto;
+  margin-top: 0.5rem;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  background: #fff;
+  padding-bottom: 0.5rem;
+}
+.wrapper section .shopItem .shop .storeName {
+  width: 100%;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.wrapper section .shopItem .shop .storeName .storeIco {
+  display: inline-block;
+  float: left;
+  width: 0.825rem;
+  height: 0.75rem;
+  background: url(../images/stroeIco.png) no-repeat;
+  background-size: contain;
+  margin-right: 0.45rem ;
+  margin-left: 0.3rem;
+  margin-top: 0.6rem;
+}
+.wrapper section .shopItem .shop .storeName .shop_name {
+  float: left;
+  width: 5rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 0.7rem;
+  vertical-align: middle;
+  padding-top: 0.3rem;
+}
+.wrapper section .shopItem .shop .storeName i {
+  width: 0.425rem;
+  height: 0.65rem;
+  display: inline-block;
+  background: url(../images/searchBack.png) no-repeat;
+  background-size: contain;
+  margin-top: 0.7rem;
+}
+.wrapper section .shopItem .shop .shopDetail {
+  width: 100%;
+  height: auto;
+  background: #f5f5f5;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg {
+  width: 100%;
+  height: 4.5rem;
+  display: block;
+  text-decoration: none;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl {
+  width: 100%;
+  height: 4.375rem;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 0.5rem;
+  -webkit-flex-direction: row;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl dt {
+  max-width: 4.5rem;
+  max-height: 4.5rem;
+  background-size: contain;
+  margin: 0 0.5rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl dt img {
+  max-width: 4.5rem;
+  max-height: 4.5rem;
+  background-size: contain;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_info {
+  height: 4.375rem;
+  padding-top: 0.3rem;
+  width: 10rem;
+  margin-right: 0.5rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_info h3,
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_info h2 {
+  font-size: 0.65rem;
+  font-weight: normal;
+  color: #4d4d4d;
+  width: 10rem;
+  height: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_info p span {
+  color: #c4c4c4;
+  font-size: 0.6rem;
+  padding-right: 0.2rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price {
+  width: 4.25rem;
+  padding-top: 0.1rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price b {
+  font-size: 0.8rem;
+  color: #808080;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price em,
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price i {
+  font-style: normal;
+  color: #8a8a8a;
+  font-size: 0.65rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price em {
+  text-decoration: line-through;
+  margin-left: 0.2rem;
+}
+.wrapper section .shopItem .shop .shopDetail .orderImg dl .shop_price i {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+.wrapper section .shopItem .contact_seller_box {
+  width: 100%;
+  background: #fff;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ccc;
+}
+.wrapper section .shopItem .contact_seller_box .contact_seller {
+  width: 96%;
+  height: 1.75rem;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 0.8rem;
+  display: block;
+  line-height: 1.75rem;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px;
+  border-bottom: 1px solid #ccc;
+  color: #ccc;
+}
+.wrapper section .shopItem .contact_seller_box .contact_seller:before {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  display: inline-block;
+  background: url(../images/menuDetailIcon.png) no-repeat;
+  background-size: contain;
+}
+.wrapper section .shopItem .contact_seller_box .contact_seller span {
+  padding-left: 0.2rem;
+}
+.wrapper section .shopItem .shipping_info {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0.5rem;
+}
+.wrapper section .shopItem .shipping_info p {
+  width: 96%;
+  margin: 0 auto;
+  font-size: 0.6rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.2rem;
+  color: #424242;
+}
+.wrapper section .shopItem .shipping_info p span {
+  margin-right: 0.3rem;
+}
+.wrapper section .shopItem .member_info {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0.5rem;
+  height: 6.825rem;
+}
+.wrapper section .shopItem .member_info p {
+  width: 95%;
+  margin: 0 auto;
+  font-size: 0.6rem;
+  padding-top: 0.45rem;
+  color: #424242;
+}
+.wrapper section .shopItem .member_info p .info_left {
+  flot: left;
+}
+.wrapper section .shopItem .member_info p .info_left b {
+  font-weight: normal;
+}
+.wrapper section .shopItem .member_info p .info_right {
+  float: right;
+  margin-right: 0.3rem;
+  font-style: normal;
+}
+.wrapper section .shopItem .time_info {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0.5rem;
+}
+.wrapper section .shopItem .time_info p {
+  width: 95%;
+  margin: 0 auto;
+  font-size: 0.6rem;
+  padding: 0.5rem 0 0.2rem 0;
+  color: #424242;
+}
+.wrapper section .shopItem .time_info p .info_left {
+  float: right;
+}
+.wrapper section .shopItem .time_info p .info_left b {
+  font-weight: normal;
+}
+.wrapper section .shopItem .time_info p .info_right {
+  margin-right: 0.3rem;
+  font-style: normal;
+}
+.wrapper section .shopItem .time_infos {
+  width: 100%;
+  height: 5rem;
+  background: ##f5f5f5;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin-top: 0.5rem;
+}
+.wrapper section .shopItem .time_infos p {
+  width: 100%;
+  font-size: 0.6rem;
+  padding: 0.3rem 0  0.15rem 0;
+  color: #424242;
+  background: #fff;
+  /* border-bottom: 1px solid #ccc; */
+}
+.wrapper section .shopItem .time_infos p .info_left {
+  float: right;
+}
+.wrapper section .shopItem .time_infos p .info_left b {
+  font-weight: normal;
+}
+.wrapper section .shopItem .time_infos p .info_title {
+  padding-left: 0.3rem;
+}
+.wrapper section .shopItem .time_infos p .info_right {
+  margin-right: 0.3rem;
+  font-style: normal;
+}
+.wrapper section .shopItem .footer_info {
+  width: 100%;
+  height: auto;
+  border-top: 1px solid #ccc;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+}
+.wrapper section .shopItem .footer_info a {
+  width: 3.85rem;
+  height: 1.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px;
+  outline: none;
+  display: block;
+  background: #fff;
+  text-decoration: none;
+  float: right;
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.7rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.wrapper section .shopItem .footer_info a:hover {
+  color: #cd2f3a;
+  border: 1px solid #cd2f3a;
+}
+.wrapper section .shopItem .delete_menu {
+  width: 100%;
+  height: 2rem;
+  margin-bottom: 0.3rem;
+}
+.wrapper section .shopItem .delete_menu a {
+  float: right;
+  color: #999;
+  border: 1px solid #ccc;
+  text-decoration: none;
+  font-size: 0.6rem;
+  width: 3rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  text-align: center;
+  border-radius: 5px 5px;
+  margin: 0.3rem 0.3rem 0 0;
+}
+.wrapper section .shopItem .delete_menu a:hover {
+  color: #cd2f3a;
+  border: 1px solid #cd2f3a;
+}
+.shop_detail {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  margin-bottom: 0.5rem;
+  border-top: 1px solid #ccc;
+}
+.shop_detail h4 {
+  background: #fff;
+  height: 1.7rem;
+  line-height: 1.7rem;
+  width: 100%;
+  font-size: 0.7rem;
+  color: #666;
+}
+.shop_detail h4 i {
+  font-style: normal;
+  padding-left: 0.5rem;
+}
+.shop_detail h4 span {
+  float: right;
+  color: #cd2f3a;
+  padding-right: 0.6rem;
+}
+.shop_detail .shop_item {
+  width: 100%;
+  height: auto;
+  background: #f5f5f5;
+}
+.shop_detail .shop_item dl {
+  width: 100%;
+  height: 4.375rem;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  padding: 0.2rem 0;
+}
+.shop_detail .shop_item dl dt {
+  max-width: 4.5rem;
+  max-height: 4.5rem;
+  background-size: contain;
+  margin: 0 0.5rem;
+}
+.shop_detail .shop_item dl dt img {
+  max-width: 4.5rem;
+  max-height: 4.5rem;
+  background-size: contain;
+}
+.shop_detail .shop_item dl .shop_info {
+  height: 4.375rem;
+  padding-top: 0.3rem;
+  width: 10rem;
+  margin-right: 0.5rem;
+  
+}
+.shop_detail .shop_item dl .shop_info h3,
+.shop_detail .shop_item dl .shop_info h2 {
+  font-size: 0.65rem;
+  font-weight: normal;
+  color: #4d4d4d;
+  width: 6rem;
+  height: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.shop_detail .shop_item dl .shop_info p span {
+  color: #c4c4c4;
+  font-size: 0.6rem;
+  padding-right: 0.2rem;
+}
+.shop_detail .shop_item dl .shop_info p i,.shop_detail .shop_item dl .shop_info p em {
+  color: #c4c4c4;
+  font-size: 0.6rem;
+  padding-right: 0.2rem;
+  font-weight: normal;
+  font-style: normal;
+}
+.i_left{
+  float: left;
+   color: #c4c4c4;
+  font-size: 0.6rem;
+  padding-right: 0.2rem;
+  font-weight: normal;
+  font-style: normal;
+}
+.em_right{
+  float: right;
+  color: #c4c4c4;
+  font-size: 0.6rem;
+  padding-right: 0.2rem;
+  font-weight: normal;
+  font-style: normal;
+}
+
+.shop_detail .shop_item dl .shop_price {
+  width: 4.25rem;
+  padding-top: 0.1rem;
+}
+.shop_detail .shop_item dl .shop_price b {
+  font-size: 0.7rem;
+  font-weight: normal;
+  padding-left: 0.2rem;
+  color: #808080;
+}
+.shop_detail .shop_item dl .shop_price em,
+.shop_detail .shop_item dl .shop_price i {
+  font-style: normal;
+  color: #8a8a8a;
+  font-size: 0.65rem;
+}
+.shop_detail .shop_item dl .shop_price em {
+  text-decoration: line-through;
+  margin-left: 0.2rem;
+}
+.shop_detail .shop_item dl .shop_price i {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+.shop_detail .item_price {
+  width: 100%;
+  text-align: right;
+  font-size: 0.65rem;
+  padding: 0.5rem 0;
+  margin-right: 0.3rem;
+  color: #666;
+}
+.shop_detail .item_price b {
+  font-weight: normal;
+}
+.shop_detail .footer_info {
+  width: 100%;
+  height: 2rem;
+  border-top: 1px solid #ccc;
+  padding-top: 0.5rem;
+}
+.shop_detail .footer_info a {
+  width: 3.82rem;
+  height: 1.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px;
+  outline: none;
+  display: inline-block;
+  background: #fff;
+  text-decoration: none;
+  font-size: 0.6rem;
+  color: #666;
+  float: left;
+  text-align: center;
+  line-height: 1.3rem;
+  margin-right: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+.all_menu {
+  height: auto;
+  width: 100%;
+  background: #fff;
+  position: absolute;
+  left: 0;
+  top: 2.1rem;
+  z-index: 100000;
+  padding-bottom: 0.3rem;
+  display: none;
+}
+.all_menu a {
+  width: 24%;
+  margin: 0 0.5rem;
+  margin-top: 0.2rem;
+  height: 1.3rem;
+  border: 1px solid #ccc;
+  border-radius: 5px 5px;
+  display: inline-block;
+  background: #fff;
+  font-size: 0.6rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.3rem;
+  margin-bottom: 0.2rem;
+  margin-top: 0.5rem;
+  background: #ccc;
+}
+.all_menu a.add {
+  color: #f00;
+  border: 1px solid #f00;
+  background: #fff;
+}
+.layer {
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: .5;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+.content_dialog {
+  height: auto;
+}
+.content_dialog h2 {
+  font-size: 0.7rem;
+  padding: 0.5rem 0.5rem;
+}
+.content_dialog h3 {
+  padding-left: 0.5rem;
+  font-size: 0.7rem;
+  padding-bottom: 0.3rem;
+}
+.content_dialog .list {
+  height: auto;
+}
+.content_dialog .list label {
+  display: block;
+  padding-left: 0.5rem;
+  font-size: 0.625rem;
+  padding-top: 0.5rem;
+  height: 1.5rem;
+  line-height: 1.5rem;
+}
+.content_dialog .list label .radio_left {
+  float: left;
+}
+.content_dialog .list label .radio_rig {
+  float: right;
+  padding-right: 0.3rem;
+}
+.content_dialog .list label .radio_rig input[type="raido"] {
+  position: absolute;
+  top: -9999px;
+}
+.content_dialog .list label .radio_rig i {
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  margin-right: 10px;
+  background: url(../images/check_radio.png) no-repeat;
+  vertical-align: middle;
+  background-size: contain;
+}
+.content_dialog .list label .radio_rig input:checked + i {
+  background: url(../images/check_radios.png) no-repeat;
+  background-size: contain;
+}
+.content_dialog .list label .radio_rig input {
+  display: none;
+}
+.rease {
+  width: 100%;
+  height: auto;
+}
+.rease h2 {
+  font-size: 0.7rem;
+  padding-left: 0.5rem;
+  padding-top: 0.6rem ;
+  padding-bottom: 0.5rem ;
+}
+.rease #textarea {
+  width: 95%;
+  margin-left: 3%;
+  resize: none;
+  height: 4.5rem;
+  outline: none;
+  overflow-y: scroll;
+  font-size: 0.6rem;
+}
+.no_menu {
+  width: 100%;
+}
+.no_menu dl {
+  width: 100%;
+  height: auto;
+  margin-top: 4rem;
+}
+.no_menu dl dt {
+  width: 100%;
+  text-align: center;
+}
+.no_menu dl dt img {
+  width: 5.25rem;
+  height: 5.25rem;
+  background-size: contain;
+}
+.no_menu dl dd {
+  font-size: 0.8rem;
+  text-align: center;
+  margin-top: 2em;
+}
+.rig1 a {
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,45 @@
+.loading{
+		margin: 0 auto;
+		z-index: 100;
+		width: 30%;	
+		display: none;
+		padding-top: 0.2rem;	
+		overflow: hidden;
+		margin: 0 auto;
+		text-align: center;
+
+	}
+	.loading .loadImg{
+		width: 1.2rem;
+		height: 1.2rem;
+		float: left;
+		display: block;
+		margin-right: 0.1rem;
+	   background-size: contain;
+		
+	}
+	.loading span{
+		font-size: 0.65rem;
+		color: #666;
+		vertical-align: middle;
+	}
+	.noData{
+		width: 100%;
+		z-index: 100;
+		text-align: center;
+		line-height: 0.5rem;
+		font-size: 0.14rem;
+		bottom: 0;
+		display: none;
+		margin-top: 0.2rem;	
+	}
+	.noMore{
+		width: 100%;
+		z-index: 100;
+		padding:0.3rem 0;
+		text-align: center;
+		font-size: 0.65rem;
+		bottom: 0;
+		color: #666;
+		display: none;
+	}
