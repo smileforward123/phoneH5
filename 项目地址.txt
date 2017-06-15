@@ -1,0 +1,48 @@
+食品检测网站
+http://stg.f-jcy.com/index.htm
+
+招聘网站
+http://zhaopin.zbj.com/
+
+寻茶网站;http://www.chadaodian.com/html/join.html
+http://www.chadaodian.com/html/intro.html
+http://www.chadaodian.com
+
+
+香港服务器：
+front http://alpha2.appasia.com
+console http://alpha2console.appasia.com/admin/login.htm
+payCallback http://alpha2payCallback.appasia.com:10020/
+wallet http://alpha2wallet.appasia.com:10030
+mobile http://alpha2mobile.appasia.com:10040
+PC前台账号：m18810705539@163.com 密码：111111 卖家：750197332@qq.com 密码：111111
+
+
+马来商城
+正式服务器：
+front http://beta2.appasia.com
+console http://console.appasia.com/admin/login.htm
+payCallback http://payCallback.appasia.com/
+wallet http://wallet.appasia.com/
+mobile http://mobile.appasia.com/
+马来h5地址
+http://alpha2mobile.appasia.com/phoneh5/index.html
+
+http://106.15.33.252/phoneh5_zh/identityTest.html
+
+移动端h5
+http://106.15.33.252/phoneh5_zh/index.html
+
+
+pc前台
+http://106.15.33.252/front/store.htm?id=134
+
+pc后台
+http://106.15.33.252/console/admin/index.htm
+
+
+医院核算系统
+http://www.dehengclinic.org:8888/hospital/logIn.html
+
+json字符串解析：
+http://www.json.cn/
